@@ -1,0 +1,41 @@
+{
+  "resortId": "zillertal-arena",
+  "pageUrl": "https://zillertal.intermaps.com/zillertalarena?lang=en",
+  "tileSize": 256,
+  "remoteBaseZoom": 17,
+  "localTemplate": "/resorts/zillertal-arena/panorama/{z}/pano_{x}_{y}.jpg",
+  "levels": [
+    {
+      "localIndex": 0,
+      "remoteZoom": 17,
+      "width": 512,
+      "height": 336,
+      "columns": 2,
+      "rows": 2
+    },
+    {
+      "localIndex": 1,
+      "remoteZoom": 18,
+      "width": 1024,
+      "height": 672,
+      "columns": 4,
+      "rows": 3
+    },
+    {
+      "localIndex": 2,
+      "remoteZoom": 19,
+      "width": 2048,
+      "height": 1344,
+      "columns": 8,
+      "rows": 6
+    },
+    {
+      "localIndex": 3,
+      "remoteZoom": 20,
+      "width": 4096,
+      "height": 2688,
+      "columns": 16,
+      "rows": 11
+    }
+  ]
+}
