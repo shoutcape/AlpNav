@@ -7,6 +7,11 @@ import type { PanoramaLevel, PanoramaManifest } from "./types";
 import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
 import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
+import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
+
+// Minimum viewport scale at which each tier becomes visible.
+// Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
+const LABEL_TIER_SCALES = [0, 0.25, 0.50, 0.85] as const;
 
 type MapShellProps = {
   manifest: PanoramaManifest;
@@ -180,6 +185,22 @@ export function MapShell({ manifest }: MapShellProps) {
       drawLiftOverlay(liftContainer, overlayData.lifts);
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
+
+      const labelContainer = new Container();
+      labelContainer.label = "overlay-labels";
+      const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
+      viewport.addChild(labelContainer);
+
+      const syncLabelTiers = () => {
+        const scale = viewport.scale.x;
+        labelTiers[0].visible = true;
+        labelTiers[1].visible = scale >= LABEL_TIER_SCALES[1];
+        labelTiers[2].visible = scale >= LABEL_TIER_SCALES[2];
+        labelTiers[3].visible = scale >= LABEL_TIER_SCALES[3];
+      };
+
+      viewport.on("moved", syncLabelTiers);
+      syncLabelTiers();
     };
 
     initialize().catch((error) => {

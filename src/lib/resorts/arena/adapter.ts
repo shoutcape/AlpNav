@@ -1,4 +1,4 @@
-import type { Lift, LiftType, Piste, PisteDifficulty, Point, ResortOverlayData } from "@/lib/domain/types";
+import type { Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData } from "@/lib/domain/types";
 
 // SVG viewBox is 0 0 1024 672; PixiJS world is 4096×2688
 const SVG_TO_WORLD = 4.0;
@@ -14,10 +14,11 @@ export function loadArenaOverlayData(): Promise<ResortOverlayData> {
 }
 
 async function fetchAndParse(): Promise<ResortOverlayData> {
-  const [rSvgText, lSvgText, dataJson] = await Promise.all([
+  const [rSvgText, lSvgText, dataJson, textSvgText] = await Promise.all([
     fetch("/resorts/zillertal-arena/overlays/R.svg").then((r) => r.text()),
     fetch("/resorts/zillertal-arena/overlays/L.svg").then((r) => r.text()),
     fetch("/resorts/zillertal-arena/overlays/data.json").then((r) => r.json()),
+    fetch("/resorts/zillertal-arena/overlays/text.svg").then((r) => r.text()),
   ]);
 
   const pisteMetaMap = buildPisteMetaMap(dataJson);
@@ -25,11 +26,13 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
 
   const rDoc = new DOMParser().parseFromString(rSvgText, "image/svg+xml");
   const lDoc = new DOMParser().parseFromString(lSvgText, "image/svg+xml");
+  const textDoc = new DOMParser().parseFromString(textSvgText, "image/svg+xml");
 
   const pistes = parsePistes(rDoc, pisteMetaMap);
   const lifts = parseLifts(lDoc, liftMetaMap);
+  const labels = parseLabels(textDoc);
 
-  return { pistes, lifts };
+  return { pistes, lifts, labels };
 }
 
 // ─── metadata ────────────────────────────────────────────────────────────────
@@ -215,6 +218,179 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
   }
 
   return lifts;
+}
+
+// ─── label parsing ────────────────────────────────────────────────────────────
+
+function parseHexColor(fill: string | null): number | undefined {
+  if (!fill || !fill.startsWith("#")) {
+    return undefined;
+  }
+
+  return parseInt(fill.slice(1), 16);
+}
+
+function parseLabels(doc: Document): MapLabel[] {
+  const labels: MapLabel[] = [];
+
+  // Find the text group — try txt_group_1 first, fall back to any <g> containing <text>
+  const group =
+    doc.getElementById("txt_group_1") ??
+    doc.querySelector("g");
+
+  if (!group) {
+    return labels;
+  }
+
+  // Build background rects from polygons
+  type BgRect = { color: number; x: number; y: number; w: number; h: number };
+  const bgRects: BgRect[] = [];
+
+  for (const poly of Array.from(group.querySelectorAll("polygon"))) {
+    const pointsAttr = poly.getAttribute("points");
+    const fillAttr = poly.getAttribute("fill") ?? poly.getAttribute("style");
+
+    if (!pointsAttr) {
+      continue;
+    }
+
+    // Extract hex color from fill or style attribute
+    let hexFill: string | null = null;
+
+    if (fillAttr && fillAttr.startsWith("#")) {
+      hexFill = fillAttr;
+    } else if (fillAttr && fillAttr.includes("fill:")) {
+      const match = /fill:\s*(#[0-9a-fA-F]+)/.exec(fillAttr);
+      hexFill = match ? match[1] : null;
+    } else {
+      hexFill = poly.getAttribute("fill");
+    }
+
+    const color = parseHexColor(hexFill);
+
+    if (color === undefined) {
+      continue;
+    }
+
+    const coords = pointsAttr.trim().split(/[\s,]+/);
+    const xs: number[] = [];
+    const ys: number[] = [];
+
+    for (let i = 0; i + 1 < coords.length; i += 2) {
+      const px = parseFloat(coords[i]);
+      const py = parseFloat(coords[i + 1]);
+
+      if (!isNaN(px) && !isNaN(py)) {
+        xs.push(px);
+        ys.push(py);
+      }
+    }
+
+    if (xs.length === 0) {
+      continue;
+    }
+
+    const minX = Math.min(...xs);
+    const minY = Math.min(...ys);
+    const maxX = Math.max(...xs);
+    const maxY = Math.max(...ys);
+
+    bgRects.push({
+      color,
+      x: minX * SVG_TO_WORLD,
+      y: minY * SVG_TO_WORLD,
+      w: (maxX - minX) * SVG_TO_WORLD,
+      h: (maxY - minY) * SVG_TO_WORLD,
+    });
+  }
+
+  // Parse text elements
+  for (const el of Array.from(group.querySelectorAll("text"))) {
+    const text = el.textContent?.trim() ?? "";
+
+    if (!text) {
+      continue;
+    }
+
+    const x = parseFloat(el.getAttribute("x") ?? "0") * SVG_TO_WORLD;
+    const y = parseFloat(el.getAttribute("y") ?? "0") * SVG_TO_WORLD;
+
+    const styleAttr = el.getAttribute("style") ?? "";
+    const fillAttr = el.getAttribute("fill");
+
+    // Parse font-size from style or attribute
+    let svgFontSize = 7;
+    const fsMatch = /font-size:\s*([\d.]+)px/.exec(styleAttr) ?? /font-size:\s*([\d.]+)/.exec(styleAttr);
+
+    if (fsMatch) {
+      svgFontSize = parseFloat(fsMatch[1]);
+    } else {
+      const fsAttr = el.getAttribute("font-size");
+
+      if (fsAttr) {
+        svgFontSize = parseFloat(fsAttr);
+      }
+    }
+
+    const fontSize = svgFontSize * SVG_TO_WORLD;
+
+    // Parse font-weight
+    let fontWeight: "bold" | "normal" = "normal";
+    const fwMatch = /font-weight:\s*(\w+)/.exec(styleAttr);
+
+    if (fwMatch) {
+      fontWeight = fwMatch[1] === "bold" ? "bold" : "normal";
+    } else {
+      const fwAttr = el.getAttribute("font-weight");
+
+      if (fwAttr === "bold") {
+        fontWeight = "bold";
+      }
+    }
+
+    // Parse fill color
+    let colorHex: string | null = null;
+    const fillMatch = /fill:\s*(#[0-9a-fA-F]+)/.exec(styleAttr);
+
+    if (fillMatch) {
+      colorHex = fillMatch[1];
+    } else if (fillAttr) {
+      colorHex = fillAttr;
+    }
+
+    const color = parseHexColor(colorHex) ?? 0x000000;
+
+    // Find a background rect that contains this text's anchor point
+    const matchingBg = bgRects.find(
+      (bg) => x >= bg.x && x <= bg.x + bg.w && y >= bg.y && y <= bg.y + bg.h,
+    );
+
+    // Tier by SVG font size:
+    //   7px bold (badged towns/areas) → 1  always visible
+    //   8px bold (major peaks)        → 2  moderate zoom
+    //   6px bold (secondary peaks)    → 3  closer zoom
+    //   5px normal (direction signs)  → 4  high zoom only
+    const tier: 1 | 2 | 3 | 4 =
+      svgFontSize === 7 ? 1
+      : svgFontSize >= 8 ? 2
+      : svgFontSize >= 6 ? 3
+      : 4;
+
+    labels.push({
+      text,
+      x,
+      y,
+      fontSize,
+      color,
+      fontWeight,
+      tier,
+      ...(matchingBg
+        ? { bgColor: matchingBg.color, bgX: matchingBg.x, bgY: matchingBg.y, bgW: matchingBg.w, bgH: matchingBg.h }
+        : {}),
+    });
+  }
+
+  return labels;
 }
 
 function parsePolylinePoints(points: string, scale: number): Point[] {

@@ -25,6 +25,7 @@ async function main() {
   await downloadFile(`${BASE_URL}/image/zillertalarena_srm/svg/R.svg`, path.join(OUTPUT_ROOT, "R.svg"));
   await downloadFile(`${BASE_URL}/image/zillertalarena_srm/svg/L.svg`, path.join(OUTPUT_ROOT, "L.svg"));
   await downloadFile(`${BASE_URL}/zillertalarena/data?lang=en`, path.join(OUTPUT_ROOT, "data.json"));
+  await downloadFile(`${BASE_URL}/image/zillertalarena_srm/svg/text.svg`, path.join(OUTPUT_ROOT, "text.svg"));
 
   process.stdout.write(`Overlay files are available in ${OUTPUT_ROOT}\n`);
 }

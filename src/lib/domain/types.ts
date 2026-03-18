@@ -16,4 +16,19 @@ export type Lift = {
   segments: Point[][];
 };
 
-export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[] };
+export type MapLabel = {
+  text: string;
+  x: number;
+  y: number;
+  fontSize: number;
+  color: number;
+  fontWeight: "bold" | "normal";
+  tier: 1 | 2 | 3 | 4;
+  bgColor?: number;
+  bgX?: number;
+  bgY?: number;
+  bgW?: number;
+  bgH?: number;
+};
+
+export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[] };
