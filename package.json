@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:arena-artwork": "node scripts/download-zillertal-arena-artwork.mjs"
+    "sync:arena-artwork": "node scripts/download-zillertal-arena-artwork.mjs",
+    "sync:arena-overlays": "node scripts/download-zillertal-arena-overlays.mjs"
   },
   "dependencies": {
     "@deck.gl/core": "9.2.11",
