@@ -8,6 +8,7 @@ import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
 import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
 import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
+import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -185,6 +186,11 @@ export function MapShell({ manifest }: MapShellProps) {
       drawLiftOverlay(liftContainer, overlayData.lifts);
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
+
+      const liftMarkerContainer = new Container();
+      liftMarkerContainer.label = "overlay-lift-markers";
+      drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts);
+      viewport.addChild(liftMarkerContainer);
 
       const labelContainer = new Container();
       labelContainer.label = "overlay-labels";

@@ -208,12 +208,25 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
       continue;
     }
 
+    const iconGroup = group.querySelector(`g[id="${featureId}_icon"]`);
+    const iconCircle = iconGroup?.querySelector('circle.icon') ?? iconGroup?.querySelector('circle[class="icon"]');
+    let icon: Point | undefined;
+
+    if (iconCircle) {
+      const cx = parseFloat(iconCircle.getAttribute("cx") ?? "0");
+      const cy = parseFloat(iconCircle.getAttribute("cy") ?? "0");
+      if (!isNaN(cx) && !isNaN(cy)) {
+        icon = { x: cx * SVG_TO_WORLD, y: cy * SVG_TO_WORLD };
+      }
+    }
+
     const m = meta.get(featureId);
     lifts.push({
       id: featureId,
       name: m?.name ?? featureId,
       liftType: m?.liftType ?? "other",
       segments,
+      icon,
     });
   }
 

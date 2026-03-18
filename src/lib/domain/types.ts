@@ -14,6 +14,7 @@ export type Lift = {
   name: string;
   liftType: LiftType;
   segments: Point[][];
+  icon?: Point;
 };
 
 export type MapLabel = {
