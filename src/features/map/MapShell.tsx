@@ -37,6 +37,10 @@ export function MapShell({ manifest }: MapShellProps) {
   const hasInteractedRef = useRef(false);
   const pisteOverlayRef = useRef<Container | null>(null);
   const liftOverlayRef = useRef<Container | null>(null);
+  const liftMarkerOverlayRef = useRef<Container | null>(null);
+
+  const [liftVisible, setLiftVisible] = useState(true);
+  const [pisteVisible, setPisteVisible] = useState(true);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
 
@@ -191,6 +195,7 @@ export function MapShell({ manifest }: MapShellProps) {
       liftMarkerContainer.label = "overlay-lift-markers";
       drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts);
       viewport.addChild(liftMarkerContainer);
+      liftMarkerOverlayRef.current = liftMarkerContainer;
 
       const labelContainer = new Container();
       labelContainer.label = "overlay-labels";
@@ -245,6 +250,19 @@ export function MapShell({ manifest }: MapShellProps) {
 
   const isLoading = loadedLevelCount < manifest.levels.length;
 
+  const toggleLifts = () => {
+    const next = !liftVisible;
+    setLiftVisible(next);
+    if (liftOverlayRef.current) liftOverlayRef.current.visible = next;
+    if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
+  };
+
+  const togglePistes = () => {
+    const next = !pisteVisible;
+    setPisteVisible(next);
+    if (pisteOverlayRef.current) pisteOverlayRef.current.visible = next;
+  };
+
   return (
     <main className="relative h-screen w-full overflow-hidden bg-night text-ivory">
       {/* Map canvas */}
@@ -281,17 +299,20 @@ export function MapShell({ manifest }: MapShellProps) {
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
         <div className="pointer-events-auto flex gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
-          <MapControlButton icon={<LiftIcon />} label="Lifts" />
-          <MapControlButton icon={<SlopeIcon />} label="Slopes" />
+          <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
+          <MapControlButton icon={<SlopeIcon />} label="Slopes" active={pisteVisible} onClick={togglePistes} />
         </div>
       </div>
     </main>
   );
 }
 
-function MapControlButton({ icon, label }: { icon: React.ReactNode; label: string }) {
+function MapControlButton({ icon, label, active, onClick }: { icon: React.ReactNode; label: string; active: boolean; onClick: () => void }) {
   return (
-    <button className="flex flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 text-ivory/60 transition-[transform,background-color,color] hover:bg-white/[0.07] hover:text-ivory/90 active:scale-[0.96] active:bg-white/[0.10]">
+    <button
+      onClick={onClick}
+      className={`flex flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+    >
       {icon}
       <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">{label}</span>
     </button>
