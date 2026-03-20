@@ -128,7 +128,7 @@ export function MapShell({ manifest }: MapShellProps) {
         events: app.renderer.events,
       });
 
-      viewport.drag().pinch().wheel({ smooth: 6 }).decelerate();
+      viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true, wheelZoom: false }).decelerate({ friction: 0.95, minSpeed: 0.01 });
       viewport.on("drag-start", () => {
         hasInteractedRef.current = true;
       });
