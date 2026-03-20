@@ -179,7 +179,7 @@ export function MapShell({ manifest }: MapShellProps) {
           vp.y = (vp.screenHeight - scaledH) / 2;
         }
 
-        vp.emit("moved", { type: "wheel-pan", viewport: vp });
+        vp.emit("moved", { type: "wheel", viewport: vp });
         hasInteractedRef.current = true;
       };
 
