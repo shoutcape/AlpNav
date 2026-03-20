@@ -130,7 +130,7 @@ export function MapShell({ manifest }: MapShellProps) {
         events: app.renderer.events,
       });
 
-      viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true, wheelZoom: false }).decelerate({ friction: 0.95, minSpeed: 0.01 });
+      viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true }).decelerate({ friction: 0.95, minSpeed: 0.01 });
       viewport.on("drag-start", () => {
         hasInteractedRef.current = true;
       });
@@ -143,33 +143,22 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.on("moved", syncLevelBlend);
 
       wheelPanHandler = (e: WheelEvent) => {
-        if (e.ctrlKey) {
-          // ctrlKey = trackpad pinch — pixi-viewport's wheel plugin handles this via trackpadPinch
-          return;
-        }
+        // ctrlKey = trackpad pinch — pixi-viewport's wheel plugin handles this via trackpadPinch
+        if (e.ctrlKey) return;
+
+        // Only intercept events with a significant horizontal component — a reliable indicator of
+        // trackpad 2D scroll. Pure vertical events (mouse wheel or trackpad vertical-only) fall
+        // through to pixi-viewport's zoom handler, which is the correct desktop behavior.
+        // Note: deltaMode is always 0 on Wayland/libinput regardless of input device, so it
+        // cannot be used to distinguish mouse wheel from trackpad.
+        if (Math.abs(e.deltaX) < 2) return;
+
+        // Trackpad 2D scroll — pan the map. Intercept before pixi-viewport zooms.
+        e.stopImmediatePropagation();
         e.preventDefault();
         const vp = viewportRef.current;
         if (!vp) return;
 
-        if (e.deltaMode !== 0) {
-          // deltaMode !== 0 means line or page mode — physical mouse wheel.
-          // Zoom centered on the cursor position.
-          const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-          const newScale = clamp(vp.scale.x * zoomFactor, computeMinScale(vp.screenWidth, vp.screenHeight, vp.worldWidth, vp.worldHeight), maxScale);
-          const rect = (e.target as HTMLCanvasElement).getBoundingClientRect();
-          const cursorX = e.clientX - rect.left;
-          const cursorY = e.clientY - rect.top;
-          const worldX = (cursorX - vp.x) / vp.scale.x;
-          const worldY = (cursorY - vp.y) / vp.scale.y;
-          vp.scale.set(newScale);
-          vp.x = cursorX - worldX * newScale;
-          vp.y = cursorY - worldY * newScale;
-          vp.emit("moved", { type: "wheel-zoom", viewport: vp });
-          hasInteractedRef.current = true;
-          return;
-        }
-
-        // deltaMode === 0: pixel mode — trackpad two-finger scroll. Pan the map.
         vp.x -= e.deltaX;
         vp.y -= e.deltaY;
 
@@ -192,7 +181,7 @@ export function MapShell({ manifest }: MapShellProps) {
         hasInteractedRef.current = true;
       };
 
-      app.canvas.addEventListener("wheel", wheelPanHandler, { passive: false });
+      app.canvas.addEventListener("wheel", wheelPanHandler, { capture: true, passive: false });
 
       app.stage.addChild(viewport);
       viewportRef.current = viewport;
@@ -291,7 +280,7 @@ export function MapShell({ manifest }: MapShellProps) {
       resizeObserverRef.current = null;
 
       if (wheelPanHandler && appRef.current?.canvas) {
-        appRef.current.canvas.removeEventListener("wheel", wheelPanHandler);
+        appRef.current.canvas.removeEventListener("wheel", wheelPanHandler, { capture: true });
       }
 
       viewportRef.current?.destroy({ children: true });
