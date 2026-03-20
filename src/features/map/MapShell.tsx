@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Application, Assets, Container, Sprite } from "pixi.js";
+import { Application, Assets, Container, Rectangle, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import type { PanoramaLevel, PanoramaManifest } from "./types";
 import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
@@ -25,6 +25,8 @@ type TileDescriptor = {
   top: number;
   width: number;
   height: number;
+  srcWidth: number;
+  srcHeight: number;
 };
 
 export function MapShell({ manifest }: MapShellProps) {
@@ -407,7 +409,12 @@ async function loadLevelIntoViewport(
   container.alpha = 0;
 
   for (const tile of tiles) {
-    const sprite = Sprite.from(tile.src);
+    const fullTexture = Assets.get<Texture>(tile.src);
+    const croppedTexture = new Texture({
+      source: fullTexture.source,
+      frame: new Rectangle(0, 0, tile.srcWidth, tile.srcHeight),
+    });
+    const sprite = new Sprite(croppedTexture);
     sprite.x = tile.left;
     sprite.y = tile.top;
     sprite.width = tile.width;
@@ -435,6 +442,8 @@ function createTileDescriptors(manifest: PanoramaManifest, level: PanoramaLevel,
         top: y * manifest.tileSize * scale,
         width: tileWidth * scale,
         height: tileHeight * scale,
+        srcWidth: tileWidth,
+        srcHeight: tileHeight,
       });
     }
   }
