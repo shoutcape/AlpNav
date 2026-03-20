@@ -271,14 +271,14 @@ export function MapShell({ manifest }: MapShellProps) {
       resizeObserverRef.current?.disconnect();
       resizeObserverRef.current = null;
 
-        viewportRef.current?.destroy({ children: true });
-        viewportRef.current = null;
-        levelContainers.clear();
-        loadedLevels.clear();
-
       if (wheelPanHandler && appRef.current?.canvas) {
         appRef.current.canvas.removeEventListener("wheel", wheelPanHandler);
       }
+
+      viewportRef.current?.destroy({ children: true });
+      viewportRef.current = null;
+      levelContainers.clear();
+      loadedLevels.clear();
 
       appRef.current?.destroy(true, { children: true });
       appRef.current = null;
