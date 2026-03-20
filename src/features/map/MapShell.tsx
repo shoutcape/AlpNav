@@ -190,33 +190,12 @@ export function MapShell({ manifest }: MapShellProps) {
 
       syncViewportBounds(true);
 
-      const firstLevel = manifest.levels[0];
-      await loadLevelIntoViewport(
-        viewport,
-        levelContainersRef.current,
-        firstLevel,
-        levelTiles.get(firstLevel.remoteZoom) ?? [],
-      );
-
-      if (cancelled) {
-        return;
-      }
-
-      loadedLevelsRef.current.add(firstLevel.remoteZoom);
-      setLoadedLevelCount(1);
-      syncLevelBlend();
-
-      for (const level of manifest.levels.slice(1)) {
-        await loadLevelIntoViewport(viewport, levelContainersRef.current, level, levelTiles.get(level.remoteZoom) ?? []);
-
-        if (cancelled) {
-          return;
-        }
-
-        loadedLevelsRef.current.add(level.remoteZoom);
-        setLoadedLevelCount(loadedLevelsRef.current.size);
-        syncLevelBlend();
-      }
+      // Load and draw overlays first so they appear before any tile images.
+      // tileLayer sits below all overlay containers in the display list so tiles
+      // can never render on top of overlays regardless of when they finish loading.
+      const tileLayer = new Container();
+      tileLayer.label = "tile-layer";
+      viewport.addChild(tileLayer);
 
       const overlayData = await loadArenaOverlayData();
 
@@ -246,6 +225,32 @@ export function MapShell({ manifest }: MapShellProps) {
       labelContainer.label = "overlay-labels";
       const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
       viewport.addChild(labelContainer);
+
+      const firstLevel = manifest.levels[0];
+      await loadLevelIntoViewport(
+        tileLayer,
+        levelContainersRef.current,
+        firstLevel,
+        levelTiles.get(firstLevel.remoteZoom) ?? [],
+      );
+
+      if (cancelled) {
+        return;
+      }
+
+      loadedLevelsRef.current.add(firstLevel.remoteZoom);
+      setLoadedLevelCount(1);
+      syncLevelBlend();
+
+      await Promise.all(
+        manifest.levels.slice(1).map(async (level) => {
+          await loadLevelIntoViewport(tileLayer, levelContainersRef.current, level, levelTiles.get(level.remoteZoom) ?? []);
+          if (cancelled) return;
+          loadedLevelsRef.current.add(level.remoteZoom);
+          setLoadedLevelCount(loadedLevelsRef.current.size);
+          syncLevelBlend();
+        }),
+      );
 
       const syncLabelTiers = () => {
         const scale = viewport.scale.x;
@@ -397,7 +402,7 @@ function SlopeIcon() {
 }
 
 async function loadLevelIntoViewport(
-  viewport: Viewport,
+  tileLayer: Container,
   levelContainers: Map<number, Container>,
   level: PanoramaLevel,
   tiles: TileDescriptor[],
@@ -422,7 +427,7 @@ async function loadLevelIntoViewport(
     container.addChild(sprite);
   }
 
-  viewport.addChild(container);
+  tileLayer.addChild(container);
   levelContainers.set(level.remoteZoom, container);
 }
 
@@ -533,7 +538,7 @@ function computeMinScale(screenWidth: number, screenHeight: number, worldWidth: 
 }
 
 function buildTileUrl(remoteZoom: number, x: number, y: number) {
-  return `/resorts/zillertal-arena/panorama/${remoteZoom}/pano_${x}_${y}.jpg`;
+  return `/resorts/zillertal-arena/panorama/${remoteZoom}/pano_${x}_${y}.webp`;
 }
 
 function clamp(value: number, minimum: number, maximum: number) {

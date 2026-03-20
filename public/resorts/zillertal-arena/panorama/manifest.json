@@ -3,7 +3,7 @@
   "pageUrl": "https://zillertal.intermaps.com/zillertalarena?lang=en",
   "tileSize": 256,
   "remoteBaseZoom": 17,
-  "localTemplate": "/resorts/zillertal-arena/panorama/{z}/pano_{x}_{y}.jpg",
+  "localTemplate": "/resorts/zillertal-arena/panorama/{z}/pano_{x}_{y}.webp",
   "levels": [
     {
       "localIndex": 0,
