@@ -121,7 +121,7 @@ export function MapShell({ manifest }: MapShellProps) {
       }
 
       host.appendChild(app.canvas);
-      app.canvas.className = "h-full w-full touch-none";
+      app.canvas.className = "h-full w-full touch-none select-none";
       appRef.current = app;
 
       const viewport = new Viewport({
