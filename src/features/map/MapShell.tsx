@@ -88,8 +88,8 @@ export function MapShell({ manifest }: MapShellProps) {
       const minScale = computeMinScale(host.clientWidth, host.clientHeight, maxLevel.width, maxLevel.height);
 
       viewport.resize(host.clientWidth, host.clientHeight, maxLevel.width, maxLevel.height);
-      viewport.clamp({ direction: "all", underflow: "center" });
       viewport.clampZoom({ minScale, maxScale });
+      viewport.clamp({ direction: "all", underflow: "center" });
 
       if (shouldResetView || !hasInteractedRef.current) {
         viewport.fitWorld(true);
