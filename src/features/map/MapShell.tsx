@@ -151,6 +151,25 @@ export function MapShell({ manifest }: MapShellProps) {
         const vp = viewportRef.current;
         if (!vp) return;
 
+        if (e.deltaMode !== 0) {
+          // deltaMode !== 0 means line or page mode — physical mouse wheel.
+          // Zoom centered on the cursor position.
+          const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+          const newScale = clamp(vp.scale.x * zoomFactor, computeMinScale(vp.screenWidth, vp.screenHeight, vp.worldWidth, vp.worldHeight), maxScale);
+          const rect = (e.target as HTMLCanvasElement).getBoundingClientRect();
+          const cursorX = e.clientX - rect.left;
+          const cursorY = e.clientY - rect.top;
+          const worldX = (cursorX - vp.x) / vp.scale.x;
+          const worldY = (cursorY - vp.y) / vp.scale.y;
+          vp.scale.set(newScale);
+          vp.x = cursorX - worldX * newScale;
+          vp.y = cursorY - worldY * newScale;
+          vp.emit("moved", { type: "wheel-zoom", viewport: vp });
+          hasInteractedRef.current = true;
+          return;
+        }
+
+        // deltaMode === 0: pixel mode — trackpad two-finger scroll. Pan the map.
         vp.x -= e.deltaX;
         vp.y -= e.deltaY;
 
