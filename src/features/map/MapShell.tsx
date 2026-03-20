@@ -99,6 +99,8 @@ export function MapShell({ manifest }: MapShellProps) {
       syncLevelBlend();
     };
 
+    let wheelPanHandler: ((e: WheelEvent) => void) | null = null;
+
     const initialize = async () => {
       const app = new Application();
 
@@ -139,6 +141,39 @@ export function MapShell({ manifest }: MapShellProps) {
         hasInteractedRef.current = true;
       });
       viewport.on("moved", syncLevelBlend);
+
+      wheelPanHandler = (e: WheelEvent) => {
+        if (e.ctrlKey) {
+          // ctrlKey = trackpad pinch — pixi-viewport's wheel plugin handles this via trackpadPinch
+          return;
+        }
+        e.preventDefault();
+        const vp = viewportRef.current;
+        if (!vp) return;
+
+        vp.x -= e.deltaX;
+        vp.y -= e.deltaY;
+
+        // Enforce world bounds manually (mirrors clamp plugin's "all" + "center" settings).
+        // Direct x/y mutation bypasses pixi-viewport's plugin pipeline, so we clamp here.
+        const scaledW = vp.worldWidth * vp.scale.x;
+        const scaledH = vp.worldHeight * vp.scale.y;
+        if (scaledW >= vp.screenWidth) {
+          vp.x = Math.min(0, Math.max(vp.screenWidth - scaledW, vp.x));
+        } else {
+          vp.x = (vp.screenWidth - scaledW) / 2;
+        }
+        if (scaledH >= vp.screenHeight) {
+          vp.y = Math.min(0, Math.max(vp.screenHeight - scaledH, vp.y));
+        } else {
+          vp.y = (vp.screenHeight - scaledH) / 2;
+        }
+
+        vp.emit("moved", { type: "wheel-pan", viewport: vp });
+        hasInteractedRef.current = true;
+      };
+
+      app.canvas.addEventListener("wheel", wheelPanHandler, { passive: false });
 
       app.stage.addChild(viewport);
       viewportRef.current = viewport;
@@ -240,6 +275,10 @@ export function MapShell({ manifest }: MapShellProps) {
         viewportRef.current = null;
         levelContainers.clear();
         loadedLevels.clear();
+
+      if (wheelPanHandler && appRef.current?.canvas) {
+        appRef.current.canvas.removeEventListener("wheel", wheelPanHandler);
+      }
 
       appRef.current?.destroy(true, { children: true });
       appRef.current = null;
