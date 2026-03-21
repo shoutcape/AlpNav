@@ -37,8 +37,8 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
 
 // ─── metadata ────────────────────────────────────────────────────────────────
 
-type PisteMeta = { name: string; difficulty: PisteDifficulty };
-type LiftMeta = { name: string; liftType: LiftType };
+type PisteMeta = { name: string; difficulty: PisteDifficulty; number?: number; lengthM?: number; status?: "open" | "closed" };
+type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed" };
 
 function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta> {
   const map = new Map<string, PisteMeta>();
@@ -50,7 +50,12 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
     const rawDiff = popup.difficulty as string | undefined;
     const difficulty = normalizeDifficulty(rawDiff);
     const name = (popup.title as string | undefined) ?? id;
-    map.set(id, { name, difficulty });
+    const additionalInfo = (popup["additional-info"] ?? {}) as Record<string, unknown>;
+    const number = typeof popup.number === "number" ? popup.number : undefined;
+    const lengthM = typeof additionalInfo.length === "number" ? additionalInfo.length : undefined;
+    const rawStatus = slope.status as string | undefined;
+    const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
+    map.set(id, { name, difficulty, number, lengthM, status });
   }
 
   return map;
@@ -65,7 +70,12 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
     const popup = (lift.popup ?? {}) as Record<string, unknown>;
     const name = (popup.title as string | undefined) ?? id;
     const liftType = normalizeLiftType(lift.type as number);
-    map.set(id, { name, liftType });
+    const additionalInfo = (popup["additional-info"] ?? {}) as Record<string, unknown>;
+    const altitudeValley = typeof additionalInfo["altitude-valley"] === "number" ? additionalInfo["altitude-valley"] : undefined;
+    const altitudeMountain = typeof additionalInfo["altitude-mountain"] === "number" ? additionalInfo["altitude-mountain"] : undefined;
+    const rawStatus = lift.status as string | undefined;
+    const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
+    map.set(id, { name, liftType, altitudeValley, altitudeMountain, status });
   }
 
   return map;
@@ -160,6 +170,9 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
       name: m?.name ?? featureId,
       difficulty: m?.difficulty ?? "unknown",
       segments,
+      number: m?.number,
+      lengthM: m?.lengthM,
+      status: m?.status,
     });
   }
 
@@ -227,6 +240,9 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
       liftType: m?.liftType ?? "other",
       segments,
       icon,
+      altitudeValley: m?.altitudeValley,
+      altitudeMountain: m?.altitudeMountain,
+      status: m?.status,
     });
   }
 

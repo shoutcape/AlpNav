@@ -7,6 +7,9 @@ export type Piste = {
   name: string;
   difficulty: PisteDifficulty;
   segments: Point[][];
+  number?: number;
+  lengthM?: number;
+  status?: "open" | "closed";
 };
 
 export type Lift = {
@@ -15,6 +18,9 @@ export type Lift = {
   liftType: LiftType;
   segments: Point[][];
   icon?: Point;
+  altitudeValley?: number;
+  altitudeMountain?: number;
+  status?: "open" | "closed";
 };
 
 export type MapLabel = {
