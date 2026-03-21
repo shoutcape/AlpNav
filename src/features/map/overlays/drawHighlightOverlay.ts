@@ -63,9 +63,9 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null): void {
     }
   }
 
-  // Icon badge ring
+  // Icon badge ring — radius 26 sits flush against the badge edge (BADGE_R 24 + stroke 1 = 25)
   if (item.icon) {
-    g.circle(item.icon.x, item.icon.y, 28);
+    g.circle(item.icon.x, item.icon.y, 26);
     g.stroke({ width: 3, color: HIGHLIGHT_GOLD });
   }
 }
