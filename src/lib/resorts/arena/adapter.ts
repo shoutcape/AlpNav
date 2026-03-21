@@ -51,11 +51,15 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
     const difficulty = normalizeDifficulty(rawDiff);
     const name = (popup.title as string | undefined) ?? id;
     const additionalInfo = (popup["additional-info"] ?? {}) as Record<string, unknown>;
-    const number = typeof popup.number === "string"
+    const rawNumber = typeof popup.number === "string"
       ? popup.number
       : typeof popup.number === "number"
       ? String(popup.number)
       : undefined;
+    // Prefer the number+letter prefix from the name (e.g. "36a" from "36a Krummbach Gerlos")
+    // when the name starts with the same digits as rawNumber.
+    const namePrefix = rawNumber ? name.match(/^(\d+[a-zA-Z]?)\s/) : null;
+    const number = namePrefix && namePrefix[1].startsWith(rawNumber!) ? namePrefix[1] : rawNumber;
     const lengthM = typeof additionalInfo.length === "number" ? additionalInfo.length : undefined;
     const rawStatus = slope.status as string | undefined;
     const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
