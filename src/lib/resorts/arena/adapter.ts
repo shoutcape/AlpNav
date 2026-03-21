@@ -1,4 +1,4 @@
-import type { GastronomySpot, GastronomyType, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData } from "@/lib/domain/types";
+import type { GastronomySpot, GastronomyType, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, Webcam, WebcamProvider } from "@/lib/domain/types";
 
 // SVG viewBox is 0 0 1024 672; PixiJS world is 4096×2688
 const SVG_TO_WORLD = 4.0;
@@ -32,8 +32,9 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
   const lifts = parseLifts(lDoc, liftMetaMap);
   const labels = parseLabels(textDoc);
   const gastronomy = parseGastronomy(dataJson);
+  const webcams = parseWebcams(dataJson);
 
-  return { pistes, lifts, labels, gastronomy };
+  return { pistes, lifts, labels, gastronomy, webcams };
 }
 
 // ─── metadata ────────────────────────────────────────────────────────────────
@@ -44,6 +45,7 @@ type RawPoi = {
   position?: { x: number; y: number };
   popup: {
     title: string;
+    desc?: string;
     info?: {
       img?: string;
       "opening-hours-from"?: string;
@@ -180,6 +182,28 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
         description: item.searchdesc ?? undefined,
         imageUrls,
         openingHours,
+      };
+    });
+}
+
+function parseWebcams(data: Record<string, unknown>): Webcam[] {
+  const pois = (data.pois ?? {}) as Record<string, unknown>;
+  const feratel = (pois["2816"] ?? []) as RawPoi[];
+  const panomax = (pois["2807"] ?? []) as RawPoi[];
+  return [...feratel, ...panomax]
+    .filter(item => item.position)
+    .map(item => {
+      const types: number[] = item.types ?? [];
+      const provider: WebcamProvider = types.includes(558) ? "panomax" : "feratel";
+      const thumbnailUrl = typeof item.popup.info?.img === "string" ? item.popup.info.img : undefined;
+      const streamUrl = typeof item.popup.desc === "string" ? item.popup.desc : "";
+      return {
+        id: item.id,
+        name: item.popup.title,
+        provider,
+        position: { x: item.position!.x * SVG_TO_WORLD, y: item.position!.y * SVG_TO_WORLD },
+        thumbnailUrl,
+        streamUrl,
       };
     });
 }

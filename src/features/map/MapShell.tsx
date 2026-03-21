@@ -12,9 +12,10 @@ import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
 import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
 import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
 import { drawGastronomyMarkerOverlay } from "./overlays/drawGastronomyMarkerOverlay";
+import { drawWebcamMarkerOverlay } from "./overlays/drawWebcamMarkerOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
-import type { ResortOverlayData, Piste, Lift, GastronomySpot, PisteDifficulty } from "@/lib/domain/types";
+import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, PisteDifficulty } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -80,8 +81,11 @@ export function MapShell({ manifest }: MapShellProps) {
   const gastronomyOverlayRef = useRef<Container | null>(null);
   const [gastronomyVisible, setGastronomyVisible] = useState(true);
   const gastronomyVisibleRef = useRef(true);
+  const webcamOverlayRef = useRef<Container | null>(null);
+  const [webcamVisible, setWebcamVisible] = useState(true);
+  const webcamVisibleRef = useRef(true);
 
-  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const debugModeRef = useRef(false);
   const debugLayerRef = useRef<Graphics | null>(null);
@@ -310,6 +314,12 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.addChild(gastronomyContainer);
       gastronomyOverlayRef.current = gastronomyContainer;
 
+      const webcamContainer = new Container();
+      webcamContainer.label = "overlay-webcams";
+      drawWebcamMarkerOverlay(webcamContainer, overlayData.webcams);
+      viewport.addChild(webcamContainer);
+      webcamOverlayRef.current = webcamContainer;
+
       const badgeHighlight = new Graphics();
       badgeHighlight.label = "overlay-badge-highlight";
       viewport.addChild(badgeHighlight);
@@ -417,11 +427,13 @@ export function MapShell({ manifest }: MapShellProps) {
           ? data.pistes.filter(p => pisteFilterRef.current[p.difficulty])
           : [];
         const activeGastronomy = gastronomyVisibleRef.current ? data.gastronomy : [];
+        const activeWebcams = webcamVisibleRef.current ? data.webcams : [];
         const hit = hitTestOverlays(
           world.x, world.y,
           activePistes,
           liftVisibleRef.current ? data.lifts : [],
           activeGastronomy,
+          activeWebcams,
         );
         setSelectedItem(hit);
         console.log("clicked:", hit?.name ?? "none", hit);
@@ -466,6 +478,7 @@ export function MapShell({ manifest }: MapShellProps) {
       liftHighlightRef.current = null;
       badgeHighlightRef.current = null;
       gastronomyOverlayRef.current = null;
+      webcamOverlayRef.current = null;
       pisteLinesByDiffRef.current = null;
       pisteMarkersByDiffRef.current = null;
 
@@ -485,15 +498,16 @@ export function MapShell({ manifest }: MapShellProps) {
     const lg = liftHighlightRef.current;
     const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
-    const isGastro = selectedItem !== null && "position" in selectedItem;
-    if (!isGastro && selectedItem && "difficulty" in selectedItem) {
+    const isGastro = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem);
+    const isWebcam = selectedItem !== null && "streamUrl" in selectedItem;
+    if (!isGastro && !isWebcam && selectedItem && "difficulty" in selectedItem) {
       drawPisteHighlight(pg, selectedItem);
       drawLiftHighlight(lg, null);
     } else {
       drawPisteHighlight(pg, null);
-      drawLiftHighlight(lg, isGastro ? null : selectedItem as Lift | null);
+      drawLiftHighlight(lg, (isGastro || isWebcam) ? null : selectedItem as Lift | null);
     }
-    if (bh) drawBadgeHighlight(bh, selectedItem as Piste | Lift | GastronomySpot | null);
+    if (bh) drawBadgeHighlight(bh, isWebcam ? selectedItem as Webcam : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
@@ -553,6 +567,14 @@ export function MapShell({ manifest }: MapShellProps) {
     gastronomyVisibleRef.current = next;
     if (gastronomyOverlayRef.current)
       gastronomyOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+  };
+
+  const toggleWebcam = () => {
+    const next = !webcamVisible;
+    setWebcamVisible(next);
+    webcamVisibleRef.current = next;
+    if (webcamOverlayRef.current)
+      webcamOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
   const [legendOpen, setLegendOpen] = useState(false);
@@ -646,6 +668,7 @@ export function MapShell({ manifest }: MapShellProps) {
         <div className="pointer-events-auto flex gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
           <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
           <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
+          <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
           <div className="relative">
             <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && allDifficultiesOn} onToggleAll={toggleAllPistes} />
             <button
@@ -898,6 +921,19 @@ function GastronomyMapIcon() {
       <path d="M2.5,-8 L4,-4 L2.5,-2.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       {/* Knife handle */}
       <line x1="2.5" y1="-2.5" x2="2.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function WebcamMapIcon() {
+  return (
+    <svg width="22" height="20" viewBox="-11 -10 22 20" fill="none" aria-hidden="true">
+      {/* Camera body */}
+      <rect x="-9" y="-5" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      {/* Lens */}
+      <circle cx="0" cy="0.5" r="3.5" stroke="currentColor" strokeWidth="1.5" />
+      {/* Viewfinder bump */}
+      <rect x="-4" y="-8" width="5" height="3" rx="1" fill="currentColor" />
     </svg>
   );
 }

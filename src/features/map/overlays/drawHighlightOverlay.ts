@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js";
-import type { Piste, Lift, GastronomySpot, PisteDifficulty, Point } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, Webcam, PisteDifficulty, Point } from "@/lib/domain/types";
 
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
@@ -118,10 +118,19 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null): void {
 
 }
 
+const WEBCAM_BADGE_R = 18;
+
 // Drawn on a layer above all marker containers — recolors badge outlines to gold.
-export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | null): void {
+export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | Webcam | null): void {
   g.clear();
   if (!item) return;
+
+  if ("streamUrl" in item) {
+    // Webcam — squircle outline in gold, matching the badge shape
+    g.roundRect(item.position.x - WEBCAM_BADGE_R, item.position.y - WEBCAM_BADGE_R, WEBCAM_BADGE_R * 2, WEBCAM_BADGE_R * 2, 10);
+    g.stroke({ color: HIGHLIGHT_GOLD, width: 2 });
+    return;
+  }
 
   if ("position" in item) {
     // GastronomySpot — recolor the badge outline to gold, same radius and width

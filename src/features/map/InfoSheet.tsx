@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
-import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider } from "@/lib/domain/types";
 
 type Props = {
-  selectedItem: Piste | Lift | GastronomySpot | null;
+  selectedItem: Piste | Lift | GastronomySpot | Webcam | null;
+};
+
+const WEBCAM_PROVIDER_LABEL: Record<WebcamProvider, string> = {
+  feratel: "Webcam (Feratel)",
+  panomax: "Webcam (Panomax)",
 };
 
 const GASTRONOMY_TYPE_LABEL: Record<GastronomyType, string> = {
@@ -41,12 +46,13 @@ export function InfoSheet({ selectedItem }: Props) {
   const visible = selectedItem !== null;
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
+  const [liveMode, setLiveMode] = useState(false);
 
-  useEffect(() => { setLightboxOpen(false); setImgIndex(0); }, [selectedItem]);
+  useEffect(() => { setLightboxOpen(false); setImgIndex(0); setLiveMode(false); }, [selectedItem]);
 
   return (
     <>
-    {lightboxOpen && selectedItem && ("position" in selectedItem || "liftType" in selectedItem) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+    {lightboxOpen && selectedItem && ("liftType" in selectedItem || ("position" in selectedItem && !("streamUrl" in selectedItem))) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
       <div
         className="fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm"
         onClick={() => setLightboxOpen(false)}
@@ -70,7 +76,11 @@ export function InfoSheet({ selectedItem }: Props) {
           <div>
             <div className="flex items-center gap-3">
               {/* Icon / badge */}
-              {"position" in selectedItem ? (
+              {"streamUrl" in selectedItem ? (
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#1565c0]">
+                  <WebcamIcon />
+                </span>
+              ) : "position" in selectedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
                   style={{ backgroundColor: GASTRONOMY_TYPE_COLOR[selectedItem.type] }}
@@ -90,7 +100,16 @@ export function InfoSheet({ selectedItem }: Props) {
 
               {/* Name + type label */}
               <div className="min-w-0 flex-1">
-                {"position" in selectedItem ? (
+                {"streamUrl" in selectedItem ? (
+                  <>
+                    <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
+                      {selectedItem.name}
+                    </p>
+                    <p className="mt-0.5 text-[12px] text-ivory/50">
+                      {WEBCAM_PROVIDER_LABEL[selectedItem.provider]}
+                    </p>
+                  </>
+                ) : "position" in selectedItem ? (
                   <>
                     <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
                       {selectedItem.name}
@@ -173,7 +192,43 @@ export function InfoSheet({ selectedItem }: Props) {
               </div>
             )}
 
-            {"position" in selectedItem && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
+            {"streamUrl" in selectedItem && (
+              <div className="mt-3 flex flex-col gap-3">
+                <div className="relative mx-auto w-full max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl bg-black">
+                  {liveMode ? (
+                    <iframe
+                      src={selectedItem.streamUrl}
+                      className="w-full h-full border-0"
+                      allow="autoplay"
+                      title={selectedItem.name}
+                    />
+                  ) : (
+                    <>
+                      {selectedItem.thumbnailUrl && (
+                        <img
+                          src={selectedItem.thumbnailUrl}
+                          alt={selectedItem.name}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                      <button
+                        onClick={() => setLiveMode(true)}
+                        className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/40 backdrop-blur-[2px]"
+                      >
+                        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 border border-white/30 backdrop-blur-sm">
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white" aria-hidden="true">
+                            <path d="M6 4l12 6-12 6V4z" />
+                          </svg>
+                        </span>
+                        <span className="text-[12px] font-medium text-white/90">Watch Live</span>
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {"position" in selectedItem && !("streamUrl" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
                 {(selectedItem.openingHours || selectedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
@@ -262,6 +317,16 @@ function StatusPill({ status }: { status?: "open" | "closed" }) {
     <span className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-[#3b1a1a] text-[#ef5350]">
       Closed
     </span>
+  );
+}
+
+function WebcamIcon() {
+  return (
+    <svg width="16" height="16" viewBox="-9 -9 18 18" fill="none" aria-hidden="true">
+      <rect x="-8" y="-5" width="16" height="10" rx="2" stroke="white" strokeWidth="1.5" />
+      <circle cx="0" cy="0" r="3" stroke="white" strokeWidth="1.5" />
+      <rect x="-3" y="-8" width="5" height="3" rx="1" fill="white" />
+    </svg>
   );
 }
 

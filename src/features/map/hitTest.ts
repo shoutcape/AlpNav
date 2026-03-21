@@ -1,4 +1,4 @@
-import type { Piste, Lift, GastronomySpot, Point } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, Webcam, Point } from "@/lib/domain/types";
 
 const HIT_THRESHOLD = 20; // world units — tune after testing
 const ICON_HIT_RADIUS = 26; // world units — badge is r=24, gives ~2 units of extra margin
@@ -29,9 +29,16 @@ export function hitTestOverlays(
   pistes: Piste[],
   lifts: Lift[],
   gastronomy: GastronomySpot[] = [],
+  webcams: Webcam[] = [],
   threshold = HIT_THRESHOLD,
-): Piste | Lift | GastronomySpot | null {
-  // Gastronomy point test — highest priority
+): Piste | Lift | GastronomySpot | Webcam | null {
+  // Webcam point test — highest priority
+  for (const cam of webcams) {
+    const d = Math.hypot(px - cam.position.x, py - cam.position.y);
+    if (d <= GASTRO_HIT_RADIUS) return cam;
+  }
+
+  // Gastronomy point test — second priority
   for (const spot of gastronomy) {
     const dx = px - spot.position.x;
     const dy = py - spot.position.y;

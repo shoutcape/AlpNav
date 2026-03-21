@@ -57,4 +57,15 @@ export type GastronomySpot = {
   openingHours?: string;
 };
 
-export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[] };
+export type WebcamProvider = "feratel" | "panomax";
+
+export type Webcam = {
+  id: string;
+  name: string;
+  provider: WebcamProvider;
+  position: Point;
+  thumbnailUrl?: string;
+  streamUrl: string;
+};
+
+export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[]; webcams: Webcam[] };
