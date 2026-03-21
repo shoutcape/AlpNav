@@ -5,9 +5,9 @@ type Props = {
 };
 
 const DIFFICULTY_COLOR: Record<PisteDifficulty, string> = {
-  easy:      "#42a5f5",
-  medium:    "#ef5350",
-  difficult: "#78909c",
+  easy:      "#0069ea",
+  medium:    "#ff0000",
+  difficult: "#444444",
   unknown:   "#9e9e9e",
 };
 

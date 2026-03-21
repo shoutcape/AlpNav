@@ -26,19 +26,19 @@ export function drawLiftOverlay(container: Container, lifts: Lift[]): void {
       const last = segment[segment.length - 1];
 
       terminals.circle(first.x, first.y, TERMINAL_RADIUS);
-      terminals.fill({ color: 0x69f0ae });
+      terminals.fill({ color: 0x66bb6a });
       terminals.circle(first.x, first.y, TERMINAL_RADIUS);
       terminals.stroke({ width: 2.5, color: 0x1b5e20 });
 
       terminals.circle(last.x, last.y, TERMINAL_RADIUS);
-      terminals.fill({ color: 0x69f0ae });
+      terminals.fill({ color: 0x66bb6a });
       terminals.circle(last.x, last.y, TERMINAL_RADIUS);
       terminals.stroke({ width: 2.5, color: 0x1b5e20 });
     }
   }
 
   outline.stroke({ width: 8, color: 0x1b5e20 });
-  inner.stroke({ width: 4, color: 0x69f0ae });
+  inner.stroke({ width: 4, color: 0x66bb6a });
 
   container.addChild(outline);
   container.addChild(inner);

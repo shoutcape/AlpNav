@@ -4,9 +4,9 @@ import type { Piste, Lift, PisteDifficulty } from "@/lib/domain/types";
 const HIGHLIGHT_GOLD = 0xffd700;
 
 const HIGHLIGHT_PISTE_COLORS: Record<PisteDifficulty, number> = {
-  easy:      0x42a5f5,
-  medium:    0xff5252,
-  difficult: 0x757575,
+  easy:      0x4da6ff,
+  medium:    0xff5c5c,
+  difficult: 0x555555,
   unknown:   0xbdbdbd,
 };
 

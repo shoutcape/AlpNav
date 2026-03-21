@@ -2,12 +2,12 @@ import { Container, Graphics } from "pixi.js";
 import type { Lift, LiftType } from "@/lib/domain/types";
 
 const BADGE_R = 24;
-const BADGE_FILL = 0x1a1a2e;
+const BADGE_FILL = 0x66bb6a;
 const BADGE_STROKE_COLOR = 0x000000;
 const BADGE_STROKE_W = 2;
 
 const WHITE = 0xffffff;
-const CABIN_FILL = 0x2c2c50; // slightly lighter than badge — cabin interior
+const CABIN_FILL = 0x4a9b4e; // slightly darker than badge — cabin interior
 
 export function drawLiftMarkerOverlay(container: Container, lifts: Lift[]): void {
   // Pass 1 — badge backgrounds

@@ -2,10 +2,10 @@ import { Container, Graphics } from "pixi.js";
 import type { Piste, PisteDifficulty } from "@/lib/domain/types";
 
 const DIFFICULTY_COLORS: Record<PisteDifficulty, number> = {
-  easy: 0x1565c0,
-  medium: 0xd32f2f,
-  difficult: 0x212121,
-  unknown: 0x9e9e9e,
+  easy:      0x0069ea,
+  medium:    0xff0000,
+  difficult: 0x000000,
+  unknown:   0x9e9e9e,
 };
 
 const STROKE_WIDTH = 3;
