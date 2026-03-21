@@ -688,14 +688,16 @@ function applyLevelBlend(
       const lowerContainer = containers.get(lower.remoteZoom);
       const upperContainer = containers.get(upper.remoteZoom);
 
+      // Keep lower at full alpha so the background never bleeds through.
+      // Upper fades in on top; once fully opaque it covers the lower entirely.
       if (lowerContainer) {
-        lowerContainer.alpha = 1 - mix;
-        lowerContainer.visible = lowerContainer.alpha > 0;
+        lowerContainer.alpha = 1;
+        lowerContainer.visible = true;
       }
 
       if (upperContainer) {
         upperContainer.alpha = mix;
-        upperContainer.visible = upperContainer.alpha > 0;
+        upperContainer.visible = mix > 0;
       }
 
       return;
