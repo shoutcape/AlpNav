@@ -42,7 +42,14 @@ type RawPoi = {
   id: string;
   types?: number[];
   position?: { x: number; y: number };
-  popup: { title: string };
+  popup: {
+    title: string;
+    info?: {
+      img?: string;
+      "opening-hours-from"?: string;
+      "opening-hours-to"?: string;
+    };
+  };
   searchdesc?: string;
 };
 
@@ -110,6 +117,13 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
       const type: GastronomyType =
         types.includes(141) ? "bar" :
         types.includes(142) ? "cafe" : "restaurant";
+      const info = item.popup.info ?? {};
+      const imgs: string[] = Array.isArray((info as Record<string, unknown>).imgs) ? (info as Record<string, unknown>).imgs as string[] : [];
+      const single = typeof info.img === "string" ? info.img : undefined;
+      const imageUrls = imgs.length > 0 ? imgs : single ? [single] : undefined;
+      const from = info["opening-hours-from"];
+      const to = info["opening-hours-to"];
+      const openingHours = from && to ? `${from} – ${to}` : undefined;
       return {
         id: item.id,
         name: item.popup.title,
@@ -119,6 +133,8 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
           y: item.position!.y * SVG_TO_WORLD,
         },
         description: item.searchdesc ?? undefined,
+        imageUrls,
+        openingHours,
       };
     });
 }

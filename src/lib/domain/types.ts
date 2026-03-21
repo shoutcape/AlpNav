@@ -50,6 +50,8 @@ export type GastronomySpot = {
   type: GastronomyType;
   position: Point;
   description?: string;
+  imageUrls?: string[];
+  openingHours?: string;
 };
 
 export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[] };
