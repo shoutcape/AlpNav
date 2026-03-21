@@ -493,7 +493,7 @@ export function MapShell({ manifest }: MapShellProps) {
       drawPisteHighlight(pg, null);
       drawLiftHighlight(lg, isGastro ? null : selectedItem as Lift | null);
     }
-    if (bh) drawBadgeHighlight(bh, isGastro ? null : selectedItem as Piste | Lift | null);
+    if (bh) drawBadgeHighlight(bh, selectedItem as Piste | Lift | GastronomySpot | null);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;

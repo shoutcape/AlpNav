@@ -1,8 +1,9 @@
 import { Graphics } from "pixi.js";
-import type { Piste, Lift, PisteDifficulty, Point } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, PisteDifficulty, Point } from "@/lib/domain/types";
 
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
+const GASTRO_BADGE_R = 18;
 
 const HIGHLIGHT_GOLD = 0xffd700;
 
@@ -118,9 +119,16 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null): void {
 }
 
 // Drawn on a layer above all marker containers — recolors badge outlines to gold.
-export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | null): void {
+export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | null): void {
   g.clear();
   if (!item) return;
+
+  if ("position" in item) {
+    // GastronomySpot — recolor the badge outline to gold, same radius and width
+    g.circle(item.position.x, item.position.y, GASTRO_BADGE_R);
+    g.stroke({ color: HIGHLIGHT_GOLD, width: 1.5 });
+    return;
+  }
 
   if ("difficulty" in item) {
     // Piste — may have multiple icon positions
