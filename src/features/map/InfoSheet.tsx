@@ -104,27 +104,54 @@ function StatusPill({ status }: { status?: "open" | "closed" }) {
 }
 
 function LiftTypeIcon({ liftType }: { liftType: LiftType }) {
+  // viewBox="-24 -24 48 48" — origin matches the Pixi map badge centre (cx=0, cy=0)
   return (
-    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1a3320]">
+    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1a1a2e]">
       {liftType === "gondola" && (
-        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-          <line x1="1" y1="3" x2="15" y2="3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.7" />
-          <line x1="8" y1="1" x2="8" y2="3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          <rect x="3" y="3" width="10" height="8" rx="1.5" stroke="white" strokeWidth="1.5" />
+        <svg width="28" height="28" viewBox="-24 -24 48 48" fill="none" aria-hidden="true">
+          {/* Angled cable */}
+          <line x1="-13" y1="-5" x2="13" y2="-12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+          {/* Grip clamp */}
+          <rect x="-3" y="-11" width="6" height="3" rx="1" fill="white" />
+          {/* V hangers */}
+          <line x1="-1.5" y1="-8" x2="-5" y2="-3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="1.5" y1="-8" x2="5" y2="-3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          {/* Top deck */}
+          <rect x="-8" y="-3" width="16" height="3" fill="#2c2c50" stroke="white" strokeWidth="1.5" />
+          {/* Cabin */}
+          <rect x="-8" y="0" width="16" height="12" rx="2" fill="#2c2c50" stroke="white" strokeWidth="1.5" />
+          {/* Left window */}
+          <rect x="-7" y="2" width="5" height="7" rx="1" stroke="white" strokeWidth="1" />
+          {/* Right window */}
+          <rect x="2" y="2" width="5" height="7" rx="1" stroke="white" strokeWidth="1" />
         </svg>
       )}
       {liftType === "chairlift" && (
-        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-          <line x1="1" y1="3" x2="15" y2="3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.7" />
-          <line x1="8" y1="1" x2="8" y2="7" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M5 7 H11 V10" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <svg width="28" height="28" viewBox="-24 -24 48 48" fill="none" aria-hidden="true">
+          {/* Diagonal cable */}
+          <line x1="-13" y1="-8" x2="13" y2="-12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+          {/* Connection point */}
+          <circle cx="0" cy="-10" r="3" fill="white" />
+          {/* Short drop */}
+          <line x1="0" y1="-7" x2="0" y2="-4" stroke="white" strokeWidth="2" strokeLinecap="round" />
+          {/* C-bracket */}
+          <path d="M0,-4 L-4,-4 L-4,8 L0,8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="miter" />
+          {/* L-chair */}
+          <path d="M0,0 L0,8 L7,8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Footrest */}
+          <line x1="1" y1="11" x2="6" y2="11" stroke="white" strokeWidth="2" strokeLinecap="round" />
         </svg>
       )}
       {(liftType === "drag" || liftType === "other") && (
-        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-          <line x1="1" y1="3" x2="15" y2="3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.7" />
-          <line x1="8" y1="1" x2="8" y2="11" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="5" y1="11" x2="11" y2="11" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        <svg width="28" height="28" viewBox="-24 -24 48 48" fill="none" aria-hidden="true">
+          {/* Angled cable */}
+          <line x1="-13" y1="-8" x2="13" y2="-14" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Clamp circle */}
+          <circle cx="0" cy="-11" r="2.5" fill="white" />
+          {/* Vertical pole */}
+          <line x1="0" y1="-8.5" x2="0" y2="9" stroke="white" strokeWidth="2" strokeLinecap="round" />
+          {/* T-bar */}
+          <line x1="-6" y1="9" x2="6" y2="9" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
         </svg>
       )}
     </span>

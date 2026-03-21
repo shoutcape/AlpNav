@@ -553,17 +553,22 @@ function MapControlButton({ icon, label, active, onClick }: { icon: React.ReactN
 
 function LiftIcon() {
   return (
-    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" aria-hidden="true">
-      {/* cable */}
-      <line x1="1" y1="5" x2="19" y2="5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      {/* left pole */}
-      <line x1="4" y1="5" x2="4" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.45" />
-      {/* right pole */}
-      <line x1="16" y1="5" x2="16" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.45" />
-      {/* hanger */}
-      <line x1="10" y1="2" x2="10" y2="5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      {/* gondola body */}
-      <rect x="6.25" y="5" width="7.5" height="6.5" rx="1.75" stroke="currentColor" strokeWidth="1.5" />
+    <svg width="22" height="20" viewBox="-14 -13 28 26" fill="none" aria-hidden="true">
+      {/* Angled cable */}
+      <line x1="-13" y1="-5" x2="13" y2="-12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      {/* Grip clamp */}
+      <rect x="-3" y="-11" width="6" height="3" rx="1" fill="currentColor" />
+      {/* V hangers */}
+      <line x1="-1.5" y1="-8" x2="-5" y2="-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="1.5" y1="-8" x2="5" y2="-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Top deck */}
+      <rect x="-8" y="-3" width="16" height="3" stroke="currentColor" strokeWidth="1.5" />
+      {/* Cabin */}
+      <rect x="-8" y="0" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      {/* Left window */}
+      <rect x="-7" y="2" width="5" height="7" rx="1" stroke="currentColor" strokeWidth="1" strokeOpacity="0.6" />
+      {/* Right window */}
+      <rect x="2" y="2" width="5" height="7" rx="1" stroke="currentColor" strokeWidth="1" strokeOpacity="0.6" />
     </svg>
   );
 }
