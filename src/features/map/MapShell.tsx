@@ -61,7 +61,9 @@ export function MapShell({ manifest }: MapShellProps) {
   const liftHighlightRef = useRef<Graphics | null>(null);
 
   const [liftVisible, setLiftVisible] = useState(true);
+  const liftVisibleRef = useRef(true);
   const [pisteVisible, setPisteVisible] = useState(true);
+  const pisteVisibleRef = useRef(true);
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const debugModeRef = useRef(false);
@@ -366,7 +368,11 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
         const data = overlayDataRef.current;
         if (!data) return;
-        const hit = hitTestOverlays(world.x, world.y, data.pistes, data.lifts);
+        const hit = hitTestOverlays(
+          world.x, world.y,
+          pisteVisibleRef.current ? data.pistes : [],
+          liftVisibleRef.current ? data.lifts : [],
+        );
         setSelectedItem(hit);
         console.log("clicked:", hit?.name ?? "none", hit);
       });
@@ -438,6 +444,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const toggleLifts = () => {
     const next = !liftVisible;
     setLiftVisible(next);
+    liftVisibleRef.current = next;
     if (liftOverlayRef.current) liftOverlayRef.current.visible = next;
     if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
   };
@@ -445,6 +452,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const togglePistes = () => {
     const next = !pisteVisible;
     setPisteVisible(next);
+    pisteVisibleRef.current = next;
     if (pisteOverlayRef.current) pisteOverlayRef.current.visible = next;
     if (pisteMarkerRef.current) pisteMarkerRef.current.visible = next;
   };
