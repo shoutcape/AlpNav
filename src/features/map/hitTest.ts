@@ -1,6 +1,7 @@
 import type { Piste, Lift, Point } from "@/lib/domain/types";
 
 const HIT_THRESHOLD = 20; // world units — tune after testing
+const ICON_HIT_RADIUS = 26; // world units — badge is r=24, gives ~2 units of extra margin
 
 function pointToSegmentDist(px: number, py: number, ax: number, ay: number, bx: number, by: number): number {
   const dx = bx - ax, dy = by - ay;
@@ -28,6 +29,13 @@ export function hitTestOverlays(
   lifts: Lift[],
   threshold = HIT_THRESHOLD,
 ): Piste | Lift | null {
+  // Icon snap — highest priority
+  for (const lift of lifts) {
+    if (!lift.icon) continue;
+    const d = Math.hypot(px - lift.icon.x, py - lift.icon.y);
+    if (d < ICON_HIT_RADIUS) return lift;
+  }
+
   let best: Piste | Lift | null = null;
   let bestDist = threshold;
 
