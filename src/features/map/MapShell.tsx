@@ -457,7 +457,7 @@ export function MapShell({ manifest }: MapShellProps) {
     setLiftVisible(next);
     liftVisibleRef.current = next;
     if (liftOverlayRef.current) liftOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
-    if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
   };
 
   const togglePistes = () => {
@@ -465,7 +465,7 @@ export function MapShell({ manifest }: MapShellProps) {
     setPisteVisible(next);
     pisteVisibleRef.current = next;
     if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
-    if (pisteMarkerRef.current) pisteMarkerRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    if (pisteMarkerRef.current) pisteMarkerRef.current.visible = next;
   };
 
   const toggleDebug = () => setDebugMode(d => !d);
