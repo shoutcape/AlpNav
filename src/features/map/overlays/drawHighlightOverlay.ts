@@ -1,6 +1,9 @@
 import { Graphics } from "pixi.js";
 import type { Piste, Lift, PisteDifficulty, Point } from "@/lib/domain/types";
 
+const LIFT_BADGE_R = 24;
+const PISTE_BADGE_R = 14;
+
 const HIGHLIGHT_GOLD = 0xffd700;
 
 const HIGHLIGHT_PISTE_COLORS: Record<PisteDifficulty, number> = {
@@ -112,9 +115,22 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null): void {
     }
   }
 
-  // Icon badge ring — radius 26 sits flush against the badge edge (BADGE_R 24 + stroke 1 = 25)
-  if (item.icon) {
-    g.circle(item.icon.x, item.icon.y, 26);
-    g.stroke({ width: 3, color: HIGHLIGHT_GOLD });
+}
+
+// Drawn on a layer above all marker containers — recolors badge outlines to gold.
+export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | null): void {
+  g.clear();
+  if (!item) return;
+
+  if ("difficulty" in item) {
+    // Piste — may have multiple icon positions
+    for (const { x, y } of item.icons ?? []) {
+      g.circle(x, y, PISTE_BADGE_R).stroke({ color: HIGHLIGHT_GOLD, width: 2 });
+    }
+  } else {
+    // Lift — single icon
+    if (item.icon) {
+      g.circle(item.icon.x, item.icon.y, LIFT_BADGE_R).stroke({ color: HIGHLIGHT_GOLD, width: 2.5 });
+    }
   }
 }

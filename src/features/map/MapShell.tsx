@@ -10,7 +10,7 @@ import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
 import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
 import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
 import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
-import { drawPisteHighlight, drawLiftHighlight } from "./overlays/drawHighlightOverlay";
+import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
 import type { ResortOverlayData, Piste, Lift } from "@/lib/domain/types";
@@ -59,6 +59,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const pisteMarkerRef = useRef<Container | null>(null);
   const pisteHighlightRef = useRef<Graphics | null>(null);
   const liftHighlightRef = useRef<Graphics | null>(null);
+  const badgeHighlightRef = useRef<Graphics | null>(null);
 
   const [liftVisible, setLiftVisible] = useState(true);
   const liftVisibleRef = useRef(true);
@@ -270,6 +271,11 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.addChild(pisteMarkerContainer);
       pisteMarkerRef.current = pisteMarkerContainer;
 
+      const badgeHighlight = new Graphics();
+      badgeHighlight.label = "overlay-badge-highlight";
+      viewport.addChild(badgeHighlight);
+      badgeHighlightRef.current = badgeHighlight;
+
       const labelContainer = new Container();
       labelContainer.label = "overlay-labels";
       const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
@@ -414,6 +420,7 @@ export function MapShell({ manifest }: MapShellProps) {
 
       pisteHighlightRef.current = null;
       liftHighlightRef.current = null;
+      badgeHighlightRef.current = null;
 
       host.replaceChildren();
     };
@@ -429,6 +436,7 @@ export function MapShell({ manifest }: MapShellProps) {
   useEffect(() => {
     const pg = pisteHighlightRef.current;
     const lg = liftHighlightRef.current;
+    const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
     if (selectedItem && "difficulty" in selectedItem) {
       drawPisteHighlight(pg, selectedItem);
@@ -437,6 +445,7 @@ export function MapShell({ manifest }: MapShellProps) {
       drawPisteHighlight(pg, null);
       drawLiftHighlight(lg, selectedItem as Lift | null);
     }
+    if (bh) drawBadgeHighlight(bh, selectedItem);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
