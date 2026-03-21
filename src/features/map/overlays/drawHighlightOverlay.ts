@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js";
-import type { Piste, Lift, PisteDifficulty } from "@/lib/domain/types";
+import type { Piste, Lift, PisteDifficulty, Point } from "@/lib/domain/types";
 
 const HIGHLIGHT_GOLD = 0xffd700;
 
@@ -10,26 +10,75 @@ const HIGHLIGHT_PISTE_COLORS: Record<PisteDifficulty, number> = {
   unknown:   0xbdbdbd,
 };
 
+const DASH_LEN = 8;
+const GAP_LEN = 6;
+
+function drawDashedSegment(g: Graphics, seg: Point[]): void {
+  let drawing = true;
+  let remaining = DASH_LEN;
+
+  for (let i = 1; i < seg.length; i++) {
+    let x0 = seg[i - 1].x;
+    let y0 = seg[i - 1].y;
+    const x1 = seg[i].x;
+    const y1 = seg[i].y;
+    const dx = x1 - x0;
+    const dy = y1 - y0;
+    const segLen = Math.hypot(dx, dy);
+    if (segLen === 0) continue;
+    const ux = dx / segLen;
+    const uy = dy / segLen;
+    let covered = 0;
+
+    while (covered < segLen) {
+      const step = Math.min(remaining, segLen - covered);
+      const nx = x0 + ux * step;
+      const ny = y0 + uy * step;
+      if (drawing) {
+        g.moveTo(x0, y0);
+        g.lineTo(nx, ny);
+      }
+      x0 = nx;
+      y0 = ny;
+      covered += step;
+      remaining -= step;
+      if (remaining <= 0) {
+        drawing = !drawing;
+        remaining = drawing ? DASH_LEN : GAP_LEN;
+      }
+    }
+  }
+}
+
 // Called with the below-lifts Graphics — pistes only
 export function drawPisteHighlight(g: Graphics, item: Piste | null): void {
   g.clear();
   if (!item) return;
 
   const outlineColor = HIGHLIGHT_PISTE_COLORS[item.difficulty];
+  const skiSegs = item.skiRouteSegments ?? [];
 
-  // 1px difficulty-color border (drawn first, behind)
+  // Outline pass (drawn first, behind)
   for (const seg of item.segments) {
     if (seg.length < 2) continue;
     g.moveTo(seg[0].x, seg[0].y);
     for (let i = 1; i < seg.length; i++) g.lineTo(seg[i].x, seg[i].y);
   }
+  for (const seg of skiSegs) {
+    if (seg.length < 2) continue;
+    drawDashedSegment(g, seg);
+  }
   g.stroke({ width: 5, color: outlineColor });
 
-  // Gold core — same width as normal piste stroke
+  // Gold core
   for (const seg of item.segments) {
     if (seg.length < 2) continue;
     g.moveTo(seg[0].x, seg[0].y);
     for (let i = 1; i < seg.length; i++) g.lineTo(seg[i].x, seg[i].y);
+  }
+  for (const seg of skiSegs) {
+    if (seg.length < 2) continue;
+    drawDashedSegment(g, seg);
   }
   g.stroke({ width: 3, color: HIGHLIGHT_GOLD });
 }

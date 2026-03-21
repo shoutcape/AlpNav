@@ -45,7 +45,10 @@ export function hitTestOverlays(
   }
 
   for (const piste of pistes) {
-    const d = minDistToSegments(px, py, piste.segments);
+    const allSegs = piste.skiRouteSegments
+      ? [...piste.segments, ...piste.skiRouteSegments]
+      : piste.segments;
+    const d = minDistToSegments(px, py, allSegs);
     if (d < bestDist) { bestDist = d; best = piste; }
   }
 

@@ -1,5 +1,5 @@
 import { Container, Graphics } from "pixi.js";
-import type { Piste, PisteDifficulty } from "@/lib/domain/types";
+import type { Piste, PisteDifficulty, Point } from "@/lib/domain/types";
 
 const DIFFICULTY_COLORS: Record<PisteDifficulty, number> = {
   easy:      0x0069ea,
@@ -9,6 +9,45 @@ const DIFFICULTY_COLORS: Record<PisteDifficulty, number> = {
 };
 
 const STROKE_WIDTH = 3;
+const DASH_LEN = 8;
+const GAP_LEN = 6;
+
+function drawDashedSegment(g: Graphics, seg: Point[]): void {
+  let drawing = true;
+  let remaining = DASH_LEN;
+
+  for (let i = 1; i < seg.length; i++) {
+    let x0 = seg[i - 1].x;
+    let y0 = seg[i - 1].y;
+    const x1 = seg[i].x;
+    const y1 = seg[i].y;
+    const dx = x1 - x0;
+    const dy = y1 - y0;
+    const segLen = Math.hypot(dx, dy);
+    if (segLen === 0) continue;
+    const ux = dx / segLen;
+    const uy = dy / segLen;
+    let covered = 0;
+
+    while (covered < segLen) {
+      const step = Math.min(remaining, segLen - covered);
+      const nx = x0 + ux * step;
+      const ny = y0 + uy * step;
+      if (drawing) {
+        g.moveTo(x0, y0);
+        g.lineTo(nx, ny);
+      }
+      x0 = nx;
+      y0 = ny;
+      covered += step;
+      remaining -= step;
+      if (remaining <= 0) {
+        drawing = !drawing;
+        remaining = drawing ? DASH_LEN : GAP_LEN;
+      }
+    }
+  }
+}
 
 export function drawPisteOverlay(container: Container, pistes: Piste[]): void {
   const byDifficulty = new Map<PisteDifficulty, Piste[]>();
@@ -19,6 +58,7 @@ export function drawPisteOverlay(container: Container, pistes: Piste[]): void {
     byDifficulty.set(piste.difficulty, group);
   }
 
+  // Solid segments
   for (const [difficulty, group] of byDifficulty) {
     const color = DIFFICULTY_COLORS[difficulty];
     const g = new Graphics();
@@ -38,6 +78,21 @@ export function drawPisteOverlay(container: Container, pistes: Piste[]): void {
     }
 
     g.stroke({ width: STROKE_WIDTH, color });
+    container.addChild(g);
+  }
+
+  // Dashed ski route segments
+  for (const piste of pistes) {
+    if (!piste.skiRouteSegments?.length) continue;
+    const color = DIFFICULTY_COLORS[piste.difficulty];
+    const g = new Graphics();
+
+    for (const seg of piste.skiRouteSegments) {
+      if (seg.length < 2) continue;
+      drawDashedSegment(g, seg);
+    }
+
+    g.stroke({ width: STROKE_WIDTH, color, cap: "round", join: "round" });
     container.addChild(g);
   }
 }

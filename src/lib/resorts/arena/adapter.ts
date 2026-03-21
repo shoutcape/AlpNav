@@ -150,6 +150,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
     }
 
     const segments: Point[][] = [];
+    const skiRouteSegments: Point[][] = [];
 
     for (const pathEl of Array.from(pathGroup.querySelectorAll("path"))) {
       const d = pathEl.getAttribute("d");
@@ -159,10 +160,14 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
       }
 
       const parsed = parseSvgPathD(d, SVG_TO_WORLD);
-      segments.push(...parsed);
+      if (pathEl.getAttribute("stroke-dasharray")) {
+        skiRouteSegments.push(...parsed);
+      } else {
+        segments.push(...parsed);
+      }
     }
 
-    if (segments.length === 0) {
+    if (segments.length === 0 && skiRouteSegments.length === 0) {
       continue;
     }
 
@@ -172,6 +177,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
       name: m?.name ?? featureId,
       difficulty: m?.difficulty ?? "unknown",
       segments,
+      ...(skiRouteSegments.length > 0 ? { skiRouteSegments } : {}),
       number: m?.number,
       lengthM: m?.lengthM,
       status: m?.status,

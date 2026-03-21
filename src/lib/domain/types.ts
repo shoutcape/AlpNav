@@ -6,7 +6,8 @@ export type Piste = {
   id: string;
   name: string;
   difficulty: PisteDifficulty;
-  segments: Point[][];
+  segments: Point[][];             // solid slope segments
+  skiRouteSegments?: Point[][];    // dashed ski route segments
   number?: number;
   lengthM?: number;
   status?: "open" | "closed";
