@@ -87,7 +87,8 @@ function liftSubtitle(lift: Lift): string {
   const parts: string[] = [typeLabel];
   if (lift.capacity != null) parts.push(`${lift.capacity} p/h`);
   if (lift.altitudeValley != null && lift.altitudeMountain != null) {
-    parts.push(`${lift.altitudeValley} → ${lift.altitudeMountain} m`);
+    const diff = lift.altitudeMountain - lift.altitudeValley;
+    parts.push(`${lift.altitudeValley} → ${lift.altitudeMountain} m (+${diff} m)`);
   }
   return parts.join(" · ");
 }
