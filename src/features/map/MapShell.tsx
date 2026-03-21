@@ -450,20 +450,22 @@ export function MapShell({ manifest }: MapShellProps) {
 
   const isLoading = loadedLevelCount < manifest.levels.length;
 
+  const HIDDEN_ALPHA = 0.15;
+
   const toggleLifts = () => {
     const next = !liftVisible;
     setLiftVisible(next);
     liftVisibleRef.current = next;
-    if (liftOverlayRef.current) liftOverlayRef.current.visible = next;
-    if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
+    if (liftOverlayRef.current) liftOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
   const togglePistes = () => {
     const next = !pisteVisible;
     setPisteVisible(next);
     pisteVisibleRef.current = next;
-    if (pisteOverlayRef.current) pisteOverlayRef.current.visible = next;
-    if (pisteMarkerRef.current) pisteMarkerRef.current.visible = next;
+    if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    if (pisteMarkerRef.current) pisteMarkerRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
   const toggleDebug = () => setDebugMode(d => !d);
