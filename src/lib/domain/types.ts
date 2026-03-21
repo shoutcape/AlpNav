@@ -42,4 +42,14 @@ export type MapLabel = {
   bgH?: number;
 };
 
-export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[] };
+export type GastronomyType = "restaurant" | "bar" | "cafe";
+
+export type GastronomySpot = {
+  id: string;
+  name: string;
+  type: GastronomyType;
+  position: Point;
+  description?: string;
+};
+
+export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[] };

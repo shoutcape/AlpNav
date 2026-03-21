@@ -1,7 +1,8 @@
-import type { Piste, Lift, Point } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, Point } from "@/lib/domain/types";
 
 const HIT_THRESHOLD = 20; // world units — tune after testing
 const ICON_HIT_RADIUS = 26; // world units — badge is r=24, gives ~2 units of extra margin
+const GASTRO_HIT_RADIUS = 20;
 
 function pointToSegmentDist(px: number, py: number, ax: number, ay: number, bx: number, by: number): number {
   const dx = bx - ax, dy = by - ay;
@@ -27,8 +28,16 @@ export function hitTestOverlays(
   py: number,
   pistes: Piste[],
   lifts: Lift[],
+  gastronomy: GastronomySpot[] = [],
   threshold = HIT_THRESHOLD,
-): Piste | Lift | null {
+): Piste | Lift | GastronomySpot | null {
+  // Gastronomy point test — highest priority
+  for (const spot of gastronomy) {
+    const dx = px - spot.position.x;
+    const dy = py - spot.position.y;
+    if (Math.sqrt(dx * dx + dy * dy) <= GASTRO_HIT_RADIUS) return spot;
+  }
+
   // Icon snap — highest priority
   for (const lift of lifts) {
     if (!lift.icon) continue;

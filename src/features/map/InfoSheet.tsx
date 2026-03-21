@@ -1,7 +1,18 @@
-import type { Piste, Lift, PisteDifficulty, LiftType } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType } from "@/lib/domain/types";
 
 type Props = {
-  selectedItem: Piste | Lift | null;
+  selectedItem: Piste | Lift | GastronomySpot | null;
+};
+
+const GASTRONOMY_TYPE_LABEL: Record<GastronomyType, string> = {
+  restaurant: "Mountain Restaurant",
+  bar:        "Bar / Après-ski",
+  cafe:       "Café",
+};
+const GASTRONOMY_TYPE_COLOR: Record<GastronomyType, string> = {
+  restaurant: "#e8a020",
+  bar:        "#9b4dca",
+  cafe:       "#20a090",
 };
 
 const DIFFICULTY_COLOR: Record<PisteDifficulty, string> = {
@@ -39,7 +50,14 @@ export function InfoSheet({ selectedItem }: Props) {
         {selectedItem && (
           <div className="flex items-center gap-3">
             {/* Icon / badge */}
-            {"difficulty" in selectedItem ? (
+            {"position" in selectedItem ? (
+              <span
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
+                style={{ backgroundColor: GASTRONOMY_TYPE_COLOR[selectedItem.type] }}
+              >
+                <GastronomyIcon />
+              </span>
+            ) : "difficulty" in selectedItem ? (
               <span
                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold uppercase tracking-wide text-white"
                 style={{ backgroundColor: DIFFICULTY_COLOR[selectedItem.difficulty] }}
@@ -52,20 +70,33 @@ export function InfoSheet({ selectedItem }: Props) {
 
             {/* Name + type label */}
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                  {selectedItem.name}
-                  {"number" in selectedItem && selectedItem.number != null && (
-                    <span className="ml-1.5 text-[13px] font-normal text-ivory/40">#{selectedItem.number}</span>
-                  )}
-                </p>
-                <StatusPill status={selectedItem.status} />
-              </div>
-              <p className="mt-0.5 text-[12px] text-ivory/50">
-                {"difficulty" in selectedItem
-                  ? pisteSubtitle(selectedItem)
-                  : liftSubtitle(selectedItem)}
-              </p>
+              {"position" in selectedItem ? (
+                <>
+                  <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
+                    {selectedItem.name}
+                  </p>
+                  <p className="mt-0.5 text-[12px] text-ivory/50">
+                    {GASTRONOMY_TYPE_LABEL[selectedItem.type]}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center gap-2">
+                    <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
+                      {selectedItem.name}
+                      {"number" in selectedItem && selectedItem.number != null && (
+                        <span className="ml-1.5 text-[13px] font-normal text-ivory/40">#{selectedItem.number}</span>
+                      )}
+                    </p>
+                    <StatusPill status={selectedItem.status} />
+                  </div>
+                  <p className="mt-0.5 text-[12px] text-ivory/50">
+                    {"difficulty" in selectedItem
+                      ? pisteSubtitle(selectedItem)
+                      : liftSubtitle(selectedItem)}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -103,6 +134,25 @@ function StatusPill({ status }: { status?: "open" | "closed" }) {
     <span className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-[#3b1a1a] text-[#ef5350]">
       Closed
     </span>
+  );
+}
+
+function GastronomyIcon() {
+  return (
+    <svg width="16" height="16" viewBox="-8 -8 16 16" fill="none" aria-hidden="true">
+      {/* Fork tines */}
+      <line x1="-3.5" y1="-7" x2="-3.5" y2="-3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="-2" y1="-7" x2="-2" y2="-3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="-0.5" y1="-7" x2="-0.5" y2="-3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+      {/* Fork arch */}
+      <path d="M-3.5,-3 Q-2,-1 -0.5,-3" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      {/* Fork handle */}
+      <line x1="-2" y1="-1.5" x2="-2" y2="7" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+      {/* Knife blade */}
+      <path d="M2,-7 L3.5,-3.5 L2,-2" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Knife handle */}
+      <line x1="2" y1="-2" x2="2" y2="7" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
   );
 }
 

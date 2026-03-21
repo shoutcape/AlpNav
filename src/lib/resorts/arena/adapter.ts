@@ -1,4 +1,4 @@
-import type { Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData } from "@/lib/domain/types";
+import type { GastronomySpot, GastronomyType, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData } from "@/lib/domain/types";
 
 // SVG viewBox is 0 0 1024 672; PixiJS world is 4096×2688
 const SVG_TO_WORLD = 4.0;
@@ -31,11 +31,20 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
   const pistes = parsePistes(rDoc, pisteMetaMap);
   const lifts = parseLifts(lDoc, liftMetaMap);
   const labels = parseLabels(textDoc);
+  const gastronomy = parseGastronomy(dataJson);
 
-  return { pistes, lifts, labels };
+  return { pistes, lifts, labels, gastronomy };
 }
 
 // ─── metadata ────────────────────────────────────────────────────────────────
+
+type RawPoi = {
+  id: string;
+  types?: number[];
+  position?: { x: number; y: number };
+  popup: { title: string };
+  searchdesc?: string;
+};
 
 type PisteMeta = { name: string; difficulty: PisteDifficulty; number?: string; lengthM?: number; status?: "open" | "closed" };
 type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed"; capacity?: number; subtitle?: string };
@@ -89,6 +98,29 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
   }
 
   return map;
+}
+
+function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
+  const pois = (data.pois ?? {}) as Record<string, unknown>;
+  const items = (pois["202"] ?? []) as RawPoi[];
+  return items
+    .filter(item => item.position)
+    .map(item => {
+      const types: number[] = item.types ?? [];
+      const type: GastronomyType =
+        types.includes(141) ? "bar" :
+        types.includes(142) ? "cafe" : "restaurant";
+      return {
+        id: item.id,
+        name: item.popup.title,
+        type,
+        position: {
+          x: item.position!.x * SVG_TO_WORLD,
+          y: item.position!.y * SVG_TO_WORLD,
+        },
+        description: item.searchdesc ?? undefined,
+      };
+    });
 }
 
 function normalizeDifficulty(raw: string | undefined): PisteDifficulty {

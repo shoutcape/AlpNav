@@ -11,9 +11,10 @@ import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
 import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
 import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
 import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
+import { drawGastronomyMarkerOverlay } from "./overlays/drawGastronomyMarkerOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
-import type { ResortOverlayData, Piste, Lift, PisteDifficulty } from "@/lib/domain/types";
+import type { ResortOverlayData, Piste, Lift, GastronomySpot, PisteDifficulty } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -76,7 +77,11 @@ export function MapShell({ manifest }: MapShellProps) {
   const pisteLinesByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const pisteMarkersByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Piste | Lift | null>(null);
+  const gastronomyOverlayRef = useRef<Container | null>(null);
+  const [gastronomyVisible, setGastronomyVisible] = useState(true);
+  const gastronomyVisibleRef = useRef(true);
+
+  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const debugModeRef = useRef(false);
   const debugLayerRef = useRef<Graphics | null>(null);
@@ -299,6 +304,12 @@ export function MapShell({ manifest }: MapShellProps) {
       pisteLinesByDiffRef.current = linesByDiff;
       pisteMarkersByDiffRef.current = markersByDiff;
 
+      const gastronomyContainer = new Container();
+      gastronomyContainer.label = "overlay-gastronomy";
+      drawGastronomyMarkerOverlay(gastronomyContainer, overlayData.gastronomy);
+      viewport.addChild(gastronomyContainer);
+      gastronomyOverlayRef.current = gastronomyContainer;
+
       const badgeHighlight = new Graphics();
       badgeHighlight.label = "overlay-badge-highlight";
       viewport.addChild(badgeHighlight);
@@ -405,10 +416,12 @@ export function MapShell({ manifest }: MapShellProps) {
         const activePistes = pisteVisibleRef.current
           ? data.pistes.filter(p => pisteFilterRef.current[p.difficulty])
           : [];
+        const activeGastronomy = gastronomyVisibleRef.current ? data.gastronomy : [];
         const hit = hitTestOverlays(
           world.x, world.y,
           activePistes,
           liftVisibleRef.current ? data.lifts : [],
+          activeGastronomy,
         );
         setSelectedItem(hit);
         console.log("clicked:", hit?.name ?? "none", hit);
@@ -452,6 +465,7 @@ export function MapShell({ manifest }: MapShellProps) {
       pisteHighlightRef.current = null;
       liftHighlightRef.current = null;
       badgeHighlightRef.current = null;
+      gastronomyOverlayRef.current = null;
       pisteLinesByDiffRef.current = null;
       pisteMarkersByDiffRef.current = null;
 
@@ -471,14 +485,15 @@ export function MapShell({ manifest }: MapShellProps) {
     const lg = liftHighlightRef.current;
     const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
-    if (selectedItem && "difficulty" in selectedItem) {
+    const isGastro = selectedItem !== null && "position" in selectedItem;
+    if (!isGastro && selectedItem && "difficulty" in selectedItem) {
       drawPisteHighlight(pg, selectedItem);
       drawLiftHighlight(lg, null);
     } else {
       drawPisteHighlight(pg, null);
-      drawLiftHighlight(lg, selectedItem as Lift | null);
+      drawLiftHighlight(lg, isGastro ? null : selectedItem as Lift | null);
     }
-    if (bh) drawBadgeHighlight(bh, selectedItem);
+    if (bh) drawBadgeHighlight(bh, isGastro ? null : selectedItem as Piste | Lift | null);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
@@ -532,6 +547,16 @@ export function MapShell({ manifest }: MapShellProps) {
     }
   };
 
+  const toggleGastronomy = () => {
+    const next = !gastronomyVisible;
+    setGastronomyVisible(next);
+    gastronomyVisibleRef.current = next;
+    if (gastronomyOverlayRef.current)
+      gastronomyOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+  };
+
+  const [legendOpen, setLegendOpen] = useState(false);
+
   const toggleDebug = () => setDebugMode(d => !d);
 
   const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -563,8 +588,25 @@ export function MapShell({ manifest }: MapShellProps) {
         />
       </div>
 
-      {/* Top-right: debug toggle */}
-      <div className="pointer-events-none absolute right-0 top-0 z-10 p-3.5">
+      {/* Top-right: info + debug */}
+      <div className="pointer-events-none absolute right-0 top-0 z-10 p-3.5 flex flex-col items-end gap-2">
+        {/* Info / legend */}
+        <div className="relative">
+          <LegendPanel open={legendOpen} />
+          <button
+            onClick={() => setLegendOpen(o => !o)}
+            className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${legendOpen ? "bg-white/[0.18] text-ivory" : "bg-[#07111f]/65 text-white/70"}`}
+            aria-label="Toggle legend"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="8" y1="7" x2="8" y2="11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="8" cy="4.5" r="0.85" fill="currentColor" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Debug toggle */}
         <button
           onClick={toggleDebug}
           className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${debugMode ? "bg-yellow-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
@@ -593,16 +635,17 @@ export function MapShell({ manifest }: MapShellProps) {
         </button>
       </div>
 
-      {/* Dismiss backdrop for filter panel */}
+      {/* Dismiss backdrop for filter panel + legend */}
       <div
-        className={`fixed inset-0 z-[9] ${filterPanelOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-        onClick={() => setFilterPanelOpen(false)}
+        className={`fixed inset-0 z-[9] ${filterPanelOpen || legendOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        onClick={() => { setFilterPanelOpen(false); setLegendOpen(false); }}
       />
 
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
         <div className="pointer-events-auto flex gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
           <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
+          <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
           <div className="relative">
             <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && allDifficultiesOn} onToggleAll={toggleAllPistes} />
             <button
@@ -749,6 +792,112 @@ function SlopeIcon() {
       <path d="M2 16 L10 3 L18 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.5" />
       {/* piste line */}
       <path d="M10 3 L14.5 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function LegendPanel({ open }: { open: boolean }) {
+  return (
+    <div className={`absolute right-0 top-full mt-2 w-[220px] rounded-[18px] border border-white/[0.09] bg-[#07111f]/85 p-4 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-[opacity,transform] duration-150 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}`}>
+      {/* Slopes */}
+      <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-ivory/40 mb-2">Slopes</p>
+      {([
+        { color: "#0069ea", letter: "B", label: "Easy" },
+        { color: "#ff0000", letter: "R", label: "Medium" },
+        { color: "#444444", letter: "S", label: "Difficult" },
+      ] as const).map(({ color, letter, label }) => (
+        <div key={label} className="flex items-center gap-2.5 py-1">
+          <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[8px] font-bold text-white" style={{ backgroundColor: color }}>{letter}</span>
+          <span className="text-[12px] text-ivory">{label}</span>
+        </div>
+      ))}
+
+      <div className="my-3 h-px bg-white/[0.07]" />
+
+      {/* Lifts */}
+      <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-ivory/40 mb-2">Lifts</p>
+      <div className="flex items-center gap-2.5 py-1">
+        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#1a1a2e]">
+          <svg width="12" height="12" viewBox="-24 -24 48 48" fill="none" aria-hidden="true">
+            <line x1="-13" y1="-5" x2="13" y2="-12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <rect x="-3" y="-11" width="6" height="3" rx="1" fill="white" />
+            <line x1="-1.5" y1="-8" x2="-5" y2="-3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="1.5" y1="-8" x2="5" y2="-3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+            <rect x="-8" y="-3" width="16" height="3" stroke="white" strokeWidth="1.5" />
+            <rect x="-8" y="0" width="16" height="12" rx="2" stroke="white" strokeWidth="1.5" />
+            <rect x="-7" y="2" width="5" height="7" rx="1" stroke="white" strokeWidth="1" strokeOpacity="0.6" />
+            <rect x="2" y="2" width="5" height="7" rx="1" stroke="white" strokeWidth="1" strokeOpacity="0.6" />
+          </svg>
+        </span>
+        <span className="text-[12px] text-ivory">Gondola</span>
+      </div>
+      <div className="flex items-center gap-2.5 py-1">
+        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#1a1a2e]">
+          <svg width="12" height="12" viewBox="-24 -24 48 48" fill="none" aria-hidden="true">
+            <line x1="-13" y1="-8" x2="13" y2="-12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="0" cy="-10" r="3" fill="white" />
+            <line x1="0" y1="-7" x2="0" y2="0" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <rect x="-10" y="0" width="20" height="11" rx="2" stroke="white" strokeWidth="1.5" />
+            <line x1="1" y1="11" x2="6" y2="11" stroke="white" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </span>
+        <span className="text-[12px] text-ivory">Chairlift</span>
+      </div>
+      <div className="flex items-center gap-2.5 py-1">
+        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#1a1a2e]">
+          <svg width="12" height="12" viewBox="-24 -24 48 48" fill="none" aria-hidden="true">
+            <line x1="-13" y1="-8" x2="13" y2="-14" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+            <circle cx="0" cy="-11" r="2.5" fill="white" />
+            <line x1="0" y1="-8.5" x2="0" y2="9" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <line x1="-6" y1="9" x2="6" y2="9" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </span>
+        <span className="text-[12px] text-ivory">Drag Lift</span>
+      </div>
+
+      <div className="my-3 h-px bg-white/[0.07]" />
+
+      {/* Food */}
+      <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-ivory/40 mb-2">Food &amp; Drink</p>
+      {([
+        { color: "#e8a020", label: "Mountain Restaurant" },
+        { color: "#9b4dca", label: "Bar / Après-ski" },
+        { color: "#20a090", label: "Café" },
+      ] as const).map(({ color, label }) => (
+        <div key={label} className="flex items-center gap-2.5 py-1">
+          <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: color }}>
+            <svg width="10" height="10" viewBox="-8 -8 16 16" fill="none" aria-hidden="true">
+              <line x1="-3.5" y1="-7" x2="-3.5" y2="-3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="-2" y1="-7" x2="-2" y2="-3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="-0.5" y1="-7" x2="-0.5" y2="-3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+              <path d="M-3.5,-3 Q-2,-1.5 -0.5,-3" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+              <line x1="-2" y1="-1.5" x2="-2" y2="7" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+              <path d="M2,-7 L3,-4 L2,-2.5" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              <line x1="2" y1="-2.5" x2="2" y2="7" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </span>
+          <span className="text-[12px] text-ivory">{label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GastronomyMapIcon() {
+  return (
+    <svg width="22" height="20" viewBox="-11 -10 22 20" fill="none" aria-hidden="true">
+      {/* Fork tines */}
+      <line x1="-4.5" y1="-8" x2="-4.5" y2="-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="-2.5" y1="-8" x2="-2.5" y2="-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="-0.5" y1="-8" x2="-0.5" y2="-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Fork arch */}
+      <path d="M-4.5,-3 Q-2.5,-1 -0.5,-3" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      {/* Fork handle */}
+      <line x1="-2.5" y1="-1.5" x2="-2.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Knife blade */}
+      <path d="M2.5,-8 L4,-4 L2.5,-2.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Knife handle */}
+      <line x1="2.5" y1="-2.5" x2="2.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
