@@ -9,6 +9,7 @@ import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
 import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
 import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
+import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
 import { drawPisteHighlight, drawLiftHighlight } from "./overlays/drawHighlightOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
@@ -55,6 +56,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const pisteOverlayRef = useRef<Container | null>(null);
   const liftOverlayRef = useRef<Container | null>(null);
   const liftMarkerOverlayRef = useRef<Container | null>(null);
+  const pisteMarkerRef = useRef<Container | null>(null);
   const pisteHighlightRef = useRef<Graphics | null>(null);
   const liftHighlightRef = useRef<Graphics | null>(null);
 
@@ -260,6 +262,12 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.addChild(liftMarkerContainer);
       liftMarkerOverlayRef.current = liftMarkerContainer;
 
+      const pisteMarkerContainer = new Container();
+      pisteMarkerContainer.label = "overlay-piste-markers";
+      drawPisteMarkerOverlay(pisteMarkerContainer, overlayData.pistes);
+      viewport.addChild(pisteMarkerContainer);
+      pisteMarkerRef.current = pisteMarkerContainer;
+
       const labelContainer = new Container();
       labelContainer.label = "overlay-labels";
       const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
@@ -438,6 +446,7 @@ export function MapShell({ manifest }: MapShellProps) {
     const next = !pisteVisible;
     setPisteVisible(next);
     if (pisteOverlayRef.current) pisteOverlayRef.current.visible = next;
+    if (pisteMarkerRef.current) pisteMarkerRef.current.visible = next;
   };
 
   const toggleDebug = () => setDebugMode(d => !d);

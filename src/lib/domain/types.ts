@@ -8,7 +8,8 @@ export type Piste = {
   difficulty: PisteDifficulty;
   segments: Point[][];             // solid slope segments
   skiRouteSegments?: Point[][];    // dashed ski route segments
-  number?: number;
+  number?: string;
+  icons?: Point[];
   lengthM?: number;
   status?: "open" | "closed";
 };

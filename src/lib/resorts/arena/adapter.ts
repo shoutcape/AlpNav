@@ -37,7 +37,7 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
 
 // ─── metadata ────────────────────────────────────────────────────────────────
 
-type PisteMeta = { name: string; difficulty: PisteDifficulty; number?: number; lengthM?: number; status?: "open" | "closed" };
+type PisteMeta = { name: string; difficulty: PisteDifficulty; number?: string; lengthM?: number; status?: "open" | "closed" };
 type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed"; capacity?: number; subtitle?: string };
 
 function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta> {
@@ -51,7 +51,11 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
     const difficulty = normalizeDifficulty(rawDiff);
     const name = (popup.title as string | undefined) ?? id;
     const additionalInfo = (popup["additional-info"] ?? {}) as Record<string, unknown>;
-    const number = typeof popup.number === "number" ? popup.number : undefined;
+    const number = typeof popup.number === "string"
+      ? popup.number
+      : typeof popup.number === "number"
+      ? String(popup.number)
+      : undefined;
     const lengthM = typeof additionalInfo.length === "number" ? additionalInfo.length : undefined;
     const rawStatus = slope.status as string | undefined;
     const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
@@ -171,6 +175,14 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
       continue;
     }
 
+    const iconGroup = group.querySelector(`g[id="${featureId}_icon"]`);
+    const icons: Point[] = [];
+    for (const circle of Array.from(iconGroup?.querySelectorAll("circle") ?? [])) {
+      const cx = parseFloat(circle.getAttribute("cx") ?? "");
+      const cy = parseFloat(circle.getAttribute("cy") ?? "");
+      if (!isNaN(cx) && !isNaN(cy)) icons.push({ x: cx * SVG_TO_WORLD, y: cy * SVG_TO_WORLD });
+    }
+
     const m = meta.get(featureId);
     pistes.push({
       id: featureId,
@@ -178,6 +190,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
       difficulty: m?.difficulty ?? "unknown",
       segments,
       ...(skiRouteSegments.length > 0 ? { skiRouteSegments } : {}),
+      ...(icons.length > 0 ? { icons } : {}),
       number: m?.number,
       lengthM: m?.lengthM,
       status: m?.status,
