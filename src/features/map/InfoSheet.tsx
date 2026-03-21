@@ -46,7 +46,7 @@ export function InfoSheet({ selectedItem }: Props) {
 
   return (
     <>
-    {lightboxOpen && selectedItem && "position" in selectedItem && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+    {lightboxOpen && selectedItem && ("position" in selectedItem || "liftType" in selectedItem) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
       <div
         className="fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm"
         onClick={() => setLightboxOpen(false)}
@@ -119,6 +119,59 @@ export function InfoSheet({ selectedItem }: Props) {
                 )}
               </div>
             </div>
+
+            {"liftType" in selectedItem && (selectedItem.imageUrls || selectedItem.description || selectedItem.openingHours) && (
+              <div className="mt-3 flex flex-col gap-3">
+                {(selectedItem.openingHours || selectedItem.description) && (
+                  <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
+                    {selectedItem.openingHours && (
+                      <p className="text-[12px] text-ivory/60">
+                        🕐 {selectedItem.openingHours}
+                      </p>
+                    )}
+                    {selectedItem.description && (
+                      <p className="line-clamp-3 text-[12px] text-ivory/50">
+                        {selectedItem.description}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                  <div>
+                    <div className="relative mx-auto max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl cursor-pointer" onClick={() => setLightboxOpen(true)}>
+                      <img
+                        src={selectedItem.imageUrls[imgIndex]}
+                        alt={selectedItem.name}
+                        className="w-full h-full object-cover"
+                      />
+                      {selectedItem.imageUrls.length > 1 && (
+                        <>
+                          <button
+                            className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm"
+                            onClick={e => { e.stopPropagation(); setImgIndex(i => (i - 1 + selectedItem.imageUrls!.length) % selectedItem.imageUrls!.length); }}
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                          </button>
+                          <button
+                            className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm"
+                            onClick={e => { e.stopPropagation(); setImgIndex(i => (i + 1) % selectedItem.imageUrls!.length); }}
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    {selectedItem.imageUrls.length > 1 && (
+                      <div className="flex justify-center gap-1 mt-1">
+                        {selectedItem.imageUrls.map((_, i) => (
+                          <span key={i} className={`w-1.5 h-1.5 rounded-full ${i === imgIndex ? "bg-white" : "bg-white/30"}`} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
 
             {"position" in selectedItem && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">

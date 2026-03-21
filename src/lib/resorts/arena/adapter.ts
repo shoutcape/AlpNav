@@ -54,7 +54,7 @@ type RawPoi = {
 };
 
 type PisteMeta = { name: string; difficulty: PisteDifficulty; number?: string; lengthM?: number; status?: "open" | "closed" };
-type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed"; capacity?: number; subtitle?: string };
+type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed"; capacity?: number; subtitle?: string; imageUrls?: string[]; description?: string; openingHours?: string };
 
 function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta> {
   const map = new Map<string, PisteMeta>();
@@ -85,6 +85,43 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
   return map;
 }
 
+// Translate German lift description fragments to English.
+// Applied to searchdesc at parse time so the UI always shows English.
+function translateLiftDescription(raw: string): string {
+  let s = raw;
+
+  // ── Lift type prefixes (more specific first) ──────────────────────────────
+  s = s.replace(/\b10er Einseilumlaufbahn\b/gi, "10-seat gondola");
+  s = s.replace(/\b8er Einseilumlaufbahn\b/gi, "8-seat gondola");
+  s = s.replace(/\b8er EUB mit Sitzheizung\b/gi, "8-seat gondola with heated seats");
+  s = s.replace(/\b8er EUB\b/gi, "8-seat gondola");
+  s = s.replace(/\bKuppelbare (\d+)er-?Sesselbahn mit Wetterschutzhaube\b/gi, "Detachable $1-seat chairlift with weather protection");
+  s = s.replace(/\bKuppelbare (\d+)er SB mit Wetterschutzhaube\b/gi, "Detachable $1-seat chairlift with weather protection");
+  s = s.replace(/\b(\d+)er Sessellift mit Wetterschutzhaube\b/gi, "$1-seat chairlift with weather protection");
+  s = s.replace(/\b(\d+)er Sesselbahn mit Wetterschutzhaube\b/gi, "$1-seat chairlift with weather protection");
+  s = s.replace(/\b(\d+)er KSB Sesselbahn\b/gi, "$1-seat chairlift");
+  s = s.replace(/\b(\d+) KSB Sesselbahn\b/gi, "$1-seat chairlift");
+  s = s.replace(/\b(\d+)er Sesselbahn\b/gi, "$1-seat chairlift");
+  s = s.replace(/\b(\d+)er Sessellift\b/gi, "$1-seat chairlift");
+  s = s.replace(/\b(\d+)er SB\b/gi, "$1-seat chairlift");
+  s = s.replace(/\bmit Sitzheizung\b/gi, "with heated seats");
+  s = s.replace(/\bmit Zwischenstation\b/gi, "with intermediate station");
+
+  // ── Key terms ─────────────────────────────────────────────────────────────
+  s = s.replace(/\bFahrzeit:/gi, "Journey time:");
+  s = s.replace(/\bHöhenunterschied:/gi, "Difference in altitude:");
+  s = s.replace(/\bMinuten\b/gi, "min");
+
+  // ── Decimal comma in numeric values (e.g. "3,6 min" → "3.6 min") ─────────
+  // Negative lookahead (?!\d\d) prevents replacing thousands separators like "2,000"
+  s = s.replace(/(\d),(\d)(?!\d\d)/g, "$1.$2");
+
+  // ── Data typos ────────────────────────────────────────────────────────────
+  s = s.replace(/\bDiffernence\b/g, "Difference");
+
+  return s;
+}
+
 function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> {
   const map = new Map<string, LiftMeta>();
   const lifts = (data.lifts ?? []) as Array<Record<string, unknown>>;
@@ -101,7 +138,15 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
     const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
     const capacity = typeof additionalInfo["capacity"] === "number" ? additionalInfo["capacity"] : undefined;
     const subtitle = typeof lift.subtitle === "string" ? lift.subtitle : undefined;
-    map.set(id, { name, liftType, altitudeValley, altitudeMountain, status, capacity, subtitle });
+    const info = (popup.info ?? {}) as Record<string, unknown>;
+    const imgs: string[] = Array.isArray(info.imgs) ? info.imgs as string[] : [];
+    const single = typeof info.img === "string" ? info.img : undefined;
+    const imageUrls = imgs.length > 0 ? imgs : single ? [single] : undefined;
+    const description = typeof lift.searchdesc === "string" ? translateLiftDescription(lift.searchdesc) : undefined;
+    const rawFrom = info["opening-hours-from"];
+    const rawTo = info["opening-hours-to"];
+    const openingHours = rawFrom && rawTo ? `${rawFrom} – ${rawTo}` : undefined;
+    map.set(id, { name, liftType, altitudeValley, altitudeMountain, status, capacity, subtitle, imageUrls, description, openingHours });
   }
 
   return map;
@@ -318,6 +363,9 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
       status: m?.status,
       capacity: m?.capacity,
       subtitle: m?.subtitle,
+      imageUrls: m?.imageUrls,
+      description: m?.description,
+      openingHours: m?.openingHours,
     });
   }
 

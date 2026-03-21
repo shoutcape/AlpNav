@@ -25,6 +25,9 @@ export type Lift = {
   status?: "open" | "closed";
   capacity?: number;
   subtitle?: string;
+  imageUrls?: string[];
+  description?: string;
+  openingHours?: string;
 };
 
 export type MapLabel = {
