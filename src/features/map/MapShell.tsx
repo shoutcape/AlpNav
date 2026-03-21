@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Application, Assets, Container, Rectangle, Sprite, Texture } from "pixi.js";
+import { Application, Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import type { PanoramaLevel, PanoramaManifest } from "./types";
 import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
@@ -9,6 +9,9 @@ import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
 import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
 import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
+import { drawHighlightOverlay } from "./overlays/drawHighlightOverlay";
+import { hitTestOverlays } from "./hitTest";
+import type { ResortOverlayData, Piste, Lift } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -37,12 +40,15 @@ export function MapShell({ manifest }: MapShellProps) {
   const levelContainersRef = useRef<Map<number, Container>>(new Map());
   const loadedLevelsRef = useRef<Set<number>>(new Set());
   const hasInteractedRef = useRef(false);
+  const overlayDataRef = useRef<ResortOverlayData | null>(null);
   const pisteOverlayRef = useRef<Container | null>(null);
   const liftOverlayRef = useRef<Container | null>(null);
   const liftMarkerOverlayRef = useRef<Container | null>(null);
+  const highlightGraphicsRef = useRef<Graphics | null>(null);
 
   const [liftVisible, setLiftVisible] = useState(true);
   const [pisteVisible, setPisteVisible] = useState(true);
+  const [selectedItem, setSelectedItem] = useState<Piste | Lift | null>(null);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
 
@@ -203,6 +209,8 @@ export function MapShell({ manifest }: MapShellProps) {
         return;
       }
 
+      overlayDataRef.current = overlayData;
+
       const pisteContainer = new Container();
       pisteContainer.label = "overlay-pistes";
       drawPisteOverlay(pisteContainer, overlayData.pistes);
@@ -214,6 +222,11 @@ export function MapShell({ manifest }: MapShellProps) {
       drawLiftOverlay(liftContainer, overlayData.lifts);
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
+
+      const highlightGraphics = new Graphics();
+      highlightGraphics.label = "overlay-highlight";
+      viewport.addChild(highlightGraphics);
+      highlightGraphicsRef.current = highlightGraphics;
 
       const liftMarkerContainer = new Container();
       liftMarkerContainer.label = "overlay-lift-markers";
@@ -262,6 +275,14 @@ export function MapShell({ manifest }: MapShellProps) {
 
       viewport.on("moved", syncLabelTiers);
       syncLabelTiers();
+
+      viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
+        const data = overlayDataRef.current;
+        if (!data) return;
+        const hit = hitTestOverlays(world.x, world.y, data.pistes, data.lifts);
+        setSelectedItem(hit);
+        console.log("clicked:", hit?.name ?? "none", hit);
+      });
     };
 
     initialize().catch((error) => {
@@ -298,9 +319,17 @@ export function MapShell({ manifest }: MapShellProps) {
       appRef.current?.destroy(true, { children: true });
       appRef.current = null;
 
+      highlightGraphicsRef.current = null;
+
       host.replaceChildren();
     };
   }, [levelTiles, manifest.levels, maxLevel.height, maxLevel.width, maxScale]);
+
+  useEffect(() => {
+    const g = highlightGraphicsRef.current;
+    if (!g) return;
+    drawHighlightOverlay(g, selectedItem);
+  }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
 
