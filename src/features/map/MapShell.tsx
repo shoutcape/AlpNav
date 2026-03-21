@@ -9,8 +9,9 @@ import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
 import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
 import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
-import { drawHighlightOverlay } from "./overlays/drawHighlightOverlay";
+import { drawPisteHighlight, drawLiftHighlight } from "./overlays/drawHighlightOverlay";
 import { hitTestOverlays } from "./hitTest";
+import { InfoSheet } from "./InfoSheet";
 import type { ResortOverlayData, Piste, Lift } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
@@ -19,6 +20,16 @@ const LABEL_TIER_SCALES = [0, 0.25, 0.50, 0.85] as const;
 
 type MapShellProps = {
   manifest: PanoramaManifest;
+};
+
+type DebugStats = {
+  scale: number;
+  activeLevel: number;
+  blendPct: number;
+  worldCenterX: number;
+  worldCenterY: number;
+  loadedCount: number;
+  totalCount: number;
 };
 
 type TileDescriptor = {
@@ -44,11 +55,18 @@ export function MapShell({ manifest }: MapShellProps) {
   const pisteOverlayRef = useRef<Container | null>(null);
   const liftOverlayRef = useRef<Container | null>(null);
   const liftMarkerOverlayRef = useRef<Container | null>(null);
-  const highlightGraphicsRef = useRef<Graphics | null>(null);
+  const pisteHighlightRef = useRef<Graphics | null>(null);
+  const liftHighlightRef = useRef<Graphics | null>(null);
 
   const [liftVisible, setLiftVisible] = useState(true);
   const [pisteVisible, setPisteVisible] = useState(true);
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | null>(null);
+  const [debugMode, setDebugMode] = useState(false);
+  const debugModeRef = useRef(false);
+  const debugLayerRef = useRef<Graphics | null>(null);
+  const redrawDebugRef = useRef<(() => void) | null>(null);
+  const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
+  const minScaleRef = useRef(0.05);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
 
@@ -94,6 +112,7 @@ export function MapShell({ manifest }: MapShellProps) {
       }
 
       const minScale = computeMinScale(host.clientWidth, host.clientHeight, maxLevel.width, maxLevel.height);
+      minScaleRef.current = minScale;
 
       viewport.resize(host.clientWidth, host.clientHeight, maxLevel.width, maxLevel.height);
       viewport.clampZoom({ minScale, maxScale });
@@ -217,16 +236,23 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.addChild(pisteContainer);
       pisteOverlayRef.current = pisteContainer;
 
+      // Piste highlight — below lifts so lift lines render on top
+      const pisteHighlight = new Graphics();
+      pisteHighlight.label = "overlay-piste-highlight";
+      viewport.addChild(pisteHighlight);
+      pisteHighlightRef.current = pisteHighlight;
+
       const liftContainer = new Container();
       liftContainer.label = "overlay-lifts";
       drawLiftOverlay(liftContainer, overlayData.lifts);
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
 
-      const highlightGraphics = new Graphics();
-      highlightGraphics.label = "overlay-highlight";
-      viewport.addChild(highlightGraphics);
-      highlightGraphicsRef.current = highlightGraphics;
+      // Lift highlight — above lifts so gold color overwrites the green inner
+      const liftHighlight = new Graphics();
+      liftHighlight.label = "overlay-lift-highlight";
+      viewport.addChild(liftHighlight);
+      liftHighlightRef.current = liftHighlight;
 
       const liftMarkerContainer = new Container();
       liftMarkerContainer.label = "overlay-lift-markers";
@@ -238,6 +264,59 @@ export function MapShell({ manifest }: MapShellProps) {
       labelContainer.label = "overlay-labels";
       const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
       viewport.addChild(labelContainer);
+
+      // Debug layer — above all overlays, invisible unless debug mode is active
+      const debugLayer = new Graphics();
+      debugLayer.label = "debug-layer";
+      debugLayer.visible = false;
+      viewport.addChild(debugLayer);
+      debugLayerRef.current = debugLayer;
+
+      const redrawDebug = () => {
+        const g = debugLayerRef.current;
+        const vp = viewportRef.current;
+        if (!g || !vp) return;
+        g.clear();
+        if (!debugModeRef.current) return;
+
+        let activeZoom = -1, highestAlpha = -1;
+        for (const [zoom, container] of levelContainersRef.current) {
+          if (container.alpha > highestAlpha) {
+            highestAlpha = container.alpha;
+            activeZoom = zoom;
+          }
+        }
+        if (activeZoom === -1) return;
+
+        const level = manifest.levels.find(l => l.remoteZoom === activeZoom);
+        if (!level) return;
+
+        const scale = maxLevel.width / level.width;
+        const tw = manifest.tileSize * scale;
+        const th = manifest.tileSize * scale;
+
+        for (let y = 0; y < level.rows; y++) {
+          for (let x = 0; x < level.columns; x++) {
+            g.rect(x * tw, y * th, tw, th);
+            g.stroke({ width: 2 / vp.scale.x, color: 0xff00ff, alpha: 0.6 });
+          }
+        }
+
+        const centerWorldX = -vp.x / vp.scale.x + vp.screenWidth / 2 / vp.scale.x;
+        const centerWorldY = -vp.y / vp.scale.y + vp.screenHeight / 2 / vp.scale.y;
+
+        setDebugStats({
+          scale: vp.scale.x,
+          activeLevel: activeZoom,
+          blendPct: highestAlpha * 100,
+          worldCenterX: Math.round(centerWorldX),
+          worldCenterY: Math.round(centerWorldY),
+          loadedCount: loadedLevelsRef.current.size,
+          totalCount: manifest.levels.length,
+        });
+      };
+
+      redrawDebugRef.current = redrawDebug;
 
       const firstLevel = manifest.levels[0];
       await loadLevelIntoViewport(
@@ -273,7 +352,7 @@ export function MapShell({ manifest }: MapShellProps) {
         labelTiers[3].visible = scale >= LABEL_TIER_SCALES[3];
       };
 
-      viewport.on("moved", syncLabelTiers);
+      viewport.on("moved", () => { syncLabelTiers(); redrawDebug(); });
       syncLabelTiers();
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
@@ -319,16 +398,31 @@ export function MapShell({ manifest }: MapShellProps) {
       appRef.current?.destroy(true, { children: true });
       appRef.current = null;
 
-      highlightGraphicsRef.current = null;
+      pisteHighlightRef.current = null;
+      liftHighlightRef.current = null;
 
       host.replaceChildren();
     };
   }, [levelTiles, manifest.levels, maxLevel.height, maxLevel.width, maxScale]);
 
   useEffect(() => {
-    const g = highlightGraphicsRef.current;
-    if (!g) return;
-    drawHighlightOverlay(g, selectedItem);
+    debugModeRef.current = debugMode;
+    if (debugLayerRef.current) debugLayerRef.current.visible = debugMode;
+    if (!debugMode) setDebugStats(null);
+    redrawDebugRef.current?.();
+  }, [debugMode]);
+
+  useEffect(() => {
+    const pg = pisteHighlightRef.current;
+    const lg = liftHighlightRef.current;
+    if (!pg || !lg) return;
+    if (selectedItem && "difficulty" in selectedItem) {
+      drawPisteHighlight(pg, selectedItem);
+      drawLiftHighlight(lg, null);
+    } else {
+      drawPisteHighlight(pg, null);
+      drawLiftHighlight(lg, selectedItem as Lift | null);
+    }
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
@@ -344,6 +438,18 @@ export function MapShell({ manifest }: MapShellProps) {
     const next = !pisteVisible;
     setPisteVisible(next);
     if (pisteOverlayRef.current) pisteOverlayRef.current.visible = next;
+  };
+
+  const toggleDebug = () => setDebugMode(d => !d);
+
+  const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const vp = viewportRef.current;
+    if (!vp) return;
+    const t = parseFloat(e.target.value);
+    const logMin = Math.log(minScaleRef.current);
+    const logMax = Math.log(maxScale);
+    vp.scaled = Math.exp(logMin + t * (logMax - logMin));
+    vp.emit("moved", { type: "wheel", viewport: vp });
   };
 
   return (
@@ -363,6 +469,22 @@ export function MapShell({ manifest }: MapShellProps) {
           className="h-full bg-[#a8cfe0] transition-[width] duration-500"
           style={{ width: `${(loadedLevelCount / manifest.levels.length) * 100}%` }}
         />
+      </div>
+
+      {/* Top-right: debug toggle */}
+      <div className="pointer-events-none absolute right-0 top-0 z-10 p-3.5">
+        <button
+          onClick={toggleDebug}
+          className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${debugMode ? "bg-yellow-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
+          aria-label="Toggle debug overlay"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
+            <rect x="9.5" y="0.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
+            <rect x="0.5" y="9.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
+            <rect x="9.5" y="9.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+        </button>
       </div>
 
       {/* Top-left: menu trigger */}
@@ -386,6 +508,33 @@ export function MapShell({ manifest }: MapShellProps) {
           <MapControlButton icon={<SlopeIcon />} label="Slopes" active={pisteVisible} onClick={togglePistes} />
         </div>
       </div>
+
+      <InfoSheet selectedItem={selectedItem} />
+
+      {debugMode && debugStats && (
+        <div className="absolute bottom-4 left-4 z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5">
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.001"
+            value={(() => {
+              const logMin = Math.log(minScaleRef.current);
+              const logMax = Math.log(maxScale);
+              return ((Math.log(debugStats.scale) - logMin) / (logMax - logMin)).toFixed(4);
+            })()}
+            onChange={onZoomSliderChange}
+            className="w-full accent-yellow-400"
+            aria-label="Zoom"
+          />
+          <div className="space-y-0.5 pointer-events-none">
+            <div>scale: {debugStats.scale.toFixed(4)}</div>
+            <div>level: z{debugStats.activeLevel} ({debugStats.blendPct.toFixed(0)}%)</div>
+            <div>center: {debugStats.worldCenterX}, {debugStats.worldCenterY}</div>
+            <div>loaded: {debugStats.loadedCount}/{debugStats.totalCount}</div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
