@@ -538,25 +538,37 @@ export function MapShell({ manifest }: MapShellProps) {
     const enabled = next[diff];
     if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = enabled ? 1 : HIDDEN_ALPHA;
     if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[diff].visible = enabled;
+
+    // If turning a filter on while the master switch is off, restore the parent
+    // and explicitly dim all other off-filters (they were at alpha 1 with parent hiding them)
+    if (enabled && !pisteVisibleRef.current) {
+      setPisteVisible(true);
+      pisteVisibleRef.current = true;
+      if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = 1;
+      if (pisteMarkerRef.current) pisteMarkerRef.current.visible = true;
+      for (const d of DIFFICULTIES) {
+        if (d === diff) continue;
+        if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[d].alpha = next[d] ? 1 : HIDDEN_ALPHA;
+        if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[d].visible = next[d];
+      }
+    }
   };
 
-  const allDifficultiesOn = DIFFICULTIES.every(d => pisteFilterRef.current[d]);
-
   const toggleAllPistes = () => {
-    const turnOn = !pisteVisibleRef.current || !allDifficultiesOn;
-
-    // Global layer
+    const allOn = pisteVisibleRef.current && DIFFICULTIES.every(d => pisteFilterRef.current[d]);
+    const turnOn = !allOn;
     setPisteVisible(turnOn);
     pisteVisibleRef.current = turnOn;
     if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = turnOn ? 1 : HIDDEN_ALPHA;
     if (pisteMarkerRef.current) pisteMarkerRef.current.visible = turnOn;
 
-    // All difficulty filters
     const next = { easy: turnOn, medium: turnOn, difficult: turnOn, unknown: turnOn } as Record<PisteDifficulty, boolean>;
     setPisteFilter(next);
     pisteFilterRef.current = next;
     for (const diff of DIFFICULTIES) {
-      if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = turnOn ? 1 : HIDDEN_ALPHA;
+      // When turning off, parent handles hiding — reset children to 1 to avoid compounding.
+      // When turning on, children are all on (next[diff] === true).
+      if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = 1;
       if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[diff].visible = turnOn;
     }
   };
@@ -670,7 +682,7 @@ export function MapShell({ manifest }: MapShellProps) {
           <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
           <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
           <div className="relative">
-            <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && allDifficultiesOn} onToggleAll={toggleAllPistes} />
+            <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && DIFFICULTIES.every(d => pisteFilter[d])} onToggleAll={toggleAllPistes} />
             <button
               onClick={() => setFilterPanelOpen(o => !o)}
               onContextMenu={e => e.preventDefault()}
@@ -762,13 +774,15 @@ function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
   onToggleAll: () => void;
 }) {
   const difficulties: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
+  const activeCount = difficulties.filter(d => filter[d]).length;
+  const allOpacity = activeCount === difficulties.length ? "opacity-100" : "opacity-30";
   return (
-    <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-[opacity,transform] duration-150 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}`}>
+    <div className={`absolute bottom-full mb-2 right-0 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-[opacity,transform] duration-150 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}`}>
       <button
         onClick={onToggleAll}
-        className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${allOn ? "opacity-100" : "opacity-30"}`}
+        className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${allOpacity}`}
       >
-        <span className="w-4 h-4 rounded-full border border-white/40 bg-white/20" />
+        <span className="w-4 h-4 rounded-full bg-white ring-1 ring-black" />
         <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">All</span>
       </button>
       <div className="w-px self-stretch bg-white/[0.08] mx-0.5" />
@@ -778,7 +792,7 @@ function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
           onClick={() => onToggle(diff)}
           className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${filter[diff] ? "opacity-100" : "opacity-30"}`}
         >
-          <span className="w-4 h-4 rounded-full" style={{ backgroundColor: DIFFICULTY_CSS_COLORS[diff] }} />
+          <span className="w-4 h-4 rounded-full ring-1 ring-black" style={{ backgroundColor: DIFFICULTY_CSS_COLORS[diff] }} />
           <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">{DIFFICULTY_LABELS[diff]}</span>
         </button>
       ))}
