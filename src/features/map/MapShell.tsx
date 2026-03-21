@@ -13,7 +13,7 @@ import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
 import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
-import type { ResortOverlayData, Piste, Lift } from "@/lib/domain/types";
+import type { ResortOverlayData, Piste, Lift, PisteDifficulty } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -61,10 +61,21 @@ export function MapShell({ manifest }: MapShellProps) {
   const liftHighlightRef = useRef<Graphics | null>(null);
   const badgeHighlightRef = useRef<Graphics | null>(null);
 
+  const DIFFICULTIES: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
+
   const [liftVisible, setLiftVisible] = useState(true);
   const liftVisibleRef = useRef(true);
   const [pisteVisible, setPisteVisible] = useState(true);
   const pisteVisibleRef = useRef(true);
+  const [pisteFilter, setPisteFilter] = useState<Record<PisteDifficulty, boolean>>(
+    { easy: true, medium: true, difficult: true, unknown: true }
+  );
+  const pisteFilterRef = useRef<Record<PisteDifficulty, boolean>>(
+    { easy: true, medium: true, difficult: true, unknown: true }
+  );
+  const pisteLinesByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
+  const pisteMarkersByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
+  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const debugModeRef = useRef(false);
@@ -237,7 +248,6 @@ export function MapShell({ manifest }: MapShellProps) {
 
       const pisteContainer = new Container();
       pisteContainer.label = "overlay-pistes";
-      drawPisteOverlay(pisteContainer, overlayData.pistes);
       viewport.addChild(pisteContainer);
       pisteOverlayRef.current = pisteContainer;
 
@@ -267,9 +277,27 @@ export function MapShell({ manifest }: MapShellProps) {
 
       const pisteMarkerContainer = new Container();
       pisteMarkerContainer.label = "overlay-piste-markers";
-      drawPisteMarkerOverlay(pisteMarkerContainer, overlayData.pistes);
       viewport.addChild(pisteMarkerContainer);
       pisteMarkerRef.current = pisteMarkerContainer;
+
+      // Draw per-difficulty sub-containers
+      const linesByDiff = {} as Record<PisteDifficulty, Container>;
+      const markersByDiff = {} as Record<PisteDifficulty, Container>;
+      for (const diff of DIFFICULTIES) {
+        const filtered = overlayData.pistes.filter(p => p.difficulty === diff);
+
+        const lineSub = new Container();
+        drawPisteOverlay(lineSub, filtered);
+        pisteContainer.addChild(lineSub);
+        linesByDiff[diff] = lineSub;
+
+        const markerSub = new Container();
+        drawPisteMarkerOverlay(markerSub, filtered);
+        pisteMarkerContainer.addChild(markerSub);
+        markersByDiff[diff] = markerSub;
+      }
+      pisteLinesByDiffRef.current = linesByDiff;
+      pisteMarkersByDiffRef.current = markersByDiff;
 
       const badgeHighlight = new Graphics();
       badgeHighlight.label = "overlay-badge-highlight";
@@ -374,9 +402,12 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
         const data = overlayDataRef.current;
         if (!data) return;
+        const activePistes = pisteVisibleRef.current
+          ? data.pistes.filter(p => pisteFilterRef.current[p.difficulty])
+          : [];
         const hit = hitTestOverlays(
           world.x, world.y,
-          pisteVisibleRef.current ? data.pistes : [],
+          activePistes,
           liftVisibleRef.current ? data.lifts : [],
         );
         setSelectedItem(hit);
@@ -421,6 +452,8 @@ export function MapShell({ manifest }: MapShellProps) {
       pisteHighlightRef.current = null;
       liftHighlightRef.current = null;
       badgeHighlightRef.current = null;
+      pisteLinesByDiffRef.current = null;
+      pisteMarkersByDiffRef.current = null;
 
       host.replaceChildren();
     };
@@ -466,6 +499,37 @@ export function MapShell({ manifest }: MapShellProps) {
     pisteVisibleRef.current = next;
     if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
     if (pisteMarkerRef.current) pisteMarkerRef.current.visible = next;
+  };
+
+  const toggleDifficultyFilter = (diff: PisteDifficulty) => {
+    const next = { ...pisteFilterRef.current, [diff]: !pisteFilterRef.current[diff] };
+    setPisteFilter(next);
+    pisteFilterRef.current = next;
+
+    const enabled = next[diff];
+    if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = enabled ? 1 : HIDDEN_ALPHA;
+    if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[diff].visible = enabled;
+  };
+
+  const allDifficultiesOn = DIFFICULTIES.every(d => pisteFilterRef.current[d]);
+
+  const toggleAllPistes = () => {
+    const turnOn = !pisteVisibleRef.current || !allDifficultiesOn;
+
+    // Global layer
+    setPisteVisible(turnOn);
+    pisteVisibleRef.current = turnOn;
+    if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = turnOn ? 1 : HIDDEN_ALPHA;
+    if (pisteMarkerRef.current) pisteMarkerRef.current.visible = turnOn;
+
+    // All difficulty filters
+    const next = { easy: turnOn, medium: turnOn, difficult: turnOn, unknown: turnOn } as Record<PisteDifficulty, boolean>;
+    setPisteFilter(next);
+    pisteFilterRef.current = next;
+    for (const diff of DIFFICULTIES) {
+      if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = turnOn ? 1 : HIDDEN_ALPHA;
+      if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[diff].visible = turnOn;
+    }
   };
 
   const toggleDebug = () => setDebugMode(d => !d);
@@ -529,11 +593,39 @@ export function MapShell({ manifest }: MapShellProps) {
         </button>
       </div>
 
+      {/* Dismiss backdrop for filter panel */}
+      <div
+        className={`fixed inset-0 z-[9] ${filterPanelOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        onClick={() => setFilterPanelOpen(false)}
+      />
+
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
         <div className="pointer-events-auto flex gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
           <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
-          <MapControlButton icon={<SlopeIcon />} label="Slopes" active={pisteVisible} onClick={togglePistes} />
+          <div className="relative">
+            <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && allDifficultiesOn} onToggleAll={toggleAllPistes} />
+            <button
+              onClick={() => setFilterPanelOpen(o => !o)}
+              onContextMenu={e => e.preventDefault()}
+              className={`touch-none select-none flex flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+            >
+              <SlopeIcon />
+              <div className="flex gap-[3px] items-center h-[5px]">
+                {DIFFICULTIES.map(diff => (
+                  <span
+                    key={diff}
+                    className="w-[5px] h-[5px] rounded-full transition-opacity duration-150"
+                    style={{
+                      backgroundColor: DIFFICULTY_CSS_COLORS[diff],
+                      opacity: pisteVisible && pisteFilter[diff] ? 1 : 0.15,
+                    }}
+                  />
+                ))}
+              </div>
+              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -567,15 +659,64 @@ export function MapShell({ manifest }: MapShellProps) {
   );
 }
 
-function MapControlButton({ icon, label, active, onClick }: { icon: React.ReactNode; label: string; active: boolean; onClick: () => void }) {
+function MapControlButton({ icon, label, active, onClick, onPointerDown, onPointerUp, onPointerLeave }: {
+  icon: React.ReactNode; label: string; active: boolean;
+  onClick?: () => void;
+  onPointerDown?: () => void;
+  onPointerUp?: () => void;
+  onPointerLeave?: () => void;
+}) {
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerLeave={onPointerLeave}
+      onContextMenu={e => e.preventDefault()}
+      className={`touch-none select-none flex flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
     >
       {icon}
       <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">{label}</span>
     </button>
+  );
+}
+
+const DIFFICULTY_LABELS: Record<PisteDifficulty, string> = {
+  easy: "Easy", medium: "Med", difficult: "Hard", unknown: "Other"
+};
+const DIFFICULTY_CSS_COLORS: Record<PisteDifficulty, string> = {
+  easy: "#0069ea", medium: "#ff0000", difficult: "#444444", unknown: "#9e9e9e"
+};
+
+function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
+  filter: Record<PisteDifficulty, boolean>;
+  open: boolean;
+  onToggle: (d: PisteDifficulty) => void;
+  allOn: boolean;
+  onToggleAll: () => void;
+}) {
+  const difficulties: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
+  return (
+    <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-[opacity,transform] duration-150 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}`}>
+      <button
+        onClick={onToggleAll}
+        className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${allOn ? "opacity-100" : "opacity-30"}`}
+      >
+        <span className="w-4 h-4 rounded-full border border-white/40 bg-white/20" />
+        <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">All</span>
+      </button>
+      <div className="w-px self-stretch bg-white/[0.08] mx-0.5" />
+      {difficulties.map(diff => (
+        <button
+          key={diff}
+          onClick={() => onToggle(diff)}
+          className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${filter[diff] ? "opacity-100" : "opacity-30"}`}
+        >
+          <span className="w-4 h-4 rounded-full" style={{ backgroundColor: DIFFICULTY_CSS_COLORS[diff] }} />
+          <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">{DIFFICULTY_LABELS[diff]}</span>
+        </button>
+      ))}
+    </div>
   );
 }
 
