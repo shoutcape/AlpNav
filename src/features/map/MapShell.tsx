@@ -677,16 +677,14 @@ export function MapShell({ manifest }: MapShellProps) {
 
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
-        <div className="pointer-events-auto flex gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
+        <div className="pointer-events-auto grid grid-cols-4 gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
           <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
-          <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
-          <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
           <div className="relative">
             <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && DIFFICULTIES.every(d => pisteFilter[d])} onToggleAll={toggleAllPistes} />
             <button
               onClick={() => setFilterPanelOpen(o => !o)}
               onContextMenu={e => e.preventDefault()}
-              className={`touch-none select-none flex flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+              className={`touch-none select-none flex w-full flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
             >
               <SlopeIcon />
               <div className="flex gap-[3px] items-center h-[5px]">
@@ -704,6 +702,8 @@ export function MapShell({ manifest }: MapShellProps) {
               <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
             </button>
           </div>
+          <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
+          <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
         </div>
       </div>
 
@@ -751,7 +751,7 @@ function MapControlButton({ icon, label, active, onClick, onPointerDown, onPoint
       onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
       onContextMenu={e => e.preventDefault()}
-      className={`touch-none select-none flex flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+      className={`touch-none select-none flex w-full flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
     >
       {icon}
       <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">{label}</span>
@@ -777,7 +777,7 @@ function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
   const activeCount = difficulties.filter(d => filter[d]).length;
   const allOpacity = activeCount === difficulties.length ? "opacity-100" : "opacity-30";
   return (
-    <div className={`absolute bottom-full mb-2 right-0 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-[opacity,transform] duration-150 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}`}>
+    <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-[opacity,transform] duration-150 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}`}>
       <button
         onClick={onToggleAll}
         className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${allOpacity}`}
