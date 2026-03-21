@@ -38,7 +38,7 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
 // ─── metadata ────────────────────────────────────────────────────────────────
 
 type PisteMeta = { name: string; difficulty: PisteDifficulty; number?: number; lengthM?: number; status?: "open" | "closed" };
-type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed" };
+type LiftMeta = { name: string; liftType: LiftType; altitudeValley?: number; altitudeMountain?: number; status?: "open" | "closed"; capacity?: number; subtitle?: string };
 
 function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta> {
   const map = new Map<string, PisteMeta>();
@@ -75,7 +75,9 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
     const altitudeMountain = typeof additionalInfo["altitude-mountain"] === "number" ? additionalInfo["altitude-mountain"] : undefined;
     const rawStatus = lift.status as string | undefined;
     const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
-    map.set(id, { name, liftType, altitudeValley, altitudeMountain, status });
+    const capacity = typeof additionalInfo["capacity"] === "number" ? additionalInfo["capacity"] : undefined;
+    const subtitle = typeof lift.subtitle === "string" ? lift.subtitle : undefined;
+    map.set(id, { name, liftType, altitudeValley, altitudeMountain, status, capacity, subtitle });
   }
 
   return map;
@@ -243,6 +245,8 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
       altitudeValley: m?.altitudeValley,
       altitudeMountain: m?.altitudeMountain,
       status: m?.status,
+      capacity: m?.capacity,
+      subtitle: m?.subtitle,
     });
   }
 

@@ -21,6 +21,8 @@ export type Lift = {
   altitudeValley?: number;
   altitudeMountain?: number;
   status?: "open" | "closed";
+  capacity?: number;
+  subtitle?: string;
 };
 
 export type MapLabel = {

@@ -83,11 +83,13 @@ function pisteSubtitle(piste: Piste): string {
 }
 
 function liftSubtitle(lift: Lift): string {
-  const label = LIFT_TYPE_LABEL[lift.liftType];
+  const typeLabel = lift.subtitle ?? LIFT_TYPE_LABEL[lift.liftType];
+  const parts: string[] = [typeLabel];
+  if (lift.capacity != null) parts.push(`${lift.capacity} p/h`);
   if (lift.altitudeValley != null && lift.altitudeMountain != null) {
-    return `${label} · ${lift.altitudeValley} → ${lift.altitudeMountain} m`;
+    parts.push(`${lift.altitudeValley} → ${lift.altitudeMountain} m`);
   }
-  return label;
+  return parts.join(" · ");
 }
 
 function StatusPill({ status }: { status?: "open" | "closed" }) {
