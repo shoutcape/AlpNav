@@ -629,7 +629,7 @@ export function MapShell({ manifest }: MapShellProps) {
           <LegendPanel open={legendOpen} />
           <button
             onClick={() => setLegendOpen(o => !o)}
-            className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${legendOpen ? "bg-white/[0.18] text-ivory" : "bg-[#07111f]/65 text-white/70"}`}
+            className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${legendOpen ? "bg-yellow-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
             aria-label="Toggle legend"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
