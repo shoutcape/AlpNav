@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider } from "@/lib/domain/types";
 import { ImageCarousel } from "./ImageCarousel";
 
@@ -44,157 +44,173 @@ const LIFT_TYPE_LABEL: Record<LiftType, string> = {
 };
 
 export function InfoSheet({ selectedItem }: Props) {
-  const [displayedItem, setDisplayedItem] = useState(selectedItem);
-  const [exiting, setExiting] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [liveMode, setLiveMode] = useState(false);
 
-  // Sequence transitions when switching between items
-  useEffect(() => {
-    if (selectedItem === null) {
-      setExiting(false);
-      setDisplayedItem(null);
-      return;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const prevHeightRef = useRef(0);
+  const prevItemRef = useRef(selectedItem);
+
+  // Animate height and fade content when switching between items
+  useLayoutEffect(() => {
+    const card = cardRef.current;
+    const content = contentRef.current;
+    const prevItem = prevItemRef.current;
+    prevItemRef.current = selectedItem;
+
+    if (!card || !content) return;
+
+    const newHeight = card.offsetHeight;
+
+    if (prevItem && selectedItem) {
+      // Animate card height from old to new
+      if (Math.abs(newHeight - prevHeightRef.current) > 1) {
+        card.animate(
+          [{ height: `${prevHeightRef.current}px` }, { height: `${newHeight}px` }],
+          { duration: 280, easing: "cubic-bezier(0.4, 0, 0.2, 1)" }
+        );
+      }
+      // Fade content in (hides snap of new content appearing)
+      content.style.opacity = "0";
+      content.style.transition = "none";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (content) {
+          content.style.transition = "opacity 200ms ease";
+          content.style.opacity = "1";
+        }
+      }));
     }
-    if (displayedItem === null) {
-      setDisplayedItem(selectedItem);
-      return;
-    }
-    setExiting(true);
-    const id = setTimeout(() => {
-      setDisplayedItem(selectedItem);
-      setExiting(false);
-    }, 180);
-    return () => clearTimeout(id);
+
+    prevHeightRef.current = newHeight;
   }, [selectedItem]);
 
-  // Prefetch images immediately on selection (before exit animation finishes)
+  // Prefetch images immediately on selection
   useEffect(() => {
     if (selectedItem && "imageUrls" in selectedItem && selectedItem.imageUrls) {
       selectedItem.imageUrls.forEach(url => { const img = new Image(); img.src = url; });
     }
   }, [selectedItem]);
 
-  // Reset UI state when new content is shown
+  // Reset UI state on item change
   useEffect(() => {
     setLightboxOpen(false);
     setLightboxIndex(0);
     setLiveMode(false);
-  }, [displayedItem]);
+  }, [selectedItem]);
 
-  const slideDown = exiting || displayedItem === null;
-  const transitionDuration = exiting ? "duration-[180ms]" : "duration-300";
+  const visible = selectedItem !== null;
 
   return (
     <>
-    {lightboxOpen && displayedItem && ("liftType" in displayedItem || ("position" in displayedItem && !("streamUrl" in displayedItem))) && displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
+    {lightboxOpen && selectedItem && ("liftType" in selectedItem || ("position" in selectedItem && !("streamUrl" in selectedItem))) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
       <div
         className="fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm"
         onClick={() => setLightboxOpen(false)}
       >
         <img
-          src={displayedItem.imageUrls[lightboxIndex]}
-          alt={displayedItem.name}
+          src={selectedItem.imageUrls[lightboxIndex]}
+          alt={selectedItem.name}
           className="max-h-screen max-w-screen w-auto h-auto rounded-xl"
           onClick={e => e.stopPropagation()}
         />
       </div>
     )}
     <div
-      className={`absolute inset-x-0 bottom-0 z-20 transition-transform ease-out ${transitionDuration} ${slideDown ? "translate-y-full pointer-events-none" : "translate-y-0 pointer-events-auto"}`}
+      className={`absolute inset-x-0 bottom-0 z-20 transition-transform duration-300 ease-out ${visible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
     >
-      <div className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
+      <div ref={cardRef} className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
         {/* Drag handle */}
         <div className="mx-auto mb-4 h-[3px] w-10 rounded-full bg-white/20" />
 
-        {displayedItem && (
-          <div>
+        {selectedItem && (
+          <div ref={contentRef}>
             <div className="flex items-center gap-3">
               {/* Icon / badge */}
-              {"streamUrl" in displayedItem ? (
+              {"streamUrl" in selectedItem ? (
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#1565c0]">
                   <WebcamIcon />
                 </span>
-              ) : "position" in displayedItem ? (
+              ) : "position" in selectedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-                  style={{ backgroundColor: GASTRONOMY_TYPE_COLOR[displayedItem.type] }}
+                  style={{ backgroundColor: GASTRONOMY_TYPE_COLOR[selectedItem.type] }}
                 >
                   <GastronomyIcon />
                 </span>
-              ) : "difficulty" in displayedItem ? (
+              ) : "difficulty" in selectedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold uppercase tracking-wide text-white"
-                  style={{ backgroundColor: DIFFICULTY_COLOR[displayedItem.difficulty] }}
+                  style={{ backgroundColor: DIFFICULTY_COLOR[selectedItem.difficulty] }}
                 >
-                  {displayedItem.difficulty === "easy" ? "B" : displayedItem.difficulty === "medium" ? "R" : "S"}
+                  {selectedItem.difficulty === "easy" ? "B" : selectedItem.difficulty === "medium" ? "R" : "S"}
                 </span>
               ) : (
-                <LiftTypeIcon liftType={displayedItem.liftType} />
+                <LiftTypeIcon liftType={selectedItem.liftType} />
               )}
 
               {/* Name + type label */}
               <div className="min-w-0 flex-1">
-                {"streamUrl" in displayedItem ? (
+                {"streamUrl" in selectedItem ? (
                   <>
                     <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                      {displayedItem.name}
+                      {selectedItem.name}
                     </p>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {WEBCAM_PROVIDER_LABEL[displayedItem.provider]}
+                      {WEBCAM_PROVIDER_LABEL[selectedItem.provider]}
                     </p>
                   </>
-                ) : "position" in displayedItem ? (
+                ) : "position" in selectedItem ? (
                   <>
                     <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                      {displayedItem.name}
+                      {selectedItem.name}
                     </p>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {GASTRONOMY_TYPE_LABEL[displayedItem.type]}
+                      {GASTRONOMY_TYPE_LABEL[selectedItem.type]}
                     </p>
                   </>
                 ) : (
                   <>
                     <div className="flex items-center gap-2">
                       <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                        {displayedItem.name}
-                        {"number" in displayedItem && displayedItem.number != null && (
-                          <span className="ml-1.5 text-[13px] font-normal text-ivory/40">#{displayedItem.number}</span>
+                        {selectedItem.name}
+                        {"number" in selectedItem && selectedItem.number != null && (
+                          <span className="ml-1.5 text-[13px] font-normal text-ivory/40">#{selectedItem.number}</span>
                         )}
                       </p>
-                      <StatusPill status={displayedItem.status} />
+                      <StatusPill status={selectedItem.status} />
                     </div>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {"difficulty" in displayedItem
-                        ? pisteSubtitle(displayedItem)
-                        : liftSubtitle(displayedItem)}
+                      {"difficulty" in selectedItem
+                        ? pisteSubtitle(selectedItem)
+                        : liftSubtitle(selectedItem)}
                     </p>
                   </>
                 )}
               </div>
             </div>
 
-            {"liftType" in displayedItem && (displayedItem.imageUrls || displayedItem.description || displayedItem.openingHours) && (
+            {"liftType" in selectedItem && (selectedItem.imageUrls || selectedItem.description || selectedItem.openingHours) && (
               <div className="mt-3 flex flex-col gap-3">
-                {(displayedItem.openingHours || displayedItem.description) && (
+                {(selectedItem.openingHours || selectedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
-                    {displayedItem.openingHours && (
+                    {selectedItem.openingHours && (
                       <p className="text-[12px] text-ivory/60">
-                        🕐 {displayedItem.openingHours}
+                        🕐 {selectedItem.openingHours}
                       </p>
                     )}
-                    {displayedItem.description && (
+                    {selectedItem.description && (
                       <p className="line-clamp-3 text-[12px] text-ivory/50">
-                        {displayedItem.description}
+                        {selectedItem.description}
                       </p>
                     )}
                   </div>
                 )}
-                {displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
+                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
                   <ImageCarousel
-                    imageUrls={displayedItem.imageUrls}
-                    alt={displayedItem.name}
+                    imageUrls={selectedItem.imageUrls}
+                    alt={selectedItem.name}
                     onOpenLightbox={() => setLightboxOpen(true)}
                     onIndexChange={setLightboxIndex}
                   />
@@ -202,22 +218,22 @@ export function InfoSheet({ selectedItem }: Props) {
               </div>
             )}
 
-            {"streamUrl" in displayedItem && (
+            {"streamUrl" in selectedItem && (
               <div className="mt-3 flex flex-col gap-3">
                 <div className="relative mx-auto w-full max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl bg-black">
                   {liveMode ? (
                     <iframe
-                      src={displayedItem.streamUrl}
+                      src={selectedItem.streamUrl}
                       className="w-full h-full border-0"
                       allow="autoplay"
-                      title={displayedItem.name}
+                      title={selectedItem.name}
                     />
                   ) : (
                     <>
-                      {displayedItem.thumbnailUrl && (
+                      {selectedItem.thumbnailUrl && (
                         <img
-                          src={displayedItem.thumbnailUrl}
-                          alt={displayedItem.name}
+                          src={selectedItem.thumbnailUrl}
+                          alt={selectedItem.name}
                           className="w-full h-full object-cover"
                         />
                       )}
@@ -238,26 +254,26 @@ export function InfoSheet({ selectedItem }: Props) {
               </div>
             )}
 
-            {"position" in displayedItem && !("streamUrl" in displayedItem) && ((displayedItem.imageUrls && displayedItem.imageUrls.length > 0) || displayedItem.openingHours || displayedItem.description) && (
+            {"position" in selectedItem && !("streamUrl" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
-                {(displayedItem.openingHours || displayedItem.description) && (
+                {(selectedItem.openingHours || selectedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
-                    {displayedItem.openingHours && (
+                    {selectedItem.openingHours && (
                       <p className="text-[12px] text-ivory/60">
-                        🕐 {displayedItem.openingHours}
+                        🕐 {selectedItem.openingHours}
                       </p>
                     )}
-                    {displayedItem.description && (
+                    {selectedItem.description && (
                       <p className="line-clamp-3 text-[12px] text-ivory/50">
-                        {displayedItem.description}
+                        {selectedItem.description}
                       </p>
                     )}
                   </div>
                 )}
-                {displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
+                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
                   <ImageCarousel
-                    imageUrls={displayedItem.imageUrls}
-                    alt={displayedItem.name}
+                    imageUrls={selectedItem.imageUrls}
+                    alt={selectedItem.name}
                     onOpenLightbox={() => setLightboxOpen(true)}
                     onIndexChange={setLightboxIndex}
                   />
