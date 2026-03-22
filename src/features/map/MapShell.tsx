@@ -17,7 +17,7 @@ import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay"
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
-import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, PisteDifficulty } from "@/lib/domain/types";
+import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -90,7 +90,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const [infrastructureVisible, setInfrastructureVisible] = useState(true);
   const infrastructureVisibleRef = useRef(true);
 
-  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const debugModeRef = useRef(false);
   const debugLayerRef = useRef<Graphics | null>(null);
@@ -449,6 +449,7 @@ export function MapShell({ manifest }: MapShellProps) {
           activeGastronomy,
           activeWebcams,
           activeInfrastructure,
+          data.sportFun,
         );
         setSelectedItem(hit);
         console.log("clicked:", hit?.name ?? "none", hit);

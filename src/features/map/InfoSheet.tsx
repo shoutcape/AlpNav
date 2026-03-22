@@ -1,9 +1,9 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider, InfrastructurePoi, InfrastructureCategory } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider, InfrastructurePoi, InfrastructureCategory, SportFunPoi } from "@/lib/domain/types";
 import { ImageCarousel } from "./ImageCarousel";
 
 type Props = {
-  selectedItem: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null;
+  selectedItem: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null;
   onDismiss: () => void;
 };
 
@@ -226,6 +226,10 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                     : selectedItem.category === "rescue" ? <RescueIcon />
                     : "i"}
                 </span>
+              ) : "sportCategory" in selectedItem ? (
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple-600">
+                  <span className="text-[10px] font-bold text-white">⛰</span>
+                </span>
               ) : "position" in selectedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
@@ -265,6 +269,15 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                     </div>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
                       {INFRA_CATEGORY_LABEL[selectedItem.category]}
+                    </p>
+                  </>
+                ) : "sportCategory" in selectedItem ? (
+                  <>
+                    <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
+                      {selectedItem.name}
+                    </p>
+                    <p className="mt-0.5 text-[12px] text-ivory/50">
+                      Sport & Fun
                     </p>
                   </>
                 ) : "position" in selectedItem ? (
@@ -387,7 +400,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
-            {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
+            {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
                 {(selectedItem.openingHours || selectedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
