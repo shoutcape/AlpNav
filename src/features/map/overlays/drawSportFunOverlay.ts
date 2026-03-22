@@ -3,7 +3,7 @@ import type { SportFunCategory, SportFunPoi } from "@/lib/domain/types";
 
 export const SPORT_FUN_BADGE_R = 20;
 
-const BADGE_FILL: Record<SportFunCategory, number> = {
+export const BADGE_FILL: Record<SportFunCategory, number> = {
   skimovie: 0x7c3aed,
   speedcheck: 0x0284c7,
   skidepot: 0xd97706,
