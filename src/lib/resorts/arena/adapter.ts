@@ -47,8 +47,10 @@ type RawPoi = {
   popup: {
     title: string;
     desc?: string;
+    status?: string;
     info?: {
       img?: string;
+      imgs?: string[];
       "opening-hours-from"?: string;
       "opening-hours-to"?: string;
     };
@@ -86,6 +88,28 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
   }
 
   return map;
+}
+
+function translateInfrastructureTitle(raw: string): string {
+  let s = raw;
+  s = s.replace(/^Parkhaus\b/i,          "Car Park");
+  s = s.replace(/^Parkplatz\b/i,         "Parking");
+  s = s.replace(/^Skibushaltestelle\b/i, "Ski Bus Stop");
+  s = s.replace(/^Pistenrettung\b/i,     "Slope Rescue");
+  s = s.replace(/^Tourismusverband\b/i,  "Tourist Information Office");
+  s = s.replace(/\bGratis-Skibus\b/gi,   "Free Ski Bus");
+  return s;
+}
+
+function translateInfrastructureDescription(raw: string): string {
+  let s = raw;
+  s = s.replace(/\bPkw-Parkplätze:/gi, "Car parking spaces:");
+  s = s.replace(/\bBus-Parkplätze:/gi, "Bus parking spaces:");
+  s = s.replace(
+    /Für Gäste mit einem gültigen Skipass ist ein kostenloser Pendel-Busverkehr von allen umliegenden Orten zur Talstation Kreuzjoch und/gi,
+    "For guests with a valid ski pass, free shuttle bus service from all surrounding villages to the Kreuzjoch valley station and",
+  );
+  return s;
 }
 
 // Translate German lift description fragments to English.
@@ -201,15 +225,29 @@ function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[]
     const items = (pois[catId] ?? []) as RawPoi[];
     for (const item of items) {
       if (!item.position) continue;
+      const info = item.popup.info ?? {};
+      const imgs: string[] = Array.isArray((info as Record<string, unknown>).imgs)
+        ? (info as Record<string, unknown>).imgs as string[]
+        : [];
+      const single = typeof info.img === "string" ? info.img : undefined;
+      const imageUrls = imgs.length > 0 ? imgs : single ? [single] : undefined;
+      const from = info["opening-hours-from"];
+      const to = info["opening-hours-to"];
+      const openingHours = from && to ? `${from} – ${to}` : undefined;
+      const rawStatus = item.popup.status;
+      const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
       result.push({
         id: item.id,
-        name: item.popup.title,
+        name: translateInfrastructureTitle(item.popup.title),
         category,
         position: {
           x: item.position.x * SVG_TO_WORLD,
           y: item.position.y * SVG_TO_WORLD,
         },
-        description: item.searchdesc ?? undefined,
+        description: item.searchdesc ? translateInfrastructureDescription(item.searchdesc) : undefined,
+        status,
+        openingHours,
+        imageUrls,
       });
     }
   }

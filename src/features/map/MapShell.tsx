@@ -17,7 +17,7 @@ import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay"
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
-import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, PisteDifficulty } from "@/lib/domain/types";
+import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, PisteDifficulty } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -90,7 +90,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const [infrastructureVisible, setInfrastructureVisible] = useState(true);
   const infrastructureVisibleRef = useRef(true);
 
-  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const debugModeRef = useRef(false);
   const debugLayerRef = useRef<Graphics | null>(null);
@@ -441,12 +441,14 @@ export function MapShell({ manifest }: MapShellProps) {
           : [];
         const activeGastronomy = gastronomyVisibleRef.current ? data.gastronomy : [];
         const activeWebcams = webcamVisibleRef.current ? data.webcams : [];
+        const activeInfrastructure = infrastructureVisibleRef.current ? data.infrastructure : [];
         const hit = hitTestOverlays(
           world.x, world.y,
           activePistes,
           liftVisibleRef.current ? data.lifts : [],
           activeGastronomy,
           activeWebcams,
+          activeInfrastructure,
         );
         setSelectedItem(hit);
         console.log("clicked:", hit?.name ?? "none", hit);
@@ -512,16 +514,17 @@ export function MapShell({ manifest }: MapShellProps) {
     const lg = liftHighlightRef.current;
     const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
-    const isGastro = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem);
+    const isInfra  = selectedItem !== null && "category" in selectedItem;
+    const isGastro = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem);
     const isWebcam = selectedItem !== null && "streamUrl" in selectedItem;
-    if (!isGastro && !isWebcam && selectedItem && "difficulty" in selectedItem) {
+    if (!isInfra && !isGastro && !isWebcam && selectedItem && "difficulty" in selectedItem) {
       drawPisteHighlight(pg, selectedItem);
       drawLiftHighlight(lg, null);
     } else {
       drawPisteHighlight(pg, null);
-      drawLiftHighlight(lg, (isGastro || isWebcam) ? null : selectedItem as Lift | null);
+      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam) ? null : selectedItem as Lift | null);
     }
-    if (bh) drawBadgeHighlight(bh, isWebcam ? selectedItem as Webcam : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
+    if (bh) drawBadgeHighlight(bh, isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;

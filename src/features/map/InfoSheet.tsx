@@ -1,9 +1,22 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider, InfrastructurePoi, InfrastructureCategory } from "@/lib/domain/types";
 import { ImageCarousel } from "./ImageCarousel";
 
 type Props = {
-  selectedItem: Piste | Lift | GastronomySpot | Webcam | null;
+  selectedItem: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null;
+};
+
+const INFRA_CATEGORY_LABEL: Record<InfrastructureCategory, string> = {
+  parking: "Parking",
+  bus:     "Ski Bus Stop",
+  info:    "Tourist Information",
+  rescue:  "Slope Rescue",
+};
+const INFRA_CATEGORY_COLOR: Record<InfrastructureCategory, string> = {
+  parking: "#2563eb",
+  bus:     "#16a34a",
+  info:    "#d97706",
+  rescue:  "#dc2626",
 };
 
 const WEBCAM_PROVIDER_LABEL: Record<WebcamProvider, string> = {
@@ -93,7 +106,11 @@ export function InfoSheet({ selectedItem }: Props) {
 
   return (
     <>
-    {lightboxOpen && selectedItem && ("liftType" in selectedItem || ("position" in selectedItem && !("streamUrl" in selectedItem))) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+    {lightboxOpen && selectedItem && (
+      "liftType" in selectedItem ||
+      "category" in selectedItem ||
+      ("position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem))
+    ) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
       <div
         className="fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm"
         onClick={() => setLightboxOpen(false)}
@@ -120,6 +137,16 @@ export function InfoSheet({ selectedItem }: Props) {
               {"streamUrl" in selectedItem ? (
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#1565c0]">
                   <WebcamIcon />
+                </span>
+              ) : "category" in selectedItem ? (
+                <span
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                  style={{ backgroundColor: INFRA_CATEGORY_COLOR[selectedItem.category] }}
+                >
+                  {selectedItem.category === "parking" ? "P"
+                    : selectedItem.category === "bus" ? "B"
+                    : selectedItem.category === "rescue" ? "+"
+                    : "i"}
                 </span>
               ) : "position" in selectedItem ? (
                 <span
@@ -148,6 +175,18 @@ export function InfoSheet({ selectedItem }: Props) {
                     </p>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
                       {WEBCAM_PROVIDER_LABEL[selectedItem.provider]}
+                    </p>
+                  </>
+                ) : "category" in selectedItem ? (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
+                        {selectedItem.name}
+                      </p>
+                      <StatusPill status={selectedItem.status} />
+                    </div>
+                    <p className="mt-0.5 text-[12px] text-ivory/50">
+                      {INFRA_CATEGORY_LABEL[selectedItem.category]}
                     </p>
                   </>
                 ) : "position" in selectedItem ? (
@@ -243,7 +282,34 @@ export function InfoSheet({ selectedItem }: Props) {
               </div>
             )}
 
-            {"position" in selectedItem && !("streamUrl" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
+            {"category" in selectedItem && (selectedItem.imageUrls?.length || selectedItem.openingHours || selectedItem.description) && (
+              <div className="mt-3 flex flex-col gap-3">
+                {(selectedItem.openingHours || selectedItem.description) && (
+                  <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
+                    {selectedItem.openingHours && (
+                      <p className="text-[12px] text-ivory/60">
+                        🕐 {selectedItem.openingHours}
+                      </p>
+                    )}
+                    {selectedItem.description && (
+                      <p className="line-clamp-3 text-[12px] text-ivory/50">
+                        {selectedItem.description}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                  <ImageCarousel
+                    imageUrls={selectedItem.imageUrls}
+                    alt={selectedItem.name}
+                    onOpenLightbox={() => setLightboxOpen(true)}
+                    onIndexChange={setLightboxIndex}
+                  />
+                )}
+              </div>
+            )}
+
+            {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
                 {(selectedItem.openingHours || selectedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">

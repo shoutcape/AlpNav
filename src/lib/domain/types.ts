@@ -65,6 +65,9 @@ export type InfrastructurePoi = {
   category: InfrastructureCategory;
   position: Point;
   description?: string;
+  status?: "open" | "closed";
+  openingHours?: string;
+  imageUrls?: string[];
 };
 
 export type WebcamProvider = "feratel" | "panomax";

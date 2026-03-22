@@ -1,9 +1,10 @@
 import { Graphics } from "pixi.js";
-import type { Piste, Lift, GastronomySpot, Webcam, PisteDifficulty, Point } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, PisteDifficulty, Point } from "@/lib/domain/types";
 
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
 const GASTRO_BADGE_R = 18;
+const INFRA_BADGE_R = 16;
 
 const HIGHLIGHT_GOLD = 0xffd700;
 
@@ -121,7 +122,7 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null): void {
 const WEBCAM_BADGE_R = 18;
 
 // Drawn on a layer above all marker containers — recolors badge outlines to gold.
-export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | Webcam | null): void {
+export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null): void {
   g.clear();
   if (!item) return;
 
@@ -129,6 +130,13 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
     // Webcam — squircle outline in gold, matching the badge shape
     g.roundRect(item.position.x - WEBCAM_BADGE_R, item.position.y - WEBCAM_BADGE_R, WEBCAM_BADGE_R * 2, WEBCAM_BADGE_R * 2, 10);
     g.stroke({ color: HIGHLIGHT_GOLD, width: 2 });
+    return;
+  }
+
+  if ("category" in item) {
+    // InfrastructurePoi — circle highlight matching the 16-unit badge
+    g.circle(item.position.x, item.position.y, INFRA_BADGE_R);
+    g.stroke({ color: HIGHLIGHT_GOLD, width: 1.5 });
     return;
   }
 
