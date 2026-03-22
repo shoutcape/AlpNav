@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider } from "@/lib/domain/types";
+import { ImageCarousel } from "./ImageCarousel";
 
 type Props = {
   selectedItem: Piste | Lift | GastronomySpot | Webcam | null;
@@ -45,10 +46,17 @@ const LIFT_TYPE_LABEL: Record<LiftType, string> = {
 export function InfoSheet({ selectedItem }: Props) {
   const visible = selectedItem !== null;
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [imgIndex, setImgIndex] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [liveMode, setLiveMode] = useState(false);
 
-  useEffect(() => { setLightboxOpen(false); setImgIndex(0); setLiveMode(false); }, [selectedItem]);
+  useEffect(() => {
+    setLightboxOpen(false);
+    setLightboxIndex(0);
+    setLiveMode(false);
+    if (selectedItem && "imageUrls" in selectedItem && selectedItem.imageUrls) {
+      selectedItem.imageUrls.forEach(url => { const img = new Image(); img.src = url; });
+    }
+  }, [selectedItem]);
 
   return (
     <>
@@ -58,7 +66,7 @@ export function InfoSheet({ selectedItem }: Props) {
         onClick={() => setLightboxOpen(false)}
       >
         <img
-          src={selectedItem.imageUrls[imgIndex]}
+          src={selectedItem.imageUrls[lightboxIndex]}
           alt={selectedItem.name}
           className="max-h-screen max-w-screen w-auto h-auto rounded-xl"
           onClick={e => e.stopPropagation()}
@@ -156,38 +164,12 @@ export function InfoSheet({ selectedItem }: Props) {
                   </div>
                 )}
                 {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
-                  <div>
-                    <div className="relative mx-auto max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl cursor-pointer" onClick={() => setLightboxOpen(true)}>
-                      <img
-                        src={selectedItem.imageUrls[imgIndex]}
-                        alt={selectedItem.name}
-                        className="w-full h-full object-cover"
-                      />
-                      {selectedItem.imageUrls.length > 1 && (
-                        <>
-                          <button
-                            className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm"
-                            onClick={e => { e.stopPropagation(); setImgIndex(i => (i - 1 + selectedItem.imageUrls!.length) % selectedItem.imageUrls!.length); }}
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                          </button>
-                          <button
-                            className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm"
-                            onClick={e => { e.stopPropagation(); setImgIndex(i => (i + 1) % selectedItem.imageUrls!.length); }}
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                          </button>
-                        </>
-                      )}
-                    </div>
-                    {selectedItem.imageUrls.length > 1 && (
-                      <div className="flex justify-center gap-1 mt-1">
-                        {selectedItem.imageUrls.map((_, i) => (
-                          <span key={i} className={`w-1.5 h-1.5 rounded-full ${i === imgIndex ? "bg-white" : "bg-white/30"}`} />
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <ImageCarousel
+                    imageUrls={selectedItem.imageUrls}
+                    alt={selectedItem.name}
+                    onOpenLightbox={() => setLightboxOpen(true)}
+                    onIndexChange={setLightboxIndex}
+                  />
                 )}
               </div>
             )}
@@ -245,38 +227,12 @@ export function InfoSheet({ selectedItem }: Props) {
                   </div>
                 )}
                 {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
-                  <div>
-                    <div className="relative mx-auto max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl cursor-pointer" onClick={() => setLightboxOpen(true)}>
-                      <img
-                        src={selectedItem.imageUrls[imgIndex]}
-                        alt={selectedItem.name}
-                        className="w-full h-full object-cover"
-                      />
-                      {selectedItem.imageUrls.length > 1 && (
-                        <>
-                          <button
-                            className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm"
-                            onClick={e => { e.stopPropagation(); setImgIndex(i => (i - 1 + selectedItem.imageUrls!.length) % selectedItem.imageUrls!.length); }}
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                          </button>
-                          <button
-                            className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm"
-                            onClick={e => { e.stopPropagation(); setImgIndex(i => (i + 1) % selectedItem.imageUrls!.length); }}
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                          </button>
-                        </>
-                      )}
-                    </div>
-                    {selectedItem.imageUrls.length > 1 && (
-                      <div className="flex justify-center gap-1 mt-1">
-                        {selectedItem.imageUrls.map((_, i) => (
-                          <span key={i} className={`w-1.5 h-1.5 rounded-full ${i === imgIndex ? "bg-white" : "bg-white/30"}`} />
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <ImageCarousel
+                    imageUrls={selectedItem.imageUrls}
+                    alt={selectedItem.name}
+                    onOpenLightbox={() => setLightboxOpen(true)}
+                    onIndexChange={setLightboxIndex}
+                  />
                 )}
               </div>
             )}
