@@ -93,4 +93,12 @@ export type Webcam = {
   streamUrl: string;
 };
 
-export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[]; webcams: Webcam[]; infrastructure: InfrastructurePoi[]; sportFun: SportFunPoi[] };
+export type ResortOverlayData = {
+  pistes: Piste[];
+  lifts: Lift[];
+  labels: MapLabel[];
+  gastronomy: GastronomySpot[];
+  webcams: Webcam[];
+  infrastructure: InfrastructurePoi[];
+  sportFun: SportFunPoi[];
+};
