@@ -146,9 +146,8 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
 
   if ("sportCategory" in item) {
     // SportFunPoi — hexagon outline in gold, matching the badge shape
-    const r = SPORT_FUN_BADGE_R + 3;
-    g.poly(hexPts(item.position.x, item.position.y, r))
-      .stroke({ color: HIGHLIGHT_GOLD, width: 2 });
+    g.poly(hexPts(item.position.x, item.position.y, SPORT_FUN_BADGE_R))
+      .stroke({ color: HIGHLIGHT_GOLD, width: 1.5 });
     return;
   }
 
