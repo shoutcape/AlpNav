@@ -1,5 +1,6 @@
 import { Graphics } from "pixi.js";
-import type { Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, PisteDifficulty, Point } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty, Point } from "@/lib/domain/types";
+import { SPORT_FUN_BADGE_R } from "./drawSportFunOverlay";
 
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
@@ -18,6 +19,15 @@ const HIGHLIGHT_PISTE_COLORS: Record<PisteDifficulty, number> = {
 
 const DASH_LEN = 8;
 const GAP_LEN = 6;
+
+function hexPts(cx: number, cy: number, r: number): number[] {
+  const pts: number[] = [];
+  for (let i = 0; i < 6; i++) {
+    const a = Math.PI / 2 + i * (Math.PI / 3);
+    pts.push(cx + r * Math.cos(a), cy + r * Math.sin(a));
+  }
+  return pts;
+}
 
 function drawDashedSegment(g: Graphics, seg: Point[]): void {
   let drawing = true;
@@ -123,7 +133,7 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null): void {
 const WEBCAM_BADGE_R = 18;
 
 // Drawn on a layer above all marker containers — recolors badge outlines to gold.
-export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null): void {
+export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null): void {
   g.clear();
   if (!item) return;
 
@@ -131,6 +141,14 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
     // Webcam — squircle outline in gold, matching the badge shape
     g.roundRect(item.position.x - WEBCAM_BADGE_R, item.position.y - WEBCAM_BADGE_R, WEBCAM_BADGE_R * 2, WEBCAM_BADGE_R * 2, 10);
     g.stroke({ color: HIGHLIGHT_GOLD, width: 2 });
+    return;
+  }
+
+  if ("sportCategory" in item) {
+    // SportFunPoi — hexagon outline in gold, matching the badge shape
+    const r = SPORT_FUN_BADGE_R + 3;
+    g.poly(hexPts(item.position.x, item.position.y, r))
+      .stroke({ color: HIGHLIGHT_GOLD, width: 2 });
     return;
   }
 
