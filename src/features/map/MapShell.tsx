@@ -13,8 +13,10 @@ import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
 import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
 import { drawGastronomyMarkerOverlay } from "./overlays/drawGastronomyMarkerOverlay";
 import { drawWebcamMarkerOverlay } from "./overlays/drawWebcamMarkerOverlay";
+import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
+import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, PisteDifficulty } from "@/lib/domain/types";
 
 // Minimum viewport scale at which each tier becomes visible.
@@ -84,6 +86,9 @@ export function MapShell({ manifest }: MapShellProps) {
   const webcamOverlayRef = useRef<Container | null>(null);
   const [webcamVisible, setWebcamVisible] = useState(true);
   const webcamVisibleRef = useRef(true);
+  const infrastructureOverlayRef = useRef<Container | null>(null);
+  const [infrastructureVisible, setInfrastructureVisible] = useState(true);
+  const infrastructureVisibleRef = useRef(true);
 
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | null>(null);
   const [debugMode, setDebugMode] = useState(false);
@@ -320,6 +325,12 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.addChild(webcamContainer);
       webcamOverlayRef.current = webcamContainer;
 
+      const infrastructureContainer = new Container();
+      infrastructureContainer.label = "overlay-infrastructure";
+      drawInfrastructureOverlay(infrastructureContainer, overlayData.infrastructure);
+      viewport.addChild(infrastructureContainer);
+      infrastructureOverlayRef.current = infrastructureContainer;
+
       const badgeHighlight = new Graphics();
       badgeHighlight.label = "overlay-badge-highlight";
       viewport.addChild(badgeHighlight);
@@ -481,6 +492,7 @@ export function MapShell({ manifest }: MapShellProps) {
       badgeHighlightRef.current = null;
       gastronomyOverlayRef.current = null;
       webcamOverlayRef.current = null;
+      infrastructureOverlayRef.current = null;
       pisteLinesByDiffRef.current = null;
       pisteMarkersByDiffRef.current = null;
 
@@ -583,6 +595,14 @@ export function MapShell({ manifest }: MapShellProps) {
       gastronomyOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
+  const toggleInfrastructure = () => {
+    const next = !infrastructureVisible;
+    setInfrastructureVisible(next);
+    infrastructureVisibleRef.current = next;
+    if (infrastructureOverlayRef.current)
+      infrastructureOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+  };
+
   const toggleWebcam = () => {
     const next = !webcamVisible;
     setWebcamVisible(next);
@@ -592,6 +612,7 @@ export function MapShell({ manifest }: MapShellProps) {
   };
 
   const [legendOpen, setLegendOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDebug = () => setDebugMode(d => !d);
 
@@ -622,6 +643,21 @@ export function MapShell({ manifest }: MapShellProps) {
           className="h-full bg-[#a8cfe0] transition-[width] duration-500"
           style={{ width: `${(loadedLevelCount / manifest.levels.length) * 100}%` }}
         />
+      </div>
+
+      {/* Top-left: menu trigger */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 p-3.5">
+        <button
+          onClick={() => setDrawerOpen(true)}
+          className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${drawerOpen ? "bg-white/[0.15] text-ivory" : "bg-[#07111f]/65"}`}
+          aria-label="Open menu"
+        >
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="none" aria-hidden="true">
+            <rect width="15" height="1.5" rx="0.75" fill="white" fillOpacity="0.78" />
+            <rect y="4.75" width="11" height="1.5" rx="0.75" fill="white" fillOpacity="0.78" />
+            <rect y="9.5" width="15" height="1.5" rx="0.75" fill="white" fillOpacity="0.78" />
+          </svg>
+        </button>
       </div>
 
       {/* Top-right: info + debug */}
@@ -657,20 +693,6 @@ export function MapShell({ manifest }: MapShellProps) {
         </button>
       </div>
 
-      {/* Top-left: menu trigger */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 p-3.5">
-        <button
-          className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] bg-[#07111f]/65 shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 active:bg-[#07111f]/80"
-          aria-label="Open menu"
-        >
-          <svg width="15" height="11" viewBox="0 0 15 11" fill="none" aria-hidden="true">
-            <rect width="15" height="1.5" rx="0.75" fill="white" fillOpacity="0.78" />
-            <rect y="4.75" width="11" height="1.5" rx="0.75" fill="white" fillOpacity="0.78" />
-            <rect y="9.5" width="15" height="1.5" rx="0.75" fill="white" fillOpacity="0.78" />
-          </svg>
-        </button>
-      </div>
-
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
         <div className="pointer-events-auto grid grid-cols-4 gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
@@ -700,6 +722,7 @@ export function MapShell({ manifest }: MapShellProps) {
           </div>
           <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
           <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
+          <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
         </div>
       </div>
 
@@ -729,6 +752,8 @@ export function MapShell({ manifest }: MapShellProps) {
           </div>
         </div>
       )}
+
+      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
     </main>
   );
 }
@@ -772,9 +797,16 @@ function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
   const difficulties: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
   const activeCount = difficulties.filter(d => filter[d]).length;
   const allOpacity = activeCount === difficulties.length ? "opacity-100" : "opacity-30";
+  const allBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (open) allBtnRef.current?.focus();
+  }, [open]);
+
   return (
-    <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-opacity duration-200 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+    <div inert={!open || undefined} className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-opacity duration-200 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
       <button
+        ref={allBtnRef}
         onClick={onToggleAll}
         className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${allOpacity}`}
       >
@@ -944,6 +976,17 @@ function WebcamMapIcon() {
       <circle cx="0" cy="0.5" r="3.5" stroke="currentColor" strokeWidth="1.5" />
       {/* Viewfinder bump */}
       <rect x="-4" y="-8" width="5" height="3" rx="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+function InfrastructureMapIcon() {
+  return (
+    <svg width="22" height="20" viewBox="-11 -10 22 20" fill="none" aria-hidden="true">
+      {/* Map pin outline */}
+      <path d="M0,-9 C-5,-9 -7,-5 -7,-2 C-7,3 0,9 0,9 C0,9 7,3 7,-2 C7,-5 5,-9 0,-9 Z" stroke="currentColor" strokeWidth="1.5" />
+      {/* Inner circle */}
+      <circle cx="0" cy="-2" r="2.5" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }

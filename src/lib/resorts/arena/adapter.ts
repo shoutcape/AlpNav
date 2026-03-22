@@ -1,4 +1,4 @@
-import type { GastronomySpot, GastronomyType, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, Webcam, WebcamProvider } from "@/lib/domain/types";
+import type { GastronomySpot, GastronomyType, InfrastructureCategory, InfrastructurePoi, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, Webcam, WebcamProvider } from "@/lib/domain/types";
 
 // SVG viewBox is 0 0 1024 672; PixiJS world is 4096×2688
 const SVG_TO_WORLD = 4.0;
@@ -33,8 +33,9 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
   const labels = parseLabels(textDoc);
   const gastronomy = parseGastronomy(dataJson);
   const webcams = parseWebcams(dataJson);
+  const infrastructure = parseInfrastructure(dataJson);
 
-  return { pistes, lifts, labels, gastronomy, webcams };
+  return { pistes, lifts, labels, gastronomy, webcams, infrastructure };
 }
 
 // ─── metadata ────────────────────────────────────────────────────────────────
@@ -184,6 +185,35 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
         openingHours,
       };
     });
+}
+
+const INFRA_CATEGORY_IDS: Record<string, InfrastructureCategory> = {
+  "222": "parking",
+  "244": "bus",
+  "258": "info",
+  "216": "rescue",
+};
+
+function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[] {
+  const pois = (data.pois ?? {}) as Record<string, unknown>;
+  const result: InfrastructurePoi[] = [];
+  for (const [catId, category] of Object.entries(INFRA_CATEGORY_IDS)) {
+    const items = (pois[catId] ?? []) as RawPoi[];
+    for (const item of items) {
+      if (!item.position) continue;
+      result.push({
+        id: item.id,
+        name: item.popup.title,
+        category,
+        position: {
+          x: item.position.x * SVG_TO_WORLD,
+          y: item.position.y * SVG_TO_WORLD,
+        },
+        description: item.searchdesc ?? undefined,
+      });
+    }
+  }
+  return result;
 }
 
 function parseWebcams(data: Record<string, unknown>): Webcam[] {
