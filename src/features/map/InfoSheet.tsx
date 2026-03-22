@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider, InfrastructurePoi, InfrastructureCategory, SportFunPoi } from "@/lib/domain/types";
+import type { Piste, Lift, GastronomySpot, GastronomyType, PisteDifficulty, LiftType, Webcam, WebcamProvider, InfrastructurePoi, InfrastructureCategory, SportFunPoi, SportFunCategory } from "@/lib/domain/types";
 import { ImageCarousel } from "./ImageCarousel";
 
 type Props = {
@@ -18,6 +18,22 @@ const INFRA_CATEGORY_COLOR: Record<InfrastructureCategory, string> = {
   bus:     "#16a34a",
   info:    "#d97706",
   rescue:  "#dc2626",
+};
+
+const SPORT_FUN_LABEL: Record<SportFunCategory, string> = {
+  skimovie: "SkiMovie",
+  speedcheck: "Speed Check",
+  skidepot: "Ski Depot",
+  photopoint: "Photo Point",
+  viewpoint: "Viewpoint",
+};
+
+const SPORT_FUN_COLOR: Record<SportFunCategory, string> = {
+  skimovie: "#7c3aed",
+  speedcheck: "#0284c7",
+  skidepot: "#d97706",
+  photopoint: "#db2777",
+  viewpoint: "#16a34a",
 };
 
 const WEBCAM_PROVIDER_LABEL: Record<WebcamProvider, string> = {
@@ -227,8 +243,14 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                     : "i"}
                 </span>
               ) : "sportCategory" in selectedItem ? (
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple-600">
-                  <span className="text-[10px] font-bold text-white">⛰</span>
+                <span
+                  className="flex h-8 w-8 shrink-0 items-center justify-center"
+                  style={{
+                    clipPath: "polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)",
+                    backgroundColor: SPORT_FUN_COLOR[selectedItem.sportCategory],
+                  }}
+                >
+                  <SportFunCategoryIcon category={selectedItem.sportCategory} />
                 </span>
               ) : "position" in selectedItem ? (
                 <span
@@ -277,7 +299,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                       {selectedItem.name}
                     </p>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      Sport & Fun
+                      {SPORT_FUN_LABEL[selectedItem.sportCategory]}
                     </p>
                   </>
                 ) : "position" in selectedItem ? (
@@ -400,6 +422,24 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
+            {"sportCategory" in selectedItem && (selectedItem.imageUrls?.length || selectedItem.description) && (
+              <div className="mt-3 flex flex-col gap-3">
+                {selectedItem.description && (
+                  <p className="line-clamp-3 text-[12px] text-ivory/50">
+                    {selectedItem.description}
+                  </p>
+                )}
+                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                  <ImageCarousel
+                    imageUrls={selectedItem.imageUrls}
+                    alt={selectedItem.name}
+                    onOpenLightbox={() => setLightboxOpen(true)}
+                    onIndexChange={setLightboxIndex}
+                  />
+                )}
+              </div>
+            )}
+
             {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
                 {(selectedItem.openingHours || selectedItem.description) && (
@@ -502,6 +542,45 @@ function GastronomyIcon() {
       <line x1="2" y1="-2" x2="2" y2="7" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
+}
+
+function SportFunCategoryIcon({ category }: { category: SportFunCategory }) {
+  switch (category) {
+    case "skimovie":
+      return (
+        <svg width="12" height="12" viewBox="-6 -6 12 12" fill="white" aria-hidden="true">
+          <polygon points="-3,-5 6,0 -3,5" />
+        </svg>
+      );
+    case "speedcheck":
+      return (
+        <svg width="12" height="12" viewBox="-6 -8 12 16" fill="none" aria-hidden="true">
+          <polyline points="3,-7 -2,-1 3,-1 -3,7" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case "skidepot":
+      return (
+        <svg width="12" height="12" viewBox="-6 -6 12 12" fill="none" aria-hidden="true">
+          <line x1="-4" y1="-5" x2="4" y2="5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="4" y1="-5" x2="-4" y2="5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case "photopoint":
+      return (
+        <svg width="12" height="12" viewBox="-6 -6 12 12" fill="none" aria-hidden="true">
+          <rect x="-5" y="-2" width="10" height="6" rx="1.5" stroke="white" strokeWidth="1.3" />
+          <circle cx="0" cy="1" r="2" stroke="white" strokeWidth="1.3" />
+          <rect x="-3" y="-5" width="3" height="2.5" rx="0.8" fill="white" />
+        </svg>
+      );
+    case "viewpoint":
+      return (
+        <svg width="12" height="12" viewBox="-6 -6 12 12" fill="none" aria-hidden="true">
+          <polygon points="-5,5 0,-5 5,5" fill="white" opacity="0.5" />
+          <polygon points="-2,5 3,-4 8,5" fill="white" />
+        </svg>
+      );
+  }
 }
 
 function LiftTypeIcon({ liftType }: { liftType: LiftType }) {
