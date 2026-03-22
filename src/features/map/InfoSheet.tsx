@@ -206,6 +206,22 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
           className="max-h-screen max-w-screen w-auto h-auto rounded-xl"
           onClick={e => e.stopPropagation()}
         />
+        {selectedItem.imageUrls.length > 1 && (
+          <>
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm"
+              onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + selectedItem.imageUrls!.length) % selectedItem.imageUrls!.length); }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm"
+              onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % selectedItem.imageUrls!.length); }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </>
+        )}
       </div>
     )}
     <div
@@ -443,7 +459,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
-            {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description) && (
+            {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description || selectedItem.website) && (
               <div className="mt-3 flex flex-col gap-3">
                 {(selectedItem.openingHours || selectedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
@@ -458,6 +474,21 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                       </p>
                     )}
                   </div>
+                )}
+                {selectedItem.website && (
+                  <a
+                    href={selectedItem.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded-[10px] bg-white/[0.06] px-3 py-2.5 text-[13px] text-ivory/80 transition-colors hover:bg-white/[0.09] active:bg-white/[0.12]"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-60">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                    <span className="truncate">{selectedItem.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
+                  </a>
                 )}
                 {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
                   <ImageCarousel

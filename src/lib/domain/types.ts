@@ -55,6 +55,7 @@ export type GastronomySpot = {
   description?: string;
   imageUrls?: string[];
   openingHours?: string;
+  website?: string;
 };
 
 export type InfrastructureCategory = "parking" | "bus" | "info" | "rescue";

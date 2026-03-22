@@ -54,6 +54,7 @@ type RawPoi = {
       imgs?: string[];
       "opening-hours-from"?: string;
       "opening-hours-to"?: string;
+      website?: string;
     };
   };
   searchdesc?: string;
@@ -207,6 +208,7 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
       const from = info["opening-hours-from"];
       const to = info["opening-hours-to"];
       const openingHours = from && to ? `${from} – ${to}` : undefined;
+      const website = typeof info.website === "string" ? info.website : undefined;
       return {
         id: item.id,
         name: item.popup.title,
@@ -218,6 +220,7 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
         description: item.searchdesc ?? undefined,
         imageUrls,
         openingHours,
+        website,
       };
     });
 }
