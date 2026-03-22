@@ -1,4 +1,4 @@
-import type { GastronomySpot, GastronomyType, InfrastructureCategory, InfrastructurePoi, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, Webcam, WebcamProvider } from "@/lib/domain/types";
+import type { GastronomySpot, GastronomyType, InfrastructureCategory, InfrastructurePoi, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, SportFunCategory, SportFunPoi, Webcam, WebcamProvider } from "@/lib/domain/types";
 
 // SVG viewBox is 0 0 1024 672; PixiJS world is 4096×2688
 const SVG_TO_WORLD = 4.0;
@@ -34,8 +34,9 @@ async function fetchAndParse(): Promise<ResortOverlayData> {
   const gastronomy = parseGastronomy(dataJson);
   const webcams = parseWebcams(dataJson);
   const infrastructure = parseInfrastructure(dataJson);
+  const sportFun = parseSportFun(dataJson);
 
-  return { pistes, lifts, labels, gastronomy, webcams, infrastructure };
+  return { pistes, lifts, labels, gastronomy, webcams, infrastructure, sportFun };
 }
 
 // ─── metadata ────────────────────────────────────────────────────────────────
@@ -110,6 +111,16 @@ function translateInfrastructureDescription(raw: string): string {
     "For guests with a valid ski pass, free shuttle bus service from all surrounding villages to the Kreuzjoch valley station and",
   );
   return s;
+}
+
+function translateSportFunTitle(raw: string, cat: SportFunCategory): string {
+  if (cat === "viewpoint") return raw.replace(/^Photopoint\b/i, "Viewpoint");
+  return raw
+    .replace(/^SkiMovie\s+Strecke\b/i, "SkiMovie Station")
+    .replace(/^SkiMovie\b/i, "SkiMovie Station")
+    .replace(/^Speed\s*Check\b/i, "Speed Check")
+    .replace(/^Skidepot\b/i, "Ski Depot")
+    .replace(/^Photopoint\b/i, "Photo Point");
 }
 
 // Translate German lift description fragments to English.
@@ -247,6 +258,37 @@ function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[]
         description: item.searchdesc ? translateInfrastructureDescription(item.searchdesc) : undefined,
         status,
         openingHours,
+        imageUrls,
+      });
+    }
+  }
+  return result;
+}
+
+const SPORT_FUN_CATEGORY_IDS: Record<string, SportFunCategory> = {
+  "247": "skimovie", "256": "speedcheck", "242": "skidepot",
+  "226": "photopoint", "261": "viewpoint",
+};
+
+function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
+  const pois = (data.pois ?? {}) as Record<string, unknown>;
+  const result: SportFunPoi[] = [];
+  for (const [catId, sportCategory] of Object.entries(SPORT_FUN_CATEGORY_IDS)) {
+    const items = (pois[catId] ?? []) as RawPoi[];
+    for (const item of items) {
+      if (!item.position) continue;
+      const info = (item.popup.info ?? {}) as Record<string, unknown>;
+      const imgs = Array.isArray(info.imgs) ? (info.imgs as string[]) : [];
+      const single = typeof info.img === "string" ? info.img : undefined;
+      const imageUrls = imgs.length > 0 ? imgs : single ? [single] : undefined;
+      const rawStatus = item.popup.status;
+      result.push({
+        id: item.id,
+        name: translateSportFunTitle(item.popup.title, sportCategory),
+        sportCategory,
+        position: { x: item.position.x * SVG_TO_WORLD, y: item.position.y * SVG_TO_WORLD },
+        description: item.searchdesc ?? undefined,
+        status: rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined,
         imageUrls,
       });
     }
