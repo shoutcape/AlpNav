@@ -199,7 +199,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
       <div ref={cardRef} className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
         {/* Drag handle */}
         <div
-          className="mx-auto flex mb-2 w-16 cursor-grab touch-none select-none items-center justify-center -my-2 py-2"
+          className="flex mb-2 w-full cursor-grab touch-none select-none items-center justify-center -my-2 py-2"
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
