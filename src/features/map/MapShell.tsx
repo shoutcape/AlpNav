@@ -528,7 +528,7 @@ export function MapShell({ manifest }: MapShellProps) {
     const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
     const isInfra    = selectedItem !== null && "category" in selectedItem;
-    const isGastro   = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem);
+    const isGastro   = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem);
     const isWebcam   = selectedItem !== null && "streamUrl" in selectedItem;
     const isSportFun = !!selectedItem && "sportCategory" in selectedItem;
     if (!isInfra && !isGastro && !isWebcam && !isSportFun && selectedItem && "difficulty" in selectedItem) {

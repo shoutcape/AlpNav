@@ -295,9 +295,12 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                   </>
                 ) : "sportCategory" in selectedItem ? (
                   <>
-                    <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                      {selectedItem.name}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
+                        {selectedItem.name}
+                      </p>
+                      <StatusPill status={selectedItem.status} />
+                    </div>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
                       {SPORT_FUN_LABEL[selectedItem.sportCategory]}
                     </p>
