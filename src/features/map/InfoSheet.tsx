@@ -140,12 +140,12 @@ export function InfoSheet({ selectedItem }: Props) {
                 </span>
               ) : "category" in selectedItem ? (
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[4px] text-[11px] font-bold text-white"
                   style={{ backgroundColor: INFRA_CATEGORY_COLOR[selectedItem.category] }}
                 >
                   {selectedItem.category === "parking" ? "P"
                     : selectedItem.category === "bus" ? "B"
-                    : selectedItem.category === "rescue" ? "+"
+                    : selectedItem.category === "rescue" ? <RescueIcon />
                     : "i"}
                 </span>
               ) : "position" in selectedItem ? (
@@ -381,6 +381,15 @@ function WebcamIcon() {
       <rect x="-8" y="-5" width="16" height="10" rx="2" stroke="white" strokeWidth="1.5" />
       <circle cx="0" cy="0" r="3" stroke="white" strokeWidth="1.5" />
       <rect x="-3" y="-8" width="5" height="3" rx="1" fill="white" />
+    </svg>
+  );
+}
+
+function RescueIcon() {
+  return (
+    <svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true">
+      <rect x="-2" y="-6" width="4" height="12" fill="white" />
+      <rect x="-6" y="-2" width="12" height="4" fill="white" />
     </svg>
   );
 }

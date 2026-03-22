@@ -1,7 +1,8 @@
 import { Container, Graphics } from "pixi.js";
 import type { InfrastructureCategory, InfrastructurePoi } from "@/lib/domain/types";
 
-const BADGE_R = 16;
+const BADGE_SIZE = 32;
+const BADGE_CORNER = 4;
 const BADGE_STROKE_COLOR = 0x000000;
 const BADGE_STROKE_W = 1.5;
 
@@ -20,7 +21,7 @@ export function drawInfrastructureOverlay(container: Container, pois: Infrastruc
   container.addChild(bg);
   for (const poi of pois) {
     const { x, y } = poi.position;
-    bg.circle(x, y, BADGE_R)
+    bg.roundRect(x - BADGE_SIZE / 2, y - BADGE_SIZE / 2, BADGE_SIZE, BADGE_SIZE, BADGE_CORNER)
       .fill({ color: BADGE_FILL[poi.category] })
       .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W });
   }
@@ -86,10 +87,8 @@ function drawI(g: Graphics, cx: number, cy: number): void {
     .stroke({ color: WHITE, width: 2.5, cap: "round" });
 }
 
-// Cross — horizontal + vertical strokes
+// Medical cross — filled rectangle arms
 function drawCross(g: Graphics, cx: number, cy: number): void {
-  g.moveTo(cx, cy - 7).lineTo(cx, cy + 7)
-    .stroke({ color: WHITE, width: 2.5, cap: "round" });
-  g.moveTo(cx - 5, cy).lineTo(cx + 5, cy)
-    .stroke({ color: WHITE, width: 2.5, cap: "round" });
+  g.rect(cx - 2.5, cy - 7, 5, 14).fill({ color: WHITE });
+  g.rect(cx - 7, cy - 2.5, 14, 5).fill({ color: WHITE });
 }

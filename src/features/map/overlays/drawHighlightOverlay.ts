@@ -4,7 +4,8 @@ import type { Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, PisteDiffi
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
 const GASTRO_BADGE_R = 18;
-const INFRA_BADGE_R = 16;
+const INFRA_BADGE_SIZE = 32;
+const INFRA_BADGE_CORNER = 4;
 
 const HIGHLIGHT_GOLD = 0xffd700;
 
@@ -134,8 +135,8 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
   }
 
   if ("category" in item) {
-    // InfrastructurePoi — circle highlight matching the 16-unit badge
-    g.circle(item.position.x, item.position.y, INFRA_BADGE_R);
+    // InfrastructurePoi — square highlight matching the badge shape
+    g.roundRect(item.position.x - INFRA_BADGE_SIZE / 2, item.position.y - INFRA_BADGE_SIZE / 2, INFRA_BADGE_SIZE, INFRA_BADGE_SIZE, INFRA_BADGE_CORNER);
     g.stroke({ color: HIGHLIGHT_GOLD, width: 1.5 });
     return;
   }
