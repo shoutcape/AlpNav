@@ -421,6 +421,8 @@ export function MapShell({ manifest }: MapShellProps) {
       syncLabelTiers();
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
+        setFilterPanelOpen(false);
+        setLegendOpen(false);
         const data = overlayDataRef.current;
         if (!data) return;
         const activePistes = pisteVisibleRef.current
