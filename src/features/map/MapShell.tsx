@@ -185,18 +185,12 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true }).decelerate({ friction: 0.95, minSpeed: 0.01 });
       viewport.on("drag-start", () => {
         hasInteractedRef.current = true;
-        setFilterPanelOpen(false);
-        setLegendOpen(false);
       });
       viewport.on("pinch-start", () => {
         hasInteractedRef.current = true;
-        setFilterPanelOpen(false);
-        setLegendOpen(false);
       });
       viewport.on("wheel", () => {
         hasInteractedRef.current = true;
-        setFilterPanelOpen(false);
-        setLegendOpen(false);
       });
       viewport.on("moved", syncLevelBlend);
 
@@ -427,8 +421,6 @@ export function MapShell({ manifest }: MapShellProps) {
       syncLabelTiers();
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
-        setFilterPanelOpen(false);
-        setLegendOpen(false);
         const data = overlayDataRef.current;
         if (!data) return;
         const activePistes = pisteVisibleRef.current
