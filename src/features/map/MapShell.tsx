@@ -729,7 +729,7 @@ export function MapShell({ manifest }: MapShellProps) {
         </div>
       </div>
 
-      <InfoSheet selectedItem={selectedItem} />
+      <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
 
       {debugMode && debugStats && (
         <div className="absolute bottom-4 left-4 z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5">

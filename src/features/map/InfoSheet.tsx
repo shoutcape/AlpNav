@@ -4,6 +4,7 @@ import { ImageCarousel } from "./ImageCarousel";
 
 type Props = {
   selectedItem: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | null;
+  onDismiss: () => void;
 };
 
 const INFRA_CATEGORY_LABEL: Record<InfrastructureCategory, string> = {
@@ -56,14 +57,82 @@ const LIFT_TYPE_LABEL: Record<LiftType, string> = {
   other:     "Lift",
 };
 
-export function InfoSheet({ selectedItem }: Props) {
+export function InfoSheet({ selectedItem, onDismiss }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [liveMode, setLiveMode] = useState(false);
 
   const cardRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const prevHeightRef = useRef(0);
   const prevItemRef = useRef(selectedItem);
+
+  const dragStartY = useRef(0);
+  const dragStartTime = useRef(0);
+  const sheetHeightAtDragStart = useRef(0);
+  const isDragging = useRef(false);
+
+  function snapBack(el: HTMLDivElement) {
+    el.style.transition = "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)";
+    el.style.transform = "translateY(0)";
+    const onEnd = (ev: TransitionEvent) => {
+      if (ev.propertyName !== "transform") return;
+      el.removeEventListener("transitionend", onEnd);
+      el.style.transition = "";
+      el.style.transform = "";
+    };
+    el.addEventListener("transitionend", onEnd);
+  }
+
+  function handlePointerDown(e: React.PointerEvent) {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragStartY.current = e.clientY;
+    dragStartTime.current = Date.now();
+    sheetHeightAtDragStart.current = wrapperRef.current?.offsetHeight || window.innerHeight * 0.5;
+    isDragging.current = true;
+  }
+
+  function handlePointerMove(e: React.PointerEvent) {
+    if (!isDragging.current) return;
+    const dy = Math.max(0, e.clientY - dragStartY.current);
+    if (dy < 6) return; // dead-zone to avoid jitter on tap
+    const el = wrapperRef.current;
+    if (!el) return;
+    el.style.transition = "none";
+    el.style.transform = `translateY(${dy}px)`;
+  }
+
+  function handlePointerUp(e: React.PointerEvent) {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const dy = Math.max(0, e.clientY - dragStartY.current);
+    const velocity = dy / (Date.now() - dragStartTime.current);
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const shouldDismiss = velocity > 0.4 || dy >= sheetHeightAtDragStart.current * 0.25;
+
+    if (shouldDismiss) {
+      el.style.transition = "transform 0.25s ease-out";
+      el.style.transform = "translateY(100%)";
+      const onEnd = (ev: TransitionEvent) => {
+        if (ev.propertyName !== "transform") return;
+        el.removeEventListener("transitionend", onEnd);
+        el.style.transition = "";
+        el.style.transform = "";
+        onDismiss();
+      };
+      el.addEventListener("transitionend", onEnd);
+    } else {
+      snapBack(el);
+    }
+  }
+
+  function handlePointerCancel() {
+    isDragging.current = false;
+    const el = wrapperRef.current;
+    if (el) snapBack(el);
+  }
 
   // Animate height and fade content when switching between items
   useLayoutEffect(() => {
@@ -124,11 +193,20 @@ export function InfoSheet({ selectedItem }: Props) {
       </div>
     )}
     <div
+      ref={wrapperRef}
       className={`absolute inset-x-0 bottom-0 z-20 transition-transform duration-300 ease-out ${visible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
     >
       <div ref={cardRef} className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
         {/* Drag handle */}
-        <div className="mx-auto mb-4 h-[3px] w-10 rounded-full bg-white/20" />
+        <div
+          className="mx-auto flex mb-2 w-16 cursor-grab touch-none select-none items-center justify-center -my-2 py-2"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
+        >
+          <div className="h-[3px] w-10 rounded-full bg-white/20" />
+        </div>
 
         {selectedItem && (
           <div>
