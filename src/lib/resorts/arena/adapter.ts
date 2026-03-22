@@ -266,8 +266,11 @@ function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[]
 }
 
 const SPORT_FUN_CATEGORY_IDS: Record<string, SportFunCategory> = {
-  "247": "skimovie", "256": "speedcheck", "242": "skidepot",
-  "226": "photopoint", "261": "viewpoint",
+  "247": "skimovie",
+  "256": "speedcheck",
+  "242": "skidepot",
+  "226": "photopoint",
+  "261": "viewpoint",
 };
 
 function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
