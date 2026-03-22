@@ -70,6 +70,18 @@ export type InfrastructurePoi = {
   imageUrls?: string[];
 };
 
+export type SportFunCategory = "skimovie" | "speedcheck" | "skidepot" | "photopoint" | "viewpoint";
+
+export type SportFunPoi = {
+  id: string;
+  name: string;
+  sportCategory: SportFunCategory;  // named "sportCategory" not "category" — avoids InfrastructurePoi discriminant collision
+  position: Point;
+  description?: string;
+  status?: "open" | "closed";
+  imageUrls?: string[];
+};
+
 export type WebcamProvider = "feratel" | "panomax";
 
 export type Webcam = {
@@ -81,4 +93,4 @@ export type Webcam = {
   streamUrl: string;
 };
 
-export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[]; webcams: Webcam[]; infrastructure: InfrastructurePoi[] };
+export type ResortOverlayData = { pistes: Piste[]; lifts: Lift[]; labels: MapLabel[]; gastronomy: GastronomySpot[]; webcams: Webcam[]; infrastructure: InfrastructurePoi[]; sportFun: SportFunPoi[] };
