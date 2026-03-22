@@ -49,18 +49,16 @@ export function InfoSheet({ selectedItem }: Props) {
   const [liveMode, setLiveMode] = useState(false);
 
   const cardRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const prevHeightRef = useRef(0);
   const prevItemRef = useRef(selectedItem);
 
   // Animate height and fade content when switching between items
   useLayoutEffect(() => {
     const card = cardRef.current;
-    const content = contentRef.current;
     const prevItem = prevItemRef.current;
     prevItemRef.current = selectedItem;
 
-    if (!card || !content) return;
+    if (!card) return;
 
     const newHeight = card.offsetHeight;
 
@@ -72,15 +70,6 @@ export function InfoSheet({ selectedItem }: Props) {
           { duration: 280, easing: "cubic-bezier(0.4, 0, 0.2, 1)" }
         );
       }
-      // Fade content in (hides snap of new content appearing)
-      content.style.opacity = "0";
-      content.style.transition = "none";
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (content) {
-          content.style.transition = "opacity 200ms ease";
-          content.style.opacity = "1";
-        }
-      }));
     }
 
     prevHeightRef.current = newHeight;
@@ -125,7 +114,7 @@ export function InfoSheet({ selectedItem }: Props) {
         <div className="mx-auto mb-4 h-[3px] w-10 rounded-full bg-white/20" />
 
         {selectedItem && (
-          <div ref={contentRef}>
+          <div>
             <div className="flex items-center gap-3">
               {/* Icon / badge */}
               {"streamUrl" in selectedItem ? (
