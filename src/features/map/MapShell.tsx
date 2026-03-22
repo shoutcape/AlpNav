@@ -14,6 +14,7 @@ import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./ove
 import { drawGastronomyMarkerOverlay } from "./overlays/drawGastronomyMarkerOverlay";
 import { drawWebcamMarkerOverlay } from "./overlays/drawWebcamMarkerOverlay";
 import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay";
+import { drawSportFunOverlay } from "./overlays/drawSportFunOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
@@ -89,6 +90,9 @@ export function MapShell({ manifest }: MapShellProps) {
   const infrastructureOverlayRef = useRef<Container | null>(null);
   const [infrastructureVisible, setInfrastructureVisible] = useState(true);
   const infrastructureVisibleRef = useRef(true);
+  const sportFunOverlayRef = useRef<Container | null>(null);
+  const [sportFunVisible, setSportFunVisible] = useState(true);
+  const sportFunVisibleRef = useRef(true);
 
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null>(null);
   const [debugMode, setDebugMode] = useState(false);
@@ -331,6 +335,12 @@ export function MapShell({ manifest }: MapShellProps) {
       viewport.addChild(infrastructureContainer);
       infrastructureOverlayRef.current = infrastructureContainer;
 
+      const sportFunContainer = new Container();
+      sportFunContainer.label = "overlay-sport-fun";
+      drawSportFunOverlay(sportFunContainer, overlayData.sportFun);
+      viewport.addChild(sportFunContainer);
+      sportFunOverlayRef.current = sportFunContainer;
+
       const badgeHighlight = new Graphics();
       badgeHighlight.label = "overlay-badge-highlight";
       viewport.addChild(badgeHighlight);
@@ -442,6 +452,7 @@ export function MapShell({ manifest }: MapShellProps) {
         const activeGastronomy = gastronomyVisibleRef.current ? data.gastronomy : [];
         const activeWebcams = webcamVisibleRef.current ? data.webcams : [];
         const activeInfrastructure = infrastructureVisibleRef.current ? data.infrastructure : [];
+        const activeSportFun = sportFunVisibleRef.current ? data.sportFun : [];
         const hit = hitTestOverlays(
           world.x, world.y,
           activePistes,
@@ -449,7 +460,7 @@ export function MapShell({ manifest }: MapShellProps) {
           activeGastronomy,
           activeWebcams,
           activeInfrastructure,
-          data.sportFun,
+          activeSportFun,
         );
         setSelectedItem(hit);
         console.log("clicked:", hit?.name ?? "none", hit);
@@ -496,6 +507,7 @@ export function MapShell({ manifest }: MapShellProps) {
       gastronomyOverlayRef.current = null;
       webcamOverlayRef.current = null;
       infrastructureOverlayRef.current = null;
+      sportFunOverlayRef.current = null;
       pisteLinesByDiffRef.current = null;
       pisteMarkersByDiffRef.current = null;
 
@@ -515,17 +527,18 @@ export function MapShell({ manifest }: MapShellProps) {
     const lg = liftHighlightRef.current;
     const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
-    const isInfra  = selectedItem !== null && "category" in selectedItem;
-    const isGastro = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem);
-    const isWebcam = selectedItem !== null && "streamUrl" in selectedItem;
-    if (!isInfra && !isGastro && !isWebcam && selectedItem && "difficulty" in selectedItem) {
+    const isInfra    = selectedItem !== null && "category" in selectedItem;
+    const isGastro   = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem);
+    const isWebcam   = selectedItem !== null && "streamUrl" in selectedItem;
+    const isSportFun = !!selectedItem && "sportCategory" in selectedItem;
+    if (!isInfra && !isGastro && !isWebcam && !isSportFun && selectedItem && "difficulty" in selectedItem) {
       drawPisteHighlight(pg, selectedItem);
       drawLiftHighlight(lg, null);
     } else {
       drawPisteHighlight(pg, null);
-      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam) ? null : selectedItem as Lift | null);
+      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam || isSportFun) ? null : selectedItem as Lift | null);
     }
-    if (bh) drawBadgeHighlight(bh, isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
+    if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
@@ -605,6 +618,13 @@ export function MapShell({ manifest }: MapShellProps) {
     infrastructureVisibleRef.current = next;
     if (infrastructureOverlayRef.current)
       infrastructureOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+  };
+
+  const toggleSportFun = () => {
+    const next = !sportFunVisible;
+    setSportFunVisible(next);
+    sportFunVisibleRef.current = next;
+    if (sportFunOverlayRef.current) sportFunOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
   const toggleWebcam = () => {
@@ -699,7 +719,7 @@ export function MapShell({ manifest }: MapShellProps) {
 
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
-        <div className="pointer-events-auto grid grid-cols-4 gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
+        <div className="pointer-events-auto grid grid-cols-3 gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
           <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
           <div className="relative">
             <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && DIFFICULTIES.every(d => pisteFilter[d])} onToggleAll={toggleAllPistes} />
@@ -727,6 +747,7 @@ export function MapShell({ manifest }: MapShellProps) {
           <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
           <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
           <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
+          <MapControlButton icon={<SportFunMapIcon />} label="Sport" active={sportFunVisible} onClick={toggleSportFun} />
         </div>
       </div>
 
@@ -991,6 +1012,20 @@ function InfrastructureMapIcon() {
       <path d="M0,-9 C-5,-9 -7,-5 -7,-2 C-7,3 0,9 0,9 C0,9 7,3 7,-2 C7,-5 5,-9 0,-9 Z" stroke="currentColor" strokeWidth="1.5" />
       {/* Inner circle */}
       <circle cx="0" cy="-2" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function SportFunMapIcon() {
+  return (
+    <svg width="22" height="20" viewBox="-11 -10 22 20" fill="none" aria-hidden="true">
+      <polygon
+        points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <polygon points="-3,-4 6,0 -3,4" fill="currentColor" opacity="0.8" />
     </svg>
   );
 }
