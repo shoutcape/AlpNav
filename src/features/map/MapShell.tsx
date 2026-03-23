@@ -103,6 +103,8 @@ export function MapShell({ manifest }: MapShellProps) {
   const minScaleRef = useRef(0.05);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
+  const [legendOpen, setLegendOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const maxLevel = manifest.levels[manifest.levels.length - 1];
   const maxScale = useMemo(() => {
@@ -635,9 +637,6 @@ export function MapShell({ manifest }: MapShellProps) {
       webcamOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
-  const [legendOpen, setLegendOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
   const toggleDebug = () => setDebugMode(d => !d);
 
   const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -760,6 +759,7 @@ export function MapShell({ manifest }: MapShellProps) {
             min="0"
             max="1"
             step="0.001"
+            // eslint-disable-next-line react-hooks/refs
             value={(() => {
               const logMin = Math.log(minScaleRef.current);
               const logMax = Math.log(maxScale);

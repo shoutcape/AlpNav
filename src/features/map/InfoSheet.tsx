@@ -182,6 +182,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
 
   // Reset UI state on item change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLightboxOpen(false);
     setLightboxIndex(0);
     setLiveMode(false);

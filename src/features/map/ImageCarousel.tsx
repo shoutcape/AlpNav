@@ -25,9 +25,11 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
   const imgIndex = n > 1 ? (stripIndex - 1 + n) % n : 0;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStripIndex(n > 1 ? 1 : 0);
     setSkipTransition(true);
     onIndexChange?.(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageUrls]);
 
   // Re-enable transition after the instant-jump render has painted
