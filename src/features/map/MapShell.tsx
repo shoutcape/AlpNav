@@ -104,6 +104,14 @@ export function MapShell({ manifest }: MapShellProps) {
   const lastTapRef = useRef<{ time: number; x: number; y: number } | null>(null);
   const suppressNextClickRef = useRef(false);
   const suppressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dragZoomRef = useRef<{
+    startY: number;
+    startScale: number;
+    worldX: number;
+    worldY: number;
+    screenX: number;
+    screenY: number;
+  } | null>(null);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
   const [legendOpen, setLegendOpen] = useState(false);
@@ -167,6 +175,10 @@ export function MapShell({ manifest }: MapShellProps) {
 
     let wheelPanHandler: ((e: WheelEvent) => void) | null = null;
     let touchEndHandler: ((e: TouchEvent) => void) | null = null;
+    // eslint-disable-next-line prefer-const
+    let touchStartHandler: ((e: TouchEvent) => void) | null = null;
+    // eslint-disable-next-line prefer-const
+    let touchMoveHandler:  ((e: TouchEvent) => void) | null = null;
 
     const initialize = async () => {
       const app = new Application();
