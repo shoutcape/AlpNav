@@ -112,9 +112,9 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
       <div
         className="relative w-full aspect-[4/3] overflow-hidden rounded-xl cursor-pointer"
         onClick={handleClick}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onTouchStart={n > 1 ? handleTouchStart : undefined}
+        onTouchMove={n > 1 ? handleTouchMove : undefined}
+        onTouchEnd={n > 1 ? handleTouchEnd : undefined}
       >
         <div
           className="flex h-full"
