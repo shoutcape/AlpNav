@@ -166,6 +166,7 @@ export function MapShell({ manifest }: MapShellProps) {
     };
 
     let wheelPanHandler: ((e: WheelEvent) => void) | null = null;
+    let touchEndHandler: ((e: TouchEvent) => void) | null = null;
 
     const initialize = async () => {
       const app = new Application();
@@ -259,7 +260,7 @@ export function MapShell({ manifest }: MapShellProps) {
         vp.animate({ scale: newScale, position: worldPoint, time: 300, ease: "easeInOutQuad" });
       };
 
-      const handleTouchEnd = (e: TouchEvent) => {
+      touchEndHandler = (e: TouchEvent) => {
         if (e.changedTouches.length !== 1) return;
         if (e.touches.length !== 0) return;
         const { clientX, clientY } = e.changedTouches[0];
@@ -280,7 +281,7 @@ export function MapShell({ manifest }: MapShellProps) {
         lastTapRef.current = { time: now, x: clientX, y: clientY };
       };
 
-      app.canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
+      app.canvas.addEventListener("touchend", touchEndHandler, { passive: true });
 
       app.stage.addChild(viewport);
       viewportRef.current = viewport;
@@ -538,7 +539,9 @@ export function MapShell({ manifest }: MapShellProps) {
       if (wheelPanHandler && appRef.current?.canvas) {
         appRef.current.canvas.removeEventListener("wheel", wheelPanHandler, { capture: true });
       }
-      appRef.current?.canvas.removeEventListener("touchend", handleTouchEnd);
+      if (touchEndHandler && appRef.current?.canvas) {
+        appRef.current.canvas.removeEventListener("touchend", touchEndHandler);
+      }
 
       viewportRef.current?.destroy({ children: true });
       viewportRef.current = null;
