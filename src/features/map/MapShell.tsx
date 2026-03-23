@@ -175,9 +175,7 @@ export function MapShell({ manifest }: MapShellProps) {
 
     let wheelPanHandler: ((e: WheelEvent) => void) | null = null;
     let touchEndHandler: ((e: TouchEvent) => void) | null = null;
-    // eslint-disable-next-line prefer-const
     let touchStartHandler: ((e: TouchEvent) => void) | null = null;
-    // eslint-disable-next-line prefer-const
     let touchMoveHandler:  ((e: TouchEvent) => void) | null = null;
 
     const initialize = async () => {
@@ -270,6 +268,66 @@ export function MapShell({ manifest }: MapShellProps) {
         const worldPoint = vp.toWorld(clientX - rect.left, clientY - rect.top);
         const newScale = Math.min(vp.scale.x * 2, maxScale);
         vp.animate({ scale: newScale, position: worldPoint, time: 300, ease: "easeInOutQuad" });
+      };
+
+      touchStartHandler = (e: TouchEvent) => {
+        if (e.touches.length > 1) {
+          dragZoomRef.current = null;
+          viewportRef.current?.plugins.resume("drag");
+          return;
+        }
+        if (e.touches.length !== 1) return;
+        const { clientX, clientY } = e.touches[0];
+        const last = lastTapRef.current;
+        if (
+          last &&
+          performance.now() - last.time < 300 &&
+          Math.hypot(clientX - last.x, clientY - last.y) < 30
+        ) {
+          const vp = viewportRef.current;
+          const canvas = appRef.current?.canvas;
+          if (!vp || !canvas) return;
+          const rect = canvas.getBoundingClientRect();
+          const sx = clientX - rect.left;
+          const sy = clientY - rect.top;
+          const wp = vp.toWorld(sx, sy);
+          lastTapRef.current = null;
+          dragZoomRef.current = {
+            startY: clientY,
+            startScale: vp.scale.x,
+            worldX: wp.x,
+            worldY: wp.y,
+            screenX: sx,
+            screenY: sy,
+          };
+          vp.plugins.pause("drag");
+        }
+      };
+
+      touchMoveHandler = (e: TouchEvent) => {
+        if (!dragZoomRef.current) return;
+        if (e.touches.length !== 1) return;
+        const vp = viewportRef.current;
+        if (!vp) return;
+        const dz = dragZoomRef.current;
+        const deltaY = e.touches[0].clientY - dz.startY;
+        const newScale = Math.min(
+          Math.max(dz.startScale * Math.pow(2, -deltaY / 100), minScaleRef.current),
+          maxScale,
+        );
+        vp.scale.set(newScale);
+        vp.x = dz.screenX - dz.worldX * newScale;
+        vp.y = dz.screenY - dz.worldY * newScale;
+        // Clamp to world bounds (direct x/y mutation bypasses the plugin pipeline).
+        const scaledW = vp.worldWidth * newScale;
+        const scaledH = vp.worldHeight * newScale;
+        vp.x = scaledW >= vp.screenWidth
+          ? Math.min(0, Math.max(vp.screenWidth - scaledW, vp.x))
+          : (vp.screenWidth - scaledW) / 2;
+        vp.y = scaledH >= vp.screenHeight
+          ? Math.min(0, Math.max(vp.screenHeight - scaledH, vp.y))
+          : (vp.screenHeight - scaledH) / 2;
+        vp.emit("moved", { type: "drag", viewport: vp });
       };
 
       touchEndHandler = (e: TouchEvent) => {
