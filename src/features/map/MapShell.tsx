@@ -651,7 +651,7 @@ export function MapShell({ manifest }: MapShellProps) {
   };
 
   return (
-    <main className="relative h-screen w-full overflow-hidden bg-night text-ivory">
+    <main className="relative h-screen w-full overflow-hidden bg-night text-ivory select-none">
       {/* Map canvas */}
       <div
         ref={hostRef}
