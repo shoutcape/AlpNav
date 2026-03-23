@@ -1,6 +1,6 @@
 import { Graphics } from "pixi.js";
 import type { Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty, Point } from "@/lib/domain/types";
-import { SPORT_FUN_BADGE_R, BADGE_FILL as SPORT_FUN_BADGE_FILL } from "./drawSportFunOverlay";
+import { SPORT_FUN_BADGE_R } from "./drawSportFunOverlay";
 
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
@@ -145,10 +145,9 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
   }
 
   if ("sportCategory" in item) {
-    // SportFunPoi — redraw badge with same fill + gold stroke so only the border color changes
+    // SportFunPoi — gold border only; fill and icon are on the layer below
     g.poly(hexPts(item.position.x, item.position.y, SPORT_FUN_BADGE_R))
-      .fill({ color: SPORT_FUN_BADGE_FILL[item.sportCategory] })
-      .stroke({ color: HIGHLIGHT_GOLD, width: 1.5 });
+      .stroke({ color: HIGHLIGHT_GOLD, width: 2 });
     return;
   }
 
