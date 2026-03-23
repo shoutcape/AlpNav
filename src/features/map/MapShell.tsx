@@ -888,7 +888,7 @@ function SlopeIcon() {
 
 function LegendPanel({ open }: { open: boolean }) {
   return (
-    <div inert={!open || undefined} className={`absolute right-0 top-full z-20 mt-2 w-[220px] rounded-[18px] border border-white/[0.09] bg-[#07111f]/85 p-4 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-opacity duration-200 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+    <div className={`select-none absolute right-0 top-full z-20 mt-2 w-[220px] rounded-[18px] border border-white/[0.09] bg-[#07111f]/85 p-4 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-opacity duration-200 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
       {/* Slopes */}
       <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-ivory/40 mb-2">Slopes</p>
       {([
