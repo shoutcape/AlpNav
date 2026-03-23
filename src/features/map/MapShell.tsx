@@ -101,6 +101,9 @@ export function MapShell({ manifest }: MapShellProps) {
   const redrawDebugRef = useRef<(() => void) | null>(null);
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const minScaleRef = useRef(0.05);
+  const lastTapRef = useRef<{ time: number; x: number; y: number } | null>(null);
+  const suppressNextClickRef = useRef(false);
+  const suppressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
   const [legendOpen, setLegendOpen] = useState(false);
@@ -245,6 +248,39 @@ export function MapShell({ manifest }: MapShellProps) {
       };
 
       app.canvas.addEventListener("wheel", wheelPanHandler, { capture: true, passive: false });
+
+      const doZoom = (clientX: number, clientY: number) => {
+        const vp = viewportRef.current;
+        const canvas = appRef.current?.canvas;
+        if (!vp || !canvas) return;
+        const rect = canvas.getBoundingClientRect();
+        const worldPoint = vp.toWorld(clientX - rect.left, clientY - rect.top);
+        const newScale = Math.min(vp.scale.x * 2, maxScale);
+        vp.animate({ scale: newScale, position: worldPoint, time: 300, ease: "easeInOutQuad" });
+      };
+
+      const handleTouchEnd = (e: TouchEvent) => {
+        if (e.changedTouches.length !== 1) return;
+        if (e.touches.length !== 0) return;
+        const { clientX, clientY } = e.changedTouches[0];
+        const now = performance.now();
+        const last = lastTapRef.current;
+        if (last && now - last.time < 300 && Math.hypot(clientX - last.x, clientY - last.y) < 30) {
+          lastTapRef.current = null;
+          if (viewportRef.current && viewportRef.current.scale.x < maxScale) {
+            suppressNextClickRef.current = true;
+            suppressTimeoutRef.current = setTimeout(() => {
+              suppressNextClickRef.current = false;
+              suppressTimeoutRef.current = null;
+            }, 500);
+            doZoom(clientX, clientY);
+          }
+          return;
+        }
+        lastTapRef.current = { time: now, x: clientX, y: clientY };
+      };
+
+      app.canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
 
       app.stage.addChild(viewport);
       viewportRef.current = viewport;
@@ -444,6 +480,14 @@ export function MapShell({ manifest }: MapShellProps) {
       syncLabelTiers();
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
+        if (suppressNextClickRef.current) {
+          suppressNextClickRef.current = false;
+          if (suppressTimeoutRef.current !== null) {
+            clearTimeout(suppressTimeoutRef.current);
+            suppressTimeoutRef.current = null;
+          }
+          return;
+        }
         setFilterPanelOpen(false);
         setLegendOpen(false);
         const data = overlayDataRef.current;
@@ -494,6 +538,7 @@ export function MapShell({ manifest }: MapShellProps) {
       if (wheelPanHandler && appRef.current?.canvas) {
         appRef.current.canvas.removeEventListener("wheel", wheelPanHandler, { capture: true });
       }
+      appRef.current?.canvas.removeEventListener("touchend", handleTouchEnd);
 
       viewportRef.current?.destroy({ children: true });
       viewportRef.current = null;
