@@ -331,6 +331,23 @@ export function MapShell({ manifest }: MapShellProps) {
       };
 
       touchEndHandler = (e: TouchEvent) => {
+        if (dragZoomRef.current !== null) {
+          const dz = dragZoomRef.current;
+          dragZoomRef.current = null;
+          viewportRef.current?.plugins.resume("drag");
+          const { clientX, clientY } = e.changedTouches[0];
+          const deltaY = Math.abs(clientY - dz.startY);
+          if (suppressTimeoutRef.current !== null) clearTimeout(suppressTimeoutRef.current);
+          suppressNextClickRef.current = true;
+          suppressTimeoutRef.current = setTimeout(() => {
+            suppressNextClickRef.current = false;
+            suppressTimeoutRef.current = null;
+          }, 500);
+          if (deltaY < 20 && viewportRef.current && viewportRef.current.scale.x < maxScale) {
+            doZoom(clientX, clientY);
+          }
+          return;
+        }
         if (e.changedTouches.length !== 1) return;
         if (e.touches.length !== 0) return;
         const { clientX, clientY } = e.changedTouches[0];
