@@ -369,6 +369,8 @@ export function MapShell({ manifest }: MapShellProps) {
       };
 
       app.canvas.addEventListener("touchend", touchEndHandler, { passive: true });
+      app.canvas.addEventListener("touchstart", touchStartHandler, { passive: true });
+      app.canvas.addEventListener("touchmove",  touchMoveHandler,  { passive: true });
 
       app.stage.addChild(viewport);
       viewportRef.current = viewport;
@@ -629,6 +631,13 @@ export function MapShell({ manifest }: MapShellProps) {
       if (touchEndHandler && appRef.current?.canvas) {
         appRef.current.canvas.removeEventListener("touchend", touchEndHandler);
       }
+      if (touchStartHandler && appRef.current?.canvas) {
+        appRef.current.canvas.removeEventListener("touchstart", touchStartHandler);
+      }
+      if (touchMoveHandler && appRef.current?.canvas) {
+        appRef.current.canvas.removeEventListener("touchmove", touchMoveHandler);
+      }
+      viewportRef.current?.plugins.resume("drag");
 
       viewportRef.current?.destroy({ children: true });
       viewportRef.current = null;
