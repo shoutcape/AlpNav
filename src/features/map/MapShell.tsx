@@ -198,7 +198,12 @@ export function MapShell({ manifest }: MapShellProps) {
       host.appendChild(app.canvas);
       app.canvas.className = "h-full w-full touch-none select-none";
       // Prevent iOS text-selection / callout UI on double-tap without suppressing pointer events.
-      (app.canvas.style as CSSStyleDeclaration & Record<string, string>)["webkitTouchCallout"] = "none";
+      const cs = app.canvas.style as CSSStyleDeclaration & Record<string, string>;
+      cs.userSelect = "none";
+      cs.webkitUserSelect = "none";
+      cs["webkitTouchCallout"] = "none";
+      cs.touchAction = "none";
+      app.canvas.addEventListener("selectstart", (e) => e.preventDefault());
       appRef.current = app;
 
       const viewport = new Viewport({
