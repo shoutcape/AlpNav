@@ -298,6 +298,7 @@ export function MapShell({ manifest }: MapShellProps) {
           const sx = clientX - rect.left;
           const sy = clientY - rect.top;
           const wp = vp.toWorld(sx, sy);
+          e.preventDefault();
           lastTapRef.current = null;
           dragZoomRef.current = {
             startY: clientY,
@@ -341,8 +342,12 @@ export function MapShell({ manifest }: MapShellProps) {
         if (dragZoomRef.current !== null) {
           const dz = dragZoomRef.current;
           dragZoomRef.current = null;
-          viewportRef.current?.plugins.resume("drag");
-          (viewportRef.current?.plugins.get("decelerate") as { reset?: () => void } | null)?.reset?.();
+          const vp = viewportRef.current;
+          if (vp) {
+            (vp.plugins.get("drag") as { reset?: () => void } | null)?.reset?.();
+            vp.plugins.resume("drag");
+            (vp.plugins.get("decelerate") as { reset?: () => void } | null)?.reset?.();
+          }
           const { clientX, clientY } = e.changedTouches[0];
           const deltaY = Math.abs(clientY - dz.startY);
           if (suppressTimeoutRef.current !== null) clearTimeout(suppressTimeoutRef.current);
@@ -377,7 +382,7 @@ export function MapShell({ manifest }: MapShellProps) {
       };
 
       app.canvas.addEventListener("touchend", touchEndHandler, { passive: true });
-      app.canvas.addEventListener("touchstart", touchStartHandler, { passive: true });
+      app.canvas.addEventListener("touchstart", touchStartHandler, { passive: false });
       app.canvas.addEventListener("touchmove",  touchMoveHandler,  { passive: true });
 
       app.stage.addChild(viewport);
