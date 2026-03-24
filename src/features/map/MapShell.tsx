@@ -291,6 +291,7 @@ export function MapShell({ manifest }: MapShellProps) {
           const sx = clientX - rect.left;
           const sy = clientY - rect.top;
           const wp = vp.toWorld(sx, sy);
+          e.preventDefault();
           lastTapRef.current = null;
           dragZoomRef.current = {
             startY: clientY,
@@ -369,7 +370,7 @@ export function MapShell({ manifest }: MapShellProps) {
       };
 
       app.canvas.addEventListener("touchend", touchEndHandler, { passive: true });
-      app.canvas.addEventListener("touchstart", touchStartHandler, { passive: true });
+      app.canvas.addEventListener("touchstart", touchStartHandler, { passive: false });
       app.canvas.addEventListener("touchmove",  touchMoveHandler,  { passive: true });
 
       app.stage.addChild(viewport);
