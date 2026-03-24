@@ -337,6 +337,7 @@ export function MapShell({ manifest }: MapShellProps) {
           const dz = dragZoomRef.current;
           dragZoomRef.current = null;
           viewportRef.current?.plugins.resume("drag");
+          (viewportRef.current?.plugins.get("decelerate") as { reset?: () => void } | null)?.reset?.();
           const { clientX, clientY } = e.changedTouches[0];
           const deltaY = Math.abs(clientY - dz.startY);
           if (suppressTimeoutRef.current !== null) clearTimeout(suppressTimeoutRef.current);
