@@ -16,6 +16,8 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
   const [dragOffset, setDragOffset] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [skipTransition, setSkipTransition] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const firstImgRef = useRef<HTMLImageElement>(null);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const didSwipe = useRef(false);
@@ -28,6 +30,7 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setStripIndex(n > 1 ? 1 : 0);
     setSkipTransition(true);
+    setLoaded(false);
     onIndexChange?.(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageUrls]);
@@ -38,6 +41,10 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     const id = requestAnimationFrame(() => setSkipTransition(false));
     return () => cancelAnimationFrame(id);
   }, [skipTransition]);
+
+  useEffect(() => {
+    if (firstImgRef.current?.complete) setLoaded(true);
+  }, [imageUrls]);
 
   function navigate(next: number) {
     setStripIndex(next);
@@ -129,6 +136,8 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
           {strip.map((url, i) => (
             <img
               key={i}
+              ref={i === (n > 1 ? 1 : 0) ? firstImgRef : undefined}
+              onLoad={i === (n > 1 ? 1 : 0) ? () => setLoaded(true) : undefined}
               src={url}
               alt={i === (n > 1 ? 1 : 0) ? alt : ""}
               className="h-full object-cover"
@@ -136,6 +145,13 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
               draggable={false}
             />
           ))}
+        </div>
+
+        <div
+          className={`absolute inset-0 rounded-xl bg-[#07111f] pointer-events-none transition-opacity duration-300 ${loaded ? "opacity-0" : "opacity-100"}`}
+          aria-hidden="true"
+        >
+          <div className="absolute inset-0 animate-shimmer bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_50%,transparent_100%)] bg-[length:200%_100%]" />
         </div>
 
         {n > 1 && (
