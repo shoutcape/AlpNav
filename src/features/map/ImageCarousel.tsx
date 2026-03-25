@@ -108,9 +108,9 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
   const translateX = `calc(${(-stripIndex * 100) / strip.length}% + ${dragOffset}px)`;
 
   return (
-    <div className="mx-auto sm:mx-0 max-w-[350px]">
+    <div>
       <div
-        className="relative w-full aspect-[4/3] overflow-hidden rounded-xl cursor-pointer"
+        className="relative w-full h-[220px] overflow-hidden rounded-xl cursor-pointer"
         onClick={handleClick}
         onTouchStart={n > 1 ? handleTouchStart : undefined}
         onTouchMove={n > 1 ? handleTouchMove : undefined}
