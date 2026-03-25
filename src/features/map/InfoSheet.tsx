@@ -173,13 +173,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     prevHeightRef.current = newHeight;
   }, [selectedItem]);
 
-  // Prefetch images immediately on selection
-  useEffect(() => {
-    if (selectedItem && "imageUrls" in selectedItem && selectedItem.imageUrls) {
-      selectedItem.imageUrls.forEach(url => { const img = new Image(); img.src = url; });
-    }
-  }, [selectedItem]);
-
   // Reset UI state on item change
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
