@@ -42,6 +42,7 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     return () => cancelAnimationFrame(id);
   }, [skipTransition]);
 
+  // Must run after the reset effect above — React guarantees [imageUrls] effects fire in declaration order
   useEffect(() => {
     if (firstImgRef.current?.complete) setLoaded(true);
   }, [imageUrls]);
@@ -112,6 +113,8 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     ? [imageUrls[n - 1], ...imageUrls, imageUrls[0]]
     : imageUrls;
 
+  const firstRealIndex = n > 1 ? 1 : 0;
+
   const translateX = `calc(${(-stripIndex * 100) / strip.length}% + ${dragOffset}px)`;
 
   return (
@@ -136,10 +139,10 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
           {strip.map((url, i) => (
             <img
               key={i}
-              ref={i === (n > 1 ? 1 : 0) ? firstImgRef : undefined}
-              onLoad={i === (n > 1 ? 1 : 0) ? () => setLoaded(true) : undefined}
+              ref={i === firstRealIndex ? firstImgRef : undefined}
+              onLoad={i === firstRealIndex ? () => setLoaded(true) : undefined}
               src={url}
-              alt={i === (n > 1 ? 1 : 0) ? alt : ""}
+              alt={i === firstRealIndex ? alt : ""}
               className="h-full object-cover"
               style={{ width: `${100 / strip.length}%` }}
               draggable={false}
@@ -151,7 +154,9 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
           className={`absolute inset-0 rounded-xl bg-[#07111f] pointer-events-none transition-opacity duration-300 ${loaded ? "opacity-0" : "opacity-100"}`}
           aria-hidden="true"
         >
-          <div className="absolute inset-0 animate-shimmer bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_50%,transparent_100%)] bg-[length:200%_100%]" />
+          {!loaded && (
+            <div className="absolute inset-0 animate-shimmer bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_50%,transparent_100%)] bg-[length:200%_100%]" />
+          )}
         </div>
 
         {n > 1 && (
