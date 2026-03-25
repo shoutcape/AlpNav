@@ -16,6 +16,8 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
   const [dragOffset, setDragOffset] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [skipTransition, setSkipTransition] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const firstImgRef = useRef<HTMLImageElement>(null);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const didSwipe = useRef(false);
@@ -28,6 +30,7 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setStripIndex(n > 1 ? 1 : 0);
     setSkipTransition(true);
+    setLoaded(false);
     onIndexChange?.(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageUrls]);
@@ -38,6 +41,11 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     const id = requestAnimationFrame(() => setSkipTransition(false));
     return () => cancelAnimationFrame(id);
   }, [skipTransition]);
+
+  // Must run after the reset effect above — React guarantees [imageUrls] effects fire in declaration order
+  useEffect(() => {
+    if (firstImgRef.current?.complete) setLoaded(true);
+  }, [imageUrls]);
 
   function navigate(next: number) {
     setStripIndex(next);
@@ -105,12 +113,14 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
     ? [imageUrls[n - 1], ...imageUrls, imageUrls[0]]
     : imageUrls;
 
+  const firstRealIndex = n > 1 ? 1 : 0;
+
   const translateX = `calc(${(-stripIndex * 100) / strip.length}% + ${dragOffset}px)`;
 
   return (
-    <div className="mx-auto sm:mx-0 max-w-[350px]">
+    <div>
       <div
-        className="relative w-full aspect-[4/3] overflow-hidden rounded-xl cursor-pointer"
+        className="relative w-full h-[220px] overflow-hidden rounded-xl cursor-pointer"
         onClick={handleClick}
         onTouchStart={n > 1 ? handleTouchStart : undefined}
         onTouchMove={n > 1 ? handleTouchMove : undefined}
@@ -129,13 +139,24 @@ export function ImageCarousel({ imageUrls, alt, onOpenLightbox, onIndexChange }:
           {strip.map((url, i) => (
             <img
               key={i}
+              ref={i === firstRealIndex ? firstImgRef : undefined}
+              onLoad={i === firstRealIndex ? () => setLoaded(true) : undefined}
               src={url}
-              alt={i === (n > 1 ? 1 : 0) ? alt : ""}
+              alt={i === firstRealIndex ? alt : ""}
               className="h-full object-cover"
               style={{ width: `${100 / strip.length}%` }}
               draggable={false}
             />
           ))}
+        </div>
+
+        <div
+          className={`absolute inset-0 rounded-xl bg-[#07111f] pointer-events-none transition-opacity duration-300 ${loaded ? "opacity-0" : "opacity-100"}`}
+          aria-hidden="true"
+        >
+          {!loaded && (
+            <div className="absolute inset-0 animate-shimmer bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_50%,transparent_100%)] bg-[length:200%_100%]" />
+          )}
         </div>
 
         {n > 1 && (

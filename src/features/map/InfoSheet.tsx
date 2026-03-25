@@ -173,13 +173,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     prevHeightRef.current = newHeight;
   }, [selectedItem]);
 
-  // Prefetch images immediately on selection
-  useEffect(() => {
-    if (selectedItem && "imageUrls" in selectedItem && selectedItem.imageUrls) {
-      selectedItem.imageUrls.forEach(url => { const img = new Image(); img.src = url; });
-    }
-  }, [selectedItem]);
-
   // Reset UI state on item change
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -227,7 +220,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     )}
     <div
       ref={wrapperRef}
-      className={`absolute inset-x-0 bottom-0 z-20 transition-transform duration-300 ease-out ${visible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
+      className={`absolute inset-x-0 bottom-0 z-20 will-change-transform transition-transform duration-300 ease-out ${visible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
     >
       <div ref={cardRef} className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
         {/* Drag handle */}

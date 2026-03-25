@@ -56,3 +56,14 @@ a {
   scrollbar-width: thin;
   scrollbar-color: rgba(248, 244, 234, 0.15) transparent;
 }
+
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+@layer utilities {
+  .animate-shimmer {
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+}
