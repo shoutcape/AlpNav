@@ -83,9 +83,10 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
   const isDragDismissing = useRef(false);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  // Derived synchronously — no extra render cycle on open
+  // Derived synchronously — no extra render cycle on open or close
   const displayedItem = selectedItem ?? lastItem;
-  const isVisible = selectedItem !== null;
+  // Stays true until lastItem is cleared (after the close animation completes)
+  const isVisible = selectedItem !== null || lastItem !== null;
 
   const cardRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -97,19 +98,44 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
   const sheetHeightAtDragStart = useRef(0);
   const isDragging = useRef(false);
 
-  // Keep lastItem up to date; on close, delay clearing it so content stays alive during the slide-out
+  // Keep lastItem in sync; manually animate wrapper on dismiss so we control easing and height is irrelevant
   useEffect(() => {
     if (selectedItem !== null) {
       clearTimeout(exitTimer.current);
+      // Cancel any in-progress dismiss animation
+      const el = wrapperRef.current;
+      if (el) { el.style.transition = ""; el.style.transform = ""; }
       isDragDismissing.current = false;
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLastItem(selectedItem);
     } else {
       if (!isDragDismissing.current) {
-        // Programmatic dismiss — Tailwind drives the animation; clear content after it completes
-        exitTimer.current = setTimeout(() => setLastItem(null), 320);
+        // Programmatic dismiss — animate manually (same as drag path) so easing is controlled
+        const el = wrapperRef.current;
+        if (el) {
+          el.style.transition = "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)";
+          el.style.transform = "translateY(100%)";
+          const onEnd = (ev: TransitionEvent) => {
+            if (ev.propertyName !== "transform") return;
+            el.removeEventListener("transitionend", onEnd);
+            clearTimeout(exitTimer.current);
+            el.style.transition = "";
+            // Keep transform until Tailwind class takes over (isVisible → false after setLastItem(null))
+            setLastItem(null);
+          };
+          el.addEventListener("transitionend", onEnd);
+          // Fallback in case transitionend doesn't fire
+          exitTimer.current = setTimeout(() => {
+            el.removeEventListener("transitionend", onEnd);
+            el.style.transition = "";
+            el.style.transform = "";
+            setLastItem(null);
+          }, 400);
+        } else {
+          setLastItem(null);
+        }
       } else {
-        // Drag already animated out — clear immediately, skip the timer
+        // Drag already animated out — just clear content
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setLastItem(null);
         isDragDismissing.current = false;
