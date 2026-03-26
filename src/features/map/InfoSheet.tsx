@@ -78,15 +78,45 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [liveMode, setLiveMode] = useState(false);
 
+  // lastItem: the most recently shown non-null item; kept alive so content stays rendered during exit animation
+  const [lastItem, setLastItem] = useState(selectedItem);
+  const isDragDismissing = useRef(false);
+  const exitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  // Derived synchronously — no extra render cycle on open
+  const displayedItem = selectedItem ?? lastItem;
+  const isVisible = selectedItem !== null;
+
   const cardRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const prevHeightRef = useRef(0);
-  const prevItemRef = useRef(selectedItem);
+  const prevItemRef = useRef(displayedItem);
 
   const dragStartY = useRef(0);
   const dragStartTime = useRef(0);
   const sheetHeightAtDragStart = useRef(0);
   const isDragging = useRef(false);
+
+  // Keep lastItem up to date; on close, delay clearing it so content stays alive during the slide-out
+  useEffect(() => {
+    if (selectedItem !== null) {
+      clearTimeout(exitTimer.current);
+      isDragDismissing.current = false;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLastItem(selectedItem);
+    } else {
+      if (!isDragDismissing.current) {
+        // Programmatic dismiss — Tailwind drives the animation; clear content after it completes
+        exitTimer.current = setTimeout(() => setLastItem(null), 320);
+      } else {
+        // Drag already animated out — clear immediately, skip the timer
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setLastItem(null);
+        isDragDismissing.current = false;
+      }
+    }
+    return () => clearTimeout(exitTimer.current);
+  }, [selectedItem]);
 
   function snapBack(el: HTMLDivElement) {
     el.style.transition = "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)";
@@ -129,6 +159,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     const shouldDismiss = velocity > 0.4 || dy >= sheetHeightAtDragStart.current * 0.25;
 
     if (shouldDismiss) {
+      isDragDismissing.current = true;
       el.style.transition = "transform 0.25s ease-out";
       el.style.transform = "translateY(100%)";
       const onEnd = (ev: TransitionEvent) => {
@@ -150,17 +181,17 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     if (el) snapBack(el);
   }
 
-  // Animate height and fade content when switching between items
+  // Animate height when displayed content changes
   useLayoutEffect(() => {
     const card = cardRef.current;
     const prevItem = prevItemRef.current;
-    prevItemRef.current = selectedItem;
+    prevItemRef.current = displayedItem;
 
     if (!card) return;
 
     const newHeight = card.offsetHeight;
 
-    if (prevItem && selectedItem) {
+    if (prevItem && displayedItem) {
       // Animate card height from old to new
       if (Math.abs(newHeight - prevHeightRef.current) > 1) {
         card.animate(
@@ -171,7 +202,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     }
 
     prevHeightRef.current = newHeight;
-  }, [selectedItem]);
+  }, [displayedItem]);
 
   // Reset UI state on item change
   useEffect(() => {
@@ -180,8 +211,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     setLightboxIndex(0);
     setLiveMode(false);
   }, [selectedItem]);
-
-  const visible = selectedItem !== null;
 
   return (
     <>
@@ -220,7 +249,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
     )}
     <div
       ref={wrapperRef}
-      className={`absolute inset-x-0 bottom-0 z-20 will-change-transform transition-transform duration-300 ease-out ${visible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
+      className={`absolute inset-x-0 bottom-0 z-20 will-change-transform transition-transform duration-300 ease-out ${isVisible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
     >
       <div ref={cardRef} className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
         {/* Drag handle */}
@@ -234,137 +263,137 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
           <div className="h-[3px] w-10 rounded-full bg-white/20" />
         </div>
 
-        {selectedItem && (
+        {displayedItem && (
           <div>
             <div className="flex items-center gap-3">
               {/* Icon / badge */}
-              {"streamUrl" in selectedItem ? (
+              {"streamUrl" in displayedItem ? (
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-[#1565c0]">
                   <WebcamIcon />
                 </span>
-              ) : "category" in selectedItem ? (
+              ) : "category" in displayedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[4px] text-[11px] font-bold text-white"
-                  style={{ backgroundColor: INFRA_CATEGORY_COLOR[selectedItem.category] }}
+                  style={{ backgroundColor: INFRA_CATEGORY_COLOR[displayedItem.category] }}
                 >
-                  {selectedItem.category === "parking" ? "P"
-                    : selectedItem.category === "bus" ? "B"
-                    : selectedItem.category === "rescue" ? <RescueIcon />
+                  {displayedItem.category === "parking" ? "P"
+                    : displayedItem.category === "bus" ? "B"
+                    : displayedItem.category === "rescue" ? <RescueIcon />
                     : "i"}
                 </span>
-              ) : "sportCategory" in selectedItem ? (
+              ) : "sportCategory" in displayedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center"
                   style={{
                     clipPath: "polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)",
-                    backgroundColor: SPORT_FUN_COLOR[selectedItem.sportCategory],
+                    backgroundColor: SPORT_FUN_COLOR[displayedItem.sportCategory],
                   }}
                 >
-                  <SportFunCategoryIcon category={selectedItem.sportCategory} />
+                  <SportFunCategoryIcon category={displayedItem.sportCategory} />
                 </span>
-              ) : "position" in selectedItem ? (
+              ) : "position" in displayedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-                  style={{ backgroundColor: GASTRONOMY_TYPE_COLOR[selectedItem.type] }}
+                  style={{ backgroundColor: GASTRONOMY_TYPE_COLOR[displayedItem.type] }}
                 >
                   <GastronomyIcon />
                 </span>
-              ) : "difficulty" in selectedItem ? (
+              ) : "difficulty" in displayedItem ? (
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold uppercase tracking-wide text-white"
-                  style={{ backgroundColor: DIFFICULTY_COLOR[selectedItem.difficulty] }}
+                  style={{ backgroundColor: DIFFICULTY_COLOR[displayedItem.difficulty] }}
                 >
-                  {selectedItem.difficulty === "easy" ? "B" : selectedItem.difficulty === "medium" ? "R" : "S"}
+                  {displayedItem.difficulty === "easy" ? "B" : displayedItem.difficulty === "medium" ? "R" : "S"}
                 </span>
               ) : (
-                <LiftTypeIcon liftType={selectedItem.liftType} />
+                <LiftTypeIcon liftType={displayedItem.liftType} />
               )}
 
               {/* Name + type label */}
               <div className="min-w-0 flex-1">
-                {"streamUrl" in selectedItem ? (
+                {"streamUrl" in displayedItem ? (
                   <>
                     <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                      {selectedItem.name}
+                      {displayedItem.name}
                     </p>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {WEBCAM_PROVIDER_LABEL[selectedItem.provider]}
+                      {WEBCAM_PROVIDER_LABEL[displayedItem.provider]}
                     </p>
                   </>
-                ) : "category" in selectedItem ? (
+                ) : "category" in displayedItem ? (
                   <>
                     <div className="flex items-center gap-2">
                       <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                        {selectedItem.name}
+                        {displayedItem.name}
                       </p>
-                      <StatusPill status={selectedItem.status} />
+                      <StatusPill status={displayedItem.status} />
                     </div>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {INFRA_CATEGORY_LABEL[selectedItem.category]}
+                      {INFRA_CATEGORY_LABEL[displayedItem.category]}
                     </p>
                   </>
-                ) : "sportCategory" in selectedItem ? (
+                ) : "sportCategory" in displayedItem ? (
                   <>
                     <div className="flex items-center gap-2">
                       <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                        {selectedItem.name}
+                        {displayedItem.name}
                       </p>
-                      <StatusPill status={selectedItem.status} />
+                      <StatusPill status={displayedItem.status} />
                     </div>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {SPORT_FUN_LABEL[selectedItem.sportCategory]}
+                      {SPORT_FUN_LABEL[displayedItem.sportCategory]}
                     </p>
                   </>
-                ) : "position" in selectedItem ? (
+                ) : "position" in displayedItem ? (
                   <>
                     <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                      {selectedItem.name}
+                      {displayedItem.name}
                     </p>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {GASTRONOMY_TYPE_LABEL[selectedItem.type]}
+                      {GASTRONOMY_TYPE_LABEL[displayedItem.type]}
                     </p>
                   </>
                 ) : (
                   <>
                     <div className="flex items-center gap-2">
                       <p className="truncate text-[15px] font-semibold leading-tight text-ivory">
-                        {selectedItem.name}
-                        {"number" in selectedItem && selectedItem.number != null && (
-                          <span className="ml-1.5 text-[13px] font-normal text-ivory/40">#{selectedItem.number}</span>
+                        {displayedItem.name}
+                        {"number" in displayedItem && displayedItem.number != null && (
+                          <span className="ml-1.5 text-[13px] font-normal text-ivory/40">#{displayedItem.number}</span>
                         )}
                       </p>
-                      <StatusPill status={selectedItem.status} />
+                      <StatusPill status={displayedItem.status} />
                     </div>
                     <p className="mt-0.5 text-[12px] text-ivory/50">
-                      {"difficulty" in selectedItem
-                        ? pisteSubtitle(selectedItem)
-                        : liftSubtitle(selectedItem)}
+                      {"difficulty" in displayedItem
+                        ? pisteSubtitle(displayedItem)
+                        : liftSubtitle(displayedItem)}
                     </p>
                   </>
                 )}
               </div>
             </div>
 
-            {"liftType" in selectedItem && (selectedItem.imageUrls || selectedItem.description || selectedItem.openingHours) && (
+            {"liftType" in displayedItem && (displayedItem.imageUrls || displayedItem.description || displayedItem.openingHours) && (
               <div className="mt-3 flex flex-col gap-3">
-                {(selectedItem.openingHours || selectedItem.description) && (
+                {(displayedItem.openingHours || displayedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
-                    {selectedItem.openingHours && (
+                    {displayedItem.openingHours && (
                       <p className="text-[12px] text-ivory/60">
-                        🕐 {selectedItem.openingHours}
+                        🕐 {displayedItem.openingHours}
                       </p>
                     )}
-                    {selectedItem.description && (
+                    {displayedItem.description && (
                       <p className="line-clamp-3 text-[12px] text-ivory/50">
-                        {selectedItem.description}
+                        {displayedItem.description}
                       </p>
                     )}
                   </div>
                 )}
-                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                {displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
                   <ImageCarousel
-                    imageUrls={selectedItem.imageUrls}
-                    alt={selectedItem.name}
+                    imageUrls={displayedItem.imageUrls}
+                    alt={displayedItem.name}
                     onOpenLightbox={() => setLightboxOpen(true)}
                     onIndexChange={setLightboxIndex}
                   />
@@ -372,22 +401,22 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
-            {"streamUrl" in selectedItem && (
+            {"streamUrl" in displayedItem && (
               <div className="mt-3 flex flex-col gap-3">
                 <div className="relative mx-auto w-full max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl bg-black">
                   {liveMode ? (
                     <iframe
-                      src={selectedItem.streamUrl}
+                      src={displayedItem.streamUrl}
                       className="w-full h-full border-0"
                       allow="autoplay"
-                      title={selectedItem.name}
+                      title={displayedItem.name}
                     />
                   ) : (
                     <>
-                      {selectedItem.thumbnailUrl && (
+                      {displayedItem.thumbnailUrl && (
                         <img
-                          src={selectedItem.thumbnailUrl}
-                          alt={selectedItem.name}
+                          src={displayedItem.thumbnailUrl}
+                          alt={displayedItem.name}
                           className="w-full h-full object-cover"
                         />
                       )}
@@ -408,26 +437,26 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
-            {"category" in selectedItem && (selectedItem.imageUrls?.length || selectedItem.openingHours || selectedItem.description) && (
+            {"category" in displayedItem && (displayedItem.imageUrls?.length || displayedItem.openingHours || displayedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
-                {(selectedItem.openingHours || selectedItem.description) && (
+                {(displayedItem.openingHours || displayedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
-                    {selectedItem.openingHours && (
+                    {displayedItem.openingHours && (
                       <p className="text-[12px] text-ivory/60">
-                        🕐 {selectedItem.openingHours}
+                        🕐 {displayedItem.openingHours}
                       </p>
                     )}
-                    {selectedItem.description && (
+                    {displayedItem.description && (
                       <p className="line-clamp-3 text-[12px] text-ivory/50">
-                        {selectedItem.description}
+                        {displayedItem.description}
                       </p>
                     )}
                   </div>
                 )}
-                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                {displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
                   <ImageCarousel
-                    imageUrls={selectedItem.imageUrls}
-                    alt={selectedItem.name}
+                    imageUrls={displayedItem.imageUrls}
+                    alt={displayedItem.name}
                     onOpenLightbox={() => setLightboxOpen(true)}
                     onIndexChange={setLightboxIndex}
                   />
@@ -435,17 +464,17 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
-            {"sportCategory" in selectedItem && (selectedItem.imageUrls?.length || selectedItem.description) && (
+            {"sportCategory" in displayedItem && (displayedItem.imageUrls?.length || displayedItem.description) && (
               <div className="mt-3 flex flex-col gap-3">
-                {selectedItem.description && (
+                {displayedItem.description && (
                   <p className="line-clamp-3 text-[12px] text-ivory/50">
-                    {selectedItem.description}
+                    {displayedItem.description}
                   </p>
                 )}
-                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                {displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
                   <ImageCarousel
-                    imageUrls={selectedItem.imageUrls}
-                    alt={selectedItem.name}
+                    imageUrls={displayedItem.imageUrls}
+                    alt={displayedItem.name}
                     onOpenLightbox={() => setLightboxOpen(true)}
                     onIndexChange={setLightboxIndex}
                   />
@@ -453,25 +482,25 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
               </div>
             )}
 
-            {"position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem) && ((selectedItem.imageUrls && selectedItem.imageUrls.length > 0) || selectedItem.openingHours || selectedItem.description || selectedItem.website) && (
+            {"position" in displayedItem && !("streamUrl" in displayedItem) && !("category" in displayedItem) && !("sportCategory" in displayedItem) && ((displayedItem.imageUrls && displayedItem.imageUrls.length > 0) || displayedItem.openingHours || displayedItem.description || displayedItem.website) && (
               <div className="mt-3 flex flex-col gap-3">
-                {(selectedItem.openingHours || selectedItem.description) && (
+                {(displayedItem.openingHours || displayedItem.description) && (
                   <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1.5">
-                    {selectedItem.openingHours && (
+                    {displayedItem.openingHours && (
                       <p className="text-[12px] text-ivory/60">
-                        🕐 {selectedItem.openingHours}
+                        🕐 {displayedItem.openingHours}
                       </p>
                     )}
-                    {selectedItem.description && (
+                    {displayedItem.description && (
                       <p className="line-clamp-3 text-[12px] text-ivory/50">
-                        {selectedItem.description}
+                        {displayedItem.description}
                       </p>
                     )}
                   </div>
                 )}
-                {selectedItem.website && (
+                {displayedItem.website && (
                   <a
-                    href={selectedItem.website}
+                    href={displayedItem.website}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 rounded-[10px] bg-white/[0.06] px-3 py-2.5 text-[13px] text-ivory/80 transition-colors hover:bg-white/[0.09] active:bg-white/[0.12]"
@@ -481,13 +510,13 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                       <polyline points="15 3 21 3 21 9" />
                       <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
-                    <span className="truncate">{selectedItem.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
+                    <span className="truncate">{displayedItem.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
                   </a>
                 )}
-                {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
+                {displayedItem.imageUrls && displayedItem.imageUrls.length > 0 && (
                   <ImageCarousel
-                    imageUrls={selectedItem.imageUrls}
-                    alt={selectedItem.name}
+                    imageUrls={displayedItem.imageUrls}
+                    alt={displayedItem.name}
                     onOpenLightbox={() => setLightboxOpen(true)}
                     onIndexChange={setLightboxIndex}
                   />
