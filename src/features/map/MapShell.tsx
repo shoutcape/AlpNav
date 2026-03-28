@@ -395,15 +395,15 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.addChild(sportFunContainer);
       sportFunOverlayRef.current = sportFunContainer;
 
-      const badgeHighlight = new Graphics();
-      badgeHighlight.label = "overlay-badge-highlight";
-      viewport.addChild(badgeHighlight);
-      badgeHighlightRef.current = badgeHighlight;
-
       const labelContainer = new Container();
       labelContainer.label = "overlay-labels";
       const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
       viewport.addChild(labelContainer);
+
+      const badgeHighlight = new Graphics();
+      badgeHighlight.label = "overlay-badge-highlight";
+      viewport.addChild(badgeHighlight);
+      badgeHighlightRef.current = badgeHighlight;
 
       // Debug layer — above all overlays, invisible unless debug mode is active
       const debugLayer = new Graphics();

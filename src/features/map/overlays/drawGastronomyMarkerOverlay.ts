@@ -13,22 +13,19 @@ const BADGE_FILL: Record<GastronomyType, number> = {
 
 const WHITE = 0xffffff;
 
-export function drawGastronomyMarkerOverlay(container: Container, spots: GastronomySpot[], visualScale: number = 1): void {
-  // Pass 1 — badge backgrounds
-  const bg = new Graphics();
-  container.addChild(bg);
-  for (const spot of spots) {
-    const { x, y } = spot.position;
-    bg.circle(x, y, BADGE_R * visualScale)
-      .fill({ color: BADGE_FILL[spot.type] })
-      .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
-  }
+export function drawGastronomyBadge(g: Graphics, spot: GastronomySpot, visualScale: number = 1): void {
+  const { x, y } = spot.position;
+  g.circle(x, y, BADGE_R * visualScale)
+    .fill({ color: BADGE_FILL[spot.type] })
+    .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
+  drawForkKnife(g, x, y, visualScale);
+}
 
-  // Pass 2 — fork-and-knife symbols
-  const sym = new Graphics();
-  container.addChild(sym);
+export function drawGastronomyMarkerOverlay(container: Container, spots: GastronomySpot[], visualScale: number = 1): void {
+  const g = new Graphics();
+  container.addChild(g);
   for (const spot of spots) {
-    drawForkKnife(sym, spot.position.x, spot.position.y, visualScale);
+    drawGastronomyBadge(g, spot, visualScale);
   }
 }
 

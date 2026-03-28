@@ -20,20 +20,20 @@ function hexPts(cx: number, cy: number, r: number): number[] {
   return pts;
 }
 
-export function drawSportFunOverlay(container: Container, pois: SportFunPoi[], visualScale: number = 1): void {
-  const bg = new Graphics();
-  container.addChild(bg);
+export function drawSportFunBadge(g: Graphics, poi: SportFunPoi, visualScale: number = 1): void {
+  const { x, y } = poi.position;
   const r = SPORT_FUN_BADGE_R * visualScale;
+  g.poly(hexPts(x, y, r))
+    .fill({ color: BADGE_FILL[poi.sportCategory] })
+    .stroke({ color: 0x000000, width: 1.5 * visualScale });
+  drawIcon(g, x, y, poi.sportCategory, visualScale);
+}
+
+export function drawSportFunOverlay(container: Container, pois: SportFunPoi[], visualScale: number = 1): void {
+  const g = new Graphics();
+  container.addChild(g);
   for (const poi of pois) {
-    const { x, y } = poi.position;
-    bg.poly(hexPts(x, y, r))
-      .fill({ color: BADGE_FILL[poi.sportCategory] })
-      .stroke({ color: 0x000000, width: 1.5 * visualScale });
-  }
-  const sym = new Graphics();
-  container.addChild(sym);
-  for (const poi of pois) {
-    drawIcon(sym, poi.position.x, poi.position.y, poi.sportCategory, visualScale);
+    drawSportFunBadge(g, poi, visualScale);
   }
 }
 

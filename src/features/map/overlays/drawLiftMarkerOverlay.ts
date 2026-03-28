@@ -9,24 +9,20 @@ const BADGE_STROKE_W = 2;
 const WHITE = 0xffffff;
 const CABIN_FILL = 0x4a9b4e; // slightly darker than badge — cabin interior
 
-export function drawLiftMarkerOverlay(container: Container, lifts: Lift[], visualScale: number = 1): void {
-  // Pass 1 — badge backgrounds
-  const bg = new Graphics();
-  container.addChild(bg);
-  for (const lift of lifts) {
-    if (!lift.icon) continue;
-    const { x, y } = lift.icon;
-    bg.circle(x, y, BADGE_R * visualScale)
-      .fill({ color: BADGE_FILL })
-      .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
-  }
+export function drawLiftBadge(g: Graphics, lift: Lift, visualScale: number = 1): void {
+  if (!lift.icon) return;
+  const { x, y } = lift.icon;
+  g.circle(x, y, BADGE_R * visualScale)
+    .fill({ color: BADGE_FILL })
+    .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
+  drawSymbol(g, lift.liftType, x, y, visualScale);
+}
 
-  // Pass 2 — symbols
-  const sym = new Graphics();
-  container.addChild(sym);
+export function drawLiftMarkerOverlay(container: Container, lifts: Lift[], visualScale: number = 1): void {
+  const g = new Graphics();
+  container.addChild(g);
   for (const lift of lifts) {
-    if (!lift.icon) continue;
-    drawSymbol(sym, lift.liftType, lift.icon.x, lift.icon.y, visualScale);
+    drawLiftBadge(g, lift, visualScale);
   }
 }
 
