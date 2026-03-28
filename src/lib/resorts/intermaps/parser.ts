@@ -321,18 +321,21 @@ function parseSportFun(data: Record<string, unknown>, scale: number): SportFunPo
 
 function parseWebcams(data: Record<string, unknown>, scale: number): Webcam[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
-  const feratel = [...(pois["2816"] ?? []) as RawPoi[], ...(pois["2810"] ?? []) as RawPoi[]];
-  const panomax = (pois["2807"] ?? []) as RawPoi[];
+  const feratel = [...(pois["2816"] ?? []) as RawPoi[], ...(pois["2810"] ?? []) as RawPoi[]].map(item => ({ ...item, _provider: "feratel" }));
+  const panomax = ((pois["2807"] ?? []) as RawPoi[]).map(item => ({ ...item, _provider: "panomax" }));
+
   return [...feratel, ...panomax]
     .filter(item => item.position)
     .map(item => {
       const types: number[] = item.types ?? [];
-      const provider: WebcamProvider = types.includes(558) ? "panomax" : "feratel";
-      const thumbnailUrl = typeof item.popup.info?.img === "string" ? item.popup.info.img : undefined;
-      const streamUrl = typeof item.popup.desc === "string" ? item.popup.desc : "";
+      const provider: WebcamProvider = item._provider as WebcamProvider ?? (types.includes(558) ? "panomax" : "feratel");
+      const popup = item.popup as any;
+      const thumbnailUrl = typeof popup.info?.img === "string" ? popup.info.img : (typeof popup.thumbnail === "string" ? popup.thumbnail : undefined);
+      const streamUrl = typeof popup.desc === "string" ? popup.desc : "";
+
       return {
-        id: item.id,
-        name: item.popup.title,
+        id: item.id as string,
+        name: popup.title as string,
         provider,
         position: { x: item.position!.x * scale, y: item.position!.y * scale },
         thumbnailUrl,
