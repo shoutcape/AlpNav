@@ -427,10 +427,21 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>, scale: number)
 
     const iconGroup = group.querySelector(`g[id="${featureId}_icon"]`);
     const icons: Point[] = [];
-    for (const circle of Array.from(iconGroup?.querySelectorAll("circle") ?? [])) {
-      const cx = parseFloat(circle.getAttribute("cx") ?? "");
-      const cy = parseFloat(circle.getAttribute("cy") ?? "");
-      if (!isNaN(cx) && !isNaN(cy)) icons.push({ x: cx * scale, y: cy * scale });
+    if (iconGroup) {
+      for (const circle of Array.from(iconGroup.querySelectorAll("circle"))) {
+        const cx = parseFloat(circle.getAttribute("cx") ?? "");
+        const cy = parseFloat(circle.getAttribute("cy") ?? "");
+        if (!isNaN(cx) && !isNaN(cy)) icons.push({ x: cx * scale, y: cy * scale });
+      }
+      for (const rect of Array.from(iconGroup.querySelectorAll("rect"))) {
+        const x = parseFloat(rect.getAttribute("x") ?? "");
+        const y = parseFloat(rect.getAttribute("y") ?? "");
+        const w = parseFloat(rect.getAttribute("width") ?? "");
+        const h = parseFloat(rect.getAttribute("height") ?? "");
+        if (!isNaN(x) && !isNaN(y) && !isNaN(w) && !isNaN(h)) {
+          icons.push({ x: (x + w / 2) * scale, y: (y + h / 2) * scale });
+        }
+      }
     }
 
     const m = meta.get(featureId);
