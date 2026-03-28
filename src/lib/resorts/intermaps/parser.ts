@@ -175,14 +175,14 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
     const id = lift.id as string;
     const popup = (lift.popup ?? {}) as Record<string, unknown>;
     const name = (popup.title as string | undefined) ?? id;
-    const liftType = normalizeLiftType(lift.type as number);
+    const subtitle = typeof lift.subtitle === "string" ? lift.subtitle : undefined;
+    const liftType = normalizeLiftType(lift.type as number, subtitle);
     const additionalInfo = (popup["additional-info"] ?? {}) as Record<string, unknown>;
     const altitudeValley = typeof additionalInfo["altitude-valley"] === "number" ? additionalInfo["altitude-valley"] : undefined;
     const altitudeMountain = typeof additionalInfo["altitude-mountain"] === "number" ? additionalInfo["altitude-mountain"] : undefined;
     const rawStatus = lift.status as string | undefined;
     const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
     const capacity = typeof additionalInfo["capacity"] === "number" ? additionalInfo["capacity"] : undefined;
-    const subtitle = typeof lift.subtitle === "string" ? lift.subtitle : undefined;
     const info = (popup.info ?? {}) as Record<string, unknown>;
     const imgs: string[] = Array.isArray(info.imgs) ? info.imgs as string[] : [];
     const single = typeof info.img === "string" ? info.img : undefined;
@@ -363,30 +363,27 @@ function normalizeDifficulty(rawDiff: string | undefined, subtitle: string | und
   return "unknown";
 }
 
-function normalizeLiftType(type: number): LiftType {
+function normalizeLiftType(type: number, subtitle?: string): LiftType {
   switch (type) {
-    case 2:
-    case 3:
-    case 7:
-    case 8:
-    case 17:
-    case 23:
+    case 2: case 3: case 7: case 8: case 17: case 23:
+    case 2608: case 2610: case 2624: case 2634:
       return "gondola";
-    case 1:
-    case 13:
-    case 24:
-    case 25:
-    case 29:
-    case 30:
-    case 33:
+    case 1: case 13: case 24: case 25: case 29: case 30: case 33:
+    case 2604: case 2605: case 2606:
       return "chairlift";
-    case 9:
-    case 21:
-    case 31:
+    case 9: case 21: case 31:
+    case 2607: case 2613: case 2623:
       return "drag";
-    default:
-      return "other";
   }
+
+  if (subtitle) {
+    const s = subtitle.toLowerCase();
+    if (s.includes("gondola") || s.includes("cable car") || s.includes("tramway") || s.includes("umlaufbahn") || s.includes("kombibahn")) return "gondola";
+    if (s.includes("chair")) return "chairlift";
+    if (s.includes("t-bar") || s.includes("drag") || s.includes("tow") || s.includes("carpet") || s.includes("teller") || s.includes("kuli")) return "drag";
+  }
+
+  return "other";
 }
 
 // ─── piste parsing ────────────────────────────────────────────────────────────
@@ -472,6 +469,13 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>, scale: number): 
       if (!points) continue;
       const seg = parsePolylinePoints(points, scale);
       if (seg.length > 0) segments.push(seg);
+    }
+
+    for (const pathEl of Array.from(pathGroup.querySelectorAll("path"))) {
+      const d = pathEl.getAttribute("d");
+      if (!d) continue;
+      const parsed = parseSvgPathD(d, scale);
+      segments.push(...parsed);
     }
 
     if (segments.length === 0) continue;
