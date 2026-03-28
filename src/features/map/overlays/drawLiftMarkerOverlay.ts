@@ -9,16 +9,16 @@ const BADGE_STROKE_W = 2;
 const WHITE = 0xffffff;
 const CABIN_FILL = 0x4a9b4e; // slightly darker than badge — cabin interior
 
-export function drawLiftMarkerOverlay(container: Container, lifts: Lift[]): void {
+export function drawLiftMarkerOverlay(container: Container, lifts: Lift[], visualScale: number = 1): void {
   // Pass 1 — badge backgrounds
   const bg = new Graphics();
   container.addChild(bg);
   for (const lift of lifts) {
     if (!lift.icon) continue;
     const { x, y } = lift.icon;
-    bg.circle(x, y, BADGE_R)
+    bg.circle(x, y, BADGE_R * visualScale)
       .fill({ color: BADGE_FILL })
-      .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W });
+      .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
   }
 
   // Pass 2 — symbols
@@ -26,129 +26,115 @@ export function drawLiftMarkerOverlay(container: Container, lifts: Lift[]): void
   container.addChild(sym);
   for (const lift of lifts) {
     if (!lift.icon) continue;
-    drawSymbol(sym, lift.liftType, lift.icon.x, lift.icon.y);
+    drawSymbol(sym, lift.liftType, lift.icon.x, lift.icon.y, visualScale);
   }
 }
 
-function drawSymbol(g: Graphics, liftType: LiftType, cx: number, cy: number): void {
+function drawSymbol(g: Graphics, liftType: LiftType, cx: number, cy: number, s: number): void {
   switch (liftType) {
-    case "gondola":   drawGondola(g, cx, cy);   break;
-    case "chairlift": drawChairlift(g, cx, cy); break;
-    case "drag":      drawDragLift(g, cx, cy);  break;
+    case "gondola":   drawGondola(g, cx, cy, s);   break;
+    case "chairlift": drawChairlift(g, cx, cy, s); break;
+    case "drag":      drawDragLift(g, cx, cy, s);  break;
     default:
-      g.circle(cx, cy, 4).fill({ color: WHITE });
+      g.circle(cx, cy, 4 * s).fill({ color: WHITE });
   }
 }
 
 /**
  * Gondola / cable car
- *
- * Faithfully derived from gondola.svg:
- *   — Angled cable across the top (lower-left → upper-right)
- *   — Rectangle grip/clamp at midpoint of cable
- *   — V-shaped twin hangers from grip down to cabin top section
- *   — Flat top section (mounting deck)
- *   — Large rounded-rect main cabin body
- *   — Two rectangular windows
  */
-function drawGondola(g: Graphics, cx: number, cy: number): void {
+function drawGondola(g: Graphics, cx: number, cy: number, s: number): void {
   // Angled cable
-  g.moveTo(cx - 13, cy - 5)
-    .lineTo(cx + 13, cy - 12)
-    .stroke({ color: WHITE, width: 2, cap: "round" });
+  g.moveTo(cx - 13 * s, cy - 5 * s)
+    .lineTo(cx + 13 * s, cy - 12 * s)
+    .stroke({ color: WHITE, width: 2 * s, cap: "round" });
 
   // Grip clamp — small rectangle sitting on the cable at its midpoint (~0, -8.5)
-  g.roundRect(cx - 3, cy - 11, 6, 3, 1)
+  g.roundRect(cx - 3 * s, cy - 11 * s, 6 * s, 3 * s, 1 * s)
     .fill({ color: WHITE });
 
   // V-shaped twin hangers: from bottom of grip down to top section edges
-  g.moveTo(cx - 1.5, cy - 8).lineTo(cx - 5, cy - 3)
-    .stroke({ color: WHITE, width: 1.5, cap: "round" });
-  g.moveTo(cx + 1.5, cy - 8).lineTo(cx + 5, cy - 3)
-    .stroke({ color: WHITE, width: 1.5, cap: "round" });
+  g.moveTo(cx - 1.5 * s, cy - 8 * s).lineTo(cx - 5 * s, cy - 3 * s)
+    .stroke({ color: WHITE, width: 1.5 * s, cap: "round" });
+  g.moveTo(cx + 1.5 * s, cy - 8 * s).lineTo(cx + 5 * s, cy - 3 * s)
+    .stroke({ color: WHITE, width: 1.5 * s, cap: "round" });
 
   // Top mounting deck (flat section between hangers and main cabin)
-  g.rect(cx - 8, cy - 3, 16, 3)
+  g.rect(cx - 8 * s, cy - 3 * s, 16 * s, 3 * s)
     .fill({ color: CABIN_FILL })
-    .stroke({ color: WHITE, width: 1.5 });
+    .stroke({ color: WHITE, width: 1.5 * s });
 
   // Main cabin body
-  g.roundRect(cx - 8, cy, 16, 12, 2)
+  g.roundRect(cx - 8 * s, cy, 16 * s, 12 * s, 2 * s)
     .fill({ color: CABIN_FILL })
-    .stroke({ color: WHITE, width: 1.5 });
+    .stroke({ color: WHITE, width: 1.5 * s });
 
   // Left window
-  g.roundRect(cx - 7, cy + 2, 5, 7, 1)
-    .stroke({ color: WHITE, width: 1 });
+  g.roundRect(cx - 7 * s, cy + 2 * s, 5 * s, 7 * s, 1 * s)
+    .stroke({ color: WHITE, width: 1 * s });
 
   // Right window
-  g.roundRect(cx + 2, cy + 2, 5, 7, 1)
-    .stroke({ color: WHITE, width: 1 });
+  g.roundRect(cx + 2 * s, cy + 2 * s, 5 * s, 7 * s, 1 * s)
+    .stroke({ color: WHITE, width: 1 * s });
 }
 
 /**
  * Chairlift — connection point → drop → angular C-bracket → L-chair → footrest
  */
-function drawChairlift(g: Graphics, cx: number, cy: number): void {
+function drawChairlift(g: Graphics, cx: number, cy: number, s: number): void {
   // Diagonal cable
-  g.moveTo(cx - 13, cy - 8)
-    .lineTo(cx + 13, cy - 12)
-    .stroke({ color: WHITE, width: 2, cap: "round" });
+  g.moveTo(cx - 13 * s, cy - 8 * s)
+    .lineTo(cx + 13 * s, cy - 12 * s)
+    .stroke({ color: WHITE, width: 2 * s, cap: "round" });
 
   // Connection point on cable
-  g.circle(cx, cy - 10, 3).fill({ color: WHITE });
+  g.circle(cx, cy - 10 * s, 3 * s).fill({ color: WHITE });
 
   // Short drop from connection point to top of C-bracket
-  g.moveTo(cx, cy - 7)
-    .lineTo(cx, cy - 4)
-    .stroke({ color: WHITE, width: 2, cap: "round" });
+  g.moveTo(cx, cy - 7 * s)
+    .lineTo(cx, cy - 4 * s)
+    .stroke({ color: WHITE, width: 2 * s, cap: "round" });
 
   // Angular C-bracket (opens right, body to the left):
   // top arm goes left → down (longer) → bottom arm goes right, landing at L corner
-  g.moveTo(cx, cy - 4)
-    .lineTo(cx - 4, cy - 4)  // top arm goes left
-    .lineTo(cx - 4, cy + 8)  // left side — extended for lower seat
-    .lineTo(cx, cy + 8)      // bottom arm returns right → L corner
-    .stroke({ color: WHITE, width: 2, cap: "round", join: "miter" });
+  g.moveTo(cx, cy - 4 * s)
+    .lineTo(cx - 4 * s, cy - 4 * s)  // top arm goes left
+    .lineTo(cx - 4 * s, cy + 8 * s)  // left side — extended for lower seat
+    .lineTo(cx, cy + 8 * s)      // bottom arm returns right → L corner
+    .stroke({ color: WHITE, width: 2 * s, cap: "round", join: "miter" });
 
   // L-shaped chair: corner at (cx, cy+8) = where C lands
   // Longer backrest extends UP from corner, seat extends RIGHT (uphill)
   g.moveTo(cx, cy + 0)        // free top of backrest
-    .lineTo(cx, cy + 8)       // backrest down to corner
-    .lineTo(cx + 7, cy + 8)   // seat extends uphill
-    .stroke({ color: WHITE, width: 2, cap: "round", join: "round" });
+    .lineTo(cx, cy + 8 * s)       // backrest down to corner
+    .lineTo(cx + 7 * s, cy + 8 * s)   // seat extends uphill
+    .stroke({ color: WHITE, width: 2 * s, cap: "round", join: "round" });
 
   // Small footrest below seat
-  g.moveTo(cx + 1, cy + 11)
-    .lineTo(cx + 6, cy + 11)
-    .stroke({ color: WHITE, width: 2, cap: "round" });
+  g.moveTo(cx + 1 * s, cy + 11 * s)
+    .lineTo(cx + 6 * s, cy + 11 * s)
+    .stroke({ color: WHITE, width: 2 * s, cap: "round" });
 }
 
 /**
  * Drag lift / anchor lift (T-bar)
- *
- * Derived from anchor_lift.svg:
- *   — Prominent horizontal cable at the very top
- *   — Clamp circle sitting on the cable
- *   — Long vertical pole/hanger
- *   — Wide horizontal T-bar at the bottom
  */
-function drawDragLift(g: Graphics, cx: number, cy: number): void {
+function drawDragLift(g: Graphics, cx: number, cy: number, s: number): void {
   // Angled cable — same uphill direction as gondola/chairlift
-  g.moveTo(cx - 13, cy - 8)
-    .lineTo(cx + 13, cy - 14)
-    .stroke({ color: WHITE, width: 2.5, cap: "round" });
+  g.moveTo(cx - 13 * s, cy - 8 * s)
+    .lineTo(cx + 13 * s, cy - 14 * s)
+    .stroke({ color: WHITE, width: 2.5 * s, cap: "round" });
 
   // Clamp circle at cable midpoint (~cy - 11)
-  g.circle(cx, cy - 11, 2.5).fill({ color: WHITE });
+  g.circle(cx, cy - 11 * s, 2.5 * s).fill({ color: WHITE });
 
   // Long vertical hanger pole
-  g.moveTo(cx, cy - 8.5)
-    .lineTo(cx, cy + 9)
-    .stroke({ color: WHITE, width: 2, cap: "round" });
+  g.moveTo(cx, cy - 8.5 * s)
+    .lineTo(cx, cy + 9 * s)
+    .stroke({ color: WHITE, width: 2 * s, cap: "round" });
 
   // T-bar
-  g.moveTo(cx - 6, cy + 9)
-    .lineTo(cx + 6, cy + 9)
-    .stroke({ color: WHITE, width: 2.5, cap: "round" });
+  g.moveTo(cx - 6 * s, cy + 9 * s)
+    .lineTo(cx + 6 * s, cy + 9 * s)
+    .stroke({ color: WHITE, width: 2.5 * s, cap: "round" });
 }

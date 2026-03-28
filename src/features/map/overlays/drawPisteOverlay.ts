@@ -12,9 +12,11 @@ const STROKE_WIDTH = 3;
 const DASH_LEN = 8;
 const GAP_LEN = 6;
 
-function drawDashedSegment(g: Graphics, seg: Point[]): void {
+function drawDashedSegment(g: Graphics, seg: Point[], visualScale: number): void {
   let drawing = true;
-  let remaining = DASH_LEN;
+  const dashLen = DASH_LEN * visualScale;
+  const gapLen = GAP_LEN * visualScale;
+  let remaining = dashLen;
 
   for (let i = 1; i < seg.length; i++) {
     let x0 = seg[i - 1].x;
@@ -43,13 +45,13 @@ function drawDashedSegment(g: Graphics, seg: Point[]): void {
       remaining -= step;
       if (remaining <= 0) {
         drawing = !drawing;
-        remaining = drawing ? DASH_LEN : GAP_LEN;
+        remaining = drawing ? dashLen : gapLen;
       }
     }
   }
 }
 
-export function drawPisteOverlay(container: Container, pistes: Piste[]): void {
+export function drawPisteOverlay(container: Container, pistes: Piste[], visualScale: number = 1): void {
   const byDifficulty = new Map<PisteDifficulty, Piste[]>();
 
   for (const piste of pistes) {
@@ -77,7 +79,7 @@ export function drawPisteOverlay(container: Container, pistes: Piste[]): void {
       }
     }
 
-    g.stroke({ width: STROKE_WIDTH, color });
+    g.stroke({ width: STROKE_WIDTH * visualScale, color });
     container.addChild(g);
   }
 
@@ -89,10 +91,10 @@ export function drawPisteOverlay(container: Container, pistes: Piste[]): void {
 
     for (const seg of piste.skiRouteSegments) {
       if (seg.length < 2) continue;
-      drawDashedSegment(g, seg);
+      drawDashedSegment(g, seg, visualScale);
     }
 
-    g.stroke({ width: STROKE_WIDTH, color, cap: "round", join: "round" });
+    g.stroke({ width: STROKE_WIDTH * visualScale, color, cap: "round", join: "round" });
     container.addChild(g);
   }
 }

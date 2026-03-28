@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Application, Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import type { PanoramaLevel, PanoramaManifest } from "./types";
-import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
+import { RESORTS, canActivateResort, resolveActiveResort } from "@/lib/resorts/catalog";
 import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
 import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
@@ -23,9 +23,10 @@ import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, Infrastruc
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
 const LABEL_TIER_SCALES = [0, 0.25, 0.50, 0.85] as const;
+const DIFFICULTIES: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
 
 type MapShellProps = {
-  manifest: PanoramaManifest;
+  initialAreaId: string;
 };
 
 type DebugStats = {
@@ -49,11 +50,19 @@ type TileDescriptor = {
   srcHeight: number;
 };
 
-export function MapShell({ manifest }: MapShellProps) {
+const DEFAULT_PISTE_FILTER: Record<PisteDifficulty, boolean> = {
+  easy: true,
+  medium: true,
+  difficult: true,
+  unknown: true,
+};
+
+export function MapShell({ initialAreaId }: MapShellProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const appRef = useRef<Application | null>(null);
   const viewportRef = useRef<Viewport | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const loadRequestIdRef = useRef(0);
   const levelContainersRef = useRef<Map<number, Container>>(new Map());
   const loadedLevelsRef = useRef<Set<number>>(new Set());
   const hasInteractedRef = useRef(false);
@@ -66,18 +75,16 @@ export function MapShell({ manifest }: MapShellProps) {
   const liftHighlightRef = useRef<Graphics | null>(null);
   const badgeHighlightRef = useRef<Graphics | null>(null);
 
-  const DIFFICULTIES: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
+  const [selectedAreaId, setSelectedAreaId] = useState(() => resolveActiveResort(initialAreaId).id);
+  const activeArea = useMemo(() => resolveActiveResort(selectedAreaId), [selectedAreaId]);
+  const manifest = activeArea.manifest;
 
   const [liftVisible, setLiftVisible] = useState(true);
   const liftVisibleRef = useRef(true);
   const [pisteVisible, setPisteVisible] = useState(true);
   const pisteVisibleRef = useRef(true);
-  const [pisteFilter, setPisteFilter] = useState<Record<PisteDifficulty, boolean>>(
-    { easy: true, medium: true, difficult: true, unknown: true }
-  );
-  const pisteFilterRef = useRef<Record<PisteDifficulty, boolean>>(
-    { easy: true, medium: true, difficult: true, unknown: true }
-  );
+  const [pisteFilter, setPisteFilter] = useState<Record<PisteDifficulty, boolean>>(DEFAULT_PISTE_FILTER);
+  const pisteFilterRef = useRef<Record<PisteDifficulty, boolean>>(DEFAULT_PISTE_FILTER);
   const pisteLinesByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const pisteMarkersByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
@@ -105,6 +112,7 @@ export function MapShell({ manifest }: MapShellProps) {
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
   const [legendOpen, setLegendOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const maxLevel = manifest.levels[manifest.levels.length - 1];
   const maxScale = useMemo(() => {
@@ -119,13 +127,53 @@ export function MapShell({ manifest }: MapShellProps) {
   }, [manifest, maxLevel]);
 
   useEffect(() => {
+    const resolvedAreaId = resolveActiveResort(initialAreaId).id;
+
+    setSelectedAreaId((currentAreaId) => {
+      return currentAreaId === resolvedAreaId ? currentAreaId : resolvedAreaId;
+    });
+  }, [initialAreaId]);
+
+  useEffect(() => {
+    setSelectedItem(null);
+    setDebugMode(false);
+    debugModeRef.current = false;
+    setDebugStats(null);
+    setLegendOpen(false);
+    setFilterPanelOpen(false);
+    setDrawerOpen(false);
+    setLoadedLevelCount(0);
+    setLiftVisible(true);
+    liftVisibleRef.current = true;
+    setPisteVisible(true);
+    pisteVisibleRef.current = true;
+    setPisteFilter(DEFAULT_PISTE_FILTER);
+    pisteFilterRef.current = DEFAULT_PISTE_FILTER;
+    setGastronomyVisible(true);
+    gastronomyVisibleRef.current = true;
+    setWebcamVisible(true);
+    webcamVisibleRef.current = true;
+    setInfrastructureVisible(true);
+    infrastructureVisibleRef.current = true;
+    setSportFunVisible(true);
+    sportFunVisibleRef.current = true;
+    hasInteractedRef.current = false;
+    overlayDataRef.current = null;
+    setLoadError(null);
+  }, [activeArea.id]);
+
+  useEffect(() => {
     const host = hostRef.current;
-    const levelContainers = levelContainersRef.current;
-    const loadedLevels = loadedLevelsRef.current;
+    const levelContainers = new Map<number, Container>();
+    const loadedLevels = new Set<number>();
+    const requestId = ++loadRequestIdRef.current;
 
     if (!host) {
       return;
     }
+
+    levelContainersRef.current = levelContainers;
+    loadedLevelsRef.current = loadedLevels;
 
     let cancelled = false;
 
@@ -137,7 +185,7 @@ export function MapShell({ manifest }: MapShellProps) {
       }
 
       const projectedWidth = maxLevel.width * viewport.scale.x;
-      applyLevelBlend(manifest.levels, levelContainersRef.current, loadedLevelsRef.current, projectedWidth);
+      applyLevelBlend(manifest.levels, levelContainers, loadedLevels, projectedWidth);
     };
 
     const syncViewportBounds = (shouldResetView: boolean) => {
@@ -258,7 +306,11 @@ export function MapShell({ manifest }: MapShellProps) {
       tileLayer.label = "tile-layer";
       viewport.addChild(tileLayer);
 
-      const overlayData = await loadArenaOverlayData();
+      if (loadRequestIdRef.current === requestId) {
+        setLoadError(null);
+      }
+
+      const overlayData = await activeArea.loadOverlayData();
 
       if (cancelled) {
         return;
@@ -279,7 +331,7 @@ export function MapShell({ manifest }: MapShellProps) {
 
       const liftContainer = new Container();
       liftContainer.label = "overlay-lifts";
-      drawLiftOverlay(liftContainer, overlayData.lifts);
+      drawLiftOverlay(liftContainer, overlayData.lifts, activeArea.visualScale);
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
 
@@ -291,7 +343,7 @@ export function MapShell({ manifest }: MapShellProps) {
 
       const liftMarkerContainer = new Container();
       liftMarkerContainer.label = "overlay-lift-markers";
-      drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts);
+      drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts, activeArea.visualScale);
       viewport.addChild(liftMarkerContainer);
       liftMarkerOverlayRef.current = liftMarkerContainer;
 
@@ -307,12 +359,12 @@ export function MapShell({ manifest }: MapShellProps) {
         const filtered = overlayData.pistes.filter(p => p.difficulty === diff);
 
         const lineSub = new Container();
-        drawPisteOverlay(lineSub, filtered);
+        drawPisteOverlay(lineSub, filtered, activeArea.visualScale);
         pisteContainer.addChild(lineSub);
         linesByDiff[diff] = lineSub;
 
         const markerSub = new Container();
-        drawPisteMarkerOverlay(markerSub, filtered);
+        drawPisteMarkerOverlay(markerSub, filtered, activeArea.visualScale);
         pisteMarkerContainer.addChild(markerSub);
         markersByDiff[diff] = markerSub;
       }
@@ -321,25 +373,25 @@ export function MapShell({ manifest }: MapShellProps) {
 
       const gastronomyContainer = new Container();
       gastronomyContainer.label = "overlay-gastronomy";
-      drawGastronomyMarkerOverlay(gastronomyContainer, overlayData.gastronomy);
+      drawGastronomyMarkerOverlay(gastronomyContainer, overlayData.gastronomy, activeArea.visualScale);
       viewport.addChild(gastronomyContainer);
       gastronomyOverlayRef.current = gastronomyContainer;
 
       const webcamContainer = new Container();
       webcamContainer.label = "overlay-webcams";
-      drawWebcamMarkerOverlay(webcamContainer, overlayData.webcams);
+      drawWebcamMarkerOverlay(webcamContainer, overlayData.webcams, activeArea.visualScale);
       viewport.addChild(webcamContainer);
       webcamOverlayRef.current = webcamContainer;
 
       const infrastructureContainer = new Container();
       infrastructureContainer.label = "overlay-infrastructure";
-      drawInfrastructureOverlay(infrastructureContainer, overlayData.infrastructure);
+      drawInfrastructureOverlay(infrastructureContainer, overlayData.infrastructure, activeArea.visualScale);
       viewport.addChild(infrastructureContainer);
       infrastructureOverlayRef.current = infrastructureContainer;
 
       const sportFunContainer = new Container();
       sportFunContainer.label = "overlay-sport-fun";
-      drawSportFunOverlay(sportFunContainer, overlayData.sportFun);
+      drawSportFunOverlay(sportFunContainer, overlayData.sportFun, activeArea.visualScale);
       viewport.addChild(sportFunContainer);
       sportFunOverlayRef.current = sportFunContainer;
 
@@ -368,7 +420,7 @@ export function MapShell({ manifest }: MapShellProps) {
         if (!debugModeRef.current) return;
 
         let activeZoom = -1, highestAlpha = -1;
-        for (const [zoom, container] of levelContainersRef.current) {
+        for (const [zoom, container] of levelContainers) {
           if (container.alpha > highestAlpha) {
             highestAlpha = container.alpha;
             activeZoom = zoom;
@@ -399,7 +451,7 @@ export function MapShell({ manifest }: MapShellProps) {
           blendPct: highestAlpha * 100,
           worldCenterX: Math.round(centerWorldX),
           worldCenterY: Math.round(centerWorldY),
-          loadedCount: loadedLevelsRef.current.size,
+          loadedCount: loadedLevels.size,
           totalCount: manifest.levels.length,
         });
       };
@@ -409,7 +461,7 @@ export function MapShell({ manifest }: MapShellProps) {
       const firstLevel = manifest.levels[0];
       await loadLevelIntoViewport(
         tileLayer,
-        levelContainersRef.current,
+        levelContainers,
         firstLevel,
         levelTiles.get(firstLevel.remoteZoom) ?? [],
       );
@@ -418,16 +470,16 @@ export function MapShell({ manifest }: MapShellProps) {
         return;
       }
 
-      loadedLevelsRef.current.add(firstLevel.remoteZoom);
+      loadedLevels.add(firstLevel.remoteZoom);
       setLoadedLevelCount(1);
       syncLevelBlend();
 
       await Promise.all(
         manifest.levels.slice(1).map(async (level) => {
-          await loadLevelIntoViewport(tileLayer, levelContainersRef.current, level, levelTiles.get(level.remoteZoom) ?? []);
+          await loadLevelIntoViewport(tileLayer, levelContainers, level, levelTiles.get(level.remoteZoom) ?? []);
           if (cancelled) return;
-          loadedLevelsRef.current.add(level.remoteZoom);
-          setLoadedLevelCount(loadedLevelsRef.current.size);
+          loadedLevels.add(level.remoteZoom);
+          setLoadedLevelCount(loadedLevels.size);
           syncLevelBlend();
         }),
       );
@@ -463,14 +515,22 @@ export function MapShell({ manifest }: MapShellProps) {
           activeWebcams,
           activeInfrastructure,
           activeSportFun,
+          20, // default threshold
+          activeArea.visualScale
         );
         setSelectedItem(hit);
-        console.log("clicked:", hit?.name ?? "none", hit);
       });
     };
 
     initialize().catch((error) => {
-      console.error(error instanceof Error ? error.message : String(error));
+      if (cancelled || loadRequestIdRef.current !== requestId) {
+        return;
+      }
+
+      const message = error instanceof Error ? error.message : String(error);
+
+      console.error(message);
+      setLoadError(message);
     });
 
     resizeObserverRef.current = new ResizeObserver((entries) => {
@@ -497,12 +557,22 @@ export function MapShell({ manifest }: MapShellProps) {
 
       viewportRef.current?.destroy({ children: true });
       viewportRef.current = null;
+
+      if (levelContainersRef.current === levelContainers) {
+        levelContainersRef.current = new Map();
+      }
+
+      if (loadedLevelsRef.current === loadedLevels) {
+        loadedLevelsRef.current = new Set();
+      }
+
       levelContainers.clear();
       loadedLevels.clear();
 
       appRef.current?.destroy(true, { children: true });
       appRef.current = null;
 
+      overlayDataRef.current = null;
       pisteHighlightRef.current = null;
       liftHighlightRef.current = null;
       badgeHighlightRef.current = null;
@@ -515,7 +585,7 @@ export function MapShell({ manifest }: MapShellProps) {
 
       host.replaceChildren();
     };
-  }, [levelTiles, manifest.levels, maxLevel.height, maxLevel.width, maxScale]);
+  }, [activeArea, levelTiles, manifest.levels, manifest.tileSize, maxLevel.height, maxLevel.width, maxScale]);
 
   useEffect(() => {
     debugModeRef.current = debugMode;
@@ -534,13 +604,13 @@ export function MapShell({ manifest }: MapShellProps) {
     const isWebcam   = selectedItem !== null && "streamUrl" in selectedItem;
     const isSportFun = !!selectedItem && "sportCategory" in selectedItem;
     if (!isInfra && !isGastro && !isWebcam && !isSportFun && selectedItem && "difficulty" in selectedItem) {
-      drawPisteHighlight(pg, selectedItem);
-      drawLiftHighlight(lg, null);
+      drawPisteHighlight(pg, selectedItem, activeArea.visualScale);
+      drawLiftHighlight(lg, null, activeArea.visualScale);
     } else {
-      drawPisteHighlight(pg, null);
-      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam || isSportFun) ? null : selectedItem as Lift | null);
+      drawPisteHighlight(pg, null, activeArea.visualScale);
+      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam || isSportFun) ? null : selectedItem as Lift | null, activeArea.visualScale);
     }
-    if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
+    if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null, activeArea.visualScale);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;
@@ -553,14 +623,6 @@ export function MapShell({ manifest }: MapShellProps) {
     liftVisibleRef.current = next;
     if (liftOverlayRef.current) liftOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
     if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
-  };
-
-  const togglePistes = () => {
-    const next = !pisteVisible;
-    setPisteVisible(next);
-    pisteVisibleRef.current = next;
-    if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
-    if (pisteMarkerRef.current) pisteMarkerRef.current.visible = next;
   };
 
   const toggleDifficultyFilter = (diff: PisteDifficulty) => {
@@ -649,6 +711,16 @@ export function MapShell({ manifest }: MapShellProps) {
     vp.emit("moved", { type: "wheel", viewport: vp });
   };
 
+  const handleSelectArea = (areaId: string) => {
+    if (areaId === activeArea.id) {
+      return;
+    }
+
+    if (canActivateResort(areaId)) {
+      setSelectedAreaId(areaId);
+    }
+  };
+
   return (
     <main className="relative h-screen w-full overflow-hidden bg-night text-ivory select-none">
       {/* Map canvas */}
@@ -721,7 +793,7 @@ export function MapShell({ manifest }: MapShellProps) {
         <div className="pointer-events-auto grid grid-cols-3 gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
           <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
           <div className="relative">
-            <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} allOn={pisteVisible && DIFFICULTIES.every(d => pisteFilter[d])} onToggleAll={toggleAllPistes} />
+            <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} onToggleAll={toggleAllPistes} />
             <button
               onClick={() => setFilterPanelOpen(o => !o)}
               onContextMenu={e => e.preventDefault()}
@@ -778,7 +850,28 @@ export function MapShell({ manifest }: MapShellProps) {
         </div>
       )}
 
-      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      {loadError && (
+        <div className="pointer-events-none absolute inset-x-4 top-16 z-30 rounded-[18px] border border-red-300/30 bg-red-950/85 px-4 py-3 text-sm text-red-50 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-md">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-red-200/80">Area load failed</p>
+          {process.env.NODE_ENV !== "production" ? (
+            <>
+              <p className="mt-1 break-words text-red-50/95">{loadError}</p>
+              <p className="mt-2 text-xs text-red-100/70">Active area: {activeArea.id}</p>
+            </>
+          ) : (
+            <p className="mt-1 text-red-50/95">Unable to load this area. Please refresh and try again.</p>
+          )}
+        </div>
+      )}
+
+      <Drawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        areas={RESORTS}
+        activeAreaId={activeArea.id}
+        currentArea={activeArea}
+        onSelectArea={handleSelectArea}
+      />
     </main>
   );
 }
@@ -812,16 +905,14 @@ const DIFFICULTY_CSS_COLORS: Record<PisteDifficulty, string> = {
   easy: "#0069ea", medium: "#ff0000", difficult: "#444444", unknown: "#9e9e9e"
 };
 
-function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
+function DifficultyFilterPanel({ filter, open, onToggle, onToggleAll }: {
   filter: Record<PisteDifficulty, boolean>;
   open: boolean;
   onToggle: (d: PisteDifficulty) => void;
-  allOn: boolean;
   onToggleAll: () => void;
 }) {
-  const difficulties: PisteDifficulty[] = ["easy", "medium", "difficult", "unknown"];
-  const activeCount = difficulties.filter(d => filter[d]).length;
-  const allOpacity = activeCount === difficulties.length ? "opacity-100" : "opacity-30";
+  const activeCount = DIFFICULTIES.filter(d => filter[d]).length;
+  const allOpacity = activeCount === DIFFICULTIES.length ? "opacity-100" : "opacity-30";
   const allBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -839,7 +930,7 @@ function DifficultyFilterPanel({ filter, open, onToggle, allOn, onToggleAll }: {
         <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">All</span>
       </button>
       <div className="w-px self-stretch bg-white/[0.08] mx-0.5" />
-      {difficulties.map(diff => (
+      {DIFFICULTIES.map(diff => (
         <button
           key={diff}
           onClick={() => onToggle(diff)}
@@ -1071,7 +1162,7 @@ function createTileDescriptors(manifest: PanoramaManifest, level: PanoramaLevel,
 
       tiles.push({
         key: `${level.remoteZoom}-${x}-${y}`,
-        src: buildTileUrl(level.remoteZoom, x, y),
+        src: buildTileUrl(manifest.localTemplate, level.remoteZoom, x, y),
         left: x * manifest.tileSize * scale,
         top: y * manifest.tileSize * scale,
         width: tileWidth * scale,
@@ -1168,8 +1259,11 @@ function computeMinScale(screenWidth: number, screenHeight: number, worldWidth: 
   return Math.min(screenWidth / worldWidth, screenHeight / worldHeight) * 0.92;
 }
 
-function buildTileUrl(remoteZoom: number, x: number, y: number) {
-  return `/resorts/zillertal-arena/panorama/${remoteZoom}/pano_${x}_${y}.webp`;
+function buildTileUrl(template: string, remoteZoom: number, x: number, y: number) {
+  return template
+    .replaceAll("{z}", String(remoteZoom))
+    .replaceAll("{x}", String(x))
+    .replaceAll("{y}", String(y));
 }
 
 function clamp(value: number, minimum: number, maximum: number) {

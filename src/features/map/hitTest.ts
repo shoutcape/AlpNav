@@ -33,40 +33,46 @@ export function hitTestOverlays(
   infrastructure: InfrastructurePoi[] = [],
   sportFun: SportFunPoi[] = [],
   threshold = HIT_THRESHOLD,
+  visualScale: number = 1
 ): Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null {
+  const scaledSportFun = 22 * visualScale;
+  const scaledGastro = GASTRO_HIT_RADIUS * visualScale;
+  const scaledIcon = ICON_HIT_RADIUS * visualScale;
+  const scaledThreshold = threshold * visualScale;
+
   // SportFun point test — highest priority
   for (const poi of sportFun) {
-    if (Math.hypot(px - poi.position.x, py - poi.position.y) <= 22) return poi;
+    if (Math.hypot(px - poi.position.x, py - poi.position.y) <= scaledSportFun) return poi;
   }
 
   // Infrastructure point test
   for (const poi of infrastructure) {
     const d = Math.hypot(px - poi.position.x, py - poi.position.y);
-    if (d <= GASTRO_HIT_RADIUS) return poi;
+    if (d <= scaledGastro) return poi;
   }
 
   // Webcam point test
   for (const cam of webcams) {
     const d = Math.hypot(px - cam.position.x, py - cam.position.y);
-    if (d <= GASTRO_HIT_RADIUS) return cam;
+    if (d <= scaledGastro) return cam;
   }
 
   // Gastronomy point test — second priority
   for (const spot of gastronomy) {
     const dx = px - spot.position.x;
     const dy = py - spot.position.y;
-    if (Math.sqrt(dx * dx + dy * dy) <= GASTRO_HIT_RADIUS) return spot;
+    if (Math.sqrt(dx * dx + dy * dy) <= scaledGastro) return spot;
   }
 
   // Icon snap — highest priority
   for (const lift of lifts) {
     if (!lift.icon) continue;
     const d = Math.hypot(px - lift.icon.x, py - lift.icon.y);
-    if (d < ICON_HIT_RADIUS) return lift;
+    if (d < scaledIcon) return lift;
   }
 
   let best: Piste | Lift | null = null;
-  let bestDist = threshold;
+  let bestDist = scaledThreshold;
 
   for (const lift of lifts) {
     const d = minDistToSegments(px, py, lift.segments);

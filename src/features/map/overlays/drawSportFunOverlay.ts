@@ -20,51 +20,52 @@ function hexPts(cx: number, cy: number, r: number): number[] {
   return pts;
 }
 
-export function drawSportFunOverlay(container: Container, pois: SportFunPoi[]): void {
+export function drawSportFunOverlay(container: Container, pois: SportFunPoi[], visualScale: number = 1): void {
   const bg = new Graphics();
   container.addChild(bg);
+  const r = SPORT_FUN_BADGE_R * visualScale;
   for (const poi of pois) {
     const { x, y } = poi.position;
-    bg.poly(hexPts(x, y, SPORT_FUN_BADGE_R))
+    bg.poly(hexPts(x, y, r))
       .fill({ color: BADGE_FILL[poi.sportCategory] })
-      .stroke({ color: 0x000000, width: 1.5 });
+      .stroke({ color: 0x000000, width: 1.5 * visualScale });
   }
   const sym = new Graphics();
   container.addChild(sym);
   for (const poi of pois) {
-    drawIcon(sym, poi.position.x, poi.position.y, poi.sportCategory);
+    drawIcon(sym, poi.position.x, poi.position.y, poi.sportCategory, visualScale);
   }
 }
 
-function drawIcon(g: Graphics, cx: number, cy: number, cat: SportFunCategory) {
+function drawIcon(g: Graphics, cx: number, cy: number, cat: SportFunCategory, s: number) {
   const W = 0xffffff;
   switch (cat) {
     case "skimovie":
-      g.poly([cx - 4, cy - 6, cx + 7, cy, cx - 4, cy + 6]).fill({ color: W });
+      g.poly([cx - 4 * s, cy - 6 * s, cx + 7 * s, cy, cx - 4 * s, cy + 6 * s]).fill({ color: W });
       break;
     case "speedcheck":
-      g.moveTo(cx + 3, cy - 8)
-        .lineTo(cx - 2, cy - 1)
-        .lineTo(cx + 3, cy - 1)
-        .lineTo(cx - 3, cy + 8)
-        .stroke({ color: W, width: 2.5, cap: "round", join: "round" });
+      g.moveTo(cx + 3 * s, cy - 8 * s)
+        .lineTo(cx - 2 * s, cy - 1 * s)
+        .lineTo(cx + 3 * s, cy - 1 * s)
+        .lineTo(cx - 3 * s, cy + 8 * s)
+        .stroke({ color: W, width: 2.5 * s, cap: "round", join: "round" });
       break;
     case "skidepot":
-      g.moveTo(cx - 5, cy - 7).lineTo(cx + 5, cy + 7)
-        .stroke({ color: W, width: 2, cap: "round" });
-      g.moveTo(cx + 5, cy - 7).lineTo(cx - 5, cy + 7)
-        .stroke({ color: W, width: 2, cap: "round" });
+      g.moveTo(cx - 5 * s, cy - 7 * s).lineTo(cx + 5 * s, cy + 7 * s)
+        .stroke({ color: W, width: 2 * s, cap: "round" });
+      g.moveTo(cx + 5 * s, cy - 7 * s).lineTo(cx - 5 * s, cy + 7 * s)
+        .stroke({ color: W, width: 2 * s, cap: "round" });
       for (const [dx, dy] of [[-5, -7], [5, -7], [-5, 7], [5, 7]])
-        g.circle(cx + dx, cy + dy, 2).fill({ color: W });
+        g.circle(cx + dx * s, cy + dy * s, 2 * s).fill({ color: W });
       break;
     case "photopoint":
-      g.roundRect(cx - 7, cy - 3, 14, 9, 2).stroke({ color: W, width: 1.5 });
-      g.circle(cx, cy + 1, 3).stroke({ color: W, width: 1.5 });
-      g.roundRect(cx - 5, cy - 6, 4, 3, 1).fill({ color: W });
+      g.roundRect(cx - 7 * s, cy - 3 * s, 14 * s, 9 * s, 2 * s).stroke({ color: W, width: 1.5 * s });
+      g.circle(cx, cy + 1 * s, 3 * s).stroke({ color: W, width: 1.5 * s });
+      g.roundRect(cx - 5 * s, cy - 6 * s, 4 * s, 3 * s, 1 * s).fill({ color: W });
       break;
     case "viewpoint":
-      g.poly([cx - 6, cy + 7, cx - 1, cy - 5, cx + 4, cy + 7]).fill({ color: W, alpha: 0.5 });
-      g.poly([cx - 3, cy + 7, cx + 3, cy - 8, cx + 9, cy + 7]).fill({ color: W });
+      g.poly([cx - 6 * s, cy + 7 * s, cx - 1 * s, cy - 5 * s, cx + 4 * s, cy + 7 * s]).fill({ color: W, alpha: 0.5 });
+      g.poly([cx - 3 * s, cy + 7 * s, cx + 3 * s, cy - 8 * s, cx + 9 * s, cy + 7 * s]).fill({ color: W });
       break;
   }
 }

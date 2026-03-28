@@ -8,8 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:arena-artwork": "node scripts/download-zillertal-arena-artwork.mjs",
-    "sync:arena-overlays": "node scripts/download-zillertal-arena-overlays.mjs"
+    "sync:arena": "node scripts/download-artwork.mjs zillertal-arena && node scripts/download-overlays.mjs zillertal-arena && node scripts/convert-tiles.mjs public/resorts/zillertal-arena/panorama",
+    "sync:mayrhofen": "node scripts/download-artwork.mjs mayrhofner-bergbahnen && node scripts/download-overlays.mjs mayrhofner-bergbahnen && node scripts/convert-tiles.mjs public/resorts/mayrhofner-bergbahnen/panorama",
+    "enrich:arena": "node scripts/enrich-lift-info.mjs zillertal-arena && node scripts/enrich-gastronomy-images.mjs zillertal-arena && node scripts/enrich-gastronomy-websites.mjs zillertal-arena",
+    "enrich:mayrhofen": "node scripts/enrich-lift-info.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-images.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-websites.mjs mayrhofner-bergbahnen"
   },
   "dependencies": {
     "@deck.gl/core": "9.2.11",

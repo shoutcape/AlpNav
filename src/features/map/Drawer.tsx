@@ -1,14 +1,29 @@
 import { useEffect, useRef } from "react";
+import type { ResortDefinition } from "@/lib/resorts/types";
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-const CONDITIONS_URL = "https://www.bergfex.com/zell-am-ziller/wetter/";
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  areas: ResortDefinition[];
+  activeAreaId: string;
+  currentArea: ResortDefinition;
+  onSelectArea: (areaId: string) => void;
 };
 
-export function Drawer({ open, onClose }: Props) {
+function getFocusableElements(panel: HTMLDivElement | null) {
+  return Array.from(panel?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []).filter((element) => {
+    if (element.matches(":disabled")) {
+      return false;
+    }
+
+    const tabIndex = element.getAttribute("tabindex");
+    return tabIndex !== "-1";
+  });
+}
+
+export function Drawer({ open, onClose, areas, activeAreaId, currentArea, onSelectArea }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<Element | null>(null);
 
@@ -17,7 +32,7 @@ export function Drawer({ open, onClose }: Props) {
     if (open) {
       returnFocusRef.current = document.activeElement;
       // Focus the first focusable element inside the panel
-      const first = panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE)[0];
+      const first = getFocusableElements(panelRef.current)[0];
       first?.focus();
     } else {
       (returnFocusRef.current as HTMLElement | null)?.focus();
@@ -32,9 +47,7 @@ export function Drawer({ open, onClose }: Props) {
     }
     if (e.key !== "Tab") return;
 
-    const focusable = Array.from(
-      panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []
-    );
+    const focusable = getFocusableElements(panelRef.current);
     if (focusable.length === 0) return;
 
     const first = focusable[0];
@@ -65,16 +78,16 @@ export function Drawer({ open, onClose }: Props) {
       {/* Panel */}
       <div
         ref={panelRef}
+        hidden={!open}
         inert={!open || undefined}
         role="dialog"
-        aria-modal="true"
         aria-label="Menu"
         onKeyDown={handleKeyDown}
         className={`fixed left-0 top-0 z-40 h-full w-[280px] border-r border-white/[0.09] bg-[#07111f]/90 shadow-[4px_0_32px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300 ease-out ${open ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 pt-8 pb-3">
-          <span className="text-[15px] font-semibold tracking-tight text-ivory">Zillertal Arena</span>
+          <span className="text-[15px] font-semibold tracking-tight text-ivory">{currentArea.name}</span>
           <button
             onClick={onClose}
             className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-white/[0.09] bg-white/[0.06] text-ivory/50 transition-colors hover:text-ivory active:scale-95"
@@ -89,8 +102,52 @@ export function Drawer({ open, onClose }: Props) {
 
         {/* Resort meta */}
         <div className="px-4 pb-5">
-          <p className="text-xs text-ivory/40">Zell am Ziller, Austria</p>
-          <p className="text-xs text-ivory/40">580 – 2,500 m</p>
+          <p className="text-xs text-ivory/40">{currentArea.subtitle}</p>
+          <p className="text-xs text-ivory/40">{currentArea.locationLabel}</p>
+          <p className="text-xs text-ivory/40">{currentArea.elevationLabel}</p>
+        </div>
+
+        {/* Divider */}
+        <div className="mx-5 h-px bg-white/[0.07]" />
+
+        {/* Areas */}
+        <div className="px-3 py-3" aria-label="Browse area">
+          {areas.map((area) => {
+            const isActive = area.id === activeAreaId;
+            const isAvailable = area.availability === "available";
+
+            return (
+              <button
+                key={area.id}
+                type="button"
+                disabled={!isAvailable}
+                aria-pressed={isActive}
+                onClick={() => {
+                  onSelectArea(area.id);
+                  onClose();
+                }}
+                className={`flex w-full items-center justify-between gap-3 rounded-[14px] px-3 py-3 text-left transition-colors ${
+                  isActive
+                    ? "bg-white/[0.11] text-ivory shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
+                    : isAvailable
+                      ? "text-ivory/82 hover:bg-white/[0.05] active:bg-white/[0.08]"
+                      : "cursor-not-allowed text-ivory/28"
+                }`}
+              >
+                <div>
+                  <p className="text-sm font-medium tracking-tight">{area.name}</p>
+                  <p className={`mt-1 text-xs ${isActive ? "text-ivory/65" : isAvailable ? "text-ivory/45" : "text-ivory/25"}`}>
+                    {area.subtitle}
+                  </p>
+                </div>
+                {isActive ? (
+                  <span className="rounded-full border border-white/[0.12] bg-white/[0.08] px-2 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-ivory/70">
+                    Active
+                  </span>
+                ) : null}
+              </button>
+            );
+          })}
         </div>
 
         {/* Divider */}
@@ -99,7 +156,7 @@ export function Drawer({ open, onClose }: Props) {
         {/* External links */}
         <div className="mt-2 px-3">
           <a
-            href={CONDITIONS_URL}
+            href={currentArea.conditionsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between gap-3 rounded-[12px] px-3 py-3 transition-colors hover:bg-white/[0.05] active:bg-white/[0.08]"
