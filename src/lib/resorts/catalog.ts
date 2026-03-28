@@ -1,5 +1,7 @@
 import arenaManifest from "../../../public/resorts/zillertal-arena/panorama/manifest.json";
+import mayrhofenManifest from "../../../public/resorts/mayrhofner-bergbahnen/panorama/manifest.json";
 import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
+import { loadMayrhofenOverlayData } from "@/lib/resorts/mayrhofen/adapter";
 import type { ResortDefinition } from "@/lib/resorts/types";
 
 export const DEFAULT_RESORT_ID = "zillertal-arena";
@@ -21,13 +23,13 @@ export const RESORTS: ResortDefinition[] = [
     id: "mayrhofner-bergbahnen",
     name: "Mayrhofner Bergbahnen",
     shortName: "Mayrhofen",
-    subtitle: "Coming soon",
-    availability: "coming-soon",
+    subtitle: "Available now",
+    availability: "available",
     locationLabel: "Mayrhofen, Austria",
     elevationLabel: "630 - 2,500 m",
     conditionsUrl: "https://www.bergfex.com/mayrhofen/wetter/",
-    manifest: arenaManifest,
-    loadOverlayData: loadArenaOverlayData,
+    manifest: mayrhofenManifest,
+    loadOverlayData: loadMayrhofenOverlayData,
   },
   {
     id: "ski-gletscherwelt-zillertal-3000",
