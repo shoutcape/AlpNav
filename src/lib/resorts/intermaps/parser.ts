@@ -328,9 +328,10 @@ function parseWebcams(data: Record<string, unknown>, scale: number): Webcam[] {
     .filter(item => item.position)
     .map(item => {
       const types: number[] = item.types ?? [];
-      const provider: WebcamProvider = item._provider as WebcamProvider ?? (types.includes(558) ? "panomax" : "feratel");
-      const popup = item.popup as any;
-      const thumbnailUrl = typeof popup.info?.img === "string" ? popup.info.img : (typeof popup.thumbnail === "string" ? popup.thumbnail : undefined);
+      const provider: WebcamProvider = (item as Record<string, unknown>)._provider as WebcamProvider ?? (types.includes(558) ? "panomax" : "feratel");
+      const popup = item.popup as Record<string, unknown>;
+      const popupInfo = popup.info as Record<string, unknown> | undefined;
+      const thumbnailUrl = typeof popupInfo?.img === "string" ? popupInfo.img : (typeof popup.thumbnail === "string" ? popup.thumbnail : undefined);
       const streamUrl = typeof popup.desc === "string" ? popup.desc : "";
 
       return {
@@ -479,6 +480,19 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>, scale: number): 
       if (!d) continue;
       const parsed = parseSvgPathD(d, scale);
       segments.push(...parsed);
+    }
+
+    for (const lineEl of Array.from(pathGroup.querySelectorAll("line"))) {
+      const x1 = lineEl.getAttribute("x1");
+      const y1 = lineEl.getAttribute("y1");
+      const x2 = lineEl.getAttribute("x2");
+      const y2 = lineEl.getAttribute("y2");
+      if (x1 && y1 && x2 && y2) {
+        segments.push([
+          { x: parseFloat(x1) * scale, y: parseFloat(y1) * scale },
+          { x: parseFloat(x2) * scale, y: parseFloat(y2) * scale }
+        ]);
+      }
     }
 
     if (segments.length === 0) continue;
