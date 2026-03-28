@@ -335,6 +335,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
 
+      // Lift highlight — above lifts so gold color overwrites the green inner
+      const liftHighlight = new Graphics();
+      liftHighlight.label = "overlay-lift-highlight";
+      viewport.addChild(liftHighlight);
+      liftHighlightRef.current = liftHighlight;
+
       const liftMarkerContainer = new Container();
       liftMarkerContainer.label = "overlay-lift-markers";
       drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts, activeArea.visualScale);
@@ -509,6 +515,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           activeWebcams,
           activeInfrastructure,
           activeSportFun,
+          20, // default threshold
+          activeArea.visualScale
         );
         setSelectedItem(hit);
       });
