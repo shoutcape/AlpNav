@@ -15,24 +15,21 @@ const BADGE_FILL: Record<InfrastructureCategory, number> = {
 
 const WHITE = 0xffffff;
 
-export function drawInfrastructureOverlay(container: Container, pois: InfrastructurePoi[], visualScale: number = 1): void {
-  // Pass 1 — badge backgrounds
-  const bg = new Graphics();
-  container.addChild(bg);
+export function drawInfrastructureBadge(g: Graphics, poi: InfrastructurePoi, visualScale: number = 1): void {
+  const { x, y } = poi.position;
   const size = BADGE_SIZE * visualScale;
   const corner = BADGE_CORNER * visualScale;
-  for (const poi of pois) {
-    const { x, y } = poi.position;
-    bg.roundRect(x - size / 2, y - size / 2, size, size, corner)
-      .fill({ color: BADGE_FILL[poi.category] })
-      .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
-  }
+  g.roundRect(x - size / 2, y - size / 2, size, size, corner)
+    .fill({ color: BADGE_FILL[poi.category] })
+    .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
+  drawSymbol(g, x, y, poi.category, visualScale);
+}
 
-  // Pass 2 — symbols
-  const sym = new Graphics();
-  container.addChild(sym);
+export function drawInfrastructureOverlay(container: Container, pois: InfrastructurePoi[], visualScale: number = 1): void {
+  const g = new Graphics();
+  container.addChild(g);
   for (const poi of pois) {
-    drawSymbol(sym, poi.position.x, poi.position.y, poi.category, visualScale);
+    drawInfrastructureBadge(g, poi, visualScale);
   }
 }
 

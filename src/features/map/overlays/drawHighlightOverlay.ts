@@ -1,6 +1,11 @@
 import { Graphics } from "pixi.js";
 import type { Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty, Point } from "@/lib/domain/types";
-import { SPORT_FUN_BADGE_R } from "./drawSportFunOverlay";
+import { SPORT_FUN_BADGE_R, drawSportFunBadge } from "./drawSportFunOverlay";
+import { drawLiftBadge } from "./drawLiftMarkerOverlay";
+import { drawPisteBadge } from "./drawPisteMarkerOverlay";
+import { drawGastronomyBadge } from "./drawGastronomyMarkerOverlay";
+import { drawInfrastructureBadge } from "./drawInfrastructureOverlay";
+import { drawWebcamBadge } from "./drawWebcamMarkerOverlay";
 
 const LIFT_BADGE_R = 24;
 const PISTE_BADGE_R = 14;
@@ -127,18 +132,19 @@ export function drawLiftHighlight(g: Graphics, item: Lift | null, visualScale: n
       g.stroke({ width: 2.5 * visualScale, color: 0x1b5e20 });
     }
   }
-
 }
 
 const WEBCAM_BADGE_R = 18;
 
-// Drawn on a layer above all marker containers — recolors badge outlines to gold.
+// Drawn on a layer above all marker containers — re-draws the badge and its gold highlight
 export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null, visualScale: number = 1): void {
   g.clear();
+  g.removeChildren();
   if (!item) return;
 
   if ("streamUrl" in item) {
-    // Webcam — squircle outline in gold, matching the badge shape
+    // Webcam
+    drawWebcamBadge(g, item, visualScale);
     const r = WEBCAM_BADGE_R * visualScale;
     g.roundRect(item.position.x - r, item.position.y - r, r * 2, r * 2, 10 * visualScale);
     g.stroke({ color: HIGHLIGHT_GOLD, width: 2 * visualScale });
@@ -146,14 +152,16 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
   }
 
   if ("sportCategory" in item) {
-    // SportFunPoi — gold border only; fill and icon are on the layer below
+    // SportFunPoi
+    drawSportFunBadge(g, item, visualScale);
     g.poly(hexPts(item.position.x, item.position.y, SPORT_FUN_BADGE_R * visualScale))
       .stroke({ color: HIGHLIGHT_GOLD, width: 2 * visualScale });
     return;
   }
 
   if ("category" in item) {
-    // InfrastructurePoi — square highlight matching the badge shape
+    // InfrastructurePoi
+    drawInfrastructureBadge(g, item, visualScale);
     const s = INFRA_BADGE_SIZE * visualScale;
     g.roundRect(item.position.x - s / 2, item.position.y - s / 2, s, s, INFRA_BADGE_CORNER * visualScale);
     g.stroke({ color: HIGHLIGHT_GOLD, width: 1.5 * visualScale });
@@ -161,7 +169,8 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
   }
 
   if ("position" in item) {
-    // GastronomySpot — recolor the badge outline to gold, same radius and width
+    // GastronomySpot
+    drawGastronomyBadge(g, item, visualScale);
     g.circle(item.position.x, item.position.y, GASTRO_BADGE_R * visualScale);
     g.stroke({ color: HIGHLIGHT_GOLD, width: 1.5 * visualScale });
     return;
@@ -170,11 +179,13 @@ export function drawBadgeHighlight(g: Graphics, item: Piste | Lift | GastronomyS
   if ("difficulty" in item) {
     // Piste — may have multiple icon positions
     for (const { x, y } of item.icons ?? []) {
+      drawPisteBadge(g, item, x, y, visualScale);
       g.circle(x, y, PISTE_BADGE_R * visualScale).stroke({ color: HIGHLIGHT_GOLD, width: 2 * visualScale });
     }
   } else {
     // Lift — single icon
     if (item.icon) {
+      drawLiftBadge(g, item, visualScale);
       g.circle(item.icon.x, item.icon.y, LIFT_BADGE_R * visualScale).stroke({ color: HIGHLIGHT_GOLD, width: 2.5 * visualScale });
     }
   }
