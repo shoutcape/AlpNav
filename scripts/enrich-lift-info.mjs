@@ -1,15 +1,35 @@
 #!/usr/bin/env node
 // Enriches data.json with gallery images and opening hours scraped from intermaps lift detail pages.
-// Run once: node scripts/enrich-lift-info.mjs
+// Usage: node scripts/enrich-lift-info.mjs <resort-id>
 
 import { readFileSync, writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
+const resortId = process.argv[2];
+if (!resortId) {
+  console.error("Usage: node scripts/enrich-lift-info.mjs <resort-id>");
+  console.error("Available resorts: zillertal-arena, mayrhofner-bergbahnen");
+  process.exit(1);
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = join(__dirname, "../public/resorts/zillertal-arena/overlays/data.json");
-// Category 1 = lifts; verify this works for a sample before trusting all entries
-const BASE_URL = "https://zillertal.intermaps.com/zillertalarena/detail-info-best-of/1";
+const DATA_PATH = join(__dirname, `../public/resorts/${resortId}/overlays/data.json`);
+
+const RESORT_CONFIG = {
+  "zillertal-arena": {
+    clientKey: "zillertalarena",
+  },
+  "mayrhofner-bergbahnen": {
+    clientKey: "mayrhofen",
+  }
+};
+
+const config = RESORT_CONFIG[resortId];
+if (!config) {
+  console.error(`Unknown resort ID: ${resortId}`);
+  process.exit(1);
+}
 
 function extractGalleryImages(html) {
   const imgs = [];
@@ -44,8 +64,8 @@ function extractOpeningHours(html) {
   return null;
 }
 
-async function fetchLiftDetail(oid) {
-  const url = `${BASE_URL}/${oid}?lang=en`;
+async function fetchLiftDetail(oid, categoryId) {
+  const url = `https://zillertal.intermaps.com/${config.clientKey}/detail-info-best-of/${categoryId}/${oid}?lang=en`;
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0 (compatible; AlpNav enrichment script)" },
@@ -77,12 +97,13 @@ async function main() {
 
   for (const lift of lifts) {
     const oid = lift.popup?.oid;
+    const categoryId = lift.popup?.["clients-sub-id"] || "1";
     if (!oid) {
       console.warn(`  [${lift.id}] no oid, skipping`);
       continue;
     }
     process.stdout.write(`  [${oid}] ${lift.popup?.title ?? lift.id} ...`);
-    const { imgs, openingHours } = await fetchLiftDetail(oid);
+    const { imgs, openingHours } = await fetchLiftDetail(oid, categoryId);
 
     let updated = false;
     if (imgs.length > 0) {

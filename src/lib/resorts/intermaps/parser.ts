@@ -61,7 +61,8 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
     const id = slope.id as string;
     const popup = (slope.popup ?? {}) as Record<string, unknown>;
     const rawDiff = popup.difficulty as string | undefined;
-    const difficulty = normalizeDifficulty(rawDiff);
+    const subtitle = typeof popup.subtitle === "string" ? popup.subtitle : undefined;
+    const difficulty = normalizeDifficulty(rawDiff, subtitle);
     const name = (popup.title as string | undefined) ?? id;
     const additionalInfo = (popup["additional-info"] ?? {}) as Record<string, unknown>;
     const rawNumber = typeof popup.number === "string"
@@ -69,10 +70,14 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
       : typeof popup.number === "number"
       ? String(popup.number)
       : undefined;
-    // Prefer the number+letter prefix from the name (e.g. "36a" from "36a Krummbach Gerlos")
-    // when the name starts with the same digits as rawNumber.
-    const namePrefix = rawNumber ? name.match(/^(\d+[a-zA-Z]?)\s/) : null;
-    const number = namePrefix && namePrefix[1].startsWith(rawNumber!) ? namePrefix[1] : rawNumber;
+    
+    let number = rawNumber;
+    const namePrefixMatch = name.match(/^(\d+[a-zA-Z]?)\s/);
+    if (namePrefixMatch) {
+      if (!rawNumber || namePrefixMatch[1].startsWith(rawNumber)) {
+        number = namePrefixMatch[1];
+      }
+    }
     const lengthM = typeof additionalInfo.length === "number" ? additionalInfo.length : undefined;
     const rawStatus = slope.status as string | undefined;
     const status = rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined;
@@ -183,14 +188,25 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
 
 function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
-  const items = (pois["202"] ?? []) as RawPoi[];
-  return items
-    .filter(item => item.position)
-    .map(item => {
+  const items202 = (pois["202"] ?? []) as RawPoi[];
+  const items3001 = (pois["3001"] ?? []) as RawPoi[];
+  const items3002 = (pois["3002"] ?? []) as RawPoi[];
+  
+  const allItems = [
+    ...items202.map(item => ({ item, defaultType: "restaurant" as GastronomyType })),
+    ...items3001.map(item => ({ item, defaultType: "restaurant" as GastronomyType })),
+    ...items3002.map(item => ({ item, defaultType: "bar" as GastronomyType })),
+  ];
+
+  return allItems
+    .filter(({ item }) => item.position)
+    .map(({ item, defaultType }) => {
       const types: number[] = item.types ?? [];
-      const type: GastronomyType =
-        types.includes(141) ? "bar" :
-        types.includes(142) ? "cafe" : "restaurant";
+      let type: GastronomyType = defaultType;
+      // Override default if explicit types exist (mostly for 202)
+      if (types.includes(141)) type = "bar";
+      else if (types.includes(142)) type = "cafe";
+
       const info = item.popup.info ?? {};
       const imgs: string[] = Array.isArray((info as Record<string, unknown>).imgs) ? (info as Record<string, unknown>).imgs as string[] : [];
       const single = typeof info.img === "string" ? info.img : undefined;
@@ -216,9 +232,9 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
 }
 
 const INFRA_CATEGORY_IDS: Record<string, InfrastructureCategory> = {
-  "222": "parking",
-  "244": "bus",
-  "258": "info",
+  "222": "parking", "3201": "parking",
+  "244": "bus", "3206": "bus",
+  "258": "info", "3202": "info", "3203": "info",
   "216": "rescue",
 };
 
@@ -259,11 +275,11 @@ function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[]
 }
 
 const SPORT_FUN_CATEGORY_IDS: Record<string, SportFunCategory> = {
-  "247": "skimovie",
+  "247": "skimovie", "3416": "skimovie",
   "256": "speedcheck",
-  "242": "skidepot",
+  "242": "skidepot", "3219": "skidepot",
   "226": "photopoint",
-  "261": "viewpoint",
+  "261": "viewpoint", "3216": "viewpoint",
 };
 
 function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
@@ -294,7 +310,7 @@ function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
 
 function parseWebcams(data: Record<string, unknown>): Webcam[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
-  const feratel = (pois["2816"] ?? []) as RawPoi[];
+  const feratel = [...(pois["2816"] ?? []) as RawPoi[], ...(pois["2810"] ?? []) as RawPoi[]];
   const panomax = (pois["2807"] ?? []) as RawPoi[];
   return [...feratel, ...panomax]
     .filter(item => item.position)
@@ -314,17 +330,26 @@ function parseWebcams(data: Record<string, unknown>): Webcam[] {
     });
 }
 
-function normalizeDifficulty(raw: string | undefined): PisteDifficulty {
-  switch (raw) {
-    case "easy":
-      return "easy";
-    case "medium":
-      return "medium";
-    case "difficult":
-      return "difficult";
-    default:
-      return "unknown";
+function normalizeDifficulty(rawDiff: string | undefined, subtitle: string | undefined): PisteDifficulty {
+  if (rawDiff) {
+    switch (rawDiff.toLowerCase()) {
+      case "easy":
+        return "easy";
+      case "medium":
+        return "medium";
+      case "difficult":
+        return "difficult";
+    }
   }
+
+  if (subtitle) {
+    const s = subtitle.toLowerCase();
+    if (s.includes("easy")) return "easy";
+    if (s.includes("medium") || s.includes("intermediate")) return "medium";
+    if (s.includes("difficult")) return "difficult";
+  }
+
+  return "unknown";
 }
 
 function normalizeLiftType(type: number): LiftType {

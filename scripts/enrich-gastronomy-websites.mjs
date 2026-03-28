@@ -1,14 +1,35 @@
 #!/usr/bin/env node
 // Enriches data.json with website URLs scraped from the intermaps detail pages.
-// Run once: node scripts/enrich-gastronomy-websites.mjs
+// Usage: node scripts/enrich-gastronomy-websites.mjs <resort-id>
 
 import { readFileSync, writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
+const resortId = process.argv[2];
+if (!resortId) {
+  console.error("Usage: node scripts/enrich-gastronomy-websites.mjs <resort-id>");
+  console.error("Available resorts: zillertal-arena, mayrhofner-bergbahnen");
+  process.exit(1);
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = join(__dirname, "../public/resorts/zillertal-arena/overlays/data.json");
-const BASE_URL = "https://zillertal.intermaps.com/zillertalarena/detail-info-best-of/202";
+const DATA_PATH = join(__dirname, `../public/resorts/${resortId}/overlays/data.json`);
+
+const RESORT_CONFIG = {
+  "zillertal-arena": {
+    clientKey: "zillertalarena",
+  },
+  "mayrhofner-bergbahnen": {
+    clientKey: "mayrhofen",
+  }
+};
+
+const config = RESORT_CONFIG[resortId];
+if (!config) {
+  console.error(`Unknown resort ID: ${resortId}`);
+  process.exit(1);
+}
 
 function extractWebsite(html) {
   const buttonsStart = html.indexOf('class="buttons"');
@@ -20,8 +41,8 @@ function extractWebsite(html) {
   return m ? m[1] : undefined;
 }
 
-async function fetchWebsite(id) {
-  const url = `${BASE_URL}/${id}?lang=en`;
+async function fetchWebsite(id, categoryId) {
+  const url = `https://zillertal.intermaps.com/${config.clientKey}/detail-info-best-of/${categoryId}/${id}?lang=en`;
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0 (compatible; AlpNav enrichment script)" },
@@ -39,10 +60,22 @@ async function fetchWebsite(id) {
 }
 
 async function main() {
-  const data = JSON.parse(readFileSync(DATA_PATH, "utf8"));
-  const pois = data.pois?.["202"];
-  if (!Array.isArray(pois)) {
-    console.error("No pois['202'] array found in data.json");
+  let data;
+  try {
+    data = JSON.parse(readFileSync(DATA_PATH, "utf8"));
+  } catch (err) {
+    console.error(`Failed to read data.json for ${resortId}: ${err.message}`);
+    process.exit(1);
+  }
+
+  const pois = [
+    ...(data.pois?.["202"] ?? []),
+    ...(data.pois?.["3001"] ?? []),
+    ...(data.pois?.["3002"] ?? [])
+  ];
+
+  if (pois.length === 0) {
+    console.error("No gastronomy POIs found in data.json");
     process.exit(1);
   }
 
@@ -51,9 +84,10 @@ async function main() {
 
   for (const poi of pois) {
     const id = poi.id;
+    const categoryId = poi.popup?.["clients-sub-id"] || "202";
     if (!id) continue;
     process.stdout.write(`  [${id}] ${poi.popup?.title ?? ""} ...`);
-    const website = await fetchWebsite(id);
+    const website = await fetchWebsite(id, categoryId);
     if (website) {
       poi.popup = poi.popup ?? {};
       poi.popup.info = poi.popup.info ?? {};
