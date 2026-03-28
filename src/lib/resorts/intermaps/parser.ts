@@ -1,30 +1,41 @@
 import type { GastronomySpot, GastronomyType, InfrastructureCategory, InfrastructurePoi, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, SportFunCategory, SportFunPoi, Webcam, WebcamProvider } from "@/lib/domain/types";
 
-// SVG viewBox is 0 0 1024 672; PixiJS world is 4096×2688
-const SVG_TO_WORLD = 4.0;
+// The scale factor is dynamically calculated based on the panorama manifest and SVG width.
 
 export async function loadIntermapsOverlayData(resortId: string): Promise<ResortOverlayData> {
-  const [rSvgText, lSvgText, dataJson, textSvgText] = await Promise.all([
+  const [rSvgText, lSvgText, dataJson, textSvgText, manifestJson] = await Promise.all([
     fetch(`/resorts/${resortId}/overlays/R.svg`).then((r) => r.text()),
     fetch(`/resorts/${resortId}/overlays/L.svg`).then((r) => r.text()),
     fetch(`/resorts/${resortId}/overlays/data.json`).then((r) => r.json()),
     fetch(`/resorts/${resortId}/overlays/text.svg`).then((r) => r.text()),
+    fetch(`/resorts/${resortId}/panorama/manifest.json`).then((r) => r.json()),
   ]);
-
-  const pisteMetaMap = buildPisteMetaMap(dataJson);
-  const liftMetaMap = buildLiftMetaMap(dataJson);
 
   const rDoc = new DOMParser().parseFromString(rSvgText, "image/svg+xml");
   const lDoc = new DOMParser().parseFromString(lSvgText, "image/svg+xml");
   const textDoc = new DOMParser().parseFromString(textSvgText, "image/svg+xml");
 
-  const pistes = parsePistes(rDoc, pisteMetaMap);
-  const lifts = parseLifts(lDoc, liftMetaMap);
-  const labels = parseLabels(textDoc);
-  const gastronomy = parseGastronomy(dataJson);
-  const webcams = parseWebcams(dataJson);
-  const infrastructure = parseInfrastructure(dataJson);
-  const sportFun = parseSportFun(dataJson);
+  const viewBoxAttr = rDoc.documentElement.getAttribute("viewBox");
+  let svgWidth = 1024;
+  if (viewBoxAttr) {
+    const parts = viewBoxAttr.split(/\s+/);
+    if (parts.length === 4) svgWidth = parseFloat(parts[2]);
+  } else {
+    svgWidth = parseFloat(rDoc.documentElement.getAttribute("width") || "1024");
+  }
+  const maxLevel = manifestJson.levels[manifestJson.levels.length - 1];
+  const scale = maxLevel.width / svgWidth;
+
+  const pisteMetaMap = buildPisteMetaMap(dataJson);
+  const liftMetaMap = buildLiftMetaMap(dataJson);
+
+  const pistes = parsePistes(rDoc, pisteMetaMap, scale);
+  const lifts = parseLifts(lDoc, liftMetaMap, scale);
+  const labels = parseLabels(textDoc, scale);
+  const gastronomy = parseGastronomy(dataJson, scale);
+  const webcams = parseWebcams(dataJson, scale);
+  const infrastructure = parseInfrastructure(dataJson, scale);
+  const sportFun = parseSportFun(dataJson, scale);
 
   return { pistes, lifts, labels, gastronomy, webcams, infrastructure, sportFun };
 }
@@ -186,7 +197,7 @@ function buildLiftMetaMap(data: Record<string, unknown>): Map<string, LiftMeta> 
   return map;
 }
 
-function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
+function parseGastronomy(data: Record<string, unknown>, scale: number): GastronomySpot[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
   const items202 = (pois["202"] ?? []) as RawPoi[];
   const items3001 = (pois["3001"] ?? []) as RawPoi[];
@@ -220,8 +231,8 @@ function parseGastronomy(data: Record<string, unknown>): GastronomySpot[] {
         name: item.popup.title,
         type,
         position: {
-          x: item.position!.x * SVG_TO_WORLD,
-          y: item.position!.y * SVG_TO_WORLD,
+          x: item.position!.x * scale,
+          y: item.position!.y * scale,
         },
         description: item.searchdesc ?? undefined,
         imageUrls,
@@ -238,7 +249,7 @@ const INFRA_CATEGORY_IDS: Record<string, InfrastructureCategory> = {
   "216": "rescue",
 };
 
-function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[] {
+function parseInfrastructure(data: Record<string, unknown>, scale: number): InfrastructurePoi[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
   const result: InfrastructurePoi[] = [];
   for (const [catId, category] of Object.entries(INFRA_CATEGORY_IDS)) {
@@ -261,8 +272,8 @@ function parseInfrastructure(data: Record<string, unknown>): InfrastructurePoi[]
         name: translateInfrastructureTitle(item.popup.title),
         category,
         position: {
-          x: item.position.x * SVG_TO_WORLD,
-          y: item.position.y * SVG_TO_WORLD,
+          x: item.position.x * scale,
+          y: item.position.y * scale,
         },
         description: item.searchdesc ? translateInfrastructureDescription(item.searchdesc) : undefined,
         status,
@@ -282,7 +293,7 @@ const SPORT_FUN_CATEGORY_IDS: Record<string, SportFunCategory> = {
   "261": "viewpoint", "3216": "viewpoint",
 };
 
-function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
+function parseSportFun(data: Record<string, unknown>, scale: number): SportFunPoi[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
   const result: SportFunPoi[] = [];
   for (const [catId, sportCategory] of Object.entries(SPORT_FUN_CATEGORY_IDS)) {
@@ -298,7 +309,7 @@ function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
         id: item.id,
         name: translateSportFunTitle(item.popup.title, sportCategory),
         sportCategory,
-        position: { x: item.position.x * SVG_TO_WORLD, y: item.position.y * SVG_TO_WORLD },
+        position: { x: item.position.x * scale, y: item.position.y * scale },
         description: item.searchdesc ?? undefined,
         status: rawStatus === "open" || rawStatus === "closed" ? rawStatus : undefined,
         imageUrls,
@@ -308,7 +319,7 @@ function parseSportFun(data: Record<string, unknown>): SportFunPoi[] {
   return result;
 }
 
-function parseWebcams(data: Record<string, unknown>): Webcam[] {
+function parseWebcams(data: Record<string, unknown>, scale: number): Webcam[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
   const feratel = [...(pois["2816"] ?? []) as RawPoi[], ...(pois["2810"] ?? []) as RawPoi[]];
   const panomax = (pois["2807"] ?? []) as RawPoi[];
@@ -323,7 +334,7 @@ function parseWebcams(data: Record<string, unknown>): Webcam[] {
         id: item.id,
         name: item.popup.title,
         provider,
-        position: { x: item.position!.x * SVG_TO_WORLD, y: item.position!.y * SVG_TO_WORLD },
+        position: { x: item.position!.x * scale, y: item.position!.y * scale },
         thumbnailUrl,
         streamUrl,
       };
@@ -380,7 +391,7 @@ function normalizeLiftType(type: number): LiftType {
 
 // ─── piste parsing ────────────────────────────────────────────────────────────
 
-function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
+function parsePistes(doc: Document, meta: Map<string, PisteMeta>, scale: number): Piste[] {
   const pistes: Piste[] = [];
   const groupPattern = /^R_(\d+)_group$/;
 
@@ -403,7 +414,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
       const d = pathEl.getAttribute("d");
       if (!d) continue;
 
-      const parsed = parseSvgPathD(d, SVG_TO_WORLD);
+      const parsed = parseSvgPathD(d, scale);
       if (pathEl.getAttribute("stroke-dasharray")) {
         skiRouteSegments.push(...parsed);
       } else {
@@ -418,7 +429,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
     for (const circle of Array.from(iconGroup?.querySelectorAll("circle") ?? [])) {
       const cx = parseFloat(circle.getAttribute("cx") ?? "");
       const cy = parseFloat(circle.getAttribute("cy") ?? "");
-      if (!isNaN(cx) && !isNaN(cy)) icons.push({ x: cx * SVG_TO_WORLD, y: cy * SVG_TO_WORLD });
+      if (!isNaN(cx) && !isNaN(cy)) icons.push({ x: cx * scale, y: cy * scale });
     }
 
     const m = meta.get(featureId);
@@ -440,7 +451,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>): Piste[] {
 
 // ─── lift parsing ─────────────────────────────────────────────────────────────
 
-function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
+function parseLifts(doc: Document, meta: Map<string, LiftMeta>, scale: number): Lift[] {
   const lifts: Lift[] = [];
   const groupPattern = /^L_(\d+)_group$/;
 
@@ -459,7 +470,7 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
     for (const polyEl of Array.from(pathGroup.querySelectorAll("polyline"))) {
       const points = polyEl.getAttribute("points");
       if (!points) continue;
-      const seg = parsePolylinePoints(points, SVG_TO_WORLD);
+      const seg = parsePolylinePoints(points, scale);
       if (seg.length > 0) segments.push(seg);
     }
 
@@ -473,7 +484,7 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>): Lift[] {
       const cx = parseFloat(iconCircle.getAttribute("cx") ?? "0");
       const cy = parseFloat(iconCircle.getAttribute("cy") ?? "0");
       if (!isNaN(cx) && !isNaN(cy)) {
-        icon = { x: cx * SVG_TO_WORLD, y: cy * SVG_TO_WORLD };
+        icon = { x: cx * scale, y: cy * scale };
       }
     }
 
@@ -505,7 +516,7 @@ function parseHexColor(fill: string | null): number | undefined {
   return parseInt(fill.slice(1), 16);
 }
 
-function parseLabels(doc: Document): MapLabel[] {
+function parseLabels(doc: Document, scale: number): MapLabel[] {
   const labels: MapLabel[] = [];
   const group = doc.getElementById("txt_group_1") ?? doc.querySelector("g");
 
@@ -552,10 +563,10 @@ function parseLabels(doc: Document): MapLabel[] {
 
     bgRects.push({
       color,
-      x: minX * SVG_TO_WORLD,
-      y: minY * SVG_TO_WORLD,
-      w: (maxX - minX) * SVG_TO_WORLD,
-      h: (maxY - minY) * SVG_TO_WORLD,
+      x: minX * scale,
+      y: minY * scale,
+      w: (maxX - minX) * scale,
+      h: (maxY - minY) * scale,
     });
   }
 
@@ -563,8 +574,8 @@ function parseLabels(doc: Document): MapLabel[] {
     const text = el.textContent?.trim() ?? "";
     if (!text) continue;
 
-    const x = parseFloat(el.getAttribute("x") ?? "0") * SVG_TO_WORLD;
-    const y = parseFloat(el.getAttribute("y") ?? "0") * SVG_TO_WORLD;
+    const x = parseFloat(el.getAttribute("x") ?? "0") * scale;
+    const y = parseFloat(el.getAttribute("y") ?? "0") * scale;
 
     const styleAttr = el.getAttribute("style") ?? "";
     const fillAttr = el.getAttribute("fill");
@@ -573,7 +584,7 @@ function parseLabels(doc: Document): MapLabel[] {
     const fsMatch = /font-size:\s*([\d.]+)px/.exec(styleAttr) ?? /font-size:\s*([\d.]+)/.exec(styleAttr);
     if (fsMatch) svgFontSize = parseFloat(fsMatch[1]);
     else if (el.getAttribute("font-size")) svgFontSize = parseFloat(el.getAttribute("font-size")!);
-    const fontSize = svgFontSize * SVG_TO_WORLD;
+    const fontSize = svgFontSize * scale;
 
     let fontWeight: "bold" | "normal" = "normal";
     const fwMatch = /font-weight:\s*(\w+)/.exec(styleAttr);
