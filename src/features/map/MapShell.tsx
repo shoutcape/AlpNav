@@ -127,10 +127,15 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   }, [manifest, maxLevel]);
 
   useEffect(() => {
-    const resolvedAreaId = resolveActiveResort(initialAreaId).id;
+    const savedAreaId = localStorage.getItem("alpnav_active_area");
+    let targetAreaId = resolveActiveResort(initialAreaId).id;
+
+    if (savedAreaId && canActivateResort(savedAreaId)) {
+      targetAreaId = savedAreaId;
+    }
 
     setSelectedAreaId((currentAreaId) => {
-      return currentAreaId === resolvedAreaId ? currentAreaId : resolvedAreaId;
+      return currentAreaId === targetAreaId ? currentAreaId : targetAreaId;
     });
   }, [initialAreaId]);
 
@@ -718,6 +723,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
     if (canActivateResort(areaId)) {
       setSelectedAreaId(areaId);
+      localStorage.setItem("alpnav_active_area", areaId);
     }
   };
 
