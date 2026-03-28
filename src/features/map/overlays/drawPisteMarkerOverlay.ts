@@ -10,23 +10,24 @@ const DIFFICULTY_COLORS: Record<PisteDifficulty, number> = {
   unknown: 0x9e9e9e,
 };
 
-export function drawPisteMarkerOverlay(container: Container, pistes: Piste[]): void {
+export function drawPisteMarkerOverlay(container: Container, pistes: Piste[], visualScale: number = 1): void {
   const bg = new Graphics();
   container.addChild(bg);
 
-  const SLASH_INSET = BADGE_R * 0.707; // edge-to-edge at 45°
+  const radius = BADGE_R * visualScale;
+  const SLASH_INSET = radius * 0.707; // edge-to-edge at 45°
 
   for (const piste of pistes) {
     if (!piste.icons?.length || !piste.number) continue;
     const fill = piste.status === "closed" ? CLOSED_COLOR : DIFFICULTY_COLORS[piste.difficulty];
     for (const { x, y } of piste.icons) {
-      bg.circle(x, y, BADGE_R).fill({ color: fill }).stroke({ color: 0x000000, width: 1.5 });
+      bg.circle(x, y, radius).fill({ color: fill }).stroke({ color: 0x000000, width: 1.5 * visualScale });
       if (piste.status === "closed") {
         bg.moveTo(x - SLASH_INSET, y + SLASH_INSET)
           .lineTo(x + SLASH_INSET, y - SLASH_INSET)
           .moveTo(x - SLASH_INSET, y - SLASH_INSET)
           .lineTo(x + SLASH_INSET, y + SLASH_INSET)
-          .stroke({ color: 0x000000, width: 2, alpha: 0.8 });
+          .stroke({ color: 0x000000, width: 2 * visualScale, alpha: 0.8 });
       }
     }
   }
@@ -36,7 +37,7 @@ export function drawPisteMarkerOverlay(container: Container, pistes: Piste[]): v
     for (const { x, y } of piste.icons) {
       const label = new Text({
         text: piste.number,
-        style: { fill: 0xffffff, fontFamily: "Arial", fontSize: 14, fontWeight: "bold" },
+        style: { fill: 0xffffff, fontFamily: "Arial", fontSize: 14 * visualScale, fontWeight: "bold" },
       });
       label.anchor.set(0.5);
       label.position.set(x, y);

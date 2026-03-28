@@ -17,6 +17,7 @@ export const RESORTS: ResortDefinition[] = [
     elevationLabel: "580 - 2,500 m",
     conditionsUrl: "https://www.bergfex.com/zell-am-ziller/wetter/",
     manifest: arenaManifest,
+    visualScale: 1.0,
     loadOverlayData: loadArenaOverlayData,
   },
   {
@@ -29,6 +30,7 @@ export const RESORTS: ResortDefinition[] = [
     elevationLabel: "630 - 2,500 m",
     conditionsUrl: "https://www.bergfex.com/mayrhofen/wetter/",
     manifest: mayrhofenManifest,
+    visualScale: 2.0,
     loadOverlayData: loadMayrhofenOverlayData,
   },
   {

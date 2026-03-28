@@ -331,19 +331,13 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       const liftContainer = new Container();
       liftContainer.label = "overlay-lifts";
-      drawLiftOverlay(liftContainer, overlayData.lifts);
+      drawLiftOverlay(liftContainer, overlayData.lifts, activeArea.visualScale);
       viewport.addChild(liftContainer);
       liftOverlayRef.current = liftContainer;
 
-      // Lift highlight — above lifts so gold color overwrites the green inner
-      const liftHighlight = new Graphics();
-      liftHighlight.label = "overlay-lift-highlight";
-      viewport.addChild(liftHighlight);
-      liftHighlightRef.current = liftHighlight;
-
       const liftMarkerContainer = new Container();
       liftMarkerContainer.label = "overlay-lift-markers";
-      drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts);
+      drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts, activeArea.visualScale);
       viewport.addChild(liftMarkerContainer);
       liftMarkerOverlayRef.current = liftMarkerContainer;
 
@@ -359,12 +353,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         const filtered = overlayData.pistes.filter(p => p.difficulty === diff);
 
         const lineSub = new Container();
-        drawPisteOverlay(lineSub, filtered);
+        drawPisteOverlay(lineSub, filtered, activeArea.visualScale);
         pisteContainer.addChild(lineSub);
         linesByDiff[diff] = lineSub;
 
         const markerSub = new Container();
-        drawPisteMarkerOverlay(markerSub, filtered);
+        drawPisteMarkerOverlay(markerSub, filtered, activeArea.visualScale);
         pisteMarkerContainer.addChild(markerSub);
         markersByDiff[diff] = markerSub;
       }
@@ -373,25 +367,25 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       const gastronomyContainer = new Container();
       gastronomyContainer.label = "overlay-gastronomy";
-      drawGastronomyMarkerOverlay(gastronomyContainer, overlayData.gastronomy);
+      drawGastronomyMarkerOverlay(gastronomyContainer, overlayData.gastronomy, activeArea.visualScale);
       viewport.addChild(gastronomyContainer);
       gastronomyOverlayRef.current = gastronomyContainer;
 
       const webcamContainer = new Container();
       webcamContainer.label = "overlay-webcams";
-      drawWebcamMarkerOverlay(webcamContainer, overlayData.webcams);
+      drawWebcamMarkerOverlay(webcamContainer, overlayData.webcams, activeArea.visualScale);
       viewport.addChild(webcamContainer);
       webcamOverlayRef.current = webcamContainer;
 
       const infrastructureContainer = new Container();
       infrastructureContainer.label = "overlay-infrastructure";
-      drawInfrastructureOverlay(infrastructureContainer, overlayData.infrastructure);
+      drawInfrastructureOverlay(infrastructureContainer, overlayData.infrastructure, activeArea.visualScale);
       viewport.addChild(infrastructureContainer);
       infrastructureOverlayRef.current = infrastructureContainer;
 
       const sportFunContainer = new Container();
       sportFunContainer.label = "overlay-sport-fun";
-      drawSportFunOverlay(sportFunContainer, overlayData.sportFun);
+      drawSportFunOverlay(sportFunContainer, overlayData.sportFun, activeArea.visualScale);
       viewport.addChild(sportFunContainer);
       sportFunOverlayRef.current = sportFunContainer;
 
@@ -602,13 +596,13 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     const isWebcam   = selectedItem !== null && "streamUrl" in selectedItem;
     const isSportFun = !!selectedItem && "sportCategory" in selectedItem;
     if (!isInfra && !isGastro && !isWebcam && !isSportFun && selectedItem && "difficulty" in selectedItem) {
-      drawPisteHighlight(pg, selectedItem);
-      drawLiftHighlight(lg, null);
+      drawPisteHighlight(pg, selectedItem, activeArea.visualScale);
+      drawLiftHighlight(lg, null, activeArea.visualScale);
     } else {
-      drawPisteHighlight(pg, null);
-      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam || isSportFun) ? null : selectedItem as Lift | null);
+      drawPisteHighlight(pg, null, activeArea.visualScale);
+      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam || isSportFun) ? null : selectedItem as Lift | null, activeArea.visualScale);
     }
-    if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null);
+    if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null, activeArea.visualScale);
   }, [selectedItem]);
 
   const isLoading = loadedLevelCount < manifest.levels.length;

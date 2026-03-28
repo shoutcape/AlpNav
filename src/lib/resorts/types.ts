@@ -13,5 +13,6 @@ export type ResortDefinition = {
   elevationLabel: string;
   conditionsUrl: string;
   manifest: PanoramaManifest;
+  visualScale?: number;
   loadOverlayData: () => Promise<ResortOverlayData>;
 };

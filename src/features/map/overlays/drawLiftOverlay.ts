@@ -3,10 +3,12 @@ import type { Lift } from "@/lib/domain/types";
 
 const TERMINAL_RADIUS = 9; // 2.25 SVG units × 4 world scale
 
-export function drawLiftOverlay(container: Container, lifts: Lift[]): void {
+export function drawLiftOverlay(container: Container, lifts: Lift[], visualScale: number = 1): void {
   const outline = new Graphics();
   const inner = new Graphics();
   const terminals = new Graphics();
+
+  const termRadius = TERMINAL_RADIUS * visualScale;
 
   for (const lift of lifts) {
     for (const segment of lift.segments) {
@@ -25,20 +27,20 @@ export function drawLiftOverlay(container: Container, lifts: Lift[]): void {
       const first = segment[0];
       const last = segment[segment.length - 1];
 
-      terminals.circle(first.x, first.y, TERMINAL_RADIUS);
+      terminals.circle(first.x, first.y, termRadius);
       terminals.fill({ color: 0x66bb6a });
-      terminals.circle(first.x, first.y, TERMINAL_RADIUS);
-      terminals.stroke({ width: 2.5, color: 0x1b5e20 });
+      terminals.circle(first.x, first.y, termRadius);
+      terminals.stroke({ width: 2.5 * visualScale, color: 0x1b5e20 });
 
-      terminals.circle(last.x, last.y, TERMINAL_RADIUS);
+      terminals.circle(last.x, last.y, termRadius);
       terminals.fill({ color: 0x66bb6a });
-      terminals.circle(last.x, last.y, TERMINAL_RADIUS);
-      terminals.stroke({ width: 2.5, color: 0x1b5e20 });
+      terminals.circle(last.x, last.y, termRadius);
+      terminals.stroke({ width: 2.5 * visualScale, color: 0x1b5e20 });
     }
   }
 
-  outline.stroke({ width: 8, color: 0x1b5e20 });
-  inner.stroke({ width: 4, color: 0x66bb6a });
+  outline.stroke({ width: 8 * visualScale, color: 0x1b5e20 });
+  inner.stroke({ width: 4 * visualScale, color: 0x66bb6a });
 
   container.addChild(outline);
   container.addChild(inner);
