@@ -10,19 +10,22 @@ const DIFFICULTY_COLORS: Record<PisteDifficulty, number> = {
   unknown: 0x9e9e9e,
 };
 
-export function drawPisteBadge(g: Graphics, piste: Piste, cx: number, cy: number, visualScale: number = 1): void {
+export function drawPisteBadge(container: Container, piste: Piste, cx: number, cy: number, visualScale: number = 1): void {
+  const g = new Graphics();
   const radius = BADGE_R * visualScale;
   const SLASH_INSET = radius * 0.707; // edge-to-edge at 45°
   const fill = piste.status === "closed" ? CLOSED_COLOR : DIFFICULTY_COLORS[piste.difficulty];
-  
+
   g.circle(cx, cy, radius).fill({ color: fill }).stroke({ color: 0x000000, width: 1.5 * visualScale });
   if (piste.status === "closed") {
     g.moveTo(cx - SLASH_INSET, cy + SLASH_INSET)
      .lineTo(cx + SLASH_INSET, cy - SLASH_INSET)
      .moveTo(cx - SLASH_INSET, cy - SLASH_INSET)
      .lineTo(cx + SLASH_INSET, cy + SLASH_INSET)
-     .stroke({ color: 0x000000, width: 2 * visualScale, alpha: 0.8 });
+      .stroke({ color: 0x000000, width: 2 * visualScale, alpha: 0.8 });
   }
+
+  container.addChild(g);
 
   if (piste.number) {
     const label = new Text({
@@ -31,7 +34,7 @@ export function drawPisteBadge(g: Graphics, piste: Piste, cx: number, cy: number
     });
     label.anchor.set(0.5);
     label.position.set(cx, cy);
-    g.addChild(label);
+    container.addChild(label);
   }
 }
 
@@ -39,9 +42,9 @@ export function drawPisteMarkerOverlay(container: Container, pistes: Piste[], vi
   for (const piste of pistes) {
     if (!piste.icons?.length || !piste.number) continue;
     for (const { x, y } of piste.icons) {
-      const g = new Graphics();
-      drawPisteBadge(g, piste, x, y, visualScale);
-      container.addChild(g);
+      const badge = new Container();
+      drawPisteBadge(badge, piste, x, y, visualScale);
+      container.addChild(badge);
     }
   }
 }
