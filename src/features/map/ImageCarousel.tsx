@@ -53,7 +53,7 @@ export function ImageCarousel({ imageUrls, alt }: Props) {
     if (n === 1 && stripIndexState !== 0) {
       setSkipTransition(true);
       setStripIndex(0);
-    } else if (n > 1 && stripIndexState > n) {
+    } else if (n > 1 && stripIndexState > n + 1) {
       setSkipTransition(true);
       setStripIndex(n);
     }
