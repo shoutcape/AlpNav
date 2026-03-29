@@ -396,8 +396,8 @@
     "name": "Kinderland Gerlos (valley)",
     "type": "lift-station",
     "geo": {
-      "lat": 47.2176658,
-      "lng": 11.9001146
+      "lat": 47.2635977,
+      "lng": 12.0916825
     },
     "panorama": {
       "x": 2073.204,
@@ -410,8 +410,8 @@
     "name": "Kinderland Gerlos (mountain)",
     "type": "lift-station",
     "geo": {
-      "lat": 47.2015199,
-      "lng": 11.9151445
+      "lat": 47.2631563,
+      "lng": 12.0925907
     },
     "panorama": {
       "x": 2096.456,
@@ -1036,62 +1036,6 @@
     "snapRadius": 30
   },
   {
-    "id": "L_45211_valley",
-    "name": "Dorfbahn Gerlos 1 (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.2014966,
-      "lng": 11.9150869
-    },
-    "panorama": {
-      "x": 1917.996,
-      "y": 1652.276
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_45211_mountain",
-    "name": "Dorfbahn Gerlos 1 (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.2014966,
-      "lng": 11.9150869
-    },
-    "panorama": {
-      "x": 1989.768,
-      "y": 1432.38
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_45212_valley",
-    "name": "Dorfbahn Gerlos 2 (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.2009312,
-      "lng": 11.9200127
-    },
-    "panorama": {
-      "x": 1989.768,
-      "y": 1432.38
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_45212_mountain",
-    "name": "Dorfbahn Gerlos 2 (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.2009939,
-      "lng": 11.9151903
-    },
-    "panorama": {
-      "x": 1629.244,
-      "y": 886.528
-    },
-    "snapRadius": 30
-  },
-  {
     "id": "L_45214_valley",
     "name": "6er Larmach (valley)",
     "type": "lift-station",
@@ -1124,8 +1068,8 @@
     "name": "Gerlossteinbahn (valley)",
     "type": "lift-station",
     "geo": {
-      "lat": 47.2177887,
-      "lng": 11.8998796
+      "lat": 47.2176658,
+      "lng": 11.9001146
     },
     "panorama": {
       "x": 855.584,
@@ -1138,8 +1082,8 @@
     "name": "Gerlossteinbahn (mountain)",
     "type": "lift-station",
     "geo": {
-      "lat": 47.2177887,
-      "lng": 11.8998796
+      "lat": 47.2015199,
+      "lng": 11.9151445
     },
     "panorama": {
       "x": 1317.584,
@@ -1320,8 +1264,8 @@
     "name": "Arena Schirmbar",
     "type": "restaurant",
     "geo": {
-      "lat": 47.23210555384616,
-      "lng": 12.154185907692307
+      "lat": 47.2445284,
+      "lng": 12.0350508
     },
     "panorama": {
       "x": 3740,
@@ -1348,8 +1292,8 @@
     "name": "Almbar (1.741 m)",
     "type": "restaurant",
     "geo": {
-      "lat": 47.25007502,
-      "lng": 12.076367399999999
+      "lat": 47.25181374,
+      "lng": 12.07771266
     },
     "panorama": {
       "x": 2756,
@@ -1386,26 +1330,12 @@
     "snapRadius": 20
   },
   {
-    "id": "gastro_45952",
-    "name": "Fußalm (1.941 m)",
-    "type": "restaurant",
-    "geo": {
-      "lat": 47.2999932,
-      "lng": 12.0413173
-    },
-    "panorama": {
-      "x": 2772,
-      "y": 928
-    },
-    "snapRadius": 20
-  },
-  {
     "id": "gastro_45964",
     "name": "Rössl Alm (1.600 m)",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2217464,
-      "lng": 12.1528564
+      "lat": 47.2999932,
+      "lng": 12.0413173
     },
     "panorama": {
       "x": 2000,
@@ -1418,8 +1348,8 @@
     "name": "Arena Center (1.900 m)",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2445284,
-      "lng": 12.0350508
+      "lat": 47.25124964545454,
+      "lng": 11.970040863636365
     },
     "panorama": {
       "x": 2012,
@@ -1460,8 +1390,8 @@
     "name": "Bergrestaurant Duxeralm & Bar",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2258892,
-      "lng": 12.1376442
+      "lat": 47.23504235714286,
+      "lng": 12.145103671428572
     },
     "panorama": {
       "x": 3780,
@@ -1480,20 +1410,6 @@
     "panorama": {
       "x": 3480,
       "y": 1672
-    },
-    "snapRadius": 20
-  },
-  {
-    "id": "gastro_46464",
-    "name": "BergGeistAlm",
-    "type": "restaurant",
-    "geo": {
-      "lat": 47.3086047,
-      "lng": 12.2010209
-    },
-    "panorama": {
-      "x": 3388,
-      "y": 1688
     },
     "snapRadius": 20
   },
@@ -1540,26 +1456,12 @@
     "snapRadius": 20
   },
   {
-    "id": "gastro_47133",
-    "name": "Sonnalm 1.350m",
-    "type": "restaurant",
-    "geo": {
-      "lat": 47.19415146,
-      "lng": 12.11000142
-    },
-    "panorama": {
-      "x": 1312,
-      "y": 2140
-    },
-    "snapRadius": 20
-  },
-  {
     "id": "gastro_47152",
     "name": "Arena Bistro",
     "type": "restaurant",
     "geo": {
-      "lat": 47.25124964545454,
-      "lng": 11.970040863636365
+      "lat": 47.23210555384616,
+      "lng": 12.154185907692307
     },
     "panorama": {
       "x": 468,
@@ -1600,8 +1502,8 @@
     "name": "Krocha Alm",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2691035,
-      "lng": 11.9458409
+      "lat": 47.3086047,
+      "lng": 12.2010209
     },
     "panorama": {
       "x": 372,
@@ -1614,8 +1516,8 @@
     "name": "Simon's Skisstadl 1.744m",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2187986,
-      "lng": 12.0639112
+      "lat": 47.2217464,
+      "lng": 12.1528564
     },
     "panorama": {
       "x": 416,
@@ -1642,8 +1544,8 @@
     "name": "Saustadl",
     "type": "restaurant",
     "geo": {
-      "lat": 47.12202377142857,
-      "lng": 12.009662414285716
+      "lat": 47.19415146,
+      "lng": 12.11000142
     },
     "panorama": {
       "x": 404,
@@ -1684,26 +1586,12 @@
     "name": "mountain hotel Gerlosstein",
     "type": "restaurant",
     "geo": {
-      "lat": 47.202352700000006,
-      "lng": 11.913396914285714
+      "lat": 47.2512196,
+      "lng": 12.1236025
     },
     "panorama": {
       "x": 1300,
       "y": 1900
-    },
-    "snapRadius": 20
-  },
-  {
-    "id": "gastro_47429",
-    "name": "Kreuzjochhütte",
-    "type": "restaurant",
-    "geo": {
-      "lat": 47.118330040000004,
-      "lng": 12.09620327
-    },
-    "panorama": {
-      "x": 308,
-      "y": 1020
     },
     "snapRadius": 20
   },

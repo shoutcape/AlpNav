@@ -91,11 +91,20 @@ async function main() {
     const pos = g.position;
     if (!pos || pos.x == null || pos.y == null) continue;
 
+    // Extract domain keywords from website URL for fallback matching
+    const website = g.popup?.info?.website ?? "";
+    const urlKeywords = extractUrlKeywords(website);
+
     let bestOsm = null;
     let bestScore = 0;
     for (const osmRest of osmAnchors.restaurants) {
       if (!osmRest.name || usedOsmRestaurants.has(osmRest.osmId)) continue;
-      const score = nameSimilarity(osmRest.name, gName);
+      let score = nameSimilarity(osmRest.name, gName);
+      // Fallback: check OSM name against URL keywords
+      if (score < 0.4 && urlKeywords.length > 0) {
+        const urlScore = nameSimilarity(osmRest.name, urlKeywords.join(" "));
+        score = Math.max(score, urlScore);
+      }
       if (score > bestScore) {
         bestScore = score;
         bestOsm = osmRest;
@@ -164,6 +173,19 @@ function parseLiftEndpoints(svgText, scale) {
 
 // ─── Name matching ───────────────────────────────────────────────────────────
 
+/** Extract meaningful keywords from a URL domain (e.g. "schnitzelhuette.at" → ["schnitzelhuette"]) */
+function extractUrlKeywords(url) {
+  if (!url) return [];
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, "");
+    const domain = hostname.split(".")[0]; // e.g. "schnitzelhuette"
+    // Split on hyphens and filter short fragments
+    return domain.split("-").filter((w) => w.length >= 3);
+  } catch {
+    return [];
+  }
+}
+
 function normalize(name) {
   return name
     .toLowerCase()
@@ -189,9 +211,20 @@ function nameSimilarity(a, b) {
   let significantMatch = false; // a distinctive word (4+ chars) matched
   for (const w of aWords) {
     for (const bw of bWords) {
-      if (w === bw || w.includes(bw) || bw.includes(w)) {
+      // Exact match
+      if (w === bw) {
         matches++;
-        if (w.length >= 4 || bw.length >= 4) significantMatch = true;
+        if (w.length >= 4) significantMatch = true;
+        break;
+      }
+      // Substring match: only if the shorter word is at least 60% of the longer
+      // Prevents "alm" matching "sonnalm" (3/7 = 43%) but allows
+      // "rosi" matching "rosis" (4/5 = 80%)
+      const shorter = w.length <= bw.length ? w : bw;
+      const longer = w.length <= bw.length ? bw : w;
+      if (longer.includes(shorter) && shorter.length / longer.length >= 0.6) {
+        matches++;
+        if (shorter.length >= 4) significantMatch = true;
         break;
       }
     }
