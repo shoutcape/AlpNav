@@ -41,6 +41,9 @@ const anchorQuery = `
 (
   way["aerialway"](${bboxStr});
   node["amenity"~"restaurant|cafe|bar"](${bboxStr});
+  node["tourism"~"alpine_hut|wilderness_hut"](${bboxStr});
+  way["amenity"~"restaurant|cafe|bar"](${bboxStr});
+  way["tourism"~"alpine_hut|wilderness_hut"](${bboxStr});
 );
 out geom(${bboxStr}) qt;
 `.trim();
@@ -169,14 +172,29 @@ function parseAnchors(elements) {
       });
     }
 
-    // Restaurants: amenity nodes with coordinates
-    if (el.type === "node" && tags.amenity && el.lat != null && el.lon != null) {
+    // Restaurants/huts: nodes with coordinates
+    if (el.type === "node" && (tags.amenity || tags.tourism) && el.lat != null && el.lon != null) {
       restaurants.push({
         osmId: `node/${el.id}`,
         name,
-        amenityType: tags.amenity,
+        amenityType: tags.amenity ?? tags.tourism,
         geo: { lat: el.lat, lng: el.lon },
       });
+    }
+
+    // Restaurants/huts mapped as ways: use centroid
+    if (el.type === "way" && (tags.amenity || tags.tourism) && !tags.aerialway && el.geometry) {
+      const pts = el.geometry.filter((n) => n && n.lat != null && n.lon != null);
+      if (pts.length > 0) {
+        const lat = pts.reduce((s, p) => s + p.lat, 0) / pts.length;
+        const lng = pts.reduce((s, p) => s + p.lon, 0) / pts.length;
+        restaurants.push({
+          osmId: `way/${el.id}`,
+          name,
+          amenityType: tags.amenity ?? tags.tourism,
+          geo: { lat, lng },
+        });
+      }
     }
   }
 

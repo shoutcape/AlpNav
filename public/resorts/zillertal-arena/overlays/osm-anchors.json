@@ -1560,6 +1560,15 @@
       }
     },
     {
+      "osmId": "node/13398278493",
+      "name": "Jan Senn Hütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.2498566,
+        "lng": 12.1165288
+      }
+    },
+    {
       "osmId": "node/1304564478",
       "name": "Pizzeria Amore",
       "amenityType": "restaurant",
@@ -1731,12 +1740,615 @@
       }
     },
     {
+      "osmId": "node/2368392910",
+      "name": "Rotwand-Alm",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.3086047,
+        "lng": 12.2010209
+      }
+    },
+    {
       "osmId": "node/7777333396",
       "name": "Gamskogelhütte",
       "amenityType": "restaurant",
       "geo": {
         "lat": 47.3350387,
         "lng": 12.2224597
+      }
+    },
+    {
+      "osmId": "way/62277705",
+      "name": "Gasthof Thanner",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.167631914285714,
+        "lng": 11.900237285714285
+      }
+    },
+    {
+      "osmId": "way/123466395",
+      "name": "Kolmhaus",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.17364487142857,
+        "lng": 11.935870157142856
+      }
+    },
+    {
+      "osmId": "way/140499450",
+      "name": "Karlalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.18423639,
+        "lng": 11.904905730000001
+      }
+    },
+    {
+      "osmId": "way/123233627",
+      "name": "Berghotel Gerlosstein",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.202352700000006,
+        "lng": 11.913396914285714
+      }
+    },
+    {
+      "osmId": "way/295093339",
+      "name": "Neue Kotahornalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.19974585714285,
+        "lng": 11.904586628571428
+      }
+    },
+    {
+      "osmId": "way/369599848",
+      "name": "Sonnenstüberl Arbiskogel",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.198922319999994,
+        "lng": 11.91107249
+      }
+    },
+    {
+      "osmId": "way/117878143",
+      "name": "Almgasthof Häusling",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.14693595555556,
+        "lng": 11.965977588888888
+      }
+    },
+    {
+      "osmId": "way/62207156",
+      "name": "Gasthof Au",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.12202377142857,
+        "lng": 12.009662414285716
+      }
+    },
+    {
+      "osmId": "way/62191989",
+      "name": "Jausenstation Bärenbadalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.12174328,
+        "lng": 12.038579219999999
+      }
+    },
+    {
+      "osmId": "way/103184177",
+      "name": "Jausenstation Schwarzachtal",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.188417400000006,
+        "lng": 11.995322900000001
+      }
+    },
+    {
+      "osmId": "way/1119600980",
+      "name": "Klammer's Jausenhütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.19845980000001,
+        "lng": 12.016923028571428
+      }
+    },
+    {
+      "osmId": "way/334208089",
+      "name": "Wimmertalalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.192634976923074,
+        "lng": 12.019648676923076
+      }
+    },
+    {
+      "osmId": "way/302391347",
+      "name": "Stackerlalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.18767107142857,
+        "lng": 12.056317971428571
+      }
+    },
+    {
+      "osmId": "way/117878212",
+      "name": "Adlerblick",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.12337486249999,
+        "lng": 12.060837731249999
+      }
+    },
+    {
+      "osmId": "way/117878221",
+      "name": "Klein Tibet “Hohenaualm”",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.10476100000001,
+        "lng": 12.0962999
+      }
+    },
+    {
+      "osmId": "way/117878139",
+      "name": "Plauener Hütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.118330040000004,
+        "lng": 12.09620327
+      }
+    },
+    {
+      "osmId": "way/25439465",
+      "name": "Richterhütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.1241408,
+        "lng": 12.134004033333333
+      }
+    },
+    {
+      "osmId": "way/334208063",
+      "name": "Issalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1900119,
+        "lng": 12.0649425
+      }
+    },
+    {
+      "osmId": "way/334208084",
+      "name": "Lackenalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.20233857272728,
+        "lng": 12.066816181818183
+      }
+    },
+    {
+      "osmId": "way/25476640",
+      "name": "Trissl Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.19415146,
+        "lng": 12.11000142
+      }
+    },
+    {
+      "osmId": "way/25477186",
+      "name": "Zittauer Hütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.16278078461539,
+        "lng": 12.124257769230768
+      }
+    },
+    {
+      "osmId": "way/228792486",
+      "name": "Jogg'l Kessl",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.2401197,
+        "lng": 11.9001059
+      }
+    },
+    {
+      "osmId": "way/292673478",
+      "name": "Gerlosstein Lodge",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.21302592,
+        "lng": 11.90333416
+      }
+    },
+    {
+      "osmId": "way/158589806",
+      "name": "Alpengasthof Enzianhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.22891663076923,
+        "lng": 11.916419715384617
+      }
+    },
+    {
+      "osmId": "way/158582017",
+      "name": "Kreithütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2469877,
+        "lng": 11.938888185714285
+      }
+    },
+    {
+      "osmId": "way/158582020",
+      "name": "Rosenalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.24692242307693,
+        "lng": 11.941310676923079
+      }
+    },
+    {
+      "osmId": "way/143777227",
+      "name": "Simons Skistadl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.24906207894737,
+        "lng": 11.941803757894736
+      }
+    },
+    {
+      "osmId": "way/132458729",
+      "name": "Schnitzelstation Klammlhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.25509414444444,
+        "lng": 11.905985744444445
+      }
+    },
+    {
+      "osmId": "way/117810124",
+      "name": "Tannen - Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.29595157272727,
+        "lng": 11.907261954545454
+      }
+    },
+    {
+      "osmId": "way/127977327",
+      "name": "Almluft",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.310275440000005,
+        "lng": 11.924176800000001
+      }
+    },
+    {
+      "osmId": "way/867058679",
+      "name": "Restaurant Erbhofa",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.21375491818182,
+        "lng": 12.005766000000001
+      }
+    },
+    {
+      "osmId": "way/29149718",
+      "name": "Kreuzjochalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.24955466,
+        "lng": 11.95559012
+      }
+    },
+    {
+      "osmId": "way/158581941",
+      "name": "Arena Stadl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.25124964545454,
+        "lng": 11.970040863636365
+      }
+    },
+    {
+      "osmId": "way/180914478",
+      "name": "Jägerstüberl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.226622340000006,
+        "lng": 12.04182086
+      }
+    },
+    {
+      "osmId": "way/119456734",
+      "name": "Latschenalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.24468920999999,
+        "lng": 12.031428709999998
+      }
+    },
+    {
+      "osmId": "way/135508575",
+      "name": "Rösslalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.23634664761906,
+        "lng": 12.039336552380952
+      }
+    },
+    {
+      "osmId": "way/32673609",
+      "name": "Gasthof Almstüberl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.23896518,
+        "lng": 12.0573059
+      }
+    },
+    {
+      "osmId": "way/923799146",
+      "name": "Fussalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.25181374,
+        "lng": 12.07771266
+      }
+    },
+    {
+      "osmId": "way/990188334",
+      "name": "Almbar",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.25007502,
+        "lng": 12.076367399999999
+      }
+    },
+    {
+      "osmId": "way/115831146",
+      "name": "Larmach-Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.25250502105263,
+        "lng": 12.098998205263158
+      }
+    },
+    {
+      "osmId": "way/123684899",
+      "name": "Duxeralm Restaurant",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.23504235714286,
+        "lng": 12.145103671428572
+      }
+    },
+    {
+      "osmId": "way/168883340",
+      "name": "Arena Bar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.23210555384616,
+        "lng": 12.154185907692307
+      }
+    },
+    {
+      "osmId": "way/92052176",
+      "name": "Hoppala",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.24929872,
+        "lng": 12.148436140000001
+      }
+    },
+    {
+      "osmId": "way/118165399",
+      "name": "Salzachhütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.26933022,
+        "lng": 12.129125819999999
+      }
+    },
+    {
+      "osmId": "way/172318865",
+      "name": "Farmkehralm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.34151794,
+        "lng": 11.956041679999998
+      }
+    },
+    {
+      "osmId": "way/37895782",
+      "name": "Faulbaumgarten Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.342375919999995,
+        "lng": 12.003402399999999
+      }
+    },
+    {
+      "osmId": "way/131245650",
+      "name": "Otto-Leixl-Hütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.3213968,
+        "lng": 12.008063799999999
+      }
+    },
+    {
+      "osmId": "way/125338464",
+      "name": "Neue Bamberger Hütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.3089134,
+        "lng": 12.15055576
+      }
+    },
+    {
+      "osmId": "way/134752442",
+      "name": "Wegscheid",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.33236505,
+        "lng": 12.15927266
+      }
+    },
+    {
+      "osmId": "way/178607313",
+      "name": "Niederkaser",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.34071598571428,
+        "lng": 12.155024828571428
+      }
+    },
+    {
+      "osmId": "way/25441374",
+      "name": "Krimmler Tauernhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.13895112307692,
+        "lng": 12.190928976923077
+      }
+    },
+    {
+      "osmId": "way/25441930",
+      "name": "Veitenalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.18116314,
+        "lng": 12.181628499999999
+      }
+    },
+    {
+      "osmId": "way/1412827938",
+      "name": "Hölzlahneralm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17975073333333,
+        "lng": 12.181434133333333
+      }
+    },
+    {
+      "osmId": "way/25442356",
+      "name": "Gasthof Schönangerl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.204790890000005,
+        "lng": 12.17288757
+      }
+    },
+    {
+      "osmId": "way/25442653",
+      "name": "Hanke's Cafe- Restaurant Souvenir",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.20970871111111,
+        "lng": 12.168259788888887
+      }
+    },
+    {
+      "osmId": "way/25442769",
+      "name": "Rupertiwinkel",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.21106632000001,
+        "lng": 12.16809344
+      }
+    },
+    {
+      "osmId": "way/95249411",
+      "name": null,
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.21662287499999,
+        "lng": 12.172832891666665
+      }
+    },
+    {
+      "osmId": "way/95249420",
+      "name": "Anton Wallner Bräustüberl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.220558614285714,
+        "lng": 12.174529742857144
+      }
+    },
+    {
+      "osmId": "way/232112765",
+      "name": "Friedburg",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.23881688,
+        "lng": 12.241691659999999
+      }
+    },
+    {
+      "osmId": "way/282750944",
+      "name": "Alpengasthof Venedigerhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.25480386666666,
+        "lng": 12.240867405555553
+      }
+    },
+    {
+      "osmId": "way/30500389",
+      "name": "Gasthof Siggen",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.230690316666674,
+        "lng": 12.247335133333332
+      }
+    },
+    {
+      "osmId": "way/39351542",
+      "name": "Trattenbach-Hochalm",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.29352933846154,
+        "lng": 12.181691584615386
+      }
+    },
+    {
+      "osmId": "way/39351545",
+      "name": "Trattenbach-Grundalm",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.29413993846153,
+        "lng": 12.204393361538463
+      }
+    },
+    {
+      "osmId": "way/272771677",
+      "name": "Alpengasthof Rechtegg",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.256978399999994,
+        "lng": 12.232777714285715
+      }
+    },
+    {
+      "osmId": "way/39351549",
+      "name": "Sonntagsalm",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.29412609999999,
+        "lng": 12.221887614285716
+      }
+    },
+    {
+      "osmId": "way/109069947",
+      "name": "Rotwand-Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.3086257,
+        "lng": 12.20103512
       }
     }
   ]

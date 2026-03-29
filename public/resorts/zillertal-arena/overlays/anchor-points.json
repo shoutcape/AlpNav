@@ -1264,8 +1264,8 @@
     "name": "Arena Schirmbar",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2445284,
-      "lng": 12.0350508
+      "lat": 47.23210555384616,
+      "lng": 12.154185907692307
     },
     "panorama": {
       "x": 3740,
@@ -1292,12 +1292,26 @@
     "name": "Almbar (1.741 m)",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2999932,
-      "lng": 12.0413173
+      "lat": 47.25007502,
+      "lng": 12.076367399999999
     },
     "panorama": {
       "x": 2756,
       "y": 980
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45947",
+    "name": "Latschenalm (1.950 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.24468920999999,
+      "lng": 12.031428709999998
+    },
+    "panorama": {
+      "x": 1920,
+      "y": 948
     },
     "snapRadius": 20
   },
@@ -1316,6 +1330,20 @@
     "snapRadius": 20
   },
   {
+    "id": "gastro_45952",
+    "name": "Fußalm (1.941 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2999932,
+      "lng": 12.0413173
+    },
+    "panorama": {
+      "x": 2772,
+      "y": 928
+    },
+    "snapRadius": 20
+  },
+  {
     "id": "gastro_45964",
     "name": "Rössl Alm (1.600 m)",
     "type": "restaurant",
@@ -1326,6 +1354,20 @@
     "panorama": {
       "x": 2000,
       "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45967",
+    "name": "Arena Center (1.900 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2445284,
+      "lng": 12.0350508
+    },
+    "panorama": {
+      "x": 2012,
+      "y": 1012
     },
     "snapRadius": 20
   },
@@ -1372,6 +1414,34 @@
     "snapRadius": 20
   },
   {
+    "id": "gastro_46454",
+    "name": "Duxer Stadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.24906207894737,
+      "lng": 11.941803757894736
+    },
+    "panorama": {
+      "x": 3480,
+      "y": 1672
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_46464",
+    "name": "BergGeistAlm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.3086047,
+      "lng": 12.2010209
+    },
+    "panorama": {
+      "x": 3388,
+      "y": 1688
+    },
+    "snapRadius": 20
+  },
+  {
     "id": "gastro_46516",
     "name": "Filzsteinalm",
     "type": "restaurant",
@@ -1396,6 +1466,62 @@
     "panorama": {
       "x": 3040,
       "y": 1604
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47131",
+    "name": "Kreithütte - little Rosenalm 1.700m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2469877,
+      "lng": 11.938888185714285
+    },
+    "panorama": {
+      "x": 444,
+      "y": 1272
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47133",
+    "name": "Sonnalm 1.350m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.19415146,
+      "lng": 12.11000142
+    },
+    "panorama": {
+      "x": 1312,
+      "y": 2140
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47152",
+    "name": "Arena Bistro",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.25124964545454,
+      "lng": 11.970040863636365
+    },
+    "panorama": {
+      "x": 468,
+      "y": 1904
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47157",
+    "name": "Kreuzjochalm 2.100m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.24955466,
+      "lng": 11.95559012
+    },
+    "panorama": {
+      "x": 472,
+      "y": 940
     },
     "snapRadius": 20
   },
@@ -1442,6 +1568,76 @@
     "snapRadius": 20
   },
   {
+    "id": "gastro_47191",
+    "name": "Saustadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.12202377142857,
+      "lng": 12.009662414285716
+    },
+    "panorama": {
+      "x": 404,
+      "y": 1876
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47195",
+    "name": "Rosenalm 1.740m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.24692242307693,
+      "lng": 11.941310676923079
+    },
+    "panorama": {
+      "x": 512,
+      "y": 1228
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47255",
+    "name": "mountain hotel Gerlosstein",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.202352700000006,
+      "lng": 11.913396914285714
+    },
+    "panorama": {
+      "x": 1300,
+      "y": 1900
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47429",
+    "name": "Kreuzjochhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.118330040000004,
+      "lng": 12.09620327
+    },
+    "panorama": {
+      "x": 308,
+      "y": 1020
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47431",
+    "name": "Arbiskogelhütte 1.830m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.198922319999994,
+      "lng": 11.91107249
+    },
+    "panorama": {
+      "x": 1496,
+      "y": 1804
+    },
+    "snapRadius": 20
+  },
+  {
     "id": "gastro_48743",
     "name": "Gipfeltreffen, Bergrestaurant mit Wine Lounge im Sommer & Winter",
     "type": "restaurant",
@@ -1452,6 +1648,20 @@
     "panorama": {
       "x": 3224,
       "y": 556
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_48766",
+    "name": "Larmachalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.25250502105263,
+      "lng": 12.098998205263158
+    },
+    "panorama": {
+      "x": 3020,
+      "y": 892
     },
     "snapRadius": 20
   },
