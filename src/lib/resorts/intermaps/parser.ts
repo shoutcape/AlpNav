@@ -371,13 +371,13 @@ function normalizeDifficulty(rawDiff: string | undefined, subtitle: string | und
 function normalizeLiftType(type: number, subtitle?: string): LiftType {
   switch (type) {
     case 2: case 3: case 7: case 8: case 17: case 23:
-    case 2608: case 2610: case 2624: case 2634:
+    case 2608: case 2623: case 2624: case 2634:
       return "gondola";
     case 1: case 13: case 24: case 25: case 29: case 30: case 33:
     case 2604: case 2605: case 2606:
       return "chairlift";
     case 9: case 21: case 31:
-    case 2607: case 2613: case 2623:
+    case 2607: case 2610: case 2613:
       return "drag";
   }
 
