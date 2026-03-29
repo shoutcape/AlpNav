@@ -15,8 +15,10 @@ const MAX_SNAP_DISTANCE = 50; // meters
  */
 export class GpsToPanoramaMapper {
   private segments: { seg: MappedSegment; routeNumber: string }[] = [];
+  readonly routes: MappedRoute[];
 
   constructor(routes: MappedRoute[]) {
+    this.routes = routes;
     for (const route of routes) {
       for (const seg of route.segments) {
         this.segments.push({ seg, routeNumber: route.number });

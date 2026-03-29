@@ -130,6 +130,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [lastFix, setLastFix] = useState<GeoFix | null>(null);
   const [mockGeoInput, setMockGeoInput] = useState("47.2414193, 12.0377060");
   const [mockGeoActive, setMockGeoActive] = useState(false);
+  const [simRoute, setSimRoute] = useState<string>(""); // route number
+  const [simPlaying, setSimPlaying] = useState(false);
+  const [simProgress, setSimProgress] = useState(0); // index into flattened geo points
+  const simIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const minScaleRef = useRef(0.05);
 
   const { fix: geoFix, status: geoStatus } = useGeolocation(followLocation);
@@ -859,10 +863,56 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   const clearMockGeo = () => {
     setMockGeoActive(false);
+    stopSim();
     setLastProjection(null);
     if (userPositionOverlayRef.current) {
       drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
     }
+  };
+
+  /** Flatten all geo points for the selected simulation route */
+  const getSimPoints = () => {
+    const mapper = mapperRef.current;
+    if (!mapper || !simRoute) return [];
+    const route = mapper.routes.find((r) => r.number === simRoute);
+    if (!route) return [];
+    return route.segments.flatMap((s) => s.geoPoints);
+  };
+
+  const startSim = () => {
+    const pts = getSimPoints();
+    if (pts.length === 0) return;
+    stopSim();
+    setMockGeoActive(true);
+    setSimPlaying(true);
+    setSimProgress(0);
+    // Apply first point immediately
+    const p = pts[0];
+    setLastFix({ position: p, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
+    setMockGeoInput(`${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`);
+    projectAndDraw(p.lat, p.lng, 5);
+
+    let idx = 1;
+    simIntervalRef.current = setInterval(() => {
+      if (idx >= pts.length) {
+        stopSim();
+        return;
+      }
+      const pt = pts[idx];
+      setSimProgress(idx);
+      setLastFix({ position: pt, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
+      setMockGeoInput(`${pt.lat.toFixed(6)}, ${pt.lng.toFixed(6)}`);
+      projectAndDraw(pt.lat, pt.lng, 5);
+      idx++;
+    }, 200);
+  };
+
+  const stopSim = () => {
+    if (simIntervalRef.current) {
+      clearInterval(simIntervalRef.current);
+      simIntervalRef.current = null;
+    }
+    setSimPlaying(false);
   };
 
   const toggleFollowLocation = () => setFollowLocation(f => {
@@ -1079,7 +1129,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               </div>
 
               {/* Current location */}
-              {lastFix && !mockGeoActive && (
+              {lastFix && (
                 <div className="flex items-center gap-1">
                   <span className="text-[9px] uppercase tracking-widest text-white/40 shrink-0">loc:</span>
                   <span className="text-[10px] text-white/70 truncate">{lastFix.position.lat.toFixed(5)}, {lastFix.position.lng.toFixed(5)}</span>
@@ -1120,10 +1170,59 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                     </button>
                   )}
                 </div>
-                {mockGeoActive && (
+                {mockGeoActive && !simPlaying && (
                   <div className="text-[10px] text-yellow-400/80 mt-0.5">mock active</div>
                 )}
               </div>
+
+              {/* Route simulation */}
+              {geoMapperStatus === "ready" && mapperRef.current && (
+                <div className="border-t border-white/10 pt-1.5">
+                  <div className="text-[9px] uppercase tracking-widest text-white/40 mb-1">simulate route</div>
+                  <div className="flex gap-1 items-center">
+                    <select
+                      value={simRoute}
+                      onChange={(e) => { stopSim(); setSimRoute(e.target.value); }}
+                      className="flex-1 min-w-0 rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
+                    >
+                      <option value="" className="bg-[#111]">select route</option>
+                      {mapperRef.current.routes
+                        .slice()
+                        .sort((a, b) => {
+                          const na = parseInt(a.number), nb = parseInt(b.number);
+                          if (!isNaN(na) && !isNaN(nb)) return na - nb;
+                          return a.number.localeCompare(b.number);
+                        })
+                        .map((r) => (
+                          <option key={r.pisteId} value={r.number} className="bg-[#111]">
+                            {r.number} ({r.segments.length} seg, {r.segments.reduce((n, s) => n + s.geoPoints.length, 0)} pts)
+                          </option>
+                        ))}
+                    </select>
+                    {!simPlaying ? (
+                      <button
+                        onClick={startSim}
+                        disabled={!simRoute}
+                        className="shrink-0 rounded bg-green-500/80 px-2 py-1 text-[10px] text-white hover:bg-green-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      >
+                        ▶
+                      </button>
+                    ) : (
+                      <button
+                        onClick={stopSim}
+                        className="shrink-0 rounded bg-red-500/80 px-2 py-1 text-[10px] text-white hover:bg-red-500 transition-colors"
+                      >
+                        ■
+                      </button>
+                    )}
+                  </div>
+                  {simPlaying && (
+                    <div className="text-[10px] text-green-400/80 mt-0.5">
+                      simulating: {simProgress + 1}/{getSimPoints().length}
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Projection result */}
               {lastProjection ? (
