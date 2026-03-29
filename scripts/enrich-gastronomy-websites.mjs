@@ -25,7 +25,10 @@ const RESORT_CONFIG = {
   },
   "hochzillertal-hochfugen-spieljoch": {
     clientKey: "hochzillertal_spieljoch",
-  }
+  },
+  "hintertuxer-gletscher": {
+    clientKey: "hintertuxer_gletscher",
+  },
 };
 
 const config = RESORT_CONFIG[resortId];

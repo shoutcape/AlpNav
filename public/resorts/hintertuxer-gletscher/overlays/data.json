@@ -1,0 +1,2472 @@
+{
+  "lifts": [
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "2er Gefrorene Wand 3b",
+        "types": [],
+        "additional-info": {
+          "length": 840,
+          "capacity": 1110,
+          "altitude-valley": 2972,
+          "altitude-mountain": 3248
+        },
+        "oid": "4097",
+        "status": "closed",
+        "id": "60513",
+        "subtitle": "2-chair lift",
+        "clients-sub-id": 2602
+      },
+      "number": null,
+      "type": 2602,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_60513",
+      "subtitle": "2-chair lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "3er Schlegeis",
+        "types": [],
+        "additional-info": {
+          "length": 1013,
+          "capacity": 2100,
+          "altitude-valley": 2770,
+          "altitude-mountain": 3072
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/schlegeis.jpg",
+        "oid": "4096",
+        "status": "closed",
+        "id": "60517",
+        "subtitle": "3-chair lift",
+        "clients-sub-id": 2603,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/schlegeis.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2603,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_60517",
+      "subtitle": "3-chair lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "4erTuxerjoch",
+        "types": [],
+        "additional-info": {
+          "length": 1294,
+          "capacity": 2400,
+          "altitude-valley": 2037,
+          "altitude-mountain": 2394
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/tuxerjoch%20blick%20sommerberg%20070329.jpg",
+        "oid": "4095",
+        "status": "open",
+        "id": "60528",
+        "subtitle": "4-chair lift",
+        "clients-sub-id": 2604,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/tuxerjoch%20blick%20sommerberg%20070329.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2604,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60528",
+      "subtitle": "4-chair lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "6er Sommerberg",
+        "types": [],
+        "additional-info": {
+          "length": 421,
+          "capacity": 2973,
+          "altitude-valley": 1948,
+          "altitude-mountain": 2042
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/sesselsommerberg.jpg",
+        "oid": "4094",
+        "status": "open",
+        "id": "60525",
+        "subtitle": "6-chair lift",
+        "clients-sub-id": 2605,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/sesselsommerberg.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/ausstiegsommerberg.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/ml%20a0046984%20kopie.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2605,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60525",
+      "subtitle": "6-chair lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "6er Lärmstange 1",
+        "types": [],
+        "additional-info": {
+          "length": 1785,
+          "capacity": 2800,
+          "altitude-valley": 2130,
+          "altitude-mountain": 2770
+        },
+        "oid": "4098",
+        "status": "open",
+        "id": "60522",
+        "subtitle": "6-chair lift",
+        "clients-sub-id": 2605
+      },
+      "number": null,
+      "type": 2605,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60522",
+      "subtitle": "6-chair lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "6er Lärmstange 2",
+        "types": [],
+        "additional-info": {
+          "length": 1020,
+          "capacity": 2801,
+          "altitude-mountain": 3135
+        },
+        "thumbnail": "https://clients.intermaps.com/admin/imgupload/2016_02_11_13_46_19_120_0.jpg",
+        "oid": "30676",
+        "status": "open",
+        "id": "60519",
+        "subtitle": "6-chair lift",
+        "clients-sub-id": 2605,
+        "info": {
+          "imgs": [
+            "https://clients.intermaps.com/admin/imgupload/2016_02_11_13_46_19_120_0.jpg",
+            "https://clients.intermaps.com/admin/imgupload/2016_02_11_13_46_19_167_1.jpg",
+            "https://clients.intermaps.com/admin/imgupload/2016_02_11_13_46_19_182_2.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2605,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60519",
+      "subtitle": "6-chair lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Gefrorene Wand 1",
+        "types": [],
+        "additional-info": {
+          "length": 744,
+          "capacity": 1440,
+          "altitude-valley": 3008,
+          "altitude-mountain": 3250
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gfw.jpg",
+        "oid": "4081",
+        "status": "open",
+        "id": "60514",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gfw.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/blick%20auf%20die%20vierte%20081124.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60514",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Gefrorene Wand 2",
+        "types": [],
+        "additional-info": {
+          "length": 744,
+          "capacity": 1440,
+          "altitude-valley": 3008,
+          "altitude-mountain": 3249
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gfw.jpg",
+        "oid": "4082",
+        "status": "open",
+        "id": "60557",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gfw.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/blick%20auf%20die%20vierte%20081124.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60557",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Olperer 1",
+        "types": [],
+        "additional-info": {
+          "length": 1112,
+          "capacity": 1440,
+          "altitude-valley": 3022,
+          "altitude-mountain": 3244
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/olp.jpg",
+        "oid": "4084",
+        "status": "open",
+        "id": "60518",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/olp.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/olperer.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/olperer8.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60518",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Kaserer 1",
+        "types": [],
+        "additional-info": {
+          "length": 1426,
+          "capacity": 1416,
+          "altitude-valley": 2702,
+          "altitude-mountain": 3193
+        },
+        "oid": "4086",
+        "status": "closed",
+        "id": "60520",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_60520",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Kaserer 2",
+        "types": [],
+        "additional-info": {
+          "length": 1080,
+          "capacity": 1440,
+          "altitude-valley": 2708,
+          "altitude-mountain": 3059
+        },
+        "oid": "4087",
+        "status": "open",
+        "id": "60521",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60521",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Ramsmoos",
+        "types": [],
+        "additional-info": {
+          "length": 479,
+          "capacity": 1208,
+          "altitude-valley": 2035,
+          "altitude-mountain": 2150
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/tuxerjoch.jpg",
+        "oid": "4088",
+        "status": "open",
+        "id": "60526",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/tuxerjoch.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60526",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Olperer 2",
+        "types": [],
+        "oid": "47041",
+        "status": "open",
+        "id": "60558",
+        "subtitle": "T-bar",
+        "clients-sub-id": 2607
+      },
+      "number": null,
+      "type": 2607,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60558",
+      "subtitle": "T-bar",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Babylift Hintertux",
+        "types": [],
+        "additional-info": {
+          "length": 160,
+          "capacity": 400
+        },
+        "oid": "4090",
+        "status": "open",
+        "id": "60581",
+        "subtitle": "Handle Tow",
+        "clients-sub-id": 2613
+      },
+      "number": null,
+      "type": 2613,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60581",
+      "subtitle": "Handle Tow",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Babylift Gletscherboden",
+        "types": [],
+        "oid": "38018",
+        "status": "closed",
+        "id": "60580",
+        "subtitle": "Handle Tow",
+        "clients-sub-id": 2613
+      },
+      "number": null,
+      "type": 2613,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_60580",
+      "subtitle": "Handle Tow",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Gletscherbus 1",
+        "types": [],
+        "additional-info": {
+          "length": 1412,
+          "capacity": 3200,
+          "altitude-valley": 1501,
+          "altitude-mountain": 2031
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gletscherbus1.jpg",
+        "oid": "4091",
+        "status": "open",
+        "id": "6053",
+        "subtitle": "funitel",
+        "clients-sub-id": 2622,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gletscherbus1.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/img_3299.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/dsc04515.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2622,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_6053",
+      "subtitle": "funitel",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Gletscherbus 2",
+        "types": [],
+        "additional-info": {
+          "length": 2280,
+          "capacity": 3200,
+          "altitude-valley": 2031,
+          "altitude-mountain": 2609
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/img_3304.jpg",
+        "oid": "4092",
+        "status": "open",
+        "id": "6055",
+        "subtitle": "funitel",
+        "clients-sub-id": 2622,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/img_3304.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/img_3309.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gondelgb2.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/sommerberg2.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2622,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_6055",
+      "subtitle": "funitel",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Gletscherbus 3",
+        "types": [],
+        "additional-info": {
+          "length": 1897,
+          "capacity": 3000,
+          "altitude-valley": 2600,
+          "altitude-mountain": 3250
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/ml%20a0046716%20kopie.jpg",
+        "oid": "4093",
+        "status": "open",
+        "id": "6059",
+        "subtitle": "funitel",
+        "clients-sub-id": 2622,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/ml%20a0046716%20kopie.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gb3.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/gb3berg-panorama-jo.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2622,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_6059",
+      "subtitle": "funitel",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "8er Sommerberg",
+        "types": [],
+        "additional-info": {
+          "length": 1434,
+          "capacity": 2400,
+          "altitude-valley": 1597,
+          "altitude-mountain": 2032
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/achter2.jpg",
+        "oid": "4078",
+        "status": "open",
+        "id": "6052",
+        "subtitle": "cable car",
+        "clients-sub-id": 2623,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/achter2.jpg",
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/26269_21.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2623,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_6052",
+      "subtitle": "cable car",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "4er Fernerhaus",
+        "types": [],
+        "additional-info": {
+          "length": 2400,
+          "capacity": 1750,
+          "altitude-valley": 2031,
+          "altitude-mountain": 2608
+        },
+        "oid": "4079",
+        "status": "open",
+        "id": "6056",
+        "subtitle": "cable car",
+        "clients-sub-id": 2623
+      },
+      "number": null,
+      "type": 2623,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_6056",
+      "subtitle": "cable car",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "10 EUB Gefrorene Wand",
+        "types": [],
+        "additional-info": {
+          "length": 1257,
+          "capacity": 2800,
+          "altitude-valley": 2660,
+          "altitude-mountain": 3033
+        },
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/p1030111.jpg",
+        "oid": "4080",
+        "status": "open",
+        "id": "60510",
+        "subtitle": "cable car",
+        "clients-sub-id": 2623,
+        "info": {
+          "imgs": [
+            "https://ski3.intermaps.com/zillertal/mcms3/imgupload/p1030111.jpg",
+            "https://clients.intermaps.com/admin/imgupload/2016_02_11_14_54_40_488_0.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 2623,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_60510",
+      "subtitle": "cable car",
+      "searchdesc": null
+    }
+  ],
+  "slopes": [
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "9 Olperer 1",
+        "types": [],
+        "additional-info": {
+          "length": 3500,
+          "length-open": 0
+        },
+        "oid": "4108",
+        "status": "open",
+        "id": "60543",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60543",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "9a Olperer 2",
+        "types": [],
+        "additional-info": {
+          "length": 2000,
+          "length-open": 0
+        },
+        "oid": "4109",
+        "status": "open",
+        "id": "60544",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60544",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "12 Höllscharte",
+        "types": [],
+        "additional-info": {
+          "length": 8000,
+          "length-open": 0
+        },
+        "oid": "4112",
+        "status": "open",
+        "id": "60549",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60549",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "15 Ramsmoos",
+        "types": [],
+        "additional-info": {
+          "length": 1000,
+          "length-open": 0
+        },
+        "oid": "4113",
+        "status": "open",
+        "id": "60553",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60553",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "16 Mahlgrube",
+        "types": [],
+        "additional-info": {
+          "length": 3000,
+          "length-open": 0
+        },
+        "oid": "4114",
+        "status": "open",
+        "id": "60554",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60554",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "17 Tuxerjoch",
+        "types": [],
+        "additional-info": {
+          "length": 5000,
+          "length-open": 0
+        },
+        "oid": "4115",
+        "status": "open",
+        "id": "60555",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60555",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "14",
+        "types": [],
+        "oid": "26095",
+        "status": "open",
+        "id": "60576",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60576",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "13",
+        "types": [],
+        "oid": "26096",
+        "status": "open",
+        "id": "60552",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60552",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "3",
+        "types": [],
+        "oid": "58513",
+        "status": "open",
+        "id": "60564",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60564",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "10",
+        "types": [],
+        "oid": "58514",
+        "status": "open",
+        "id": "60565",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60565",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "3a",
+        "types": [],
+        "oid": "606992",
+        "status": "open",
+        "id": "60586",
+        "subtitle": "slope (easy)",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": 2614,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_60586",
+      "subtitle": "slope (easy)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "11 Kaserer",
+        "types": [],
+        "additional-info": {
+          "length": 6000,
+          "length-open": 0
+        },
+        "oid": "4099",
+        "status": "open",
+        "id": "60546",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60546",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "2 Spannagelabfahrt",
+        "types": [],
+        "additional-info": {
+          "length": 4500,
+          "length-open": 0
+        },
+        "oid": "4100",
+        "status": "open",
+        "id": "60532",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60532",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "2a Moräne",
+        "types": [],
+        "additional-info": {
+          "length": 3000,
+          "length-open": 0
+        },
+        "oid": "4101",
+        "status": "open",
+        "id": "60533",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60533",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "3 Tuxer Fernerhaus",
+        "types": [],
+        "additional-info": {
+          "length": 8000,
+          "length-open": 0
+        },
+        "oid": "4102",
+        "status": "open",
+        "id": "60536",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60536",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "4 Gefrorene Wand",
+        "types": [],
+        "additional-info": {
+          "length-open": 0
+        },
+        "oid": "4103",
+        "status": "open",
+        "id": "60538",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60538",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "5 Riepensattel",
+        "types": [],
+        "additional-info": {
+          "length": 5000,
+          "length-open": 0
+        },
+        "oid": "4104",
+        "status": "open",
+        "id": "60539",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60539",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "8 Slalomhang",
+        "types": [],
+        "additional-info": {
+          "length": 4500,
+          "length-open": 0
+        },
+        "oid": "4106",
+        "status": "open",
+        "id": "60541",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60541",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "11a Kaserereck",
+        "types": [],
+        "additional-info": {
+          "length": 3000,
+          "length-open": 0
+        },
+        "oid": "4110",
+        "status": "open",
+        "id": "60547",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60547",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "17a Tuxerjoch",
+        "types": [],
+        "additional-info": {
+          "length": 500,
+          "length-open": 0
+        },
+        "oid": "4135",
+        "status": "open",
+        "id": "60556",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60556",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "1 Schwarze Pfanne",
+        "types": [],
+        "additional-info": {
+          "length": 7000
+        },
+        "oid": "4137",
+        "status": "open",
+        "id": "60530",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "open",
+      "id": "R_60530",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "9 Olperer innen",
+        "types": [],
+        "oid": "416138",
+        "status": "closed",
+        "id": "60583",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_60583",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "6 Schlegeis",
+        "types": [],
+        "oid": "606994",
+        "status": "closed",
+        "id": "60587",
+        "subtitle": "slope (medium)",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": 2615,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_60587",
+      "subtitle": "slope (medium)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "8a Bugglpiste",
+        "types": [],
+        "additional-info": {
+          "length": 1000,
+          "length-open": 0
+        },
+        "oid": "4107",
+        "status": "closed",
+        "id": "60542",
+        "subtitle": "slope (difficult)",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": 2616,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "closed",
+      "id": "R_60542",
+      "subtitle": "slope (difficult)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "Bergtour Zittauerhütte",
+        "types": [],
+        "oid": "309197",
+        "status": "open",
+        "id": "60567",
+        "subtitle": "slope (difficult)",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": 2616,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_60567",
+      "subtitle": "slope (difficult)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "2b",
+        "types": [],
+        "oid": "309306",
+        "status": "closed",
+        "id": "60566",
+        "subtitle": "slope (difficult)",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": 2616,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_60566",
+      "subtitle": "slope (difficult)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "6 Schlegeis",
+        "types": [],
+        "oid": "416137",
+        "status": "closed",
+        "id": "60582",
+        "subtitle": "slope (difficult)",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": 2616,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_60582",
+      "subtitle": "slope (difficult)",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "11b Sonnenhang",
+        "types": [],
+        "additional-info": {
+          "length": 1000
+        },
+        "oid": "4111",
+        "status": "closed",
+        "id": "60548",
+        "subtitle": "skiroute",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "closed",
+      "id": "R_60548",
+      "subtitle": "skiroute",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "1a Waldabfahrt",
+        "types": [],
+        "additional-info": {
+          "length": 3000,
+          "length-open": 0
+        },
+        "oid": "4136",
+        "status": "closed",
+        "id": "60529",
+        "subtitle": "skiroute",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "closed",
+      "id": "R_60529",
+      "subtitle": "skiroute",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "2 Unterm Eisbruch",
+        "types": [],
+        "additional-info": {
+          "length": 3000,
+          "length-open": 0
+        },
+        "oid": "4138",
+        "status": "closed",
+        "id": "60534",
+        "subtitle": "skiroute",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "closed",
+      "id": "R_60534",
+      "subtitle": "skiroute",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "13 Gletscherzunge",
+        "types": [],
+        "additional-info": {
+          "length": 5000,
+          "length-open": 0
+        },
+        "oid": "4139",
+        "status": "closed",
+        "id": "60550",
+        "subtitle": "skiroute",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "closed",
+      "id": "R_60550",
+      "subtitle": "skiroute",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "13a Haxenbrecher",
+        "types": [],
+        "additional-info": {
+          "length": 3500,
+          "length-open": 0
+        },
+        "oid": "4140",
+        "status": "closed",
+        "id": "60551",
+        "subtitle": "skiroute",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": null,
+      "status": "closed",
+      "id": "R_60551",
+      "subtitle": "skiroute",
+      "searchdesc": null
+    }
+  ],
+  "routes": [
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Sommerbergalm-Bichlalm-Hintertux",
+        "types": [],
+        "thumbnail": "https://ski3.intermaps.com/zillertal/mcms3/imgupload/bichl.jpg",
+        "oid": "4141",
+        "status": "open",
+        "id": "4141",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 707
+      },
+      "number": null,
+      "type": 707,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "707_4141",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Loipe Hintertux",
+        "types": [],
+        "oid": "606995",
+        "status": "closed",
+        "id": "10097807",
+        "subtitle": "Cross-country skiing",
+        "clients-sub-id": 708
+      },
+      "number": null,
+      "type": 708,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "708_10097807",
+      "subtitle": "Cross-country skiing",
+      "searchdesc": null
+    }
+  ],
+  "pois": {
+    "2810": [
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&c0=0&cam=5552",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "LiveCam Gefrorene Wand",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5552.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "4132",
+          "status": "unknown",
+          "id": "5552",
+          "subtitle": "Webcams (Feratel)",
+          "clients-sub-id": 2810
+        },
+        "number": null,
+        "icon": "svg/default/livecam.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "5552",
+        "subtitle": "Webcams (Feratel)",
+        "searchdesc": null,
+        "position": {
+          "x": 225,
+          "y": 184
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&c0=0&cam=5551",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "LiveCam Sommerbergalm",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5551.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "4133",
+          "status": "unknown",
+          "id": "5551",
+          "subtitle": "Webcams (Feratel)",
+          "clients-sub-id": 2810
+        },
+        "number": null,
+        "icon": "svg/default/livecam.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "5551",
+        "subtitle": "Webcams (Feratel)",
+        "searchdesc": null,
+        "position": {
+          "x": 617,
+          "y": 662
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&c0=0&cam=5553",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "LiveCam Tuxer Fernerhaus",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5553.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "4134",
+          "status": "unknown",
+          "id": "5553",
+          "subtitle": "Webcams (Feratel)",
+          "clients-sub-id": 2810
+        },
+        "number": null,
+        "icon": "svg/default/livecam.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "5553",
+        "subtitle": "Webcams (Feratel)",
+        "searchdesc": null,
+        "position": {
+          "x": 473,
+          "y": 321
+        }
+      }
+    ],
+    "3001": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Gletscherhütte",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_01_26_15_26_09_39_0.jpg",
+          "oid": "4119",
+          "status": "unknown",
+          "id": "4119",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2022_01_26_15_26_09_39_0.jpg"
+            ],
+            "website": "https://www.gasthof-hochsteg.at/gletscherhuette/"
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4119",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 321,
+          "y": 620
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Tuxer-Joch-Haus",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_01_26_16_21_46_805_0.jpg",
+          "oid": "4120",
+          "status": "unknown",
+          "id": "4120",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2022_01_26_16_21_46_805_0.jpg"
+            ],
+            "website": "https://www.tuxerjochhaus.at"
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4120",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 946,
+          "y": 574
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Bichlalm",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_03_15_09_06_53_758_0.jpg",
+          "oid": "4121",
+          "status": "unknown",
+          "id": "4121",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2022_03_15_09_06_53_758_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2015_09_24_13_57_34_457_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4121",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 573,
+          "y": 993
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Panorama Restaurant Sommerberg",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/4122_20140813141015_img_3817.jpg",
+          "oid": "4122",
+          "status": "unknown",
+          "id": "4122",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/4122_20140813141015_img_3817.jpg",
+              "https://clients.intermaps.com/admin/imgupload/4122_20140814134654_p100127%20(10).jpg",
+              "https://clients.intermaps.com/admin/imgupload/2022_01_24_10_45_09_873_0.jpeg",
+              "https://clients.intermaps.com/admin/imgupload/2022_01_24_10_45_29_960_0.jpeg"
+            ],
+            "website": "https://www.hintertuxergletscher.at"
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4122",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 631,
+          "y": 636
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Tuxer Fernerhaus",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/4123_20140815125722_10605638_763957160338184_1428797063_o.jpg",
+          "oid": "4123",
+          "status": "unknown",
+          "id": "4123",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/4123_20140815125722_10605638_763957160338184_1428797063_o.jpg",
+              "https://clients.intermaps.com/admin/imgupload/4123_20140815125727_10602190_763957140338186_1385118045_o.jpg"
+            ],
+            "website": "https://www.hintertuxergletscher.at"
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4123",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 448,
+          "y": 345
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Spannagelhaus",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/17946_20140813144053_6.jpg",
+          "oid": "17946",
+          "status": "unknown",
+          "id": "17946",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/17946_20140813144053_6.jpg",
+              "https://clients.intermaps.com/admin/imgupload/17946_20140815130610_5.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2022_01_24_10_30_29_949_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2022_01_24_10_28_32_768_0.jpg"
+            ],
+            "website": "https://www.hintertuxergletscher.at/de/informationen/besuch-planen/huetten-restaurants/"
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "17946",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 417,
+          "y": 400
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wirtshaus am Tuxer Ferner",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2015_09_28_16_03_09_179_0.jpg",
+          "oid": "29370",
+          "status": "unknown",
+          "id": "29370",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2015_09_28_16_03_09_179_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2015_09_28_16_03_05_242_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2015_09_28_16_03_01_54_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2015_09_28_16_03_16_695_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "29370",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 424,
+          "y": 367
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Restaurant Hochleger",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_01_31_14_31_55_383_0.jpg",
+          "oid": "293670",
+          "status": "unknown",
+          "id": "293670",
+          "subtitle": "restaurants",
+          "clients-sub-id": 3001,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2022_01_31_14_31_55_383_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "svg/default/gastro.svg",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "293670",
+        "subtitle": "restaurants",
+        "searchdesc": null,
+        "position": {
+          "x": 628,
+          "y": 646
+        }
+      }
+    ],
+    "3002": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sommerberg Arena",
+          "types": [],
+          "oid": "4117",
+          "status": "unknown",
+          "id": "4117",
+          "subtitle": "bar // pub",
+          "clients-sub-id": 3002,
+          "info": {
+            "website": "https://www.hintertuxergletscher.at/de/informationen/besuch-planen/huetten-restaurants/"
+          }
+        },
+        "number": null,
+        "icon": "svg/default/bar.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4117",
+        "subtitle": "bar // pub",
+        "searchdesc": null,
+        "position": {
+          "x": 619,
+          "y": 641
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Panoramabar im Tuxer Fernerhaus",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_01_28_16_02_50_797_0.jpg",
+          "oid": "293655",
+          "status": "unknown",
+          "id": "293655",
+          "subtitle": "bar // pub",
+          "clients-sub-id": 3002,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2022_01_28_16_02_50_797_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "svg/default/bar.svg",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "293655",
+        "subtitle": "bar // pub",
+        "searchdesc": null,
+        "position": {
+          "x": 444,
+          "y": 351
+        }
+      }
+    ],
+    "3201": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Hintertux",
+          "types": [],
+          "oid": "4125",
+          "status": "unknown",
+          "id": "4125",
+          "subtitle": "parking",
+          "clients-sub-id": 3201
+        },
+        "number": null,
+        "icon": "svg/soelden/parkplatz.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4125",
+        "subtitle": "parking",
+        "searchdesc": null,
+        "position": {
+          "x": 407,
+          "y": 942
+        }
+      }
+    ],
+    "3204": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skischule Tuxertal - Büro Sommerbergalm",
+          "types": [],
+          "oid": "4126",
+          "status": "unknown",
+          "id": "4126",
+          "subtitle": "skiing school",
+          "clients-sub-id": 3204
+        },
+        "number": null,
+        "icon": "svg/default/skischule.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4126",
+        "subtitle": "skiing school",
+        "searchdesc": null,
+        "position": {
+          "x": 628,
+          "y": 630
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skischule Tuxertal - Büro Tuxer Fernerhaus",
+          "types": [],
+          "oid": "4127",
+          "status": "unknown",
+          "id": "4127",
+          "subtitle": "skiing school",
+          "clients-sub-id": 3204
+        },
+        "number": null,
+        "icon": "svg/default/skischule.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4127",
+        "subtitle": "skiing school",
+        "searchdesc": null,
+        "position": {
+          "x": 452,
+          "y": 357
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skischule Tuxertal - Büro Talstation Hintertux",
+          "types": [],
+          "oid": "4128",
+          "status": "unknown",
+          "id": "4128",
+          "subtitle": "skiing school",
+          "clients-sub-id": 3204
+        },
+        "number": null,
+        "icon": "svg/default/skischule.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4128",
+        "subtitle": "skiing school",
+        "searchdesc": null,
+        "position": {
+          "x": 393,
+          "y": 952
+        }
+      }
+    ],
+    "3219": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sport Nenner - Sommerbergshop",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/4129_20140814093645_logo.png",
+          "oid": "4129",
+          "status": "unknown",
+          "id": "4129",
+          "subtitle": "ski rental",
+          "clients-sub-id": 3219
+        },
+        "number": null,
+        "icon": "svg/default/skiverleih.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4129",
+        "subtitle": "ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 629,
+          "y": 652
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sport Nenner - Gletschershop",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/4130_20140814093504_logo.png",
+          "oid": "4130",
+          "status": "unknown",
+          "id": "4130",
+          "subtitle": "ski rental",
+          "clients-sub-id": 3219
+        },
+        "number": null,
+        "icon": "svg/default/skiverleih.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4130",
+        "subtitle": "ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 447,
+          "y": 345
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sport Nenner - Talstation Hintertux",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/4131_20140814093336_logo.png",
+          "oid": "4131",
+          "status": "unknown",
+          "id": "4131",
+          "subtitle": "ski rental",
+          "clients-sub-id": 3219
+        },
+        "number": null,
+        "icon": "svg/default/skiverleih.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4131",
+        "subtitle": "ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 384,
+          "y": 937
+        }
+      }
+    ],
+    "3220": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkhaus Talstation Hintertux",
+          "types": [],
+          "oid": "4124",
+          "status": "unknown",
+          "id": "4124",
+          "subtitle": "underground parking",
+          "clients-sub-id": 3220
+        },
+        "number": null,
+        "icon": "svg/default/tiefgarage.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4124",
+        "subtitle": "underground parking",
+        "searchdesc": null,
+        "position": {
+          "x": 384,
+          "y": 924
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Tiefgarage \"Aue\" Hintertuxer Gletscher",
+          "types": [],
+          "oid": "293836",
+          "status": "unknown",
+          "id": "293836",
+          "subtitle": "underground parking",
+          "clients-sub-id": 3220
+        },
+        "number": null,
+        "icon": "svg/default/tiefgarage.svg",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "293836",
+        "subtitle": "underground parking",
+        "searchdesc": null,
+        "position": {
+          "x": 425,
+          "y": 955
+        }
+      }
+    ],
+    "3267": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wild- und Waldschutzzone",
+          "types": [],
+          "oid": "58515",
+          "status": "unknown",
+          "id": "58515",
+          "subtitle": "Schutzzone",
+          "clients-sub-id": 3267
+        },
+        "number": null,
+        "icon": "svg/default/circle/no_skiing3.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "58515",
+        "subtitle": "Schutzzone",
+        "searchdesc": null,
+        "position": {
+          "x": 374,
+          "y": 838
+        }
+      }
+    ],
+    "3401": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Betterpark Hintertux",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2018_08_29_09_59_52_948_0.jpg",
+          "oid": "4142",
+          "status": "unknown",
+          "id": "4142",
+          "subtitle": "Funpark",
+          "clients-sub-id": 3401
+        },
+        "number": null,
+        "icon": "svg/default/funpark.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4142",
+        "subtitle": "Funpark",
+        "searchdesc": null,
+        "position": {
+          "x": 473,
+          "y": 132
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Funslope Hintertux",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2018_08_29_09_57_18_206_0.jpg",
+          "oid": "4879",
+          "status": "unknown",
+          "id": "4879",
+          "subtitle": "Funpark",
+          "clients-sub-id": 3401
+        },
+        "number": null,
+        "icon": "svg/default/funpark.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "4879",
+        "subtitle": "Funpark",
+        "searchdesc": null,
+        "position": {
+          "x": 696,
+          "y": 635
+        }
+      }
+    ],
+    "3439": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Flohpark Hintertux (Beginners Area)",
+          "types": [],
+          "oid": "60840",
+          "status": "open",
+          "id": "60581",
+          "subtitle": "Kinderthemen / Kindertipps",
+          "clients-sub-id": 3439
+        },
+        "number": null,
+        "icon": "svg/default/circle/lifts/icon_zauberteppich_im",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "60581",
+        "subtitle": "Kinderthemen / Kindertipps",
+        "searchdesc": null,
+        "position": {
+          "x": 445,
+          "y": 957
+        }
+      }
+    ],
+    "3442": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Natur Eis Palast",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_01_26_16_42_39_305_0.jpg",
+          "oid": "24524",
+          "status": "unknown",
+          "id": "24524",
+          "subtitle": "extra",
+          "clients-sub-id": 3442
+        },
+        "number": null,
+        "icon": "svg/default/crystal_cube2.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "24524",
+        "subtitle": "extra",
+        "searchdesc": null,
+        "position": {
+          "x": 223,
+          "y": 169
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Spannagelhöhle",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_03_03_16_16_09_474_0.jpg",
+          "oid": "24525",
+          "status": "unknown",
+          "id": "24525",
+          "subtitle": "extra",
+          "clients-sub-id": 3442
+        },
+        "number": null,
+        "icon": "svg/default/crystal_cube2.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "24525",
+        "subtitle": "extra",
+        "searchdesc": null,
+        "position": {
+          "x": 407,
+          "y": 420
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Panoramaterrasse",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_03_03_16_00_42_931_0.jpeg",
+          "oid": "24526",
+          "status": "unknown",
+          "id": "24526",
+          "subtitle": "extra",
+          "clients-sub-id": 3442
+        },
+        "number": null,
+        "icon": "svg/default/crystal_cube2.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "24526",
+        "subtitle": "extra",
+        "searchdesc": null,
+        "position": {
+          "x": 219,
+          "y": 181
+        }
+      }
+    ],
+    "3461": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Kidsslope Hintertux",
+          "types": [],
+          "thumbnail": "https://clients.intermaps.com/admin/imgupload/2022_05_23_14_14_49_881_0.jpg",
+          "oid": "46562",
+          "status": "unknown",
+          "id": "46562",
+          "subtitle": "Funslope",
+          "clients-sub-id": 3461
+        },
+        "number": null,
+        "icon": "svg/default/3461.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "46562",
+        "subtitle": "Funslope",
+        "searchdesc": null,
+        "position": {
+          "x": 737,
+          "y": 563
+        }
+      }
+    ],
+    "3462": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Fotopoint",
+          "types": [],
+          "oid": "46566",
+          "status": "unknown",
+          "id": "46566",
+          "subtitle": "Photopoint",
+          "clients-sub-id": 3462
+        },
+        "number": null,
+        "icon": "svg/default/photopoint.svg",
+        "iconOrientation": null,
+        "types": [],
+        "status": "unknown",
+        "id": "46566",
+        "subtitle": "Photopoint",
+        "searchdesc": null,
+        "position": {
+          "x": 209,
+          "y": 194
+        }
+      }
+    ]
+  },
+  "lookup": {
+    "2a Moräne | slope (medium) | ": "R_60533_group",
+    "Parkhaus Talstation Hintertux | underground parking | ": "4124",
+    "Gefrorene Wand 2 | T-bar | ": "L_60557_group",
+    "3 | slope (easy) | ": "R_60564_group",
+    "Tuxer-Joch-Haus | restaurants | ": "4120",
+    "6er Sommerberg | 6-chair lift | ": "L_60525_group",
+    "11b Sonnenhang | skiroute | ": "R_60548_group",
+    "17 Tuxerjoch | slope (easy) | ": "R_60555_group",
+    "Babylift Hintertux | Handle Tow | ": "L_60581_group",
+    "Olperer 2 | T-bar | ": "L_60558_group",
+    "9a Olperer 2 | slope (easy) | ": "R_60544_group",
+    "4er Fernerhaus | cable car | ": "L_6056_group",
+    "Spannagelhöhle | extra | ": "24525",
+    "Panoramabar im Tuxer Fernerhaus | bar // pub | ": "293655",
+    "Sommerbergalm-Bichlalm-Hintertux | Winter hiking | ": "707_4141_group",
+    "2 Unterm Eisbruch | skiroute | ": "R_60534_group",
+    "3a | slope (easy) | ": "R_60586_group",
+    "8er Sommerberg | cable car | ": "L_6052_group",
+    "Fotopoint | Photopoint | ": "46566",
+    "9 Olperer innen | slope (medium) | ": "R_60583_group",
+    "Skischule Tuxertal - Büro Sommerbergalm | skiing school | ": "4126",
+    "11a Kaserereck | slope (medium) | ": "R_60547_group",
+    "5 Riepensattel | slope (medium) | ": "R_60539_group",
+    "3 Tuxer Fernerhaus | slope (medium) | ": "R_60536_group",
+    "Kidsslope Hintertux | Funslope | ": "46562",
+    "15 Ramsmoos | slope (easy) | ": "R_60553_group",
+    "16 Mahlgrube | slope (easy) | ": "R_60554_group",
+    "Flohpark Hintertux (Beginners Area) | Kinderthemen / Kindertipps | ": "60581",
+    "Olperer 1 | T-bar | ": "L_60518_group",
+    "1 Schwarze Pfanne | slope (medium) | ": "R_60530_group",
+    "Natur Eis Palast | extra | ": "24524",
+    "Sommerberg Arena | bar // pub | ": "4117",
+    "Ramsmoos | T-bar | ": "L_60526_group",
+    "2b | slope (difficult) | ": "R_60566_group",
+    "Wirtshaus am Tuxer Ferner | restaurants | ": "29370",
+    "1a Waldabfahrt | skiroute | ": "R_60529_group",
+    "Gletscherbus 1 | funitel | ": "L_6053_group",
+    "Panoramaterrasse | extra | ": "24526",
+    "Loipe Hintertux | Cross-country skiing | ": "708_10097807_group",
+    "13 | slope (easy) | ": "R_60552_group",
+    "14 | slope (easy) | ": "R_60576_group",
+    "Gletscherbus 2 | funitel | ": "L_6055_group",
+    "LiveCam Sommerbergalm | Webcams (Feratel) | ": "5551",
+    "9 Olperer 1 | slope (easy) | ": "R_60543_group",
+    "Spannagelhaus | restaurants | ": "17946",
+    "13 Gletscherzunge | skiroute | ": "R_60550_group",
+    "Wild- und Waldschutzzone | Schutzzone | ": "58515",
+    "10 | slope (easy) | ": "R_60565_group",
+    "6 Schlegeis | slope (difficult) | ": "R_60582_group",
+    "Skischule Tuxertal - Büro Talstation Hintertux | skiing school | ": "4128",
+    "10 EUB Gefrorene Wand | cable car | ": "L_60510_group",
+    "2er Gefrorene Wand 3b | 2-chair lift | ": "L_60513_group",
+    "6er Lärmstange 1 | 6-chair lift | ": "L_60522_group",
+    "Kaserer 1 | T-bar | ": "L_60520_group",
+    "12 Höllscharte | slope (easy) | ": "R_60549_group",
+    "Skischule Tuxertal - Büro Tuxer Fernerhaus | skiing school | ": "4127",
+    "Parkplatz Talstation Hintertux | parking | ": "4125",
+    "Sport Nenner - Talstation Hintertux | ski rental | ": "4131",
+    "Sport Nenner - Gletschershop | ski rental | ": "4130",
+    "11 Kaserer | slope (medium) | ": "R_60546_group",
+    "4erTuxerjoch | 4-chair lift | ": "L_60528_group",
+    "Gefrorene Wand 1 | T-bar | ": "L_60514_group",
+    "3er Schlegeis | 3-chair lift | ": "L_60517_group",
+    "8a Bugglpiste | slope (difficult) | ": "R_60542_group",
+    "Tuxer Fernerhaus | restaurants | ": "4123",
+    "Bichlalm | restaurants | ": "4121",
+    "17a Tuxerjoch | slope (medium) | ": "R_60556_group",
+    "LiveCam Tuxer Fernerhaus | Webcams (Feratel) | ": "5553",
+    "Panorama Restaurant Sommerberg | restaurants | ": "4122",
+    "Betterpark Hintertux | Funpark | ": "4142",
+    "8 Slalomhang | slope (medium) | ": "R_60541_group",
+    "Funslope Hintertux | Funpark | ": "4879",
+    "Sport Nenner - Sommerbergshop | ski rental | ": "4129",
+    "Bergtour Zittauerhütte | slope (difficult) | ": "R_60567_group",
+    "Babylift Gletscherboden | Handle Tow | ": "L_60580_group",
+    "Kaserer 2 | T-bar | ": "L_60521_group",
+    "4 Gefrorene Wand | slope (medium) | ": "R_60538_group",
+    "Restaurant Hochleger | restaurants | ": "293670",
+    "6er Lärmstange 2 | 6-chair lift | ": "L_60519_group",
+    "2 Spannagelabfahrt | slope (medium) | ": "R_60532_group",
+    "13a Haxenbrecher | skiroute | ": "R_60551_group",
+    "Tiefgarage \"Aue\" Hintertuxer Gletscher | underground parking | ": "293836",
+    "LiveCam Gefrorene Wand | Webcams (Feratel) | ": "5552",
+    "Gletscherhütte | restaurants | ": "4119",
+    "6 Schlegeis | slope (medium) | ": "R_60587_group",
+    "Gletscherbus 3 | funitel | ": "L_6059_group"
+  },
+  "lastUpdate": "2026-03-29T09:46:58"
+}

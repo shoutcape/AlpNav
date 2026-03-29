@@ -19,6 +19,10 @@ const CONFIGS = {
     intermapsId: "zillertal_3000",
     imagePath: "zillertal_3000",
   },
+  "hintertuxer-gletscher": {
+    intermapsId: "hintertuxer_gletscher",
+    imagePath: "hintertuxer_gletscher",
+  },
 };
 
 const resortId = process.argv[2];
