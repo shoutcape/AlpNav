@@ -1092,8 +1092,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           <button
             onClick={() => {
               setLegendOpen(o => !o);
+              setFilterPanelOpen(false);
               if (controlsExpandedRef.current) {
-                setFilterPanelOpen(false);
                 morphControls(false);
               }
             }}
