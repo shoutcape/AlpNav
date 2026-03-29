@@ -128,6 +128,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [geoSegmentCount, setGeoSegmentCount] = useState(0);
   const [lastProjection, setLastProjection] = useState<ProjectionResult | null>(null);
   const [lastFix, setLastFix] = useState<GeoFix | null>(null);
+  const [mockGeoInput, setMockGeoInput] = useState("47.2414193, 12.0377060");
+  const [mockGeoActive, setMockGeoActive] = useState(false);
   const minScaleRef = useRef(0.05);
 
   const { fix: geoFix, status: geoStatus } = useGeolocation(followLocation);
@@ -637,6 +639,17 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     redrawDebugRef.current?.();
   }, [debugMode]);
 
+  // Auto-apply default mock GPS when mapper becomes ready
+  useEffect(() => {
+    if (geoMapperStatus !== "ready" || mockGeoActive) return;
+    const parts = mockGeoInput.split(",").map((s) => parseFloat(s.trim()));
+    if (parts.length !== 2 || parts.some(isNaN)) return;
+    const [lat, lng] = parts;
+    setMockGeoActive(true);
+    setLastFix({ position: { lat, lng }, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
+    projectAndDraw(lat, lng, 5);
+  }, [geoMapperStatus]);
+
   // Load OSM pistes and build mapper when resort changes
   useEffect(() => {
     let cancelled = false;
@@ -687,8 +700,34 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     return () => { cancelled = true; };
   }, [activeArea.id, activeArea.bbox]);
 
-  // Project GPS fix to panorama and update user dot
+  // Project a geo position to panorama and update the user dot
+  const projectAndDraw = (lat: number, lng: number, accuracy: number) => {
+    const mapper = mapperRef.current;
+    if (!mapper) return;
+
+    const result = mapper.project({ lat, lng });
+    setLastProjection(result);
+
+    if (result && userPositionOverlayRef.current) {
+      const accuracyPx = accuracy * 2; // rough meters-to-pixels
+      drawUserPositionOverlay(
+        userPositionOverlayRef.current,
+        result.point,
+        accuracyPx,
+        activeArea.visualScale,
+      );
+
+      if (followLocationRef.current && viewportRef.current) {
+        viewportRef.current.moveCenter(result.point.x, result.point.y);
+      }
+    } else if (userPositionOverlayRef.current) {
+      drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+    }
+  };
+
+  // Project real GPS fix to panorama
   useEffect(() => {
+    if (mockGeoActive) return; // mock overrides real GPS
     if (!geoFix) {
       setLastFix(null);
       setLastProjection(null);
@@ -699,30 +738,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     }
 
     setLastFix(geoFix);
-    const mapper = mapperRef.current;
-    if (!mapper) return;
-
-    const result = mapper.project(geoFix.position);
-    setLastProjection(result);
-
-    if (result && userPositionOverlayRef.current) {
-      // Rough meters-to-pixels conversion using accuracy
-      const accuracyPx = geoFix.accuracy * 2; // approximate scale
-      drawUserPositionOverlay(
-        userPositionOverlayRef.current,
-        result.point,
-        accuracyPx,
-        activeArea.visualScale,
-      );
-
-      // Follow mode: center viewport on user position
-      if (followLocationRef.current && viewportRef.current) {
-        viewportRef.current.moveCenter(result.point.x, result.point.y);
-      }
-    } else if (userPositionOverlayRef.current) {
-      drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
-    }
-  }, [geoFix, activeArea.visualScale]);
+    projectAndDraw(geoFix.position.lat, geoFix.position.lng, geoFix.accuracy);
+  }, [geoFix, activeArea.visualScale, mockGeoActive]);
 
   useEffect(() => {
     const pg = pisteHighlightRef.current;
@@ -831,9 +848,31 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   const toggleDebug = () => setDebugMode((currentMode) => (currentMode === false ? "normal" : false));
 
+  const applyMockGeo = () => {
+    const parts = mockGeoInput.split(",").map((s) => parseFloat(s.trim()));
+    if (parts.length !== 2 || parts.some(isNaN)) return;
+    const [lat, lng] = parts;
+    setMockGeoActive(true);
+    setLastFix({ position: { lat, lng }, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
+    projectAndDraw(lat, lng, 5);
+  };
+
+  const clearMockGeo = () => {
+    setMockGeoActive(false);
+    setLastProjection(null);
+    if (userPositionOverlayRef.current) {
+      drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+    }
+  };
+
   const toggleFollowLocation = () => setFollowLocation(f => {
-    followLocationRef.current = !f;
-    return !f;
+    const next = !f;
+    followLocationRef.current = next;
+    // If enabling follow and we already have a projected position, center immediately
+    if (next && lastProjection && viewportRef.current) {
+      viewportRef.current.moveCenter(lastProjection.point.x, lastProjection.point.y);
+    }
+    return next;
   });
 
   const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -926,7 +965,15 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         {/* Follow location toggle */}
         <button
           onClick={toggleFollowLocation}
-          className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${followLocation ? "bg-blue-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
+          className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
+            geoStatus === "denied" || geoStatus === "unavailable"
+              ? "bg-red-400/70 text-black/80"
+              : followLocation
+                ? geoStatus === "active" && lastProjection
+                  ? "bg-blue-400/90 text-black"
+                  : "bg-blue-400/50 text-black/60 animate-pulse"
+                : "bg-[#07111f]/65 text-white/70"
+          }`}
           aria-label="Toggle follow location"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -1025,20 +1072,68 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           )}
 
           {debugMode === "geo" && (
-            <div className="space-y-0.5 pointer-events-none">
-              <div>mapper: {geoMapperStatus} ({geoSegmentCount} segs)</div>
-              <div>gps: {geoStatus}{lastFix ? ` ±${lastFix.accuracy.toFixed(0)}m` : ""}</div>
-              {lastFix && (
-                <div>pos: {lastFix.position.lat.toFixed(5)}, {lastFix.position.lng.toFixed(5)}</div>
+            <div className="space-y-1.5">
+              <div className="space-y-0.5 pointer-events-none">
+                <div>mapper: {geoMapperStatus} ({geoSegmentCount} segs)</div>
+                <div>gps: {geoStatus}{lastFix ? ` ±${lastFix.accuracy.toFixed(0)}m` : ""}</div>
+              </div>
+
+              {/* Current location */}
+              {lastFix && !mockGeoActive && (
+                <div className="flex items-center gap-1">
+                  <span className="text-[9px] uppercase tracking-widest text-white/40 shrink-0">loc:</span>
+                  <span className="text-[10px] text-white/70 truncate">{lastFix.position.lat.toFixed(5)}, {lastFix.position.lng.toFixed(5)}</span>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(`${lastFix.position.lat.toFixed(6)}, ${lastFix.position.lng.toFixed(6)}`)}
+                    className="shrink-0 rounded px-1 py-0.5 text-[9px] text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
+                    aria-label="Copy coordinates"
+                  >
+                    copy
+                  </button>
+                </div>
               )}
+
+              {/* Mock GPS input */}
+              <div className="border-t border-white/10 pt-1.5">
+                <div className="text-[9px] uppercase tracking-widest text-white/40 mb-1">mock gps</div>
+                <div className="flex gap-1">
+                  <input
+                    type="text"
+                    value={mockGeoInput}
+                    onChange={(e) => setMockGeoInput(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyMockGeo(); } }}
+                    placeholder="lat, lng"
+                    className="flex-1 min-w-0 rounded bg-white/10 px-1.5 py-1 text-[10px] text-white placeholder:text-white/30 outline-none focus:bg-white/15"
+                  />
+                  <button
+                    onClick={applyMockGeo}
+                    className="shrink-0 rounded bg-blue-500/80 px-2 py-1 text-[10px] text-white hover:bg-blue-500 transition-colors"
+                  >
+                    set
+                  </button>
+                  {mockGeoActive && (
+                    <button
+                      onClick={clearMockGeo}
+                      className="shrink-0 rounded bg-white/10 px-2 py-1 text-[10px] text-white/70 hover:bg-white/20 transition-colors"
+                    >
+                      clear
+                    </button>
+                  )}
+                </div>
+                {mockGeoActive && (
+                  <div className="text-[10px] text-yellow-400/80 mt-0.5">mock active</div>
+                )}
+              </div>
+
+              {/* Projection result */}
               {lastProjection ? (
-                <>
+                <div className="space-y-0.5 pointer-events-none border-t border-white/10 pt-1.5">
                   <div>proj: {lastProjection.point.x.toFixed(1)}, {lastProjection.point.y.toFixed(1)}</div>
                   <div>route: {lastProjection.routeNumber} ({lastProjection.distance.toFixed(0)}m)</div>
                   <div className="text-[9px] text-white/40 truncate">seg: {lastProjection.segmentId}</div>
-                </>
-              ) : followLocation ? (
-                <div className="text-white/40">no route match</div>
+                </div>
+              ) : (followLocation || mockGeoActive) ? (
+                <div className="text-white/40 pointer-events-none">no route match</div>
               ) : null}
             </div>
           )}
