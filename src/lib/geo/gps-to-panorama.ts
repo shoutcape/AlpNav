@@ -148,8 +148,8 @@ export class GpsToPanoramaMapper {
       }
     }
 
-    // Prefer anchor if it's closer in panorama space (within 40px)
-    if (bestAnchor && bestAnchorDist < 40 && bestAnchorDist <= bestSegDist) {
+    // Prefer anchor if it's close in panorama space (within 80px)
+    if (bestAnchor && bestAnchorDist < 80 && bestAnchorDist <= bestSegDist) {
       return { geo: bestAnchor.geo, source: bestAnchor.name };
     }
 
