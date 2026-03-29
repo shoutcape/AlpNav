@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1024px" height="620px" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 1024 620" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="lake">
+  <path fill="#88C6EB" d="M761.237 136.691c-2.13,-0.085 -5.545,0.307 -5.039,2.24 0.247,0.952 0.834,1.642 3.431,2.046 2.167,0.336 5.483,0.2 6.382,-1.539 1.014,-1.977 -2.536,-2.667 -4.774,-2.747z"/>
+  <path fill="#88C6EB" d="M255.613 472.588c0.97,4.408 8.794,4.613 14.88,2.37 5.713,-2.107 9.884,-6.446 5.748,-9.281 -1.627,-3.048 -3.299,-3.205 -8.301,-3.085 -4.722,0.112 -13.84,3.124 -12.327,9.996z"/>
+ </g>
+<g id="txt_group_1">
+ <g id="1">
+   <path fill="none" stroke="#0069EA" stroke-width="1" stroke-opacity="0.5" d="M584.644 183.427c7.427,1.944 23.022,12.031 32.666,12.31 9.641,0.28 11.468,-3.266 18.538,-1.555 8.03,1.94 12.913,0.393 20.268,-1.58 7.067,-1.899 13.255,3.828 15.812,-4.722"/>
+<a xlink:href="https://www.hintertuxergletscher.at" target="_blank">
+<g id="Z3000_logo">
+   <polygon fill="aqua" fill-opacity="0" points="804,20.247 1004,20.247 1004,89.247 804,89.247 "/>
+   <path fill="#003E86" d="M999.672 68.56l0.761 -3.57 -8.339 0 3.152 -14.839 -5.099 0 -3.91 18.409 13.435 0zm-147.569 0l0.758 -3.57 -10.198 0 11.077 -10.25 0.974 -4.589 -13.895 0 -0.759 3.568 9.179 0 -12.083 11.271 -0.759 3.57 15.706 0zm9.992 0l3.912 -18.409 -5.099 0 -3.912 18.409 5.099 0zm19.369 0l0.76 -3.57 -8.338 0 3.152 -14.839 -5.1 0 -3.91 18.409 13.436 0zm18.119 0l0.758 -3.57 -8.338 0 3.154 -14.839 -5.1 0 -3.912 18.409 13.438 0zm18.755 0l0.757 -3.57 -8.923 0 0.829 -3.901 8.211 0 0.758 -3.57 -8.21 0 0.805 -3.8 8.927 0 0.757 -3.568 -14.023 0 -3.912 18.409 14.024 0zm12.023 -7.039l1.913 0c2.6,0 2.506,0.921 2.239,3.137 -0.149,1.301 -0.278,2.626 -0.267,3.902l5.532 0c-0.12,-1.479 -0.091,-2.932 0.107,-4.463 0.275,-2.855 0.016,-4.513 -3.232,-4.589l0.021 -0.102c2.642,-0.306 5.067,-1.76 5.652,-4.513 0.827,-3.902 -3.022,-4.742 -6.133,-4.742l-8.515 0 -3.912 18.409 5.099 0 1.496 -7.039zm0.757 -3.568l0.901 -4.234 1.989 0c1.632,0 3.163,0.231 2.761,2.116 -0.401,1.889 -2.028,2.118 -3.662,2.118l-1.989 0zm17.371 10.607l5.098 0 3.153 -14.841 5.761 0 0.76 -3.568 -16.495 0 -0.761 3.568 5.636 0 -3.152 14.841zm21.637 -7.166l4.124 -7.649 0.076 0 0.719 7.649 -4.919 0zm-4.021 7.166l1.961 -3.595 7.47 0 0.462 3.595 5.76 0 -3.354 -18.409 -6.221 0 -11.178 18.409 5.1 0z"/>
+   <path fill="#D4021D" d="M833.696 51.345l0.403 -1.536c-15.672,-0.596 -27.994,-6.643 -27.994,-14.012 0,-7.766 13.671,-14.061 30.532,-14.061 11.476,0 21.47,2.915 26.685,7.224 -4.996,-5.323 -15.637,-8.96 -28.109,-8.96 -17.237,0 -31.213,7.033 -31.213,15.71 0,8.43 13.129,15.255 29.696,15.635zm102.983 31.749l0.747 0c1.111,0 2.18,0.278 1.899,1.597 -0.257,1.213 -1.419,1.614 -2.408,1.614 -1.111,0 -1.9,-0.453 -1.642,-1.668l-3.539 0c-0.607,3.02 1.483,3.888 4.778,3.888 2.847,0 5.725,-0.885 6.305,-3.608 0.39,-1.84 -0.844,-2.812 -2.571,-2.934l0.007 -0.034c1.994,-0.399 3.18,-1.163 3.534,-2.83 0.37,-1.735 -0.812,-3.365 -4.629,-3.365 -2.517,0 -5.171,0.727 -5.886,3.522l3.437 0c0.3,-0.92 1.248,-1.302 1.942,-1.302 0.92,0 1.762,0.365 1.533,1.441 -0.113,0.538 -0.639,1.457 -2.271,1.457l-0.763 0 -0.473 2.222zm13.582 -0.954c-0.847,3.99 0.708,6.385 4.37,6.385 3.661,0 6.236,-2.395 7.084,-6.385 0.849,-3.993 -0.708,-6.388 -4.369,-6.388 -3.662,0 -6.236,2.395 -7.085,6.388zm3.541 0c0.542,-2.552 1.44,-4.166 3.071,-4.166 1.631,0 1.843,1.614 1.303,4.166 -0.544,2.551 -1.442,4.165 -3.074,4.165 -1.632,0 -1.843,-1.614 -1.3,-4.165zm14.507 0c-0.849,3.99 0.708,6.385 4.369,6.385 3.66,0 6.234,-2.395 7.083,-6.385 0.847,-3.993 -0.708,-6.388 -4.369,-6.388 -3.661,0 -6.234,2.395 -7.083,6.388zm3.539 0c0.541,-2.552 1.441,-4.166 3.07,-4.166 1.633,0 1.845,1.614 1.302,4.166 -0.541,2.551 -1.439,4.165 -3.07,4.165 -1.632,0 -1.846,-1.614 -1.302,-4.165zm14.507 0c-0.849,3.99 0.708,6.385 4.368,6.385 3.661,0 6.235,-2.395 7.083,-6.385 0.847,-3.993 -0.708,-6.388 -4.366,-6.388 -3.663,0 -6.237,2.395 -7.085,6.388zm3.541 0c0.541,-2.552 1.438,-4.166 3.07,-4.166 1.63,0 1.843,1.614 1.3,4.166 -0.54,2.551 -1.439,4.165 -3.07,4.165 -1.632,0 -1.844,-1.614 -1.3,-4.165zm-120.434 -42.226c-0.37,0.305 -0.984,0.444 -1.407,0.444 -0.504,0 -1.239,-0.293 -1.126,-0.819 0.15,-0.703 0.667,-0.88 1.29,-1.172l1.243 1.547zm1.46 1.793l2.847 0 -1.336 -1.817c0.824,-0.516 1.625,-2.015 1.881,-2.849l-2.027 0c-0.121,0.575 -0.533,1.08 -0.935,1.536l-0.953 -1.196c0.859,-0.515 2.01,-1.242 2.221,-2.237 0.356,-1.677 -1.353,-2.074 -2.841,-2.074 -1.253,0 -3.221,0.432 -3.553,1.991 -0.174,0.821 0.233,1.561 0.736,2.052 -1.102,0.386 -2.206,1.065 -2.463,2.273 -0.397,1.877 1.333,2.496 2.916,2.496 1.021,0 2.135,-0.175 3.131,-0.727l0.376 0.552zm-1.795 -5.568c-0.155,-0.21 -0.629,-0.726 -0.561,-1.054 0.118,-0.552 0.6,-0.727 0.939,-0.727 0.495,0 0.901,0.175 0.784,0.727 -0.084,0.397 -0.777,0.844 -1.162,1.054zm17.891 3.962c-0.368,0.07 -0.816,0.141 -1.249,0.141 -1.688,0 -2.286,-1.102 -1.933,-2.767 0.292,-1.369 1.151,-2.764 2.733,-2.764 0.774,0 1.366,0.244 1.308,1.065l2.345 0c0.488,-2.461 -1.603,-2.765 -3.667,-2.708 -2.654,0.083 -4.617,1.759 -5.18,4.407 -0.564,2.649 0.688,4.326 3.308,4.407 2.038,0 2.439,-0.175 4.397,-0.458l0.962 -4.523 -4.067 0 -0.349 1.641 1.723 0 -0.331 1.559zm10.834 1.606l0.351 -1.642 -3.834 0 1.451 -6.821 -2.345 0 -1.798 8.463 6.175 0zm8.564 0l0.349 -1.642 -4.101 0 0.38 -1.793 3.774 0 0.348 -1.64 -3.773 0 0.371 -1.746 4.101 0 0.349 -1.642 -6.446 0 -1.798 8.463 6.446 0zm4.383 0l2.344 0 1.448 -6.821 2.651 0 0.348 -1.642 -7.583 0 -0.349 1.642 2.59 0 -1.449 6.821zm15.157 -5.978c0.574,-2.039 -1.088,-2.659 -2.834,-2.659 -1.768,0 -3.643,0.548 -4.164,2.553 -0.194,0.915 0.062,1.689 0.84,2.064 1.668,0.809 3.454,0.562 3.211,1.71 -0.12,0.564 -0.871,0.845 -1.409,0.845 -0.845,0 -1.34,-0.434 -1.158,-1.23l-2.345 0c-0.453,2.297 1.161,2.872 3.13,2.872 1.958,0 3.895,-0.845 4.273,-2.626 0.486,-2.286 -1.547,-2.428 -2.888,-2.79 -0.587,-0.164 -1.295,-0.364 -1.161,-0.986 0.088,-0.421 0.632,-0.773 1.171,-0.773 0.397,0 0.682,0.095 0.845,0.271 0.174,0.175 0.226,0.421 0.146,0.749l2.343 0zm10.496 0.176c0.488,-2.134 -1.402,-2.837 -3.452,-2.837 -2.644,0.024 -4.388,1.561 -4.99,4.397 -0.603,2.836 0.478,4.417 3.117,4.417 2.05,0 4.249,-0.75 4.667,-2.883l-2.463 0c-0.217,0.809 -0.873,1.243 -1.857,1.243 -1.324,0 -1.285,-1.454 -1.024,-2.685 0.271,-1.266 0.852,-2.846 2.199,-2.846 0.962,0 1.444,0.433 1.34,1.194l2.463 0zm3.485 5.802l0.736 -3.47 2.885 0 -0.736 3.47 2.341 0 1.799 -8.463 -2.344 0 -0.711 3.353 -2.873 0 0.712 -3.353 -2.356 0 -1.798 8.463 2.345 0zm14.365 0l0.349 -1.642 -4.103 0 0.381 -1.793 3.774 0 0.349 -1.64 -3.774 0 0.37 -1.746 4.103 0 0.349 -1.642 -6.446 0 -1.799 8.463 6.447 0zm5.467 -3.235l0.88 0c1.196,0 1.153,0.423 1.03,1.442 -0.068,0.597 -0.127,1.206 -0.124,1.793l2.545 0c-0.056,-0.679 -0.042,-1.349 0.048,-2.052 0.127,-1.312 0.007,-2.074 -1.485,-2.109l0.01 -0.047c1.213,-0.14 2.327,-0.808 2.597,-2.076 0.381,-1.792 -1.389,-2.179 -2.819,-2.179l-3.914 0 -1.799 8.463 2.346 0 0.685 -3.235zm0.351 -1.641l0.411 -1.945 0.915 0c0.75,0 1.454,0.105 1.27,0.973 -0.184,0.867 -0.933,0.972 -1.683,0.972l-0.913 0zm9.765 4.876l2.879 -6.271 0.023 0 0.121 6.271 2.814 0 3.251 -8.463 -2.121 0 -2.074 6.118 -0.025 0 0.059 -6.118 -2.872 0 -2.682 6.165 -0.022 0 0.536 -6.165 -2.333 0 -0.356 8.463 2.802 0zm15.751 0l0.349 -1.642 -4.103 0 0.38 -1.793 3.775 0 0.349 -1.64 -3.774 0 0.37 -1.746 4.102 0 0.349 -1.642 -6.447 0 -1.796 8.463 6.446 0zm8.637 0l0.349 -1.642 -3.832 0 1.449 -6.821 -2.345 0 -1.799 8.463 6.178 0zm2.937 0l2.344 0 1.45 -6.821 2.647 0 0.349 -1.642 -7.582 0 -0.349 1.642 2.59 0 -1.449 6.821zm-169.731 -8.75c0.838,-2.978 -1.588,-3.888 -4.141,-3.888 -2.587,0 -5.327,0.806 -6.086,3.735 -0.283,1.335 0.092,2.467 1.227,3.015 2.437,1.18 5.05,0.821 4.692,2.5 -0.175,0.821 -1.272,1.232 -2.06,1.232 -1.233,0 -1.955,-0.633 -1.691,-1.798l-3.424 0c-0.662,3.357 1.694,4.197 4.571,4.197 2.861,0 5.692,-1.234 6.244,-3.836 0.709,-3.341 -2.26,-3.546 -4.22,-4.077 -0.857,-0.24 -1.891,-0.53 -1.699,-1.439 0.132,-0.616 0.927,-1.13 1.713,-1.13 0.583,0 0.998,0.137 1.236,0.394 0.254,0.255 0.331,0.616 0.212,1.095l3.426 0zm7.217 1.8l-0.033 0 1.152 -5.429 -3.424 0 -2.628 12.365 3.426 0 1.398 -6.576 0.034 0 2.678 6.576 4.248 0 -3.137 -6.92 5.421 -5.445 -4.058 0 -5.077 5.429zm13.234 6.936l2.628 -12.367 -3.426 0 -2.626 12.367 3.424 0zm3.935 -3.546l4.864 0 0.435 -2.055 -4.861 0 -0.438 2.055z"/>
+   <path fill="#FFCF00" d="M865.244 31.083c14.996,-3.536 33.264,-5.612 52.985,-5.612 17.451,0 33.769,1.625 47.688,4.449l-0.292 -0.013 3.65 0.002c-15.233,-4.023 -34.068,-6.455 -54.271,-6.455 -19.106,0 -36.848,2.097 -51.543,5.686 0,0 0.613,0.363 1.783,1.943zm-40.058 18.502c-1.31,2.222 -2.015,4.527 -2.015,6.889 0,18.237 41.113,33.019 91.832,33.019 3.556,0 7.081,-0.072 10.531,-0.214l0.246 -1.906c-2.488,0.067 -5.01,0.102 -7.549,0.102 -50.994,0 -92.334,-13.88 -92.334,-31.001 0,-2.213 0.69,-4.37 2,-6.45l-2.711 -0.439z"/>
+ </g>
+</a>
+  <polygon fill="#003C74" points="512.364,417.943 424.066,417.943 424.066,406.943 512.364,406.943 "/>
+  <text x="425.336" y="416.023" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Finkenberg 840 m</text>
+  <polygon fill="#003C74" points="472.607,301.702 327.475,301.702 327.475,290.702 472.607,290.702 "/>
+  <text x="329.256" y="299.737" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Tux-Vorderlanersbach 1300 m</text>
+  <polygon fill="#003C74" points="406.02,270.544 289.048,270.544 289.048,259.544 406.02,259.544 "/>
+  <text x="290.828" y="268.579" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Tux-Lanersbach 1300 m</text>
+  <polygon fill="#003C74" points="208.218,198.361 124.363,198.361 124.363,187.361 208.218,187.361 "/>
+  <text x="125.633" y="196.396" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Hintertux 1500 m</text>
+  <polygon fill="#003C74" points="614.899,567.449 529.916,567.449 529.916,556.448 614.899,556.448 "/>
+  <text x="531.206" y="565.463" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Mayrhofen 630 m</text>
+  <polygon fill="#003C74" points="1018.168,503.221 944.317,503.221 944.317,492.221 1018.168,492.221 "/>
+  <text x="945.588" y="501.301" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Hippach 630 m</text>
+  <polygon fill="#003C74" points="1018.167,474.32 927.82,474.32 927.82,463.32 1018.167,463.32 "/>
+  <text x="929.47" y="472.4" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Schwendau 630 m</text>
+  <polygon fill="#003C74" points="1018.168,554.374 944.859,554.374 944.859,543.373 1018.168,543.373 "/>
+  <text x="946.129" y="552.408" fill="white" font-weight="bold" font-size="10px" font-family="Arial">Ramsau 630 m</text>
+  <polygon fill="black" points="1013.877,538.895 1012.892,537.418 1018.168,539.395 1012.892,541.373 1013.877,539.895 1004.21,539.895 1004.21,538.895 "/>
+  <text x="772.463" y="66.636" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Rastkogel</text>
+  <text x="778.014" y="74.68" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2762 m</text>
+  <text x="449.522" y="92.761" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Grüblspitze</text>
+  <text x="457.958" y="100.804" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2395 m</text>
+  <text x="631.716" y="205.404" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Penkenjoch</text>
+  <text x="640.601" y="213.448" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2095 m</text>
+  <text x="141.065" y="466.426" fill="black" font-weight="bold" font-size="8px" font-family="Arial">AHORN</text>
+  <text x="133.266" y="474.47" fill="black" font-weight="bold" font-size="8px" font-family="Arial">670–1965 m</text>
+  <text x="423.609" y="118.073" fill="black" font-weight="bold" font-size="8px" font-family="Arial">EGGALM</text>
+  <text x="416.474" y="126.116" fill="black" font-weight="bold" font-size="8px" font-family="Arial">1300–2300 m</text>
+  <text x="131.187" y="296.581" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Filzenkogel</text>
+  <text x="139.402" y="304.624" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2227 m</text>
+  <text x="706.647" y="104.128" fill="black" font-weight="bold" font-size="8px" font-family="Arial">RASTKOGEL</text>
+  <text x="707.069" y="112.172" fill="black" font-weight="bold" font-size="8px" font-family="Arial">1300–2500 m</text>
+  <text x="868.779" y="100.768" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Horbergjoch</text>
+  <text x="878.991" y="108.811" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2590 m</text>
+  <text x="893.266" y="136.573" fill="black" font-weight="bold" font-size="8px" font-family="Arial">HORBERG</text>
+  <text x="891.246" y="144.617" fill="black" font-weight="bold" font-size="8px" font-family="Arial">630–2278 m</text>
+  <text x="594.589" y="226.51" fill="black" font-weight="bold" font-size="8px" font-family="Arial">PENKEN</text>
+  <text x="588.794" y="234.554" fill="black" font-weight="bold" font-size="8px" font-family="Arial">630–2095 m</text>
+  <text x="17.259" y="46.184" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Gefrorene Wand</text>
+  <text x="34.659" y="54.227" fill="black" font-weight="bold" font-size="8px" font-family="Arial">3250 m</text>
+  <text x="83.92" y="23.925" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Olperer</text>
+  <text x="84.582" y="31.968" fill="black" font-weight="bold" font-size="8px" font-family="Arial">3476 m</text>
+  <text x="182.973" y="48.358" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Kleiner Kaserer</text>
+  <text x="198.979" y="56.401" fill="black" font-weight="bold" font-size="8px" font-family="Arial">3093 m</text>
+  <text x="158.401" y="22.413" fill="black" font-weight="bold" font-size="8px" font-family="Arial">HINTERTUXER GLETSCHER</text>
+  <text x="187.936" y="30.457" fill="black" font-weight="bold" font-size="8px" font-family="Arial">1500–3250 m</text>
+  <text x="59.929" y="167.41" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Realspitze</text>
+  <text x="66.148" y="175.453" fill="black" font-weight="bold" font-size="8px" font-family="Arial">3039 m</text>
+ </g>
+ <g id="2">
+  <path fill="none" stroke="#0069EA" stroke-width="0.5" stroke-opacity="0.5" d="M584.644 183.427c7.427,1.944 23.022,12.031 32.666,12.31 9.641,0.28 11.468,-3.266 18.538,-1.555 8.03,1.94 12.913,0.393 20.268,-1.58 7.067,-1.899 13.255,3.828 15.812,-4.722"/>
+  <polygon fill="black" points="502.811,505.962 503.819,507.425 498.516,505.529 503.759,503.47 502.794,504.966 509.093,504.886 509.105,505.882 "/>
+  <polygon fill="black" points="18.721,258.419 19.728,259.882 14.425,257.987 19.668,255.928 18.704,257.423 25.003,257.344 25.015,258.34 "/>
+  <polygon fill="black" points="866.098,595.876 866.347,594.119 868.963,599.107 863.712,597.067 865.434,596.622 860.749,592.411 861.417,591.669 "/>
+  <text x="978.48" y="521.499" fill="#004498" font-weight="bold" font-size="8px" font-family="Arial">Ziller</text>
+  <text x="732.582" y="556.339" fill="#004498" font-weight="bold" font-size="8px" font-family="Arial">Ziller</text>
+  <text x="542.258" y="498.89" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Au</text>
+  <text x="511.105" y="508.312" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Ginzling</text>
+  <text x="939.634" y="455.632" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Kleinschwendberg</text>
+  <text x="916.941" y="513.658" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Mühlbach</text>
+  <text x="867.578" y="530.311" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Burgstall</text>
+  <text x="688.368" y="563.73" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Kreuzlau</text>
+  <text x="689.716" y="571.774" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Bahnhof</text>
+  <text x="887.838" y="572.087" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Eckartau</text>
+  <text x="844.987" y="574.143" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Hollenzen</text>
+  <text x="789.801" y="582.287" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Laubichl</text>
+  <text x="560.605" y="503.353" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Gstan</text>
+  <text x="517.471" y="347.539" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Mittelstation</text>
+  <text x="517.471" y="355.582" fill="black" font-weight="bold" font-size="8px" font-family="Arial">1750 m</text>
+  <text x="325.959" y="364.593" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Brunnhaus</text>
+  <text x="325.089" y="382.525" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Dornau</text>
+  <text x="383.557" y="354.94" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Innerberg</text>
+  <text x="398.875" y="379.444" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Persal</text>
+  <text x="448.628" y="431.948" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Dorf</text>
+  <text x="595.473" y="415.068" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Astegg</text>
+  <text x="454.672" y="482.768" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Hochsteg</text>
+  <text x="836.692" y="171.887" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Horbergtal</text>
+  <text x="998.511" y="316.599" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Mösl</text>
+  <text x="20.47" y="252.689" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Ahornspitze</text>
+  <text x="30.015" y="260.733" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2973 m</text>
+  <text x="490.382" y="405.226" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Stein</text>
+  <text x="81.545" y="195.311" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Roßkopf</text>
+  <text x="85.309" y="203.354" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2971m</text>
+  <text x="334.701" y="231.943" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Juns</text>
+  <text x="168.703" y="226.336" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Grinbergspitze</text>
+  <text x="183.363" y="234.379" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2745 m</text>
+  <text x="949.577" y="117.812" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Pangert</text>
+  <text x="950.903" y="125.855" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2550 m</text>
+  <text x="817.828" y="596.986" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Zillergrund</text>
+  <text x="849.03" y="610.674" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Brandberg</text>
+  <text x="489.294" y="115.335" fill="black" font-weight="bold" font-size="8px" font-family="Arial">2300 m</text>
+  <text x="963.632" y="392.345" fill="black" font-weight="bold" font-size="8px" font-family="Arial">Schwendberg</text>
+ </g>
+</g>
+ <g id="txt_group_2">
+ <a xlink:href="https://www.hintertuxergletscher.at" target="_blank">
+<g id="Z3000_logo_sm">
+   <polygon fill="aqua" fill-opacity="0" points="904,20.124 1004,20.124 1004,54.624 904,54.624 "/>
+   <path fill="#003E86" d="M1001.836 44.28l0.38 -1.785 -4.169 0 1.576 -7.419 -2.55 0 -1.955 9.204 6.718 0zm-73.784 0l0.379 -1.785 -5.1 0 5.539 -5.125 0.487 -2.294 -6.948 0 -0.379 1.784 4.589 0 -6.041 5.635 -0.38 1.785 7.854 0zm4.996 0l1.956 -9.204 -2.55 0 -1.956 9.204 2.55 0zm9.684 0l0.38 -1.785 -4.169 0 1.576 -7.419 -2.55 0 -1.955 9.204 6.718 0zm9.059 0l0.379 -1.785 -4.169 0 1.577 -7.419 -2.549 0 -1.957 9.204 6.719 0zm9.378 0l0.379 -1.785 -4.462 0 0.415 -1.95 4.105 0 0.379 -1.785 -4.105 0 0.403 -1.9 4.463 0 0.378 -1.784 -7.011 0 -1.956 9.204 7.012 0zm6.012 -3.519l0.956 0c1.3,0 1.253,0.46 1.119,1.568 -0.074,0.651 -0.138,1.313 -0.133,1.951l2.766 0c-0.06,-0.739 -0.045,-1.466 0.054,-2.231 0.137,-1.428 0.007,-2.257 -1.616,-2.295l0.01 -0.051c1.321,-0.153 2.533,-0.88 2.826,-2.256 0.414,-1.951 -1.511,-2.371 -3.066,-2.371l-4.258 0 -1.956 9.204 2.55 0 0.748 -3.519zm0.378 -1.784l0.451 -2.117 0.994 0c0.816,0 1.581,0.115 1.381,1.058 -0.201,0.944 -1.015,1.059 -1.831,1.059l-0.995 0zm8.685 5.303l2.549 0 1.577 -7.42 2.881 0 0.38 -1.784 -8.248 0 -0.38 1.784 2.817 0 -1.576 7.42zm10.819 -3.582l2.062 -3.825 0.038 0 0.36 3.825 -2.46 0zm-2.011 3.582l0.981 -1.797 3.735 0 0.231 1.797 2.88 0 -1.677 -9.204 -3.111 0 -5.589 9.204 2.55 0z"/>
+   <path fill="#D4021D" d="M918.848 35.673l0.201 -0.768c-7.836,-0.298 -13.996,-3.322 -13.996,-7.006 0,-3.883 6.835,-7.031 15.265,-7.031 5.738,0 10.735,1.457 13.343,3.612 -2.498,-2.661 -7.819,-4.48 -14.055,-4.48 -8.618,0 -15.606,3.517 -15.606,7.855 0,4.215 6.564,7.628 14.848,7.818zm51.492 15.874l0.373 0c0.555,0 1.09,0.139 0.949,0.799 -0.128,0.607 -0.709,0.807 -1.203,0.807 -0.556,0 -0.951,-0.227 -0.822,-0.834l-1.769 0c-0.304,1.51 0.741,1.944 2.389,1.944 1.424,0 2.862,-0.443 3.152,-1.805 0.196,-0.919 -0.422,-1.405 -1.285,-1.466l0.003 -0.017c0.998,-0.2 1.59,-0.582 1.768,-1.415 0.184,-0.868 -0.407,-1.683 -2.315,-1.683 -1.259,0 -2.585,0.364 -2.943,1.761l1.718 0c0.15,-0.46 0.624,-0.651 0.972,-0.651 0.459,0 0.88,0.182 0.766,0.721 -0.057,0.268 -0.32,0.729 -1.135,0.729l-0.382 0 -0.236 1.11zm6.791 -0.477c-0.424,1.995 0.354,3.193 2.185,3.193 1.83,0 3.117,-1.198 3.541,-3.193 0.425,-1.996 -0.354,-3.194 -2.184,-3.194 -1.831,0 -3.118,1.198 -3.542,3.194zm1.77 0c0.271,-1.276 0.72,-2.083 1.535,-2.083 0.816,0 0.922,0.807 0.652,2.083 -0.272,1.276 -0.721,2.083 -1.537,2.083 -0.816,0 -0.922,-0.807 -0.65,-2.083zm7.253 0c-0.424,1.995 0.354,3.193 2.185,3.193 1.83,0 3.117,-1.198 3.541,-3.193 0.424,-1.996 -0.354,-3.194 -2.184,-3.194 -1.83,0 -3.117,1.198 -3.542,3.194zm1.77 0c0.271,-1.276 0.72,-2.083 1.535,-2.083 0.817,0 0.922,0.807 0.651,2.083 -0.271,1.276 -0.72,2.083 -1.535,2.083 -0.816,0 -0.923,-0.807 -0.651,-2.083zm7.253 0c-0.424,1.995 0.354,3.193 2.185,3.193 1.83,0 3.117,-1.198 3.541,-3.193 0.424,-1.996 -0.354,-3.194 -2.183,-3.194 -1.831,0 -3.118,1.198 -3.543,3.194zm1.771 0c0.27,-1.276 0.719,-2.083 1.535,-2.083 0.815,0 0.922,0.807 0.65,2.083 -0.27,1.276 -0.719,2.083 -1.535,2.083 -0.816,0 -0.922,-0.807 -0.65,-2.083zm-60.217 -21.113c-0.185,0.153 -0.492,0.222 -0.703,0.222 -0.253,0 -0.62,-0.146 -0.564,-0.41 0.075,-0.351 0.334,-0.44 0.645,-0.585l0.622 0.773zm0.73 0.896l1.424 0 -0.668 -0.908c0.412,-0.258 0.812,-1.008 0.94,-1.424l-1.014 0c-0.06,0.287 -0.266,0.539 -0.467,0.768l-0.477 -0.598c0.43,-0.258 1.005,-0.622 1.111,-1.119 0.178,-0.838 -0.677,-1.037 -1.421,-1.037 -0.626,0 -1.61,0.216 -1.776,0.996 -0.087,0.41 0.116,0.78 0.368,1.025 -0.551,0.194 -1.103,0.533 -1.232,1.137 -0.198,0.938 0.667,1.248 1.459,1.248 0.51,0 1.067,-0.088 1.565,-0.363l0.188 0.275zm-0.898 -2.784c-0.077,-0.104 -0.314,-0.362 -0.28,-0.526 0.059,-0.276 0.3,-0.364 0.469,-0.364 0.248,0 0.451,0.088 0.393,0.364 -0.043,0.199 -0.389,0.422 -0.582,0.526zm8.946 1.982c-0.184,0.034 -0.408,0.07 -0.625,0.07 -0.844,0 -1.143,-0.551 -0.966,-1.383 0.146,-0.685 0.575,-1.383 1.366,-1.383 0.387,0 0.683,0.123 0.655,0.533l1.172 0c0.244,-1.23 -0.802,-1.382 -1.834,-1.354 -1.327,0.042 -2.308,0.88 -2.589,2.204 -0.282,1.324 0.343,2.162 1.654,2.203 1.018,0 1.219,-0.088 2.198,-0.229l0.481 -2.262 -2.034 0 -0.174 0.821 0.862 0 -0.166 0.78zm5.417 0.802l0.175 -0.82 -1.917 0 0.726 -3.411 -1.173 0 -0.899 4.231 3.088 0zm4.282 0l0.174 -0.82 -2.05 0 0.19 -0.897 1.887 0 0.174 -0.82 -1.887 0 0.186 -0.873 2.051 0 0.174 -0.821 -3.223 0 -0.899 4.231 3.223 0zm2.191 0l1.173 0 0.724 -3.41 1.325 0 0.174 -0.821 -3.791 0 -0.175 0.821 1.295 0 -0.725 3.41zm7.579 -2.988c0.287,-1.02 -0.544,-1.33 -1.417,-1.33 -0.884,0 -1.822,0.274 -2.082,1.277 -0.097,0.457 0.031,0.844 0.42,1.032 0.834,0.404 1.727,0.281 1.606,0.855 -0.06,0.282 -0.436,0.422 -0.705,0.422 -0.423,0 -0.67,-0.217 -0.579,-0.615l-1.173 0c-0.226,1.149 0.581,1.436 1.565,1.436 0.979,0 1.948,-0.423 2.137,-1.313 0.243,-1.143 -0.773,-1.214 -1.444,-1.395 -0.293,-0.082 -0.647,-0.182 -0.581,-0.492 0.044,-0.211 0.316,-0.387 0.586,-0.387 0.199,0 0.341,0.047 0.422,0.135 0.087,0.087 0.114,0.211 0.074,0.375l1.171 0zm5.248 0.087c0.244,-1.066 -0.701,-1.418 -1.726,-1.418 -1.322,0.012 -2.194,0.781 -2.495,2.199 -0.301,1.418 0.239,2.208 1.558,2.208 1.025,0 2.125,-0.375 2.334,-1.441l-1.232 0c-0.108,0.404 -0.436,0.621 -0.928,0.621 -0.662,0 -0.642,-0.727 -0.512,-1.343 0.135,-0.632 0.426,-1.423 1.099,-1.423 0.481,0 0.722,0.217 0.671,0.597l1.231 0zm1.742 2.901l0.369 -1.734 1.442 0 -0.368 1.734 1.171 0 0.899 -4.231 -1.172 0 -0.355 1.677 -1.437 0 0.356 -1.677 -1.178 0 -0.899 4.231 1.172 0zm7.183 0l0.174 -0.82 -2.051 0 0.191 -0.897 1.887 0 0.174 -0.82 -1.887 0 0.185 -0.873 2.051 0 0.175 -0.821 -3.223 0 -0.899 4.231 3.223 0zm2.734 -1.617l0.44 0c0.598,0 0.576,0.212 0.514,0.721 -0.033,0.299 -0.063,0.603 -0.062,0.896l1.273 0c-0.028,-0.339 -0.021,-0.674 0.024,-1.025 0.064,-0.656 0.003,-1.037 -0.743,-1.055l0.005 -0.023c0.607,-0.07 1.164,-0.404 1.299,-1.038 0.19,-0.896 -0.694,-1.09 -1.41,-1.09l-1.957 0 -0.899 4.231 1.173 0 0.343 -1.617zm0.175 -0.82l0.206 -0.973 0.457 0c0.375,0 0.727,0.053 0.635,0.487 -0.092,0.433 -0.467,0.486 -0.842,0.486l-0.456 0zm4.882 2.437l1.44 -3.135 0.011 0 0.061 3.135 1.407 0 1.625 -4.231 -1.06 0 -1.037 3.059 -0.012 0 0.029 -3.059 -1.436 0 -1.341 3.083 -0.011 0 0.268 -3.083 -1.166 0 -0.178 4.231 1.4 0zm7.876 0l0.175 -0.82 -2.052 0 0.19 -0.897 1.888 0 0.174 -0.82 -1.887 0 0.185 -0.873 2.051 0 0.174 -0.821 -3.223 0 -0.898 4.231 3.223 0zm4.318 0l0.175 -0.82 -1.916 0 0.724 -3.411 -1.172 0 -0.899 4.231 3.088 0zm1.469 0l1.172 0 0.725 -3.41 1.324 0 0.174 -0.821 -3.791 0 -0.175 0.821 1.295 0 -0.724 3.41zm-84.865 -4.374c0.419,-1.49 -0.795,-1.944 -2.071,-1.944 -1.293,0 -2.664,0.403 -3.043,1.867 -0.141,0.668 0.046,1.234 0.614,1.508 1.218,0.59 2.524,0.41 2.345,1.249 -0.087,0.411 -0.636,0.617 -1.03,0.617 -0.616,0 -0.977,-0.317 -0.845,-0.899l-1.712 0c-0.331,1.678 0.847,2.098 2.286,2.098 1.43,0 2.845,-0.617 3.121,-1.918 0.355,-1.67 -1.13,-1.773 -2.109,-2.038 -0.429,-0.12 -0.946,-0.265 -0.85,-0.72 0.066,-0.308 0.463,-0.565 0.856,-0.565 0.292,0 0.499,0.069 0.618,0.197 0.127,0.128 0.166,0.308 0.106,0.548l1.714 0zm3.608 0.9l-0.017 0 0.577 -2.715 -1.713 0 -1.314 6.183 1.713 0 0.699 -3.289 0.018 0 1.338 3.289 2.124 0 -1.568 -3.46 2.71 -2.723 -2.029 0 -2.538 2.715zm6.617 3.468l1.314 -6.184 -1.713 0 -1.313 6.184 1.712 0zm1.967 -1.773l2.432 0 0.218 -1.028 -2.431 0 -0.219 1.028z"/>
+   <path fill="#FFCF00" d="M934.622 25.542c7.498,-1.768 16.632,-2.806 26.493,-2.806 8.725,0 16.884,0.812 23.843,2.224l-0.145 -0.006 1.825 0.001c-7.617,-2.012 -17.034,-3.228 -27.136,-3.228 -9.553,0 -18.424,1.049 -25.771,2.843 0,0 0.306,0.182 0.891,0.972zm-20.029 9.251c-0.655,1.111 -1.008,2.263 -1.008,3.444 0,9.119 20.557,16.51 45.916,16.51 1.779,0 3.541,-0.036 5.266,-0.108l0.123 -0.953c-1.244,0.034 -2.505,0.052 -3.775,0.052 -25.497,0 -46.166,-6.94 -46.166,-15.501 0,-1.106 0.344,-2.185 0.999,-3.225l-1.355 -0.219z"/>
+ </g>
+</a>
+  <polygon fill="#003C74" points="468.215,412.443 424.066,412.443 424.066,406.943 468.215,406.943 "/>
+  <text x="424.701" y="411.483" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Finkenberg 840 m</text>
+  <polygon fill="#003C74" points="472.607,298.952 400.041,298.952 400.041,293.452 472.607,293.452 "/>
+  <text x="400.931" y="297.969" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Tux-Vorderlanersbach 1300 m</text>
+  <polygon fill="#003C74" points="406.021,267.794 347.534,267.794 347.534,262.294 406.021,262.294 "/>
+  <text x="348.425" y="266.811" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Tux-Lanersbach 1300 m</text>
+  <polygon fill="#003C74" points="187.254,195.611 145.326,195.611 145.326,190.111 187.254,190.111 "/>
+  <text x="145.962" y="194.629" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Hintertux 1500 m</text>
+  <polygon fill="#003C74" points="593.653,564.727 551.161,564.727 551.161,559.227 593.653,559.227 "/>
+  <text x="551.807" y="563.735" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Mayrhofen 630 m</text>
+  <polygon fill="#003C74" points="1018.168,500.472 981.243,500.472 981.243,494.971 1018.168,494.971 "/>
+  <text x="981.877" y="499.511" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Hippach 630 m</text>
+  <polygon fill="#003C74" points="1018.168,471.57 972.994,471.57 972.994,466.07 1018.168,466.07 "/>
+  <text x="973.819" y="470.61" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Schwendau 630 m</text>
+  <polygon fill="#003C74" points="1018.168,548.874 981.513,548.874 981.513,543.373 1018.168,543.373 "/>
+  <text x="982.148" y="547.891" fill="white" font-weight="bold" font-size="5px" font-family="Arial">Ramsau 630 m</text>
+  <polygon fill="black" points="1016.022,541.134 1015.53,540.396 1018.168,541.384 1015.53,542.373 1016.022,541.634 1011.189,541.634 1011.189,541.134 "/>
+  <text x="782.03" y="70.71" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Rastkogel</text>
+  <text x="784.805" y="74.732" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2762 m</text>
+  <text x="460.54" y="96.835" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Grüblspitze</text>
+  <text x="464.757" y="100.856" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2395 m</text>
+  <text x="642.954" y="209.478" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Penkenjoch</text>
+  <text x="647.396" y="213.5" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2095 m</text>
+  <text x="159.37" y="467.005" fill="black" font-weight="bold" font-size="4px" font-family="Arial">AHORN</text>
+  <text x="155.47" y="471.027" fill="black" font-weight="bold" font-size="4px" font-family="Arial">670–1965 m</text>
+  <text x="432.386" y="122.147" fill="black" font-weight="bold" font-size="4px" font-family="Arial">EGGALM</text>
+  <text x="428.818" y="126.168" fill="black" font-weight="bold" font-size="4px" font-family="Arial">1300–2300 m</text>
+  <text x="142.086" y="300.602" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Filzenkogel</text>
+  <text x="146.193" y="304.624" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2227 m</text>
+  <text x="719.29" y="108.202" fill="black" font-weight="bold" font-size="4px" font-family="Arial">RASTKOGEL</text>
+  <text x="719.5" y="112.224" fill="black" font-weight="bold" font-size="4px" font-family="Arial">1300–2500 m</text>
+  <text x="880.669" y="100.768" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Horbergjoch</text>
+  <text x="885.775" y="104.789" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2590 m</text>
+  <text x="903.489" y="136.573" fill="black" font-weight="bold" font-size="4px" font-family="Arial">HORBERG</text>
+  <text x="902.479" y="140.595" fill="black" font-weight="bold" font-size="4px" font-family="Arial">630–2278 m</text>
+  <text x="602.925" y="226.51" fill="black" font-weight="bold" font-size="4px" font-family="Arial">PENKEN</text>
+  <text x="600.027" y="230.532" fill="black" font-weight="bold" font-size="4px" font-family="Arial">630–2095 m</text>
+  <text x="32.712" y="50.258" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Gefrorene Wand</text>
+  <text x="41.412" y="54.279" fill="black" font-weight="bold" font-size="4px" font-family="Arial">3250 m</text>
+  <text x="91.146" y="27.999" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Olperer</text>
+  <text x="91.477" y="32.02" fill="black" font-weight="bold" font-size="4px" font-family="Arial">3476 m</text>
+  <text x="197.935" y="52.432" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Kleiner Kaserer</text>
+  <text x="205.938" y="56.453" fill="black" font-weight="bold" font-size="4px" font-family="Arial">3093 m</text>
+  <text x="185.65" y="26.487" fill="black" font-weight="bold" font-size="4px" font-family="Arial">HINTERTUXER GLETSCHER</text>
+  <text x="200.416" y="30.509" fill="black" font-weight="bold" font-size="4px" font-family="Arial">1500–3250 m</text>
+  <text x="69.888" y="171.484" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Realspitze</text>
+  <text x="72.997" y="175.505" fill="black" font-weight="bold" font-size="4px" font-family="Arial">3039 m</text>
+  <polygon fill="black" points="505.958,505.705 506.462,506.436 503.81,505.488 506.432,504.459 505.95,505.206 509.099,505.167 509.105,505.665 "/>
+  <polygon fill="black" points="20.095,256.159 20.599,256.891 17.947,255.943 20.569,254.913 20.087,255.661 23.236,255.622 23.242,256.12 "/>
+  <polygon fill="black" points="863.424,595.632 863.548,594.753 864.856,597.248 862.23,596.228 863.092,596.005 860.749,593.899 861.083,593.528 "/>
+  <text x="983.26" y="520.093" fill="#004498" font-weight="bold" font-size="4px" font-family="Arial">Ziller</text>
+  <text x="737.361" y="554.933" fill="#004498" font-weight="bold" font-size="4px" font-family="Arial">Ziller</text>
+  <text x="547.315" y="498.89" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Au</text>
+  <text x="510.105" y="506.879" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Ginzling</text>
+  <text x="975.197" y="455.632" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Kleinschwendberg</text>
+  <text x="926.274" y="513.658" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Mühlbach</text>
+  <text x="876.246" y="530.311" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Burgstall</text>
+  <text x="705.261" y="563.73" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Kreuzlau</text>
+  <text x="705.935" y="567.752" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Bahnhof</text>
+  <text x="896.288" y="572.087" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Eckartau</text>
+  <text x="854.432" y="574.143" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Hollenzen</text>
+  <text x="798.023" y="582.287" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Laubichl</text>
+  <text x="560.797" y="503.353" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Gstan</text>
+  <text x="517.755" y="344.675" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Mittelstation</text>
+  <text x="517.755" y="348.697" fill="black" font-weight="bold" font-size="4px" font-family="Arial">1750 m</text>
+  <text x="336.515" y="364.593" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Brunnhaus</text>
+  <text x="332.089" y="382.525" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Dornau</text>
+  <text x="392.781" y="354.94" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Innerberg</text>
+  <text x="404.879" y="379.444" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Persal</text>
+  <text x="448.92" y="431.948" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Dorf</text>
+  <text x="602.252" y="415.068" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Astegg</text>
+  <text x="463.785" y="482.768" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Hochsteg</text>
+  <text x="846.804" y="171.887" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Horbergtal</text>
+  <text x="1003.067" y="316.599" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Mösl</text>
+  <text x="20.47" y="253.294" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Ahornspitze</text>
+  <text x="25.243" y="257.316" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2973 m</text>
+  <text x="495.272" y="405.226" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Stein</text>
+  <text x="89.655" y="195.311" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Roßkopf</text>
+  <text x="91.536" y="199.333" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2971m</text>
+  <text x="339.369" y="231.943" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Juns</text>
+  <text x="182.832" y="230.409" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Grinbergspitze</text>
+  <text x="190.162" y="234.431" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2745 m</text>
+  <text x="957.023" y="117.812" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Pangert</text>
+  <text x="957.686" y="121.833" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2550 m</text>
+  <text x="838.716" y="595.974" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Zillergrund</text>
+  <text x="859.143" y="610.674" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Brandberg</text>
+  <text x="489.394" y="115.335" fill="black" font-weight="bold" font-size="4px" font-family="Arial">2300 m</text>
+  <text x="989.859" y="392.345" fill="black" font-weight="bold" font-size="4px" font-family="Arial">Schwendberg</text>
+ </g>
+</svg>

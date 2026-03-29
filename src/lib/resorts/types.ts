@@ -14,5 +14,6 @@ export type ResortDefinition = {
   conditionsUrl: string;
   manifest: PanoramaManifest;
   visualScale?: number;
+  labelTierScales?: readonly [number, number, number, number];
   loadOverlayData: () => Promise<ResortOverlayData>;
 };

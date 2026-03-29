@@ -15,6 +15,10 @@ const CONFIGS = {
     intermapsId: "hochzillertal_spieljoch",
     remoteBaseZoom: 16,
   },
+  "ski-gletscherwelt-zillertal-3000": {
+    intermapsId: "zillertal_3000",
+    remoteBaseZoom: 16,
+  },
 };
 
 const resortId = process.argv[2];

@@ -491,10 +491,11 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       const syncLabelTiers = () => {
         const scale = viewport.scale.x;
+        const labelTierScales = activeArea.labelTierScales ?? LABEL_TIER_SCALES;
         labelTiers[0].visible = true;
-        labelTiers[1].visible = scale >= LABEL_TIER_SCALES[1];
-        labelTiers[2].visible = scale >= LABEL_TIER_SCALES[2];
-        labelTiers[3].visible = scale >= LABEL_TIER_SCALES[3];
+        labelTiers[1].visible = scale >= labelTierScales[1];
+        labelTiers[2].visible = scale >= labelTierScales[2];
+        labelTiers[3].visible = scale >= labelTierScales[3];
       };
 
       viewport.on("moved", () => { syncLabelTiers(); redrawDebug(); });

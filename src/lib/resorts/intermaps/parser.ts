@@ -84,7 +84,7 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
 
     const suspiciousLongNumber = typeof rawNumber === "string" && /^\d{5,}$/.test(rawNumber);
     let number = rawNumber;
-    const namePrefixMatch = name.match(/^(\d+[a-zA-Z]?)\s/);
+    const namePrefixMatch = name.match(/^(\d+[a-zA-Z]?)(\s|$)/);
     if (namePrefixMatch) {
       if (!rawNumber || suspiciousLongNumber || namePrefixMatch[1].startsWith(rawNumber)) {
         number = namePrefixMatch[1];
@@ -371,13 +371,13 @@ function normalizeDifficulty(rawDiff: string | undefined, subtitle: string | und
 function normalizeLiftType(type: number, subtitle?: string): LiftType {
   switch (type) {
     case 2: case 3: case 7: case 8: case 17: case 23:
-    case 2608: case 2610: case 2624: case 2634:
+    case 2608: case 2623: case 2624: case 2634:
       return "gondola";
     case 1: case 13: case 24: case 25: case 29: case 30: case 33:
     case 2604: case 2605: case 2606:
       return "chairlift";
     case 9: case 21: case 31:
-    case 2607: case 2613: case 2623:
+    case 2607: case 2610: case 2613:
       return "drag";
   }
 
@@ -545,8 +545,21 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>, scale: number): 
 // ─── label parsing ────────────────────────────────────────────────────────────
 
 function parseHexColor(fill: string | null): number | undefined {
-  if (!fill || !fill.startsWith("#")) return undefined;
-  return parseInt(fill.slice(1), 16);
+  if (!fill) return undefined;
+
+  const lowerFill = fill.toLowerCase();
+  if (lowerFill === "white") return 0xffffff;
+  if (lowerFill === "black") return 0x000000;
+  if (lowerFill === "aqua" || lowerFill === "cyan") return 0x00ffff;
+  if (lowerFill === "none" || lowerFill === "transparent") return undefined;
+
+  if (!fill.startsWith("#")) return undefined;
+
+  let hex = fill.slice(1);
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  return parseInt(hex, 16);
 }
 
 function parseLabels(doc: Document, scale: number): MapLabel[] {
