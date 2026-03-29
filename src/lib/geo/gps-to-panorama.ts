@@ -1,10 +1,11 @@
-import type { GeoPoint, MappedRoute, MappedSegment, Point } from "@/lib/domain/types";
+import type { AnchorPoint, GeoPoint, MappedRoute, MappedSegment, Point } from "@/lib/domain/types";
 
 export type ProjectionResult = {
   point: Point;
-  distance: number; // meters from GPS to nearest route
+  distance: number; // meters from GPS to nearest match
   routeNumber: string;
   segmentId: string;
+  anchorName?: string; // set when snapped to an anchor point
 };
 
 const MAX_SNAP_DISTANCE = 50; // meters
@@ -15,10 +16,12 @@ const MAX_SNAP_DISTANCE = 50; // meters
  */
 export class GpsToPanoramaMapper {
   private segments: { seg: MappedSegment; routeNumber: string }[] = [];
+  private anchors: AnchorPoint[];
   readonly routes: MappedRoute[];
 
-  constructor(routes: MappedRoute[]) {
+  constructor(routes: MappedRoute[], anchors: AnchorPoint[] = []) {
     this.routes = routes;
+    this.anchors = anchors;
     for (const route of routes) {
       for (const seg of route.segments) {
         this.segments.push({ seg, routeNumber: route.number });
@@ -30,12 +33,21 @@ export class GpsToPanoramaMapper {
     return this.segments.length;
   }
 
+  get anchorCount(): number {
+    return this.anchors.length;
+  }
+
   /** Project a GPS position to panorama pixel coordinates */
   project(geo: GeoPoint): ProjectionResult | null {
+    // Priority 1: check anchor points (lift stations, restaurants)
+    const anchorResult = this.snapToAnchor(geo);
+    if (anchorResult) return anchorResult;
+
+    // Priority 2: route-based interpolation
     let bestResult: {
       segment: { seg: MappedSegment; routeNumber: string };
       distance: number;
-      geoParam: number; // cumulative distance along geo path at closest point
+      geoParam: number;
     } | null = null;
 
     for (const entry of this.segments) {
@@ -50,20 +62,40 @@ export class GpsToPanoramaMapper {
     const { segment, distance, geoParam } = bestResult;
     const seg = segment.seg;
 
-    // Map geo cumulative distance → SVG cumulative distance
     const geoTotal = seg.geoCumulDist[seg.geoCumulDist.length - 1];
     const svgTotal = seg.svgCumulDist[seg.svgCumulDist.length - 1];
 
     if (geoTotal === 0 || svgTotal === 0) return null;
 
-    // Normalized parameter along the route
     const t = geoParam / geoTotal;
     const svgDist = t * svgTotal;
-
-    // Interpolate along SVG polyline at svgDist
     const point = interpolateAtDistance(seg.svgPoints, seg.svgCumulDist, svgDist);
 
     return { point, distance, routeNumber: segment.routeNumber, segmentId: seg.id };
+  }
+
+  /** Check if GPS is within snap radius of any anchor point */
+  private snapToAnchor(geo: GeoPoint): ProjectionResult | null {
+    let bestAnchor: AnchorPoint | null = null;
+    let bestDist = Infinity;
+
+    for (const anchor of this.anchors) {
+      const dist = haversine(geo, anchor.geo);
+      if (dist <= anchor.snapRadius && dist < bestDist) {
+        bestDist = dist;
+        bestAnchor = anchor;
+      }
+    }
+
+    if (!bestAnchor) return null;
+
+    return {
+      point: bestAnchor.panorama,
+      distance: bestDist,
+      routeNumber: "",
+      segmentId: bestAnchor.id,
+      anchorName: bestAnchor.name,
+    };
   }
 }
 

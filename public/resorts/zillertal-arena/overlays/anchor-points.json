@@ -1,0 +1,1780 @@
+[
+  {
+    "id": "L_45215_valley",
+    "name": "Gerlossteinbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2176658,
+      "lng": 11.9001146
+    },
+    "panorama": {
+      "x": 855.584,
+      "y": 2195.512
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45215_mountain",
+    "name": "Gerlossteinbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2015199,
+      "lng": 11.9151445
+    },
+    "panorama": {
+      "x": 1317.584,
+      "y": 1863.636
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45104_valley",
+    "name": "2er Sonnalm (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2084944,
+      "lng": 11.8985787
+    },
+    "panorama": {
+      "x": 1233.78,
+      "y": 2122.004
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45104_mountain",
+    "name": "2er Sonnalm (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.19846,
+      "lng": 11.9110133
+    },
+    "panorama": {
+      "x": 1551.588,
+      "y": 1809.82
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45102_valley",
+    "name": "Larchkopf (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2040895,
+      "lng": 11.9142318
+    },
+    "panorama": {
+      "x": 1184.092,
+      "y": 1933.192
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45102_mountain",
+    "name": "Larchkopf (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2001998,
+      "lng": 11.9234042
+    },
+    "panorama": {
+      "x": 1266.968,
+      "y": 1773.068
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45103_valley",
+    "name": "2er Arbiskogel (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2028674,
+      "lng": 11.9118609
+    },
+    "panorama": {
+      "x": 1289.468,
+      "y": 1938.816
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45103_mountain",
+    "name": "2er Arbiskogel (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.1989751,
+      "lng": 11.910961
+    },
+    "panorama": {
+      "x": 1531.72,
+      "y": 1810.568
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45104_valley",
+    "name": "2er Sonnalm (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.1984509,
+      "lng": 11.9109958
+    },
+    "panorama": {
+      "x": 1233.78,
+      "y": 2122.004
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45104_mountain",
+    "name": "2er Sonnalm (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.1984509,
+      "lng": 11.9109958
+    },
+    "panorama": {
+      "x": 1551.588,
+      "y": 1809.82
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45215_valley",
+    "name": "Gerlossteinbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2014966,
+      "lng": 11.9150869
+    },
+    "panorama": {
+      "x": 855.584,
+      "y": 2195.512
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45215_mountain",
+    "name": "Gerlossteinbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2014966,
+      "lng": 11.9150869
+    },
+    "panorama": {
+      "x": 1317.584,
+      "y": 1863.636
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45088_valley",
+    "name": "Kinderland Gerlos (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2009312,
+      "lng": 11.9200127
+    },
+    "panorama": {
+      "x": 2073.204,
+      "y": 1037.688
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45088_mountain",
+    "name": "Kinderland Gerlos (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2009939,
+      "lng": 11.9151903
+    },
+    "panorama": {
+      "x": 2096.456,
+      "y": 1031.876
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45090_valley",
+    "name": "Rosenalmbahn 1 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2372201,
+      "lng": 11.8998785
+    },
+    "panorama": {
+      "x": 454.404,
+      "y": 1900.144
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45090_mountain",
+    "name": "Rosenalmbahn 1 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2388604,
+      "lng": 11.9228626
+    },
+    "panorama": {
+      "x": 676.848,
+      "y": 1575.508
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45094_valley",
+    "name": "Karspitzbahn 1 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2404832,
+      "lng": 11.9003064
+    },
+    "panorama": {
+      "x": 273.012,
+      "y": 1859.384
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45094_mountain",
+    "name": "Karspitzbahn 1 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2386019,
+      "lng": 11.9531691
+    },
+    "panorama": {
+      "x": 606.384,
+      "y": 1560.364
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45215_valley",
+    "name": "Gerlossteinbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2177887,
+      "lng": 11.8998796
+    },
+    "panorama": {
+      "x": 855.584,
+      "y": 2195.512
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45215_mountain",
+    "name": "Gerlossteinbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2177887,
+      "lng": 11.8998796
+    },
+    "panorama": {
+      "x": 1317.584,
+      "y": 1863.636
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45094_valley",
+    "name": "Karspitzbahn 1 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2406719,
+      "lng": 11.9000903
+    },
+    "panorama": {
+      "x": 273.012,
+      "y": 1859.384
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45094_mountain",
+    "name": "Karspitzbahn 1 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2406719,
+      "lng": 11.9000903
+    },
+    "panorama": {
+      "x": 606.384,
+      "y": 1560.364
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45092_valley",
+    "name": "6er Karspitz X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2456671,
+      "lng": 11.9388398
+    },
+    "panorama": {
+      "x": 548.48,
+      "y": 1276.968
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45092_mountain",
+    "name": "6er Karspitz X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2412465,
+      "lng": 11.9592048
+    },
+    "panorama": {
+      "x": 891.608,
+      "y": 876.844
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45090_valley",
+    "name": "Rosenalmbahn 1 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2388604,
+      "lng": 11.9228626
+    },
+    "panorama": {
+      "x": 454.404,
+      "y": 1900.144
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45090_mountain",
+    "name": "Rosenalmbahn 1 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2476468,
+      "lng": 11.9414406
+    },
+    "panorama": {
+      "x": 676.848,
+      "y": 1575.508
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45097_valley",
+    "name": "Plattenanger I (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2514981,
+      "lng": 11.9387131
+    },
+    "panorama": {
+      "x": 211.168,
+      "y": 1316.496
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45097_mountain",
+    "name": "Plattenanger I (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2477066,
+      "lng": 11.9423077
+    },
+    "panorama": {
+      "x": 450.044,
+      "y": 1220.496
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45093_valley",
+    "name": "6er Hanser X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2487232,
+      "lng": 11.9444179
+    },
+    "panorama": {
+      "x": 431.104,
+      "y": 1144.608
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45093_mountain",
+    "name": "6er Hanser X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2474036,
+      "lng": 11.9639364
+    },
+    "panorama": {
+      "x": 662.48,
+      "y": 804.86
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45098_valley",
+    "name": "Plattenanger II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2515934,
+      "lng": 11.9407881
+    },
+    "panorama": {
+      "x": 233.292,
+      "y": 1239.248
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45098_mountain",
+    "name": "Plattenanger II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2484758,
+      "lng": 11.9443359
+    },
+    "panorama": {
+      "x": 411.796,
+      "y": 1153.744
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45216_valley",
+    "name": "10er Stuanmandl (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2426193,
+      "lng": 12.0212932
+    },
+    "panorama": {
+      "x": 1608.236,
+      "y": 884.272
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45216_mountain",
+    "name": "10er Stuanmandl (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.250347,
+      "lng": 12.0044681
+    },
+    "panorama": {
+      "x": 1486.364,
+      "y": 654.024
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45112_valley",
+    "name": "Plattenkogel X-Press I (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2287652,
+      "lng": 11.9611918
+    },
+    "panorama": {
+      "x": 2877.508,
+      "y": 1477.14
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45112_mountain",
+    "name": "Plattenkogel X-Press I (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2394637,
+      "lng": 11.9581179
+    },
+    "panorama": {
+      "x": 2984.756,
+      "y": 1699.892
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45096_valley",
+    "name": "6er Kreuzjoch X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.250611,
+      "lng": 11.9541022
+    },
+    "panorama": {
+      "x": 445.732,
+      "y": 937.24
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45096_mountain",
+    "name": "6er Kreuzjoch X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.251729,
+      "lng": 11.9700853
+    },
+    "panorama": {
+      "x": 545.856,
+      "y": 643.616
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45226_valley",
+    "name": "8er Sesselbahn Kapauns (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2610817,
+      "lng": 11.9553869
+    },
+    "panorama": {
+      "x": 122.064,
+      "y": 821.968
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45226_mountain",
+    "name": "8er Sesselbahn Kapauns (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.253672,
+      "lng": 11.9772127
+    },
+    "panorama": {
+      "x": 603.704,
+      "y": 516.616
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45231_valley",
+    "name": "Teufeltal (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2589496,
+      "lng": 12.0022043
+    },
+    "panorama": {
+      "x": 1232.48,
+      "y": 740.736
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45231_mountain",
+    "name": "Teufeltal (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2507095,
+      "lng": 12.0048219
+    },
+    "panorama": {
+      "x": 1479.984,
+      "y": 636.86
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45083_valley",
+    "name": "6er Krummbach X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2428716,
+      "lng": 12.0524752
+    },
+    "panorama": {
+      "x": 2376.044,
+      "y": 1422.26
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45083_mountain",
+    "name": "6er Krummbach X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2432032,
+      "lng": 12.0295343
+    },
+    "panorama": {
+      "x": 1826.292,
+      "y": 964.944
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45211_valley",
+    "name": "Dorfbahn Gerlos 1 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2261048,
+      "lng": 12.0344603
+    },
+    "panorama": {
+      "x": 1917.996,
+      "y": 1652.276
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45211_mountain",
+    "name": "Dorfbahn Gerlos 1 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2424348,
+      "lng": 12.0222936
+    },
+    "panorama": {
+      "x": 1989.768,
+      "y": 1432.38
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45087_valley",
+    "name": "Vorkogel (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2370966,
+      "lng": 12.0276361
+    },
+    "panorama": {
+      "x": 1666.168,
+      "y": 1148.144
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45087_mountain",
+    "name": "Vorkogel (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2429343,
+      "lng": 12.0227663
+    },
+    "panorama": {
+      "x": 1668.42,
+      "y": 907.396
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45082_valley",
+    "name": "6er Ebenfeld X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2419046,
+      "lng": 12.0401622
+    },
+    "panorama": {
+      "x": 2090.48,
+      "y": 1215.264
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45082_mountain",
+    "name": "6er Ebenfeld X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2426903,
+      "lng": 12.0222604
+    },
+    "panorama": {
+      "x": 1663.728,
+      "y": 872.14
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45081_valley",
+    "name": "Isskogelbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2296185,
+      "lng": 12.0490301
+    },
+    "panorama": {
+      "x": 2116.548,
+      "y": 1637.88
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45081_mountain",
+    "name": "Isskogelbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2447002,
+      "lng": 12.0352893
+    },
+    "panorama": {
+      "x": 2035.36,
+      "y": 1020.44
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45084_valley",
+    "name": "6er Moseltret-X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.243039,
+      "lng": 12.05244
+    },
+    "panorama": {
+      "x": 2369.496,
+      "y": 1403.652
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45084_mountain",
+    "name": "6er Moseltret-X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2429471,
+      "lng": 12.0609412
+    },
+    "panorama": {
+      "x": 2517.996,
+      "y": 1312.152
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45074_valley",
+    "name": "Dorfbahn 2 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2508295,
+      "lng": 12.1221843
+    },
+    "panorama": {
+      "x": 3485.116,
+      "y": 969.224
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45074_mountain",
+    "name": "Dorfbahn 2 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.262932,
+      "lng": 12.0926884
+    },
+    "panorama": {
+      "x": 3253.36,
+      "y": 593.848
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45085_valley",
+    "name": "6er Fussalm X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2427927,
+      "lng": 12.059595
+    },
+    "panorama": {
+      "x": 2480.744,
+      "y": 1345.332
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45085_mountain",
+    "name": "6er Fussalm X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2504818,
+      "lng": 12.0781002
+    },
+    "panorama": {
+      "x": 2815.624,
+      "y": 959.268
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45214_valley",
+    "name": "6er Larmach (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2528515,
+      "lng": 12.0996646
+    },
+    "panorama": {
+      "x": 3101.84,
+      "y": 918.232
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45214_mountain",
+    "name": "6er Larmach (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2605901,
+      "lng": 12.090057
+    },
+    "panorama": {
+      "x": 3104.468,
+      "y": 603.232
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45073_valley",
+    "name": "Sonnwendkopfbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2417045,
+      "lng": 12.1149635
+    },
+    "panorama": {
+      "x": 2890.372,
+      "y": 1454.66
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45073_mountain",
+    "name": "Sonnwendkopfbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.255636,
+      "lng": 12.1082527
+    },
+    "panorama": {
+      "x": 3346.56,
+      "y": 899.844
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45113_valley",
+    "name": "Plattenkogel X-Press II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2358611,
+      "lng": 12.1224192
+    },
+    "panorama": {
+      "x": 2990.856,
+      "y": 1618.804
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45113_mountain",
+    "name": "Plattenkogel X-Press II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2242455,
+      "lng": 12.134115
+    },
+    "panorama": {
+      "x": 3371.856,
+      "y": 1750.804
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45110_valley",
+    "name": "Duxer 6er Bubble (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2368291,
+      "lng": 12.1388428
+    },
+    "panorama": {
+      "x": 3710.668,
+      "y": 1555.992
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45110_mountain",
+    "name": "Duxer 6er Bubble (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.226784,
+      "lng": 12.1357021
+    },
+    "panorama": {
+      "x": 3357.04,
+      "y": 1604.744
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45232_valley",
+    "name": "Duxer X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2345128,
+      "lng": 12.1450712
+    },
+    "panorama": {
+      "x": 3764.296,
+      "y": 1688.184
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45232_mountain",
+    "name": "Duxer X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2262505,
+      "lng": 12.1366329
+    },
+    "panorama": {
+      "x": 3381.908,
+      "y": 1648.956
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45232_valley",
+    "name": "Duxer X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2262468,
+      "lng": 12.1364256
+    },
+    "panorama": {
+      "x": 3764.296,
+      "y": 1688.184
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45232_mountain",
+    "name": "Duxer X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2262468,
+      "lng": 12.1364256
+    },
+    "panorama": {
+      "x": 3381.908,
+      "y": 1648.956
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45108_valley",
+    "name": "4er Filzsteinbahn Speedy (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2326817,
+      "lng": 12.1520894
+    },
+    "panorama": {
+      "x": 3757.168,
+      "y": 1909.056
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45108_mountain",
+    "name": "4er Filzsteinbahn Speedy (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2261944,
+      "lng": 12.1373864
+    },
+    "panorama": {
+      "x": 3421.544,
+      "y": 1680.308
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45105_valley",
+    "name": "Handlalmlift (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2260597,
+      "lng": 12.1522597
+    },
+    "panorama": {
+      "x": 3510.984,
+      "y": 2052.5
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45105_mountain",
+    "name": "Handlalmlift (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2269445,
+      "lng": 12.1429746
+    },
+    "panorama": {
+      "x": 3455.484,
+      "y": 1808.372
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45112_valley",
+    "name": "Plattenkogel X-Press I (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.241413,
+      "lng": 12.1153358
+    },
+    "panorama": {
+      "x": 2877.508,
+      "y": 1477.14
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45112_mountain",
+    "name": "Plattenkogel X-Press I (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2344706,
+      "lng": 12.1229443
+    },
+    "panorama": {
+      "x": 2984.756,
+      "y": 1699.892
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45111_valley",
+    "name": "Plattenkogellift (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2363789,
+      "lng": 12.1253922
+    },
+    "panorama": {
+      "x": 3067.352,
+      "y": 1584.676
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45111_mountain",
+    "name": "Plattenkogellift (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2290942,
+      "lng": 12.1308342
+    },
+    "panorama": {
+      "x": 3220.728,
+      "y": 1628.552
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45078_valley",
+    "name": "Märchenwald II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2446275,
+      "lng": 12.1136443
+    },
+    "panorama": {
+      "x": 3119.456,
+      "y": 1280.868
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45078_mountain",
+    "name": "Märchenwald II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2460849,
+      "lng": 12.1138136
+    },
+    "panorama": {
+      "x": 3234.956,
+      "y": 1166.492
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45078_valley",
+    "name": "Märchenwald II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2457102,
+      "lng": 12.1131803
+    },
+    "panorama": {
+      "x": 3119.456,
+      "y": 1280.868
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45078_mountain",
+    "name": "Märchenwald II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.249791,
+      "lng": 12.1131618
+    },
+    "panorama": {
+      "x": 3234.956,
+      "y": 1166.492
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45109_valley",
+    "name": "Duxer Tellerlift (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2342698,
+      "lng": 12.1463233
+    },
+    "panorama": {
+      "x": 3770.292,
+      "y": 1737.684
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45109_mountain",
+    "name": "Duxer Tellerlift (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2319003,
+      "lng": 12.1445379
+    },
+    "panorama": {
+      "x": 3676.92,
+      "y": 1710.308
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45232_valley",
+    "name": "Duxer X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2342908,
+      "lng": 12.1445402
+    },
+    "panorama": {
+      "x": 3764.296,
+      "y": 1688.184
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45232_mountain",
+    "name": "Duxer X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2342908,
+      "lng": 12.1445402
+    },
+    "panorama": {
+      "x": 3381.908,
+      "y": 1648.956
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45078_valley",
+    "name": "Märchenwald II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2317929,
+      "lng": 12.1553515
+    },
+    "panorama": {
+      "x": 3119.456,
+      "y": 1280.868
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45078_mountain",
+    "name": "Märchenwald II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.229123,
+      "lng": 12.1481228
+    },
+    "panorama": {
+      "x": 3234.956,
+      "y": 1166.492
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45106_valley",
+    "name": "Filzsteinlift 1 (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2318241,
+      "lng": 12.1553455
+    },
+    "panorama": {
+      "x": 3709.916,
+      "y": 2001.308
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45106_mountain",
+    "name": "Filzsteinlift 1 (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2303737,
+      "lng": 12.1514325
+    },
+    "panorama": {
+      "x": 3584.668,
+      "y": 1888.056
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45086_valley",
+    "name": "Falschbachbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2550945,
+      "lng": 12.0764458
+    },
+    "panorama": {
+      "x": 2642.94,
+      "y": 949.516
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45086_mountain",
+    "name": "Falschbachbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2613713,
+      "lng": 12.0892587
+    },
+    "panorama": {
+      "x": 3075.5,
+      "y": 594.768
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45076_valley",
+    "name": "Gipfelbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.262439,
+      "lng": 12.1062819
+    },
+    "panorama": {
+      "x": 3694.536,
+      "y": 851.292
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45076_mountain",
+    "name": "Gipfelbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2610635,
+      "lng": 12.0901636
+    },
+    "panorama": {
+      "x": 3095.476,
+      "y": 576.604
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45077_valley",
+    "name": "Mühlachalm (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2661371,
+      "lng": 12.0924273
+    },
+    "panorama": {
+      "x": 3248.876,
+      "y": 576.78
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45077_mountain",
+    "name": "Mühlachalm (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.263143,
+      "lng": 12.0929767
+    },
+    "panorama": {
+      "x": 3187.748,
+      "y": 511.904
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45077_valley",
+    "name": "Mühlachalm (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2635977,
+      "lng": 12.0916825
+    },
+    "panorama": {
+      "x": 3248.876,
+      "y": 576.78
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45077_mountain",
+    "name": "Mühlachalm (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2631563,
+      "lng": 12.0925907
+    },
+    "panorama": {
+      "x": 3187.748,
+      "y": 511.904
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45230_valley",
+    "name": "6er Mitterleger (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2587,
+      "lng": 12.1008766
+    },
+    "panorama": {
+      "x": 3656.108,
+      "y": 1024.848
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45230_mountain",
+    "name": "6er Mitterleger (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2587,
+      "lng": 12.1008766
+    },
+    "panorama": {
+      "x": 3256.04,
+      "y": 806.076
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45230_valley",
+    "name": "6er Mitterleger (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2586237,
+      "lng": 12.1157527
+    },
+    "panorama": {
+      "x": 3656.108,
+      "y": 1024.848
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45230_mountain",
+    "name": "6er Mitterleger (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2586456,
+      "lng": 12.100949
+    },
+    "panorama": {
+      "x": 3256.04,
+      "y": 806.076
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45230_valley",
+    "name": "6er Mitterleger (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2587198,
+      "lng": 12.1154266
+    },
+    "panorama": {
+      "x": 3656.108,
+      "y": 1024.848
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45230_mountain",
+    "name": "6er Mitterleger (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2587198,
+      "lng": 12.1154266
+    },
+    "panorama": {
+      "x": 3256.04,
+      "y": 806.076
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2391441,
+      "lng": 11.9225695
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2691035,
+      "lng": 11.9458409
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47186",
+    "name": "delicacy-hut Kreuzwiesenalm 1.880m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2295802,
+      "lng": 11.960101
+    },
+    "panorama": {
+      "x": 1216,
+      "y": 1212
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_48773",
+    "name": "Panoramaalm, Bergrestaurant",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2261746,
+      "lng": 12.0405302
+    },
+    "panorama": {
+      "x": 3236,
+      "y": 820
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45949",
+    "name": "Seppi's (1.850 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2414325,
+      "lng": 12.0376423
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1208
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45967",
+    "name": "Arena Center (1.900 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2445284,
+      "lng": 12.0350508
+    },
+    "panorama": {
+      "x": 2012,
+      "y": 1012
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45927",
+    "name": "Prölleralm (1.475 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.248067,
+      "lng": 12.0488789
+    },
+    "panorama": {
+      "x": 2336,
+      "y": 1236
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45927",
+    "name": "Prölleralm (1.475 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2999932,
+      "lng": 12.0413173
+    },
+    "panorama": {
+      "x": 2336,
+      "y": 1236
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_46019",
+    "name": "Umbrella Bar (1.540 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2426567,
+      "lng": 12.0590061
+    },
+    "panorama": {
+      "x": 2488,
+      "y": 1340
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.232229,
+      "lng": 12.1026949
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.22796,
+      "lng": 12.1232821
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_46464",
+    "name": "BergGeistAlm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2258892,
+      "lng": 12.1376442
+    },
+    "panorama": {
+      "x": 3388,
+      "y": 1688
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_46454",
+    "name": "Duxer Stadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2284101,
+      "lng": 12.1405497
+    },
+    "panorama": {
+      "x": 3480,
+      "y": 1672
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2217464,
+      "lng": 12.1528564
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_46560",
+    "name": "Plattenalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2359957,
+      "lng": 12.124301
+    },
+    "panorama": {
+      "x": 3040,
+      "y": 1604
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_46516",
+    "name": "Filzsteinalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2320273,
+      "lng": 12.1555673
+    },
+    "panorama": {
+      "x": 3708,
+      "y": 2032
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_48743",
+    "name": "Gipfeltreffen, Bergrestaurant mit Wine Lounge im Sommer & Winter",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2629828,
+      "lng": 12.0923725
+    },
+    "panorama": {
+      "x": 3224,
+      "y": 556
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_48773",
+    "name": "Panoramaalm, Bergrestaurant",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2583503,
+      "lng": 12.1004718
+    },
+    "panorama": {
+      "x": 3236,
+      "y": 820
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.3278951,
+      "lng": 12.009522
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.3325436,
+      "lng": 12.044846
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_45964",
+    "name": "Rössl Alm (1.600 m)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1735087,
+      "lng": 12.184267
+    },
+    "panorama": {
+      "x": 2000,
+      "y": 1440
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_48773",
+    "name": "Panoramaalm, Bergrestaurant",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2469571,
+      "lng": 12.2252859
+    },
+    "panorama": {
+      "x": 3236,
+      "y": 820
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_48773",
+    "name": "Panoramaalm, Bergrestaurant",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2470936,
+      "lng": 12.227311
+    },
+    "panorama": {
+      "x": 3236,
+      "y": 820
+    },
+    "snapRadius": 20
+  }
+]

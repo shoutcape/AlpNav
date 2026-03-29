@@ -36,6 +36,15 @@ const query = `
 out geom(${bboxStr}) qt;
 `.trim();
 
+const anchorQuery = `
+[out:json][timeout:25];
+(
+  way["aerialway"](${bboxStr});
+  node["amenity"~"restaurant|cafe|bar"](${bboxStr});
+);
+out geom(${bboxStr}) qt;
+`.trim();
+
 async function main() {
   process.stdout.write(`Fetching OSM pistes for ${resortId} (bbox: ${bboxStr})...\n`);
 
@@ -58,6 +67,28 @@ async function main() {
   const dest = path.join(OUTPUT_DIR, "osm-pistes.json");
   await writeFile(dest, JSON.stringify(pistes, null, 2) + "\n");
   process.stdout.write(`Written to ${dest}\n`);
+
+  // Fetch lifts and restaurants for anchor points
+  process.stdout.write(`Fetching OSM anchors (lifts + restaurants)...\n`);
+
+  const anchorResponse = await fetch(OVERPASS_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `data=${encodeURIComponent(anchorQuery)}`,
+  });
+
+  if (!anchorResponse.ok) {
+    throw new Error(`Overpass API error (anchors): ${anchorResponse.status} ${anchorResponse.statusText}`);
+  }
+
+  const anchorRaw = await anchorResponse.json();
+  const anchors = parseAnchors(anchorRaw.elements ?? []);
+
+  process.stdout.write(`Found ${anchors.lifts.length} lifts, ${anchors.restaurants.length} restaurants\n`);
+
+  const anchorDest = path.join(OUTPUT_DIR, "osm-anchors.json");
+  await writeFile(anchorDest, JSON.stringify(anchors, null, 2) + "\n");
+  process.stdout.write(`Written to ${anchorDest}\n`);
 }
 
 /** Parse Overpass elements into structured piste objects */
@@ -112,6 +143,44 @@ function parseElements(elements) {
   }
 
   return pistes;
+}
+
+/** Parse Overpass elements into lift and restaurant objects */
+function parseAnchors(elements) {
+  const lifts = [];
+  const restaurants = [];
+
+  for (const el of elements) {
+    const tags = el.tags ?? {};
+    const name = tags.name ?? null;
+
+    // Lifts: aerialway ways with geometry (endpoints = stations)
+    if (el.type === "way" && tags.aerialway && el.geometry) {
+      const pts = el.geometry
+        .filter((n) => n && n.lat != null && n.lon != null)
+        .map((n) => ({ lat: n.lat, lng: n.lon }));
+      if (pts.length < 2) continue;
+      lifts.push({
+        osmId: `way/${el.id}`,
+        name,
+        aerialwayType: tags.aerialway,
+        valley: pts[0],
+        mountain: pts[pts.length - 1],
+      });
+    }
+
+    // Restaurants: amenity nodes with coordinates
+    if (el.type === "node" && tags.amenity && el.lat != null && el.lon != null) {
+      restaurants.push({
+        osmId: `node/${el.id}`,
+        name,
+        amenityType: tags.amenity,
+        geo: { lat: el.lat, lng: el.lon },
+      });
+    }
+  }
+
+  return { lifts, restaurants };
 }
 
 main().catch((error) => {

@@ -23,6 +23,7 @@ import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, Infrastruc
 import { useGeolocation } from "@/lib/geo/use-geolocation";
 import type { GeoFix } from "@/lib/geo/use-geolocation";
 import { loadOsmPistes } from "@/lib/geo/load-osm-pistes";
+import { loadAnchorPoints } from "@/lib/geo/load-anchor-points";
 import { matchRoutes } from "@/lib/geo/route-matcher";
 import { GpsToPanoramaMapper } from "@/lib/geo/gps-to-panorama";
 import type { ProjectionResult } from "@/lib/geo/gps-to-panorama";
@@ -669,7 +670,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
     const build = async () => {
       try {
-        const osmPistes = await loadOsmPistes(activeArea.id);
+        const [osmPistes, anchorPoints] = await Promise.all([
+          loadOsmPistes(activeArea.id),
+          loadAnchorPoints(activeArea.id).catch(() => []),
+        ]);
         if (cancelled) return;
 
         // Wait for overlay data to be available
@@ -685,13 +689,13 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         if (cancelled || !overlayDataRef.current) return;
 
         const mapped = matchRoutes(overlayDataRef.current.pistes, osmPistes);
-        const mapper = new GpsToPanoramaMapper(mapped);
+        const mapper = new GpsToPanoramaMapper(mapped, anchorPoints);
         if (cancelled) return;
 
         mapperRef.current = mapper;
         setGeoSegmentCount(mapper.segmentCount);
         setGeoMapperStatus("ready");
-        console.log(`[geo] Mapper ready: ${mapped.length} routes, ${mapper.segmentCount} segments`);
+        console.log(`[geo] Mapper ready: ${mapped.length} routes, ${mapper.segmentCount} segments, ${mapper.anchorCount} anchors`);
       } catch (err) {
         if (!cancelled) {
           console.error("[geo] Failed to build mapper:", err);
@@ -1124,7 +1128,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           {debugMode === "geo" && (
             <div className="space-y-1.5">
               <div className="space-y-0.5 pointer-events-none">
-                <div>mapper: {geoMapperStatus} ({geoSegmentCount} segs)</div>
+                <div>mapper: {geoMapperStatus} ({geoSegmentCount} segs, {mapperRef.current?.anchorCount ?? 0} anchors)</div>
                 <div>gps: {geoStatus}{lastFix ? ` ±${lastFix.accuracy.toFixed(0)}m` : ""}</div>
               </div>
 
@@ -1228,7 +1232,11 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               {lastProjection ? (
                 <div className="space-y-0.5 pointer-events-none border-t border-white/10 pt-1.5">
                   <div>proj: {lastProjection.point.x.toFixed(1)}, {lastProjection.point.y.toFixed(1)}</div>
-                  <div>route: {lastProjection.routeNumber} ({lastProjection.distance.toFixed(0)}m)</div>
+                  {lastProjection.anchorName ? (
+                    <div className="text-green-400/90">anchor: {lastProjection.anchorName} ({lastProjection.distance.toFixed(0)}m)</div>
+                  ) : (
+                    <div>route: {lastProjection.routeNumber} ({lastProjection.distance.toFixed(0)}m)</div>
+                  )}
                   <div className="text-[9px] text-white/40 truncate">seg: {lastProjection.segmentId}</div>
                 </div>
               ) : (followLocation || mockGeoActive) ? (

@@ -96,6 +96,15 @@ export type Webcam = {
   streamUrl: string;
 };
 
+export type AnchorPoint = {
+  id: string;
+  name: string;
+  type: "lift-station" | "restaurant";
+  geo: GeoPoint;
+  panorama: Point;
+  snapRadius: number; // meters
+};
+
 export type PisteVariant = {
   variantId: string; // "at", "rt-1", "rt-2"
   segments: Point[][];
