@@ -1174,9 +1174,11 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                     </button>
                   )}
                 </div>
-                {mockGeoActive && !simPlaying && (
-                  <div className="text-[10px] text-yellow-400/80 mt-0.5">mock active</div>
-                )}
+                <div className="text-[10px] mt-0.5 h-4">
+                  {mockGeoActive && (
+                    <span className="text-yellow-400/80">mock active</span>
+                  )}
+                </div>
               </div>
 
               {/* Route simulation */}
@@ -1220,11 +1222,11 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                       </button>
                     )}
                   </div>
-                  {simPlaying && (
-                    <div className="text-[10px] text-green-400/80 mt-0.5">
-                      simulating: {simProgress + 1}/{getSimPoints().length}
-                    </div>
-                  )}
+                  <div className="text-[10px] mt-0.5 h-4">
+                    {simPlaying && (
+                      <span className="text-green-400/80">simulating: {simProgress + 1}/{getSimPoints().length}</span>
+                    )}
+                  </div>
                 </div>
               )}
 
