@@ -102,11 +102,17 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const sportFunVisibleRef = useRef(true);
 
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null>(null);
-  const [debugMode, setDebugMode] = useState(false);
-  const debugModeRef = useRef(false);
+  const [debugMode, setDebugMode] = useState<false | "normal" | "geo">(() => {
+    if (typeof window === "undefined") return false;
+    const saved = localStorage.getItem("alpnav_debug_mode");
+    if (saved === "normal" || saved === "geo") return saved;
+    return false;
+  });
+  const debugModeRef = useRef<false | "normal" | "geo">(false);
   const debugLayerRef = useRef<Graphics | null>(null);
   const redrawDebugRef = useRef<(() => void) | null>(null);
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
+  const [followLocation, setFollowLocation] = useState(false);
   const minScaleRef = useRef(0.05);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
@@ -141,8 +147,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   useEffect(() => {
     setSelectedItem(null);
-    setDebugMode(false);
-    debugModeRef.current = false;
     setDebugStats(null);
     setLegendOpen(false);
     setFilterPanelOpen(false);
@@ -164,6 +168,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     sportFunVisibleRef.current = true;
     hasInteractedRef.current = false;
     overlayDataRef.current = null;
+    setFollowLocation(false);
     setLoadError(null);
   }, [activeArea.id]);
 
@@ -595,7 +600,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   useEffect(() => {
     debugModeRef.current = debugMode;
-    if (debugLayerRef.current) debugLayerRef.current.visible = debugMode;
+    if (debugMode) localStorage.setItem("alpnav_debug_mode", debugMode);
+    else localStorage.removeItem("alpnav_debug_mode");
+    if (debugLayerRef.current) debugLayerRef.current.visible = !!debugMode;
     if (!debugMode) setDebugStats(null);
     redrawDebugRef.current?.();
   }, [debugMode]);
@@ -705,7 +712,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       webcamOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
-  const toggleDebug = () => setDebugMode(d => !d);
+  const toggleDebug = () => setDebugMode((currentMode) => (currentMode === false ? "normal" : false));
+
+  const toggleFollowLocation = () => setFollowLocation(f => !f);
 
   const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const vp = viewportRef.current;
@@ -793,6 +802,22 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             <rect x="9.5" y="9.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
           </svg>
         </button>
+
+        {/* Follow location toggle */}
+        <button
+          onClick={toggleFollowLocation}
+          className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${followLocation ? "bg-blue-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
+          aria-label="Toggle follow location"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="2.5" fill="currentColor" />
+            <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="8" y1="1" x2="8" y2="3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="8" y1="12.5" x2="8" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="1" y1="8" x2="3.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="12.5" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </button>
       </div>
 
       {/* Bottom: primary map controls */}
@@ -831,29 +856,59 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
 
-      {debugMode && debugStats && (
-        <div className="absolute bottom-4 left-4 z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5">
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.001"
-            // eslint-disable-next-line react-hooks/refs
-            value={(() => {
-              const logMin = Math.log(minScaleRef.current);
-              const logMax = Math.log(maxScale);
-              return ((Math.log(debugStats.scale) - logMin) / (logMax - logMin)).toFixed(4);
-            })()}
-            onChange={onZoomSliderChange}
-            className="w-full accent-yellow-400"
-            aria-label="Zoom"
-          />
-          <div className="space-y-0.5 pointer-events-none">
-            <div>scale: {debugStats.scale.toFixed(4)}</div>
-            <div>level: z{debugStats.activeLevel} ({debugStats.blendPct.toFixed(0)}%)</div>
-            <div>center: {debugStats.worldCenterX}, {debugStats.worldCenterY}</div>
-            <div>loaded: {debugStats.loadedCount}/{debugStats.totalCount}</div>
+      {debugMode && (
+        <div className="absolute bottom-4 left-4 z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5 w-64 pointer-events-auto">
+          <div className="flex items-center justify-between gap-2 border-b border-white/20 pb-1.5">
+            <span className="text-[9px] uppercase tracking-widest text-white/50">Debug</span>
+            <div className="flex gap-1">
+              <button
+                onClick={() => setDebugMode("normal")}
+                className={`rounded px-1.5 py-0.5 text-[9px] uppercase tracking-widest transition-colors ${debugMode === "normal" ? "bg-yellow-400/90 text-black" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
+                aria-label="Show normal debug mode"
+              >
+                normal
+              </button>
+              <button
+                onClick={() => setDebugMode("geo")}
+                className={`rounded px-1.5 py-0.5 text-[9px] uppercase tracking-widest transition-colors ${debugMode === "geo" ? "bg-yellow-400/90 text-black" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
+                aria-label="Show geo debug mode"
+              >
+                geo
+              </button>
+            </div>
           </div>
+
+          {debugMode === "normal" && debugStats && (
+            <>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.001"
+                // eslint-disable-next-line react-hooks/refs
+                value={(() => {
+                  const logMin = Math.log(minScaleRef.current);
+                  const logMax = Math.log(maxScale);
+                  return ((Math.log(debugStats.scale) - logMin) / (logMax - logMin)).toFixed(4);
+                })()}
+                onChange={onZoomSliderChange}
+                className="w-full accent-yellow-400"
+                aria-label="Zoom"
+              />
+              <div className="space-y-0.5 pointer-events-none">
+                <div>scale: {debugStats.scale.toFixed(4)}</div>
+                <div>level: z{debugStats.activeLevel} ({debugStats.blendPct.toFixed(0)}%)</div>
+                <div>center: {debugStats.worldCenterX}, {debugStats.worldCenterY}</div>
+                <div>loaded: {debugStats.loadedCount}/{debugStats.totalCount}</div>
+              </div>
+            </>
+          )}
+
+          {debugMode === "geo" && (
+            <div className="text-white/40 text-[10px] py-2 text-center">
+              Geo positioning — not yet connected
+            </div>
+          )}
         </div>
       )}
 
