@@ -1,33 +1,39 @@
 import { Container, Graphics, Ticker } from "pixi.js";
 import type { Point } from "@/lib/domain/types";
 
+// Precise dot (anchors: lifts, restaurants)
 const DOT_COLOR = 0x2563eb; // blue-600
 const DOT_RADIUS = 8;
 const DOT_BORDER = 2.5;
-const ACCURACY_COLOR = 0x2563eb;
-const ACCURACY_ALPHA = 0.12;
 
-const HALO_COLOR = 0x60a5fa; // blue-400, brighter than dot
-const HALO_MIN_RADIUS = 2.0; // multiplier of DOT_RADIUS
-const HALO_MAX_RADIUS = 5.0;
-const HALO_MAX_ALPHA = 0.55;
-const HALO_SPEED = 0.02; // radians per frame
+// Estimated area circle (route interpolation)
+const AREA_COLOR = 0x2563eb;
+const AREA_FILL_ALPHA = 0.18;
+const AREA_STROKE_ALPHA = 0.5;
+const AREA_STROKE_WIDTH = 2;
+const AREA_RADIUS = 28;
+const CENTER_DOT_RADIUS = 3;
+const CENTER_DOT_ALPHA = 0.7;
+
+// Breathing halo
+const HALO_COLOR = 0x60a5fa; // blue-400
+const HALO_MAX_ALPHA = 0.35;
+const HALO_SPEED = 0.02;
 
 let activeTicker: (() => void) | null = null;
 
 /**
- * Draws a user position dot with accuracy circle on the panorama.
- * When `breathing` is true, adds a pulsing halo ring around the dot.
- * Call with `position: null` to clear the overlay.
+ * Draws user position on the panorama.
+ * `precise`: true for anchor snaps (exact dot), false for route interpolation (area circle).
+ * `breathing`: pulsing halo on follow-toggle.
  */
 export function drawUserPositionOverlay(
   container: Container,
   position: Point | null,
-  accuracyRadius: number, // in panorama pixels
   visualScale: number = 1,
+  precise: boolean = false,
   breathing: boolean = false,
 ): void {
-  // Clean up previous animation
   if (activeTicker) {
     activeTicker();
     activeTicker = null;
@@ -37,40 +43,31 @@ export function drawUserPositionOverlay(
 
   if (!position) return;
 
-  // Accuracy circle
-  if (accuracyRadius > DOT_RADIUS * visualScale) {
-    const acc = new Graphics();
-    acc.circle(position.x, position.y, accuracyRadius);
-    acc.fill({ color: ACCURACY_COLOR, alpha: ACCURACY_ALPHA });
-    container.addChild(acc);
-  }
-
-  // Breathing halo (behind dot)
+  // Breathing halo (behind everything)
   if (breathing) {
+    const baseRadius = precise ? DOT_RADIUS : AREA_RADIUS;
     const halo = new Graphics();
     container.addChild(halo);
 
     let phase = 0;
     let cycles = 0;
     const ticker = Ticker.shared;
-    const MAX_CYCLES = 3;
 
     const onTick = () => {
       const prevSin = Math.sin(phase);
       phase += HALO_SPEED;
       const curSin = Math.sin(phase);
 
-      // Count a cycle when sine crosses from negative to positive
       if (prevSin < 0 && curSin >= 0) cycles++;
-      if (cycles >= MAX_CYCLES) {
+      if (cycles >= 3) {
         halo.clear();
         ticker.remove(onTick);
         activeTicker = null;
         return;
       }
 
-      const t = (curSin + 1) / 2; // 0 → 1 → 0
-      const radius = (HALO_MIN_RADIUS + t * (HALO_MAX_RADIUS - HALO_MIN_RADIUS)) * DOT_RADIUS * visualScale;
+      const t = (curSin + 1) / 2;
+      const radius = (1.5 + t * 1.5) * baseRadius * visualScale;
       const alpha = HALO_MAX_ALPHA * (1 - t * 0.7);
 
       halo.clear();
@@ -82,15 +79,29 @@ export function drawUserPositionOverlay(
     activeTicker = () => ticker.remove(onTick);
   }
 
-  // White border
-  const border = new Graphics();
-  border.circle(position.x, position.y, (DOT_RADIUS + DOT_BORDER) * visualScale);
-  border.fill({ color: 0xffffff });
-  container.addChild(border);
+  if (precise) {
+    // Exact dot with white border (anchor snap)
+    const border = new Graphics();
+    border.circle(position.x, position.y, (DOT_RADIUS + DOT_BORDER) * visualScale);
+    border.fill({ color: 0xffffff });
+    container.addChild(border);
 
-  // Blue dot
-  const dot = new Graphics();
-  dot.circle(position.x, position.y, DOT_RADIUS * visualScale);
-  dot.fill({ color: DOT_COLOR });
-  container.addChild(dot);
+    const dot = new Graphics();
+    dot.circle(position.x, position.y, DOT_RADIUS * visualScale);
+    dot.fill({ color: DOT_COLOR });
+    container.addChild(dot);
+  } else {
+    // Estimated area circle (route interpolation)
+    const radius = AREA_RADIUS * visualScale;
+    const area = new Graphics();
+    area.circle(position.x, position.y, radius);
+    area.fill({ color: AREA_COLOR, alpha: AREA_FILL_ALPHA });
+    area.stroke({ width: AREA_STROKE_WIDTH * visualScale, color: AREA_COLOR, alpha: AREA_STROKE_ALPHA });
+    container.addChild(area);
+
+    const dot = new Graphics();
+    dot.circle(position.x, position.y, CENTER_DOT_RADIUS * visualScale);
+    dot.fill({ color: AREA_COLOR, alpha: CENTER_DOT_ALPHA });
+    container.addChild(dot);
+  }
 }

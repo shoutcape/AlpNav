@@ -739,7 +739,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   }, [activeArea.id, activeArea.bbox]);
 
   // Project a geo position to panorama and update the user dot
-  const projectAndDraw = (lat: number, lng: number, accuracy: number) => {
+  const projectAndDraw = (lat: number, lng: number, _accuracy: number) => {
     const mapper = mapperRef.current;
     if (!mapper) return;
 
@@ -747,12 +747,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     setLastProjection(result);
 
     if (result && userPositionOverlayRef.current) {
-      const accuracyPx = accuracy * 2; // rough meters-to-pixels
+      const isAnchor = !!result.anchorName;
       drawUserPositionOverlay(
         userPositionOverlayRef.current,
         result.point,
-        accuracyPx,
         activeArea.visualScale,
+        isAnchor,
         followLocationRef.current,
       );
 
@@ -760,7 +760,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         viewportRef.current.moveCenter(result.point.x, result.point.y);
       }
     } else if (userPositionOverlayRef.current) {
-      drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+      drawUserPositionOverlay(userPositionOverlayRef.current, null, activeArea.visualScale);
     }
   };
 
@@ -771,7 +771,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       setLastFix(null);
       setLastProjection(null);
       if (userPositionOverlayRef.current) {
-        drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+        drawUserPositionOverlay(userPositionOverlayRef.current, null, activeArea.visualScale);
       }
       return;
     }
@@ -901,7 +901,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     stopSim();
     setLastProjection(null);
     if (userPositionOverlayRef.current) {
-      drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+      drawUserPositionOverlay(userPositionOverlayRef.current, null, activeArea.visualScale);
     }
   };
 
@@ -958,8 +958,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       drawUserPositionOverlay(
         userPositionOverlayRef.current,
         lastProjection.point,
-        (lastFix?.accuracy ?? 5) * 2,
         activeArea.visualScale,
+        !!lastProjection.anchorName,
         next,
       );
       if (next && viewportRef.current) {
