@@ -1,0 +1,65 @@
+// Animation-only styles for map controls morph.
+// Base styling (glassmorphic card, colors, etc.) stays in Tailwind.
+
+.container {
+  position: relative;
+
+  &.expanding {
+    overflow: hidden;
+    transition: width 300ms cubic-bezier(0.32, 0.72, 0, 1),
+                height 300ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  &.collapsing {
+    overflow: hidden;
+    transition: width 250ms ease-in,
+                height 250ms ease-in;
+  }
+}
+
+.collapsed,
+.expanded {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.collapsed {
+  // When expanded, hide collapsed content
+  .container[data-expanded="true"] & {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // When collapsed, show collapsed content
+  .container[data-expanded="false"] & {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    position: relative;
+  }
+}
+
+.expanded {
+  // When collapsed, hide expanded content
+  .container[data-expanded="false"] & {
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  // When expanded, show expanded content
+  .container[data-expanded="true"] & {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    position: relative;
+  }
+}
