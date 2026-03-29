@@ -19,6 +19,10 @@ const CONFIGS = {
     intermapsId: "zillertal_3000",
     remoteBaseZoom: 16,
   },
+  "hintertuxer-gletscher": {
+    intermapsId: "hintertuxer_gletscher",
+    remoteBaseZoom: 17,
+  },
 };
 
 const resortId = process.argv[2];
@@ -58,10 +62,6 @@ async function main() {
     const remoteZoom = config.remoteBaseZoom + index;
     const columns = Math.ceil(level.size[0] / TILE_SIZE);
     const rows = Math.ceil(level.size[1] / TILE_SIZE);
-    const levelDir = path.join(OUTPUT_ROOT, String(remoteZoom));
-
-    await mkdir(levelDir, { recursive: true });
-
     manifest.levels.push({
       localIndex: index,
       remoteZoom,
@@ -70,6 +70,15 @@ async function main() {
       columns,
       rows,
     });
+  }
+
+  let tilesInaccessible = false;
+
+  outer: for (const level of manifest.levels) {
+    const { remoteZoom, columns, rows } = level;
+    const levelDir = path.join(OUTPUT_ROOT, String(remoteZoom));
+
+    await mkdir(levelDir, { recursive: true });
 
     for (let y = 0; y < rows; y += 1) {
       for (let x = 0; x < columns; x += 1) {
@@ -92,6 +101,11 @@ async function main() {
         });
 
         if (!response.ok) {
+          if (response.status === 403) {
+            console.warn(`WARNING: Tile ${tileUrl} is not publicly accessible (403). Skipping tile download — manifest will still be written.`);
+            tilesInaccessible = true;
+            break outer;
+          }
           throw new Error(`Failed to download ${tileUrl}: ${response.status} ${response.statusText}`);
         }
 
@@ -100,6 +114,10 @@ async function main() {
         process.stdout.write(`Downloaded ${resortId} z${remoteZoom} (${x},${y})\n`);
       }
     }
+  }
+
+  if (tilesInaccessible) {
+    console.warn(`WARNING: No panorama tiles were downloaded for ${resortId}. The map will render without a background image.`);
   }
 
   await writeFile(

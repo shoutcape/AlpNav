@@ -446,6 +446,12 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>, scale: number)
     }
 
     const m = meta.get(featureId);
+    let number = m?.number;
+    if (!number && icons.length > 0) {
+      const symbolGroup = group.querySelector(`g[id="${featureId}_symbol"]`);
+      const symbolText = symbolGroup?.querySelector("text")?.textContent?.trim();
+      if (symbolText) number = symbolText;
+    }
     pistes.push({
       id: featureId,
       name: m?.name ?? featureId,
@@ -453,7 +459,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>, scale: number)
       segments,
       ...(skiRouteSegments.length > 0 ? { skiRouteSegments } : {}),
       ...(icons.length > 0 ? { icons } : {}),
-      number: m?.number,
+      number,
       lengthM: m?.lengthM,
       status: m?.status,
     });

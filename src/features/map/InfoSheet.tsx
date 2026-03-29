@@ -273,7 +273,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
         onPointerCancel={handlePointerCancel}
       >
         {/* Drag handle */}
-        <div className="flex mb-2 w-full justify-center -my-6 py-6 touch-none">
+        <div className="flex mb-3 w-full justify-center -my-8 pt-6 touch-none">
           <div className="h-[3px] w-10 rounded-full bg-white/20" />
         </div>
 
@@ -415,7 +415,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
 
             {"streamUrl" in displayedItem && (
               <div className="mt-3 flex flex-col gap-3">
-                <div className="relative w-full max-w-[400px] aspect-video overflow-hidden rounded-xl bg-black">
+                <div className="relative w-full max-w-[400px] sm:max-w-[800px] aspect-video overflow-hidden rounded-xl bg-black">
                   {liveMode ? (
                     <iframe
                       src={displayedItem.streamUrl}
