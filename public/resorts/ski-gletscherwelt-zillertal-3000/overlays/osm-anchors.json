@@ -1,0 +1,1502 @@
+{
+  "lifts": [
+    {
+      "osmId": "way/76234036",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.045539,
+        "lng": 11.6112006
+      },
+      "mountain": {
+        "lat": 47.0436693,
+        "lng": 11.628074
+      }
+    },
+    {
+      "osmId": "way/4388475",
+      "name": "Olperer 1",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0606288,
+        "lng": 11.670104
+      },
+      "mountain": {
+        "lat": 47.0568399,
+        "lng": 11.6568656
+      }
+    },
+    {
+      "osmId": "way/29219135",
+      "name": "Olperer 2",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0605265,
+        "lng": 11.6701201
+      },
+      "mountain": {
+        "lat": 47.0567761,
+        "lng": 11.6568988
+      }
+    },
+    {
+      "osmId": "way/4388479",
+      "name": "Kaserer 2",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.07428,
+        "lng": 11.6557049
+      },
+      "mountain": {
+        "lat": 47.0646639,
+        "lng": 11.6506477
+      }
+    },
+    {
+      "osmId": "way/4388478",
+      "name": "Kaserer 1",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0739453,
+        "lng": 11.6566198
+      },
+      "mountain": {
+        "lat": 47.0612777,
+        "lng": 11.6572436
+      }
+    },
+    {
+      "osmId": "way/390185349",
+      "name": "Lärmstange 2",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.0720428,
+        "lng": 11.6609189
+      },
+      "mountain": {
+        "lat": 47.062855,
+        "lng": 11.6581363
+      }
+    },
+    {
+      "osmId": "way/4388472",
+      "name": "Schlegeis",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.0499755,
+        "lng": 11.6787734
+      },
+      "mountain": {
+        "lat": 47.0586339,
+        "lng": 11.6744278
+      }
+    },
+    {
+      "osmId": "way/4388471",
+      "name": "Gletscherbus 3",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.077178,
+        "lng": 11.6725266
+      },
+      "mountain": {
+        "lat": 47.0626746,
+        "lng": 11.680531
+      }
+    },
+    {
+      "osmId": "way/4388476",
+      "name": "Gefrorene Wand",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.0771745,
+        "lng": 11.6712856
+      },
+      "mountain": {
+        "lat": 47.0665448,
+        "lng": 11.673143
+      }
+    },
+    {
+      "osmId": "way/4388477",
+      "name": "Gefrorene Wand 3b",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.0679369,
+        "lng": 11.6712313
+      },
+      "mountain": {
+        "lat": 47.0636416,
+        "lng": 11.6795346
+      }
+    },
+    {
+      "osmId": "way/48242821",
+      "name": "Gefrorene Wand 2",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0630716,
+        "lng": 11.671001
+      },
+      "mountain": {
+        "lat": 47.0630456,
+        "lng": 11.6801288
+      }
+    },
+    {
+      "osmId": "way/89838103",
+      "name": "Gefrorene Wand 1",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0629667,
+        "lng": 11.6710049
+      },
+      "mountain": {
+        "lat": 47.0629547,
+        "lng": 11.680226
+      }
+    },
+    {
+      "osmId": "way/390192454",
+      "name": "Gefrorene Wand",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.0662187,
+        "lng": 11.673344
+      },
+      "mountain": {
+        "lat": 47.0662187,
+        "lng": 11.673344
+      }
+    },
+    {
+      "osmId": "way/4388469",
+      "name": "Gletscherbus 2",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.0969454,
+        "lng": 11.6634587
+      },
+      "mountain": {
+        "lat": 47.0774338,
+        "lng": 11.6705868
+      }
+    },
+    {
+      "osmId": "way/4388470",
+      "name": "Fernerhaus",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.0969988,
+        "lng": 11.6636463
+      },
+      "mountain": {
+        "lat": 47.0773964,
+        "lng": 11.6708913
+      }
+    },
+    {
+      "osmId": "way/1054061897",
+      "name": "Lärmstange 1",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.0865274,
+        "lng": 11.6608962
+      },
+      "mountain": {
+        "lat": 47.0713379,
+        "lng": 11.6602536
+      }
+    },
+    {
+      "osmId": "way/4388465",
+      "name": "Tuxerjoch",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.0979745,
+        "lng": 11.6629405
+      },
+      "mountain": {
+        "lat": 47.0938172,
+        "lng": 11.6473953
+      }
+    },
+    {
+      "osmId": "way/4388462",
+      "name": "Gletscherbus 1",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1068255,
+        "lng": 11.6749802
+      },
+      "mountain": {
+        "lat": 47.0973756,
+        "lng": 11.663824
+      }
+    },
+    {
+      "osmId": "way/4388468",
+      "name": "Sommerberg",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.0941998,
+        "lng": 11.6668863
+      },
+      "mountain": {
+        "lat": 47.0967724,
+        "lng": 11.6627305
+      }
+    },
+    {
+      "osmId": "way/107406252",
+      "name": "Ramsmoos",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0974201,
+        "lng": 11.6627891
+      },
+      "mountain": {
+        "lat": 47.0937381,
+        "lng": 11.6577518
+      }
+    },
+    {
+      "osmId": "way/777171487",
+      "name": "Babylift Gletscherboden",
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.0767529,
+        "lng": 11.6694346
+      },
+      "mountain": {
+        "lat": 47.0770424,
+        "lng": 11.6690102
+      }
+    },
+    {
+      "osmId": "way/267830429",
+      "name": "Mölstallift",
+      "aerialwayType": "j-bar",
+      "valley": {
+        "lat": 47.1686473,
+        "lng": 11.6377159
+      },
+      "mountain": {
+        "lat": 47.1665282,
+        "lng": 11.6385619
+      }
+    },
+    {
+      "osmId": "way/267830430",
+      "name": "Klammjochlift",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.1700839,
+        "lng": 11.6361762
+      },
+      "mountain": {
+        "lat": 47.1680109,
+        "lng": 11.626441
+      }
+    },
+    {
+      "osmId": "way/4388461",
+      "name": "8er Sommerberg",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.106912,
+        "lng": 11.6748163
+      },
+      "mountain": {
+        "lat": 47.0975034,
+        "lng": 11.6636371
+      }
+    },
+    {
+      "osmId": "way/444748764",
+      "name": "Babylift Hintertux",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1098553,
+        "lng": 11.6749356
+      },
+      "mountain": {
+        "lat": 47.1102337,
+        "lng": 11.6742815
+      }
+    },
+    {
+      "osmId": "way/1046177552",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1218268,
+        "lng": 11.6764468
+      },
+      "mountain": {
+        "lat": 47.1237673,
+        "lng": 11.6703782
+      }
+    },
+    {
+      "osmId": "way/1123425581",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1422787,
+        "lng": 11.716808
+      },
+      "mountain": {
+        "lat": 47.143647,
+        "lng": 11.7147349
+      }
+    },
+    {
+      "osmId": "way/51110759",
+      "name": "Beilspitzlift",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.1591488,
+        "lng": 11.7078209
+      },
+      "mountain": {
+        "lat": 47.1635563,
+        "lng": 11.7009865
+      }
+    },
+    {
+      "osmId": "way/29164678",
+      "name": "Eggalm Nord",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1726961,
+        "lng": 11.7234993
+      },
+      "mountain": {
+        "lat": 47.1638094,
+        "lng": 11.7036078
+      }
+    },
+    {
+      "osmId": "way/47511946",
+      "name": "Eggalmbahn",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1571049,
+        "lng": 11.7285311
+      },
+      "mountain": {
+        "lat": 47.1626581,
+        "lng": 11.7125372
+      }
+    },
+    {
+      "osmId": "way/47511949",
+      "name": "Lattenalm",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1658175,
+        "lng": 11.7238338
+      },
+      "mountain": {
+        "lat": 47.1632683,
+        "lng": 11.7102427
+      }
+    },
+    {
+      "osmId": "way/93738823",
+      "name": "Hinterangerlift",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1536677,
+        "lng": 11.7248229
+      },
+      "mountain": {
+        "lat": 47.1523055,
+        "lng": 11.7213792
+      }
+    },
+    {
+      "osmId": "way/371238525",
+      "name": "Talstation Rastkogelbahn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1636499,
+        "lng": 11.7430071
+      },
+      "mountain": {
+        "lat": 47.1636499,
+        "lng": 11.7430071
+      }
+    },
+    {
+      "osmId": "way/29159902",
+      "name": "Rastkogelbahn",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1636727,
+        "lng": 11.7431126
+      },
+      "mountain": {
+        "lat": 47.1806402,
+        "lng": 11.7452497
+      }
+    },
+    {
+      "osmId": "way/25842760",
+      "name": "6er Lämmerbichl",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1782666,
+        "lng": 11.731809
+      },
+      "mountain": {
+        "lat": 47.180741,
+        "lng": 11.7355019
+      }
+    },
+    {
+      "osmId": "way/534668796",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.0900382,
+        "lng": 11.7931822
+      },
+      "mountain": {
+        "lat": 47.0843,
+        "lng": 11.7988497
+      }
+    },
+    {
+      "osmId": "way/71291924",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1434243,
+        "lng": 11.7957195
+      },
+      "mountain": {
+        "lat": 47.1301152,
+        "lng": 11.7951482
+      }
+    },
+    {
+      "osmId": "way/778105646",
+      "name": "Floitenlift",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.0996518,
+        "lng": 11.8101363
+      },
+      "mountain": {
+        "lat": 47.0986226,
+        "lng": 11.811795
+      }
+    },
+    {
+      "osmId": "way/1054061903",
+      "name": "Talstation Schrofenbahn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1619238,
+        "lng": 11.7453598
+      },
+      "mountain": {
+        "lat": 47.1619238,
+        "lng": 11.7453598
+      }
+    },
+    {
+      "osmId": "way/29160846",
+      "name": "6er Katzenmoos",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1603121,
+        "lng": 11.7857862
+      },
+      "mountain": {
+        "lat": 47.1688551,
+        "lng": 11.7991867
+      }
+    },
+    {
+      "osmId": "way/265279699",
+      "name": "Talstation 6er Katzenmoos",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1604304,
+        "lng": 11.7859102
+      },
+      "mountain": {
+        "lat": 47.1604304,
+        "lng": 11.7859102
+      }
+    },
+    {
+      "osmId": "way/26158267",
+      "name": "150er Tux",
+      "aerialwayType": "cable_car",
+      "valley": {
+        "lat": 47.1786764,
+        "lng": 11.7956581
+      },
+      "mountain": {
+        "lat": 47.1839544,
+        "lng": 11.7765139
+      }
+    },
+    {
+      "osmId": "way/139080789",
+      "name": "Talstation 150er Tux",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1785487,
+        "lng": 11.7957281
+      },
+      "mountain": {
+        "lat": 47.1785487,
+        "lng": 11.7957281
+      }
+    },
+    {
+      "osmId": "way/29160837",
+      "name": "4er Sunjet",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1788278,
+        "lng": 11.7977938
+      },
+      "mountain": {
+        "lat": 47.1806949,
+        "lng": 11.7959824
+      }
+    },
+    {
+      "osmId": "way/1259807285",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1504875,
+        "lng": 11.799893
+      },
+      "mountain": {
+        "lat": 47.1521923,
+        "lng": 11.7993153
+      }
+    },
+    {
+      "osmId": "way/29160845",
+      "name": "Finkenberger Almbahn I",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1531749,
+        "lng": 11.8211495
+      },
+      "mountain": {
+        "lat": 47.1621455,
+        "lng": 11.8075705
+      }
+    },
+    {
+      "osmId": "way/51781539",
+      "name": "Finkenberger Almbahn II",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1617612,
+        "lng": 11.8073448
+      },
+      "mountain": {
+        "lat": 47.168231,
+        "lng": 11.8007008
+      }
+    },
+    {
+      "osmId": "way/141122929",
+      "name": null,
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1618661,
+        "lng": 11.807052
+      },
+      "mountain": {
+        "lat": 47.1618661,
+        "lng": 11.807052
+      }
+    },
+    {
+      "osmId": "way/141123064",
+      "name": "Finkenberger Almbahn I",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1619629,
+        "lng": 11.8077192
+      },
+      "mountain": {
+        "lat": 47.1619629,
+        "lng": 11.8077192
+      }
+    },
+    {
+      "osmId": "way/141195973",
+      "name": "Finkenberger Almbahn II",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1682027,
+        "lng": 11.8006408
+      },
+      "mountain": {
+        "lat": 47.1682027,
+        "lng": 11.8006408
+      }
+    },
+    {
+      "osmId": "way/1485336771",
+      "name": "Bergstation 6er Katzenmoos",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1688066,
+        "lng": 11.7989879
+      },
+      "mountain": {
+        "lat": 47.1688066,
+        "lng": 11.7989879
+      }
+    },
+    {
+      "osmId": "way/26158182",
+      "name": "4er Nordhang",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.178858,
+        "lng": 11.7982293
+      },
+      "mountain": {
+        "lat": 47.1694429,
+        "lng": 11.7991394
+      }
+    },
+    {
+      "osmId": "way/26158183",
+      "name": "6er Knorren",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1788124,
+        "lng": 11.8003511
+      },
+      "mountain": {
+        "lat": 47.1714107,
+        "lng": 11.8074313
+      }
+    },
+    {
+      "osmId": "way/29160843",
+      "name": "4er Lärchwald-Express",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1800125,
+        "lng": 11.8116396
+      },
+      "mountain": {
+        "lat": 47.1755334,
+        "lng": 11.8154713
+      }
+    },
+    {
+      "osmId": "way/130580355",
+      "name": "Hasenmuldenlift II",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.167549,
+        "lng": 11.806154
+      },
+      "mountain": {
+        "lat": 47.1706726,
+        "lng": 11.8019705
+      }
+    },
+    {
+      "osmId": "way/141195979",
+      "name": "Bergstation 4er Nordhang",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1695449,
+        "lng": 11.7990836
+      },
+      "mountain": {
+        "lat": 47.1695449,
+        "lng": 11.7990836
+      }
+    },
+    {
+      "osmId": "way/331853331",
+      "name": "Hasenmuldenlift I",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1676521,
+        "lng": 11.8058217
+      },
+      "mountain": {
+        "lat": 47.1702384,
+        "lng": 11.8024115
+      }
+    },
+    {
+      "osmId": "way/208444895",
+      "name": "Babylift Penkenjoch",
+      "aerialwayType": "j-bar",
+      "valley": {
+        "lat": 47.1705491,
+        "lng": 11.7996889
+      },
+      "mountain": {
+        "lat": 47.1703553,
+        "lng": 11.8019071
+      }
+    },
+    {
+      "osmId": "way/208444896",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1699575,
+        "lng": 11.8003125
+      },
+      "mountain": {
+        "lat": 47.1699601,
+        "lng": 11.8005915
+      }
+    },
+    {
+      "osmId": "way/777532865",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1700988,
+        "lng": 11.8003059
+      },
+      "mountain": {
+        "lat": 47.1701009,
+        "lng": 11.8005893
+      }
+    },
+    {
+      "osmId": "way/141123047",
+      "name": "Bergstation 6er Knorren",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1715547,
+        "lng": 11.8073731
+      },
+      "mountain": {
+        "lat": 47.1715547,
+        "lng": 11.8073731
+      }
+    },
+    {
+      "osmId": "way/26158184",
+      "name": "Penken-Express",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1733668,
+        "lng": 11.8205002
+      },
+      "mountain": {
+        "lat": 47.1741303,
+        "lng": 11.8138652
+      }
+    },
+    {
+      "osmId": "way/97725127",
+      "name": "Kombibahn Penken",
+      "aerialwayType": "mixed_lift",
+      "valley": {
+        "lat": 47.1758541,
+        "lng": 11.8201194
+      },
+      "mountain": {
+        "lat": 47.1759633,
+        "lng": 11.81604
+      }
+    },
+    {
+      "osmId": "way/139080775",
+      "name": "Bergstation 4er Lärchwald-Express",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1756837,
+        "lng": 11.8153084
+      },
+      "mountain": {
+        "lat": 47.1756837,
+        "lng": 11.8153084
+      }
+    },
+    {
+      "osmId": "way/29160839",
+      "name": "Mittertrettlift",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.1789558,
+        "lng": 11.7992115
+      },
+      "mountain": {
+        "lat": 47.1804388,
+        "lng": 11.7990664
+      }
+    },
+    {
+      "osmId": "way/139080824",
+      "name": "Talstation 4er Nordhang",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1787344,
+        "lng": 11.7982879
+      },
+      "mountain": {
+        "lat": 47.1787344,
+        "lng": 11.7982879
+      }
+    },
+    {
+      "osmId": "way/139080833",
+      "name": "Talstation 6er Knorren",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1788514,
+        "lng": 11.800382
+      },
+      "mountain": {
+        "lat": 47.1788514,
+        "lng": 11.800382
+      }
+    },
+    {
+      "osmId": "way/32076222",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1762787,
+        "lng": 11.8155817
+      },
+      "mountain": {
+        "lat": 47.1766152,
+        "lng": 11.8165098
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "osmId": "node/5869225019",
+      "name": "s'Raschtl",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.0404378,
+        "lng": 11.7039924
+      }
+    },
+    {
+      "osmId": "node/27337828",
+      "name": "Sommerbergalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.0973082,
+        "lng": 11.6632779
+      }
+    },
+    {
+      "osmId": "node/27337841",
+      "name": "Fernerhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.077041,
+        "lng": 11.6703144
+      }
+    },
+    {
+      "osmId": "node/1370410632",
+      "name": "Almhit",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1080727,
+        "lng": 11.6746298
+      }
+    },
+    {
+      "osmId": "node/1370410634",
+      "name": "Kaiserbründl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1078727,
+        "lng": 11.6744646
+      }
+    },
+    {
+      "osmId": "node/3846260929",
+      "name": "Restaurant Beim Hesser",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1147681,
+        "lng": 11.6817925
+      }
+    },
+    {
+      "osmId": "node/829910023",
+      "name": "Bichlalm",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.1188326,
+        "lng": 11.6791246
+      }
+    },
+    {
+      "osmId": "node/822581994",
+      "name": "Stoankasern",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.14466,
+        "lng": 11.6734379
+      }
+    },
+    {
+      "osmId": "node/4017812338",
+      "name": "Junster Gasthäusl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1370787,
+        "lng": 11.7064967
+      }
+    },
+    {
+      "osmId": "node/843573991",
+      "name": "Klausboden",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1474987,
+        "lng": 11.7212431
+      }
+    },
+    {
+      "osmId": "node/8536274539",
+      "name": "Dorfbar Ratschkathl",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1558658,
+        "lng": 11.7260481
+      }
+    },
+    {
+      "osmId": "node/12692692250",
+      "name": "Pizza Zillertal Lanersbach",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.155352,
+        "lng": 11.7260264
+      }
+    },
+    {
+      "osmId": "node/12709614930",
+      "name": "Pizzeria Alpenrose",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1553,
+        "lng": 11.7277783
+      }
+    },
+    {
+      "osmId": "node/12709701989",
+      "name": "City Café Bar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1556998,
+        "lng": 11.7276021
+      }
+    },
+    {
+      "osmId": "node/8536274533",
+      "name": "Restaurant Swings",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1581839,
+        "lng": 11.7301801
+      }
+    },
+    {
+      "osmId": "node/9749282481",
+      "name": "Tuxer Grillkuchl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1576923,
+        "lng": 11.7301806
+      }
+    },
+    {
+      "osmId": "node/1620496977",
+      "name": "Lattenalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1644733,
+        "lng": 11.7241766
+      }
+    },
+    {
+      "osmId": "node/1650695753",
+      "name": "Gasthof Geislerhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17802,
+        "lng": 11.722588
+      }
+    },
+    {
+      "osmId": "node/516589474",
+      "name": "Klausenalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.0554301,
+        "lng": 11.7519108
+      }
+    },
+    {
+      "osmId": "node/938577763",
+      "name": "Gasthaus Karlsteg",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1305221,
+        "lng": 11.8168882
+      }
+    },
+    {
+      "osmId": "node/7658868365",
+      "name": "Gasthof Brunnhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1469268,
+        "lng": 11.8014443
+      }
+    },
+    {
+      "osmId": "node/2508515936",
+      "name": "Pizzeria Platzl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1624161,
+        "lng": 11.7451454
+      }
+    },
+    {
+      "osmId": "node/7207109108",
+      "name": "Boxenstopp",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.1589468,
+        "lng": 11.7610576
+      }
+    },
+    {
+      "osmId": "node/7733731407",
+      "name": "Melcherbar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1687236,
+        "lng": 11.8008474
+      }
+    },
+    {
+      "osmId": "node/7733731408",
+      "name": "Kasermandl am Penken",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1749682,
+        "lng": 11.8149077
+      }
+    },
+    {
+      "osmId": "node/8535885299",
+      "name": "Gasthaus Lärchwaldhütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1752391,
+        "lng": 11.8157055
+      }
+    },
+    {
+      "osmId": "way/137132960",
+      "name": "Geraer Hütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.04339533846155,
+        "lng": 11.628046469230771
+      }
+    },
+    {
+      "osmId": "way/39911021",
+      "name": "Olpererhütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.04202472857143,
+        "lng": 11.68832047142857
+      }
+    },
+    {
+      "osmId": "way/521595166",
+      "name": "Winterraum",
+      "amenityType": "wilderness_hut",
+      "geo": {
+        "lat": 47.04183956,
+        "lng": 11.68803402
+      }
+    },
+    {
+      "osmId": "way/265688569",
+      "name": "Gletscherhütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.05797358333333,
+        "lng": 11.673892283333336
+      }
+    },
+    {
+      "osmId": "way/1170341761",
+      "name": "Schirmbar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.09669641,
+        "lng": 11.663240495
+      }
+    },
+    {
+      "osmId": "way/135564255",
+      "name": "Spannagelhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.07997791111111,
+        "lng": 11.6712493
+      }
+    },
+    {
+      "osmId": "way/178754385",
+      "name": "Friesenberghaus",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.06763603636364,
+        "lng": 11.702071354545454
+      }
+    },
+    {
+      "osmId": "way/121648748",
+      "name": "Tuxerjoch Haus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.09884394285715,
+        "lng": 11.64955202857143
+      }
+    },
+    {
+      "osmId": "way/104410669",
+      "name": "VALARA Alpine Art Hotel",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.10727722,
+        "lng": 11.67402352
+      }
+    },
+    {
+      "osmId": "way/122707207",
+      "name": "Hohenhaus Tenne",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.10778398,
+        "lng": 11.67491462
+      }
+    },
+    {
+      "osmId": "way/122707208",
+      "name": "Hotel Vierjahreszeiten",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.10847035625,
+        "lng": 11.674082481249998
+      }
+    },
+    {
+      "osmId": "way/70732795",
+      "name": "Berggasthof Grieralm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.12221806363637,
+        "lng": 11.706927954545455
+      }
+    },
+    {
+      "osmId": "way/94818333",
+      "name": "Madseiterhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.127392480000005,
+        "lng": 11.69711272
+      }
+    },
+    {
+      "osmId": "way/94818387",
+      "name": "Zum Sepp",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.12838586666667,
+        "lng": 11.698420477777779
+      }
+    },
+    {
+      "osmId": "way/149009297",
+      "name": "Brandalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.14891338,
+        "lng": 11.71430462
+      }
+    },
+    {
+      "osmId": "way/70732810",
+      "name": "Höllensteinhütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.131712674999996,
+        "lng": 11.721794141666669
+      }
+    },
+    {
+      "osmId": "way/166530671",
+      "name": "Lizumer Hütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.16673594117647,
+        "lng": 11.640485082352944
+      }
+    },
+    {
+      "osmId": "way/208444877",
+      "name": "Egger Schialm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16197512,
+        "lng": 11.710783359999999
+      }
+    },
+    {
+      "osmId": "way/208444873",
+      "name": "Berggasthaus Eggalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16253685,
+        "lng": 11.712077975000001
+      }
+    },
+    {
+      "osmId": "way/93801959",
+      "name": "Jäger",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.15413511666667,
+        "lng": 11.724595783333333
+      }
+    },
+    {
+      "osmId": "way/1370675977",
+      "name": "Bergfried Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.15462534444445,
+        "lng": 11.724811233333334
+      }
+    },
+    {
+      "osmId": "way/1370676683",
+      "name": "Bergfried Alm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1546255,
+        "lng": 11.724810277777777
+      }
+    },
+    {
+      "osmId": "way/144009269",
+      "name": "Vogelnest",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.173025611111115,
+        "lng": 11.7236127
+      }
+    },
+    {
+      "osmId": "way/144009265",
+      "name": "Waldhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17469402857143,
+        "lng": 11.726265728571429
+      }
+    },
+    {
+      "osmId": "way/94126192",
+      "name": "Das Lokal - Die Pension",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.164067918181814,
+        "lng": 11.743503745454547
+      }
+    },
+    {
+      "osmId": "way/94165808",
+      "name": "Kasermandl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16320588181818,
+        "lng": 11.743382518181816
+      }
+    },
+    {
+      "osmId": "way/149009277",
+      "name": "Heidi´s Skistall",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17961678181818,
+        "lng": 11.735745681818184
+      }
+    },
+    {
+      "osmId": "way/121820243",
+      "name": "Alpengasthaus Breitlahner",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.06075280769231,
+        "lng": 11.74976733846154
+      }
+    },
+    {
+      "osmId": "way/142968041",
+      "name": "Maxhütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.08201355999999,
+        "lng": 11.799944020000002
+      }
+    },
+    {
+      "osmId": "way/178754449",
+      "name": "Gashaus Innerböden",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.09756774,
+        "lng": 11.79459444
+      }
+    },
+    {
+      "osmId": "way/39727697",
+      "name": "Gamshütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.12976466,
+        "lng": 11.795571260000001
+      }
+    },
+    {
+      "osmId": "way/121820461",
+      "name": "Altginzling",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.10049828571429,
+        "lng": 11.809221585714287
+      }
+    },
+    {
+      "osmId": "way/121820462",
+      "name": "Café Alpenland",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.10006282857143,
+        "lng": 11.808692857142857
+      }
+    },
+    {
+      "osmId": "way/121820491",
+      "name": "Zemmtal",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.09842802,
+        "lng": 11.80368378
+      }
+    },
+    {
+      "osmId": "way/121820464",
+      "name": "Gasthof Pension Schwarzenstein",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.10287091111112,
+        "lng": 11.809743955555554
+      }
+    },
+    {
+      "osmId": "way/178754442",
+      "name": "Jausenstation Gamsgrube",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.12124518,
+        "lng": 11.80722054
+      }
+    },
+    {
+      "osmId": "way/141123076",
+      "name": "Almstüberl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.162496738461535,
+        "lng": 11.808098592307694
+      }
+    },
+    {
+      "osmId": "way/141195792",
+      "name": "Penkenjochhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.168555157142855,
+        "lng": 11.799950242857141
+      }
+    },
+    {
+      "osmId": "way/141195977",
+      "name": "Penkentenne",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.168666050000006,
+        "lng": 11.80101195
+      }
+    },
+    {
+      "osmId": "way/141195738",
+      "name": "Granatalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16956898421053,
+        "lng": 11.800230105263157
+      }
+    },
+    {
+      "osmId": "way/141122856",
+      "name": "Penken Panorahma Restaurant",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1710431,
+        "lng": 11.808504240000001
+      }
+    },
+    {
+      "osmId": "way/31838738",
+      "name": "Grillhofalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17925454,
+        "lng": 11.79847282
+      }
+    }
+  ]
+}

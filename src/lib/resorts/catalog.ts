@@ -26,6 +26,7 @@ export const RESORTS: ResortDefinition[] = [
     visualScale: 1.0,
     labelTierScales: [0, 0.1, 0.2, 0.7],
     loadOverlayData: loadArenaOverlayData,
+    bbox: { south: 47.10, west: 11.87, north: 47.35, east: 12.25 },
   },
   {
     id: "mayrhofner-bergbahnen",
@@ -40,6 +41,7 @@ export const RESORTS: ResortDefinition[] = [
     visualScale: 2.0,
     labelTierScales: [0, 0.1, 0.0, 0.0],
     loadOverlayData: loadMayrhofenOverlayData,
+    bbox: { south: 47.12, west: 11.82, north: 47.20, east: 11.90 },
   },
   {
     id: "ski-gletscherwelt-zillertal-3000",
@@ -54,6 +56,7 @@ export const RESORTS: ResortDefinition[] = [
     visualScale: 2.0,
     labelTierScales: [0, 0.1, 0.0, 0.0],
     loadOverlayData: loadZillertal3000OverlayData,
+    bbox: { south: 47.04, west: 11.62, north: 47.18, east: 11.82 },
   },
   {
     id: "hintertuxer-gletscher",
@@ -68,6 +71,7 @@ export const RESORTS: ResortDefinition[] = [
     visualScale: 2.0,
     labelTierScales: [0, 0.1, 0.0, 0.0],
     loadOverlayData: loadHintertuxerGletscherOverlayData,
+    bbox: { south: 47.02, west: 11.62, north: 47.10, east: 11.72 },
   },
   {
     id: "hochzillertal-hochfugen-spieljoch",
@@ -82,6 +86,7 @@ export const RESORTS: ResortDefinition[] = [
     visualScale: 2.0,
     labelTierScales: [0, 0.1, 0.4, 0.0],
     loadOverlayData: loadHochzillertalOverlayData,
+    bbox: { south: 47.15, west: 11.80, north: 47.30, east: 11.95 },
   },
 ];
 

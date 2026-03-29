@@ -16,7 +16,12 @@
     "enrich:arena": "node scripts/enrich-lift-info.mjs zillertal-arena && node scripts/enrich-gastronomy-images.mjs zillertal-arena && node scripts/enrich-gastronomy-websites.mjs zillertal-arena",
     "enrich:mayrhofen": "node scripts/enrich-lift-info.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-images.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-websites.mjs mayrhofner-bergbahnen",
     "enrich:hochzillertal": "node scripts/enrich-lift-info.mjs hochzillertal-hochfugen-spieljoch && node scripts/enrich-gastronomy-images.mjs hochzillertal-hochfugen-spieljoch && node scripts/enrich-gastronomy-websites.mjs hochzillertal-hochfugen-spieljoch",
-    "enrich:hintertuxer-gletscher": "node scripts/enrich-lift-info.mjs hintertuxer-gletscher && node scripts/enrich-gastronomy-images.mjs hintertuxer-gletscher && node scripts/enrich-gastronomy-websites.mjs hintertuxer-gletscher"
+    "enrich:hintertuxer-gletscher": "node scripts/enrich-lift-info.mjs hintertuxer-gletscher && node scripts/enrich-gastronomy-images.mjs hintertuxer-gletscher && node scripts/enrich-gastronomy-websites.mjs hintertuxer-gletscher",
+    "fetch-osm:arena": "node scripts/fetch-osm-pistes.mjs zillertal-arena",
+    "fetch-osm:mayrhofen": "node scripts/fetch-osm-pistes.mjs mayrhofner-bergbahnen",
+    "fetch-osm:hochzillertal": "node scripts/fetch-osm-pistes.mjs hochzillertal-hochfugen-spieljoch",
+    "fetch-osm:zillertal-3000": "node scripts/fetch-osm-pistes.mjs ski-gletscherwelt-zillertal-3000",
+    "fetch-osm:hintertuxer-gletscher": "node scripts/fetch-osm-pistes.mjs hintertuxer-gletscher"
   },
   "dependencies": {
     "@deck.gl/core": "9.2.11",

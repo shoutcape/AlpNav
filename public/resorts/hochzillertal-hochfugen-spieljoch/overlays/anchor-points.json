@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "L_23265_valley",
+    "name": "Hochzillertal I (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2892347,
+      "lng": 11.8728632
+    },
+    "panorama": {
+      "x": 3042.736,
+      "y": 2848.344
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23265_mountain",
+    "name": "Hochzillertal I (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2814196,
+      "lng": 11.8626828
+    },
+    "panorama": {
+      "x": 3137.8599999999997,
+      "y": 3283.9152
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23266_valley",
+    "name": "Hochzillertal III (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2704433,
+      "lng": 11.8472842
+    },
+    "panorama": {
+      "x": 3361.904,
+      "y": 3561.776
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23266_mountain",
+    "name": "Hochzillertal III (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2893129,
+      "lng": 11.8727505
+    },
+    "panorama": {
+      "x": 3262.3944,
+      "y": 3209.4339999999997
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23267_valley",
+    "name": "Schnee-Express (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2603788,
+      "lng": 11.8543666
+    },
+    "panorama": {
+      "x": 1187.832,
+      "y": 1897.128
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23267_mountain",
+    "name": "Schnee-Express (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2530801,
+      "lng": 11.836705
+    },
+    "panorama": {
+      "x": 1258.9315956800008,
+      "y": 1844.8842944
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23268_valley",
+    "name": "Sonnenjet (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2645835,
+      "lng": 11.8520594
+    },
+    "panorama": {
+      "x": 1963.2,
+      "y": 2582.368
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23268_mountain",
+    "name": "Sonnenjet (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2630468,
+      "lng": 11.8258635
+    },
+    "panorama": {
+      "x": 2247.25608,
+      "y": 2196.4368
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23269_valley",
+    "name": "Neuhüttenbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2739731,
+      "lng": 11.8443965
+    },
+    "panorama": {
+      "x": 3309.624,
+      "y": 1891.448
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23269_mountain",
+    "name": "Neuhüttenbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2677017,
+      "lng": 11.8273232
+    },
+    "panorama": {
+      "x": 3324.9763319999997,
+      "y": 1888.7402168000008
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23270_valley",
+    "name": "Wedelexpress (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2650721,
+      "lng": 11.817036
+    },
+    "panorama": {
+      "x": 3725.064,
+      "y": 1700.4
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23270_mountain",
+    "name": "Wedelexpress (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2574491,
+      "lng": 11.8076843
+    },
+    "panorama": {
+      "x": 3807.6744,
+      "y": 1532.0536000000002
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23272_valley",
+    "name": "Öfelerbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.254993,
+      "lng": 11.8484222
+    },
+    "panorama": {
+      "x": 956.768,
+      "y": 1609.904
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23272_mountain",
+    "name": "Öfelerbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2525596,
+      "lng": 11.8374252
+    },
+    "panorama": {
+      "x": 967.4920256000003,
+      "y": 1593.5196112000003
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23273_valley",
+    "name": "Panoramalift (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2535113,
+      "lng": 11.848544
+    },
+    "panorama": {
+      "x": 562.1056,
+      "y": 1475.4
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23273_mountain",
+    "name": "Panoramalift (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2507539,
+      "lng": 11.8381016
+    },
+    "panorama": {
+      "x": 589.0913272000001,
+      "y": 1478.1326880000006
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23274_valley",
+    "name": "Hirschbichllift (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2513598,
+      "lng": 11.8350442
+    },
+    "panorama": {
+      "x": 1076.408,
+      "y": 1266.904
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23274_mountain",
+    "name": "Hirschbichllift (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2554362,
+      "lng": 11.8329713
+    },
+    "panorama": {
+      "x": 1141.4914399999998,
+      "y": 1261.896888
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23275_valley",
+    "name": "Parklift (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2545929,
+      "lng": 11.8407165
+    },
+    "panorama": {
+      "x": 1318.328,
+      "y": 1513.544
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23275_mountain",
+    "name": "Parklift (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2531924,
+      "lng": 11.8372759
+    },
+    "panorama": {
+      "x": 1345.3137271999994,
+      "y": 1516.2766880000006
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23276_valley",
+    "name": "Zirbenlift I + II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2646426,
+      "lng": 11.8515092
+    },
+    "panorama": {
+      "x": 2076.784,
+      "y": 2561.72
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23276_mountain",
+    "name": "Zirbenlift I + II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2641964,
+      "lng": 11.8436159
+    },
+    "panorama": {
+      "x": 2164.3952,
+      "y": 2465.3424
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23277_valley",
+    "name": "Marendalmlift I (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.264932,
+      "lng": 11.8521806
+    },
+    "panorama": {
+      "x": 2486.728,
+      "y": 2442.256
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23277_mountain",
+    "name": "Marendalmlift I (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2695986,
+      "lng": 11.8475708
+    },
+    "panorama": {
+      "x": 2513.7137271999995,
+      "y": 2444.9886879999995
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23278_valley",
+    "name": "Marendalmlift II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.267848,
+      "lng": 11.8494403
+    },
+    "panorama": {
+      "x": 2696.696,
+      "y": 2407.84
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23278_mountain",
+    "name": "Marendalmlift II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2696462,
+      "lng": 11.8478711
+    },
+    "panorama": {
+      "x": 2723.6817271999994,
+      "y": 2410.5726879999997
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23280_valley",
+    "name": "Übungslift-Telecorde I (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2661253,
+      "lng": 11.8513024
+    },
+    "panorama": {
+      "x": 2857.216,
+      "y": 2469.168
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23280_mountain",
+    "name": "Übungslift-Telecorde I (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2678509,
+      "lng": 11.8497148
+    },
+    "panorama": {
+      "x": 2884.2017271999994,
+      "y": 2471.9006879999997
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23281_valley",
+    "name": "Übungslift Telecorde II - III (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.269595,
+      "lng": 11.8496673
+    },
+    "panorama": {
+      "x": 2646.312,
+      "y": 2588.392
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23281_mountain",
+    "name": "Übungslift Telecorde II - III (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2677777,
+      "lng": 11.8503902
+    },
+    "panorama": {
+      "x": 2673.2977271999994,
+      "y": 2591.1246879999994
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23282_valley",
+    "name": "Übungslift-Telecorde III (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2706631,
+      "lng": 11.8480757
+    },
+    "panorama": {
+      "x": 2476.088,
+      "y": 2498.584
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23282_mountain",
+    "name": "Übungslift-Telecorde III (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2698838,
+      "lng": 11.8484632
+    },
+    "panorama": {
+      "x": 2503.0737271999997,
+      "y": 2501.3166879999994
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23294_valley",
+    "name": "Kristall- Express (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2532561,
+      "lng": 11.8559526
+    },
+    "panorama": {
+      "x": 172.4144,
+      "y": 2293.864
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23294_mountain",
+    "name": "Kristall- Express (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2518816,
+      "lng": 11.8380309
+    },
+    "panorama": {
+      "x": 255.0224,
+      "y": 2136.156
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23295_valley",
+    "name": "Mizunbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2621805,
+      "lng": 11.8529324
+    },
+    "panorama": {
+      "x": 2047.936,
+      "y": 1907.064
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23295_mountain",
+    "name": "Mizunbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2630823,
+      "lng": 11.830779
+    },
+    "panorama": {
+      "x": 2032.583667999999,
+      "y": 1904.3562168000008
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23304_valley",
+    "name": "Zirbenlift II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2645674,
+      "lng": 11.851255
+    },
+    "panorama": {
+      "x": 2009.512,
+      "y": 2587.376
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23304_mountain",
+    "name": "Zirbenlift II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2641885,
+      "lng": 11.8445896
+    },
+    "panorama": {
+      "x": 2183.4912,
+      "y": 2395.248
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23306_valley",
+    "name": "Hochzillertal II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2814196,
+      "lng": 11.8626828
+    },
+    "panorama": {
+      "x": 2891.288,
+      "y": 2229.408
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23306_mountain",
+    "name": "Hochzillertal II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2699837,
+      "lng": 11.8469071
+    },
+    "panorama": {
+      "x": 2891.288,
+      "y": 2229.408
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23307_valley",
+    "name": "Wimbachexpress (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2617606,
+      "lng": 11.8537666
+    },
+    "panorama": {
+      "x": 1211.592,
+      "y": 2657.464
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23307_mountain",
+    "name": "Wimbachexpress (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.258175,
+      "lng": 11.8268193
+    },
+    "panorama": {
+      "x": 1540.04,
+      "y": 1996.52
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23390_valley",
+    "name": "Topjet (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2651316,
+      "lng": 11.8174139
+    },
+    "panorama": {
+      "x": 2788.84,
+      "y": 1192.232
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23390_mountain",
+    "name": "Topjet (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.262893,
+      "lng": 11.8245093
+    },
+    "panorama": {
+      "x": 2966.0280000000002,
+      "y": 1296.9188000000001
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23403_valley",
+    "name": "6er KSB Holzalm (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2677013,
+      "lng": 11.7986771
+    },
+    "panorama": {
+      "x": 4203.496,
+      "y": 1321.208
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23403_mountain",
+    "name": "6er KSB Holzalm (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2675727,
+      "lng": 11.8005604
+    },
+    "panorama": {
+      "x": 4203.496,
+      "y": 1321.208
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23404_valley",
+    "name": "8er EUB Zillertal Shuttle (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2588681,
+      "lng": 11.7991937
+    },
+    "panorama": {
+      "x": 4647.6,
+      "y": 1475.824
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23404_mountain",
+    "name": "8er EUB Zillertal Shuttle (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.257067,
+      "lng": 11.807253
+    },
+    "panorama": {
+      "x": 4718.289095840002,
+      "y": 1443.5747840000004
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23612_valley",
+    "name": "II Spieljochbahn (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.167549,
+      "lng": 11.806154
+    },
+    "panorama": {
+      "x": 7559.456,
+      "y": 2104.056
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_23612_mountain",
+    "name": "II Spieljochbahn (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.1706726,
+      "lng": 11.8019705
+    },
+    "panorama": {
+      "x": 7502.50008,
+      "y": 2179.36
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_24624_valley",
+    "name": "Förderband II (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2707993,
+      "lng": 11.8470008
+    },
+    "panorama": {
+      "x": 5692.68,
+      "y": 2272.256
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_24624_mountain",
+    "name": "Förderband II (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2707993,
+      "lng": 11.8470008
+    },
+    "panorama": {
+      "x": 5750.464,
+      "y": 2232.9759999999997
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "gastro_23327",
+    "name": "Albergo",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2581072,
+      "lng": 11.8266702
+    },
+    "panorama": {
+      "x": 2392,
+      "y": 1064
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23328",
+    "name": "Bergrestaurant Mountain View",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2696421,
+      "lng": 11.8471034
+    },
+    "panorama": {
+      "x": 2840,
+      "y": 2176
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23333",
+    "name": "Die Kashütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.25129946923077,
+      "lng": 11.83411122307692
+    },
+    "panorama": {
+      "x": 1040,
+      "y": 1264
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23334",
+    "name": "Firnhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.273812379999995,
+      "lng": 11.844878
+    },
+    "panorama": {
+      "x": 3656,
+      "y": 2552
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23338",
+    "name": "Kaltenbacher Skihütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2738692,
+      "lng": 11.83980378
+    },
+    "panorama": {
+      "x": 3456,
+      "y": 2056
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23341",
+    "name": "Kristallhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2502008,
+      "lng": 11.8385679
+    },
+    "panorama": {
+      "x": 552,
+      "y": 1232
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23348",
+    "name": "Marendalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2645524,
+      "lng": 11.8526326
+    },
+    "panorama": {
+      "x": 1952,
+      "y": 2640
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23352",
+    "name": "Platzlalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2686301,
+      "lng": 11.8456542
+    },
+    "panorama": {
+      "x": 3016,
+      "y": 2120
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23356",
+    "name": "sCHIC Bar I LIfestyle & Bar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2893318,
+      "lng": 11.8729337
+    },
+    "panorama": {
+      "x": 3224,
+      "y": 3672
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23359",
+    "name": "Skistadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.24906207894737,
+      "lng": 11.941803757894736
+    },
+    "panorama": {
+      "x": 3048,
+      "y": 2712
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23363",
+    "name": "Wedelhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2559582,
+      "lng": 11.8106187
+    },
+    "panorama": {
+      "x": 3800,
+      "y": 1072
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_23384",
+    "name": "Zirmstadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2698608,
+      "lng": 11.8444175
+    },
+    "panorama": {
+      "x": 3168,
+      "y": 2064
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24122",
+    "name": "Berghotel",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.202352700000006,
+      "lng": 11.913396914285714
+    },
+    "panorama": {
+      "x": 5344,
+      "y": 2112
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24124",
+    "name": "8er Alm (mit Pizzeria)",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2075122,
+      "lng": 11.8340945
+    },
+    "panorama": {
+      "x": 5464,
+      "y": 2048
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24130",
+    "name": "8er Treff Bistro",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.167899,
+      "lng": 11.8633476
+    },
+    "panorama": {
+      "x": 5400,
+      "y": 2056
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24131",
+    "name": "Almhof",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.20708783333334,
+      "lng": 11.817523977777778
+    },
+    "panorama": {
+      "x": 5432,
+      "y": 2288
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24180",
+    "name": "Bergrestaurant Mountain Loft",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1608588,
+      "lng": 11.86137
+    },
+    "panorama": {
+      "x": 7592,
+      "y": 2088
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24188",
+    "name": "Skihütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1749523,
+      "lng": 11.8270687
+    },
+    "panorama": {
+      "x": 7512,
+      "y": 2576
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24190",
+    "name": "Sonnberg",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2055303,
+      "lng": 11.8703963
+    },
+    "panorama": {
+      "x": 6616,
+      "y": 3184
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_24194",
+    "name": "Weps´n Nest",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2911042,
+      "lng": 11.8865748
+    },
+    "panorama": {
+      "x": 7048,
+      "y": 3152
+    },
+    "snapRadius": 20
+  }
+]

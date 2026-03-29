@@ -1,0 +1,936 @@
+{
+  "lifts": [
+    {
+      "osmId": "way/834235090",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1463949,
+        "lng": 11.8399277
+      },
+      "mountain": {
+        "lat": 47.1452218,
+        "lng": 11.8368807
+      }
+    },
+    {
+      "osmId": "way/29160845",
+      "name": "Finkenberger Almbahn I",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1524988,
+        "lng": 11.8221728
+      },
+      "mountain": {
+        "lat": 47.1542559,
+        "lng": 11.8195133
+      }
+    },
+    {
+      "osmId": "way/30978865",
+      "name": "Penkenbahn",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1634171,
+        "lng": 11.8606363
+      },
+      "mountain": {
+        "lat": 47.1754503,
+        "lng": 11.8293403
+      }
+    },
+    {
+      "osmId": "way/156215470",
+      "name": "Horbergbahn",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.1905607,
+        "lng": 11.857775
+      },
+      "mountain": {
+        "lat": 47.1838431,
+        "lng": 11.8176693
+      }
+    },
+    {
+      "osmId": "way/142183898",
+      "name": "Finkenberger Almbahn I",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1523255,
+        "lng": 11.8220106
+      },
+      "mountain": {
+        "lat": 47.1523255,
+        "lng": 11.8220106
+      }
+    },
+    {
+      "osmId": "way/26158184",
+      "name": "Penken-Express",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1725878,
+        "lng": 11.8274234
+      },
+      "mountain": {
+        "lat": 47.1734597,
+        "lng": 11.819693
+      }
+    },
+    {
+      "osmId": "way/97725127",
+      "name": "Kombibahn Penken",
+      "aerialwayType": "mixed_lift",
+      "valley": {
+        "lat": 47.1756554,
+        "lng": 11.8275372
+      },
+      "mountain": {
+        "lat": 47.1758802,
+        "lng": 11.8191434
+      }
+    },
+    {
+      "osmId": "way/1040656054",
+      "name": "Übungsland Penken",
+      "aerialwayType": "rope_tow",
+      "valley": {
+        "lat": 47.1764667,
+        "lng": 11.8305802
+      },
+      "mountain": {
+        "lat": 47.1756663,
+        "lng": 11.8313044
+      }
+    },
+    {
+      "osmId": "way/1040656055",
+      "name": "Übungsland Penken",
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.176133,
+        "lng": 11.8299298
+      },
+      "mountain": {
+        "lat": 47.1756125,
+        "lng": 11.82973
+      }
+    },
+    {
+      "osmId": "way/1040656056",
+      "name": "Übungsland Penken",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.176484,
+        "lng": 11.8300612
+      },
+      "mountain": {
+        "lat": 47.1758787,
+        "lng": 11.8287174
+      }
+    },
+    {
+      "osmId": "way/1152550113",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1749992,
+        "lng": 11.8352692
+      },
+      "mountain": {
+        "lat": 47.1694135,
+        "lng": 11.8478839
+      }
+    },
+    {
+      "osmId": "way/156220204",
+      "name": "Penkenkuli (Gschlössalm)",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1734331,
+        "lng": 11.8281498
+      },
+      "mountain": {
+        "lat": 47.1750104,
+        "lng": 11.8277379
+      }
+    },
+    {
+      "osmId": "way/343558827",
+      "name": "Babylift Penken",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.1749203,
+        "lng": 11.82985
+      },
+      "mountain": {
+        "lat": 47.1755791,
+        "lng": 11.8318446
+      }
+    },
+    {
+      "osmId": "way/31892248",
+      "name": "Ahornbahn",
+      "aerialwayType": "cable_car",
+      "valley": {
+        "lat": 47.1603521,
+        "lng": 11.8597265
+      },
+      "mountain": {
+        "lat": 47.1365629,
+        "lng": 11.870503
+      }
+    },
+    {
+      "osmId": "way/51781543",
+      "name": "6er Ebenwald",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1435366,
+        "lng": 11.8535593
+      },
+      "mountain": {
+        "lat": 47.135774,
+        "lng": 11.8638067
+      }
+    },
+    {
+      "osmId": "way/31892240",
+      "name": "8er Ahorn",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1352487,
+        "lng": 11.8641551
+      },
+      "mountain": {
+        "lat": 47.1356007,
+        "lng": 11.8728671
+      }
+    },
+    {
+      "osmId": "way/31892241",
+      "name": "Filzenalmlift",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1347618,
+        "lng": 11.8668332
+      },
+      "mountain": {
+        "lat": 47.1344117,
+        "lng": 11.8725165
+      }
+    },
+    {
+      "osmId": "way/31892242",
+      "name": "Übungslift Ahorn",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1341208,
+        "lng": 11.8726688
+      },
+      "mountain": {
+        "lat": 47.1339733,
+        "lng": 11.8756094
+      }
+    },
+    {
+      "osmId": "way/51781540",
+      "name": "Filzenlift",
+      "aerialwayType": "t-bar",
+      "valley": {
+        "lat": 47.1383991,
+        "lng": 11.8652487
+      },
+      "mountain": {
+        "lat": 47.1365292,
+        "lng": 11.8698955
+      }
+    },
+    {
+      "osmId": "way/141323583",
+      "name": "Talstation 8er Ahorn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1351442,
+        "lng": 11.8641857
+      },
+      "mountain": {
+        "lat": 47.1351442,
+        "lng": 11.8641857
+      }
+    },
+    {
+      "osmId": "way/1228720464",
+      "name": "Bergstation 6er Ebenwald",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1354121,
+        "lng": 11.8635875
+      },
+      "mountain": {
+        "lat": 47.1354121,
+        "lng": 11.8635875
+      }
+    },
+    {
+      "osmId": "way/141323585",
+      "name": "Bergstation 8er Ahorn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1355386,
+        "lng": 11.8726769
+      },
+      "mountain": {
+        "lat": 47.1355386,
+        "lng": 11.8726769
+      }
+    },
+    {
+      "osmId": "way/141323620",
+      "name": "Bergstation Ahornbahn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1366942,
+        "lng": 11.8706213
+      },
+      "mountain": {
+        "lat": 47.1366942,
+        "lng": 11.8706213
+      }
+    },
+    {
+      "osmId": "way/475122533",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1362467,
+        "lng": 11.8714499
+      },
+      "mountain": {
+        "lat": 47.1359972,
+        "lng": 11.8730845
+      }
+    },
+    {
+      "osmId": "way/598626246",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1364164,
+        "lng": 11.871462
+      },
+      "mountain": {
+        "lat": 47.1366793,
+        "lng": 11.8714128
+      }
+    },
+    {
+      "osmId": "way/1321671003",
+      "name": "Talstation 6er Ebenwald",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.143545,
+        "lng": 11.8534617
+      },
+      "mountain": {
+        "lat": 47.143545,
+        "lng": 11.8534617
+      }
+    },
+    {
+      "osmId": "way/129120739",
+      "name": "Talstation Ahornbahn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1602336,
+        "lng": 11.8596132
+      },
+      "mountain": {
+        "lat": 47.1602336,
+        "lng": 11.8596132
+      }
+    },
+    {
+      "osmId": "way/285962729",
+      "name": null,
+      "aerialwayType": "goods",
+      "valley": {
+        "lat": 47.1739169,
+        "lng": 11.8618464
+      },
+      "mountain": {
+        "lat": 47.173523,
+        "lng": 11.8592289
+      }
+    },
+    {
+      "osmId": "way/1057114985",
+      "name": "Übungsland Horberg",
+      "aerialwayType": "rope_tow",
+      "valley": {
+        "lat": 47.1884559,
+        "lng": 11.8588905
+      },
+      "mountain": {
+        "lat": 47.1883958,
+        "lng": 11.8567658
+      }
+    },
+    {
+      "osmId": "way/96638794",
+      "name": "Horbergbahn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1905687,
+        "lng": 11.8574065
+      },
+      "mountain": {
+        "lat": 47.1905687,
+        "lng": 11.8574065
+      }
+    }
+  ],
+  "restaurants": [
+    {
+      "osmId": "node/5248322122",
+      "name": "Stieralm Penken",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1760029,
+        "lng": 11.8282279
+      }
+    },
+    {
+      "osmId": "node/7313174791",
+      "name": "Bergrast",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.175427,
+        "lng": 11.8283605
+      }
+    },
+    {
+      "osmId": "node/7313185694",
+      "name": "Skihütte Pilzbar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1749523,
+        "lng": 11.8270687
+      }
+    },
+    {
+      "osmId": "node/7315466585",
+      "name": "Restaurant Pilzbar",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1748312,
+        "lng": 11.827362
+      }
+    },
+    {
+      "osmId": "node/7315468353",
+      "name": "Elchbar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1752921,
+        "lng": 11.8283139
+      }
+    },
+    {
+      "osmId": "node/1891130275",
+      "name": "Gschößwandhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.174623,
+        "lng": 11.8340092
+      }
+    },
+    {
+      "osmId": "node/357164671",
+      "name": "Ahornhütte",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1361477,
+        "lng": 11.8696274
+      }
+    },
+    {
+      "osmId": "node/10692864905",
+      "name": "SchneeBar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1356033,
+        "lng": 11.8736494
+      }
+    },
+    {
+      "osmId": "node/11137458266",
+      "name": "FreiRaum Ahorn",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.136749,
+        "lng": 11.870111
+      }
+    },
+    {
+      "osmId": "node/2470318403",
+      "name": "Wirtshaus zum Griena",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1587752,
+        "lng": 11.8562521
+      }
+    },
+    {
+      "osmId": "node/8901802197",
+      "name": "Stoaner's Bienenhäusl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1598653,
+        "lng": 11.8603009
+      }
+    },
+    {
+      "osmId": "node/8911921331",
+      "name": "Brück'n Stadl",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1614121,
+        "lng": 11.8607189
+      }
+    },
+    {
+      "osmId": "node/13430346701",
+      "name": "Café-Restaurant Mount Everest",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1608588,
+        "lng": 11.86137
+      }
+    },
+    {
+      "osmId": "node/8901711135",
+      "name": "Ländenhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1592082,
+        "lng": 11.8645741
+      }
+    },
+    {
+      "osmId": "node/2419736798",
+      "name": "Happy End",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.1631787,
+        "lng": 11.8610721
+      }
+    },
+    {
+      "osmId": "node/8904426605",
+      "name": "Pane e Vino da Michele",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1646364,
+        "lng": 11.8618162
+      }
+    },
+    {
+      "osmId": "node/690430862",
+      "name": "Kostner",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.1674754,
+        "lng": 11.8629603
+      }
+    },
+    {
+      "osmId": "node/1405608370",
+      "name": "Hotel Neue Post",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1688964,
+        "lng": 11.864529
+      }
+    },
+    {
+      "osmId": "node/1405608379",
+      "name": "Neue Post",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.1690032,
+        "lng": 11.8647304
+      }
+    },
+    {
+      "osmId": "node/1413626042",
+      "name": "Cadillac",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.1676571,
+        "lng": 11.8630774
+      }
+    },
+    {
+      "osmId": "node/2453510991",
+      "name": "Wald Cafe",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1638285,
+        "lng": 11.8648466
+      }
+    },
+    {
+      "osmId": "node/3012908226",
+      "name": "Mo's",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1669636,
+        "lng": 11.8631601
+      }
+    },
+    {
+      "osmId": "node/3319696727",
+      "name": null,
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1675038,
+        "lng": 11.8629515
+      }
+    },
+    {
+      "osmId": "node/3446133777",
+      "name": "New York Bistro",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.167899,
+        "lng": 11.8633476
+      }
+    },
+    {
+      "osmId": "node/3635172809",
+      "name": "Café Tirol",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.165557,
+        "lng": 11.8621755
+      }
+    },
+    {
+      "osmId": "node/4753305177",
+      "name": "Harakiri bar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1649119,
+        "lng": 11.8620238
+      }
+    },
+    {
+      "osmId": "node/5688619700",
+      "name": "Bacher Brot",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.1646386,
+        "lng": 11.8633535
+      }
+    },
+    {
+      "osmId": "node/8900027186",
+      "name": "El Toro",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1662852,
+        "lng": 11.8653039
+      }
+    },
+    {
+      "osmId": "node/8901511225",
+      "name": "Edelweiss Lounge",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.166543,
+        "lng": 11.8650811
+      }
+    },
+    {
+      "osmId": "node/8901881378",
+      "name": "China Restaurant Singapore",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1661852,
+        "lng": 11.8651832
+      }
+    },
+    {
+      "osmId": "node/8904340485",
+      "name": "Berg & Tal",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1650467,
+        "lng": 11.8620547
+      }
+    },
+    {
+      "osmId": "node/8904467534",
+      "name": "Mr.Lei",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1672077,
+        "lng": 11.8628045
+      }
+    },
+    {
+      "osmId": "node/8911921332",
+      "name": "BrasserieQ",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.164536,
+        "lng": 11.8620479
+      }
+    },
+    {
+      "osmId": "node/8911921333",
+      "name": "Goldkind",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1654388,
+        "lng": 11.8623886
+      }
+    },
+    {
+      "osmId": "node/8928758606",
+      "name": "Cafe Ciao",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.165473,
+        "lng": 11.8627785
+      }
+    },
+    {
+      "osmId": "node/8928758615",
+      "name": "Mike's Sportsbar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1687194,
+        "lng": 11.8659494
+      }
+    },
+    {
+      "osmId": "node/12022231781",
+      "name": "Bar Rique",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1655044,
+        "lng": 11.8627915
+      }
+    },
+    {
+      "osmId": "node/8928815020",
+      "name": "GH Forellenstüberl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.176012,
+        "lng": 11.8667271
+      }
+    },
+    {
+      "osmId": "node/9916928689",
+      "name": "Ernesto’s Lounge-Bar",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1703449,
+        "lng": 11.8629111
+      }
+    },
+    {
+      "osmId": "node/12846799936",
+      "name": "Landhotel Denggerhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1754616,
+        "lng": 11.8690502
+      }
+    },
+    {
+      "osmId": "node/8928815026",
+      "name": "GH Bruggerstube",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1818946,
+        "lng": 11.8712241
+      }
+    },
+    {
+      "osmId": "node/12444009101",
+      "name": "Hiatamadl Apres Ski Stadl",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.190463,
+        "lng": 11.8583029
+      }
+    },
+    {
+      "osmId": "way/142272746",
+      "name": "Hotel Restaurant Neuwirt",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.15409238571429,
+        "lng": 11.825081342857143
+      }
+    },
+    {
+      "osmId": "way/142272657",
+      "name": "Gasthaus Hochsteg",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.15500558,
+        "lng": 11.835698019999999
+      }
+    },
+    {
+      "osmId": "way/141122901",
+      "name": "Gasthaus Astegg",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.166607357142865,
+        "lng": 11.837147842857144
+      }
+    },
+    {
+      "osmId": "way/141323573",
+      "name": "Filznalm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.13400248000001,
+        "lng": 11.868642659999999
+      }
+    },
+    {
+      "osmId": "way/141323612",
+      "name": "Filzenstadl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.13531578571428,
+        "lng": 11.872301714285713
+      }
+    },
+    {
+      "osmId": "way/141323613",
+      "name": "Bergrestaurant Panorama",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.13698516666667,
+        "lng": 11.8691764
+      }
+    },
+    {
+      "osmId": "way/141323531",
+      "name": "Edelhütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.130524539999996,
+        "lng": 11.897443899999999
+      }
+    },
+    {
+      "osmId": "way/141323563",
+      "name": "Wh. Alpenrose",
+      "amenityType": "drinking_water",
+      "geo": {
+        "lat": 47.14667392222222,
+        "lng": 11.884659722222223
+      }
+    },
+    {
+      "osmId": "way/141323564",
+      "name": "Wiesenhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.15098934,
+        "lng": 11.85805564
+      }
+    },
+    {
+      "osmId": "way/129120806",
+      "name": "Gasthof Perauer",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1610484,
+        "lng": 11.861052933333333
+      }
+    },
+    {
+      "osmId": "way/141092132",
+      "name": "Gasthof Brücke",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16152592142857,
+        "lng": 11.860148999999998
+      }
+    },
+    {
+      "osmId": "way/129121114",
+      "name": "Würstelstand Blechhotel",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.15861148571429,
+        "lng": 11.863650971428571
+      }
+    },
+    {
+      "osmId": "way/139308407",
+      "name": "Gasthaus Zimmereben",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17347118,
+        "lng": 11.85908748
+      }
+    },
+    {
+      "osmId": "way/505249566",
+      "name": "Zwei Ender",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16374242,
+        "lng": 11.8670097
+      }
+    },
+    {
+      "osmId": "way/129024177",
+      "name": "Alpenhof Kristall",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17006904,
+        "lng": 11.865245420000003
+      }
+    },
+    {
+      "osmId": "way/140499376",
+      "name": "Steinerkogl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16734108888889,
+        "lng": 11.881531033333333
+      }
+    },
+    {
+      "osmId": "way/139071145",
+      "name": "Schrofenblick",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.17900174,
+        "lng": 11.861785489999999
+      }
+    },
+    {
+      "osmId": "way/128949140",
+      "name": "Sidan",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.189505485714285,
+        "lng": 11.860769885714287
+      }
+    }
+  ]
+}
