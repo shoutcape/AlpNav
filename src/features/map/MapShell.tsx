@@ -103,6 +103,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [controlsExpanded, setControlsExpanded] = useState(false);
   const controlsExpandedRef = useRef(false);
+  const [controlsDismissing, setControlsDismissing] = useState(false);
   const gastronomyOverlayRef = useRef<Container | null>(null);
   const [gastronomyVisible, setGastronomyVisible] = useState(true);
   const gastronomyVisibleRef = useRef(true);
@@ -551,6 +552,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         if (controlsExpandedRef.current) {
           controlsExpandedRef.current = false;
           setControlsExpanded(false);
+          setControlsDismissing(true);
+          setTimeout(() => setControlsDismissing(false), 75);
           setFilterPanelOpen(false);
           return;
         }
@@ -1042,6 +1045,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             onClick={() => {
               setLegendOpen(o => !o);
               setFilterPanelOpen(false);
+              if (controlsExpandedRef.current) {
+                setControlsDismissing(true);
+                setTimeout(() => setControlsDismissing(false), 75);
+              }
               setControlsExpanded(false);
               controlsExpandedRef.current = false;
             }}
@@ -1101,6 +1108,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           layout
           className="pointer-events-auto overflow-hidden rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md"
           transition={{ layout: { duration: 0.3, ease: [0.32, 0.72, 0, 1] } }}
+          onLayoutAnimationComplete={() => { if (!controlsDismissing) return; setControlsDismissing(false); }}
         >
           {!controlsExpanded ? (
             <button
@@ -1113,7 +1121,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               aria-expanded={controlsExpanded}
               aria-label="Map layer controls"
               onContextMenu={e => e.preventDefault()}
-              className="touch-none select-none flex flex-col items-center gap-1 rounded-[14px] px-4 py-2 text-ivory/70 hover:bg-white/[0.07] hover:text-ivory"
+              className={`touch-none select-none flex flex-col items-center gap-1 rounded-[14px] px-4 py-2 text-ivory/70 hover:bg-white/[0.07] hover:text-ivory transition-opacity duration-150${controlsDismissing ? " opacity-0" : " opacity-100"}`}
             >
               <LayersIcon />
               <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
