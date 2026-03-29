@@ -1,6 +1,110 @@
 {
   "lifts": [
     {
+      "osmId": "way/31892248",
+      "name": "Ahornbahn",
+      "aerialwayType": "cable_car",
+      "valley": {
+        "lat": 47.1472884,
+        "lng": 11.865645
+      },
+      "mountain": {
+        "lat": 47.1365629,
+        "lng": 11.870503
+      }
+    },
+    {
+      "osmId": "way/31892240",
+      "name": "8er Ahorn",
+      "aerialwayType": "chair_lift",
+      "valley": {
+        "lat": 47.1354124,
+        "lng": 11.8682057
+      },
+      "mountain": {
+        "lat": 47.1356007,
+        "lng": 11.8728671
+      }
+    },
+    {
+      "osmId": "way/31892241",
+      "name": "Filzenalmlift",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.134602,
+        "lng": 11.8694278
+      },
+      "mountain": {
+        "lat": 47.1344117,
+        "lng": 11.8725165
+      }
+    },
+    {
+      "osmId": "way/31892242",
+      "name": "Übungslift Ahorn",
+      "aerialwayType": "platter",
+      "valley": {
+        "lat": 47.1341208,
+        "lng": 11.8726688
+      },
+      "mountain": {
+        "lat": 47.1339733,
+        "lng": 11.8756094
+      }
+    },
+    {
+      "osmId": "way/141323585",
+      "name": "Bergstation 8er Ahorn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1355386,
+        "lng": 11.8726769
+      },
+      "mountain": {
+        "lat": 47.1355386,
+        "lng": 11.8726769
+      }
+    },
+    {
+      "osmId": "way/141323620",
+      "name": "Bergstation Ahornbahn",
+      "aerialwayType": "station",
+      "valley": {
+        "lat": 47.1366942,
+        "lng": 11.8706213
+      },
+      "mountain": {
+        "lat": 47.1366942,
+        "lng": 11.8706213
+      }
+    },
+    {
+      "osmId": "way/475122533",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1362467,
+        "lng": 11.8714499
+      },
+      "mountain": {
+        "lat": 47.1359972,
+        "lng": 11.8730845
+      }
+    },
+    {
+      "osmId": "way/598626246",
+      "name": null,
+      "aerialwayType": "magic_carpet",
+      "valley": {
+        "lat": 47.1364164,
+        "lng": 11.871462
+      },
+      "mountain": {
+        "lat": 47.1366793,
+        "lng": 11.8714128
+      }
+    },
+    {
       "osmId": "way/76424905",
       "name": "Gerlossteinbahn",
       "aerialwayType": "cable_car",
@@ -18,8 +122,8 @@
       "name": "Sonnalm",
       "aerialwayType": "chair_lift",
       "valley": {
-        "lat": 47.2084944,
-        "lng": 11.8985787
+        "lat": 47.2095553,
+        "lng": 11.8972597
       },
       "mountain": {
         "lat": 47.19846,
@@ -235,12 +339,25 @@
       }
     },
     {
+      "osmId": "way/30121814",
+      "name": "Hochzillertal III",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.2869596,
+        "lng": 11.8696696
+      },
+      "mountain": {
+        "lat": 47.2893129,
+        "lng": 11.8727505
+      }
+    },
+    {
       "osmId": "way/29149541",
       "name": "Rosenalmbahn 1",
       "aerialwayType": "gondola",
       "valley": {
-        "lat": 47.2372201,
-        "lng": 11.8998785
+        "lat": 47.2371939,
+        "lng": 11.899442
       },
       "mountain": {
         "lat": 47.2388604,
@@ -401,6 +518,19 @@
       "mountain": {
         "lat": 47.2484758,
         "lng": 11.9443359
+      }
+    },
+    {
+      "osmId": "way/26322053",
+      "name": "Hochzillertal I",
+      "aerialwayType": "gondola",
+      "valley": {
+        "lat": 47.2892347,
+        "lng": 11.8728632
+      },
+      "mountain": {
+        "lat": 47.2865393,
+        "lng": 11.8693518
       }
     },
     {
@@ -1173,6 +1303,195 @@
   ],
   "restaurants": [
     {
+      "osmId": "node/10692864905",
+      "name": "SchneeBar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.1356033,
+        "lng": 11.8736494
+      }
+    },
+    {
+      "osmId": "node/11137458266",
+      "name": "FreiRaum Ahorn",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.136749,
+        "lng": 11.870111
+      }
+    },
+    {
+      "osmId": "node/8928815026",
+      "name": "GH Bruggerstube",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.1818946,
+        "lng": 11.8712241
+      }
+    },
+    {
+      "osmId": "node/4736864850",
+      "name": "Gasthof Tipotsch",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2049268,
+        "lng": 11.8703226
+      }
+    },
+    {
+      "osmId": "node/8624737818",
+      "name": "Zillertaler Hausmannskost",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2055303,
+        "lng": 11.8703963
+      }
+    },
+    {
+      "osmId": "node/8624737826",
+      "name": "Des Iss",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2066655,
+        "lng": 11.8715198
+      }
+    },
+    {
+      "osmId": "node/11632615501",
+      "name": "Lebenshilfe Kantine Ramsau",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2056612,
+        "lng": 11.8722631
+      }
+    },
+    {
+      "osmId": "node/11632615502",
+      "name": "La Rustica",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2048962,
+        "lng": 11.8739222
+      }
+    },
+    {
+      "osmId": "node/5693670036",
+      "name": "Baguette",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2096551,
+        "lng": 11.8728411
+      }
+    },
+    {
+      "osmId": "node/9647698899",
+      "name": "Tweets",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2049813,
+        "lng": 11.8770629
+      }
+    },
+    {
+      "osmId": "node/9946580317",
+      "name": null,
+      "amenityType": "wilderness_hut",
+      "geo": {
+        "lat": 47.2247909,
+        "lng": 11.8872671
+      }
+    },
+    {
+      "osmId": "node/1423412344",
+      "name": "Taverne Hellas",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2223251,
+        "lng": 11.890391
+      }
+    },
+    {
+      "osmId": "node/1369891133",
+      "name": "Quat4ro",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.232505,
+        "lng": 11.8814809
+      }
+    },
+    {
+      "osmId": "node/5543217683",
+      "name": "Cafe X-press",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2336575,
+        "lng": 11.8813347
+      }
+    },
+    {
+      "osmId": "node/7221744246",
+      "name": "Restaurant Zeller Stuben",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2342477,
+        "lng": 11.8808819
+      }
+    },
+    {
+      "osmId": "node/8574571296",
+      "name": "Gredler",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2344264,
+        "lng": 11.8803684
+      }
+    },
+    {
+      "osmId": "node/11078741029",
+      "name": "Cafe Restaurant im Park",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.231164,
+        "lng": 11.8779829
+      }
+    },
+    {
+      "osmId": "node/12952501408",
+      "name": "Gasthof Kirchenwirt",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2334557,
+        "lng": 11.8815996
+      }
+    },
+    {
+      "osmId": "node/4385743549",
+      "name": "Spitz Bua",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.22868,
+        "lng": 11.8858593
+      }
+    },
+    {
+      "osmId": "node/8574876223",
+      "name": "Waldrast",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2303562,
+        "lng": 11.8960785
+      }
+    },
+    {
+      "osmId": "node/4385753051",
+      "name": "zum Tuxer",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2374996,
+        "lng": 11.8987506
+      }
+    },
+    {
       "osmId": "node/11475785626",
       "name": "dasDörfl412",
       "amenityType": "bar",
@@ -1215,6 +1534,195 @@
       "geo": {
         "lat": 47.267857,
         "lng": 11.9012935
+      }
+    },
+    {
+      "osmId": "node/8911921320",
+      "name": "Tina's Café",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2779425,
+        "lng": 11.890478
+      }
+    },
+    {
+      "osmId": "node/12692667416",
+      "name": "zum Mug",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2785073,
+        "lng": 11.8944926
+      }
+    },
+    {
+      "osmId": "node/8233957566",
+      "name": "Restaurant Liebstöckl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2914194,
+        "lng": 11.8710854
+      }
+    },
+    {
+      "osmId": "node/8524732584",
+      "name": "Gasthof Brücke",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2929124,
+        "lng": 11.8750845
+      }
+    },
+    {
+      "osmId": "node/8997743414",
+      "name": "Zum Franz",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2934088,
+        "lng": 11.874425
+      }
+    },
+    {
+      "osmId": "node/11190419273",
+      "name": "Cafe Wedelstube",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2889607,
+        "lng": 11.8729042
+      }
+    },
+    {
+      "osmId": "node/11190419275",
+      "name": "sChic Lifestyle & Bar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.2893318,
+        "lng": 11.8729337
+      }
+    },
+    {
+      "osmId": "node/12861205684",
+      "name": "Café & Bar Schmied IN",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.293613,
+        "lng": 11.8749288
+      }
+    },
+    {
+      "osmId": "node/12507624146",
+      "name": "Pizzeria Pub Trend",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.294327,
+        "lng": 11.8748528
+      }
+    },
+    {
+      "osmId": "node/2960943960",
+      "name": "Pizzeria Grian Bam",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.3029529,
+        "lng": 11.8729607
+      }
+    },
+    {
+      "osmId": "node/6852539075",
+      "name": "Baguette",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2902633,
+        "lng": 11.8769677
+      }
+    },
+    {
+      "osmId": "node/681301176",
+      "name": "SowiesO",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2936903,
+        "lng": 11.8839857
+      }
+    },
+    {
+      "osmId": "node/681317046",
+      "name": "Riedl",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2932418,
+        "lng": 11.8831262
+      }
+    },
+    {
+      "osmId": "node/681324567",
+      "name": "Landgasthof Linde",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2907132,
+        "lng": 11.8873609
+      }
+    },
+    {
+      "osmId": "node/1809930091",
+      "name": "Gasthaus Nester",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2911042,
+        "lng": 11.8865748
+      }
+    },
+    {
+      "osmId": "node/1809955738",
+      "name": "Nester Bar",
+      "amenityType": "bar",
+      "geo": {
+        "lat": 47.2911479,
+        "lng": 11.8866734
+      }
+    },
+    {
+      "osmId": "node/8329082212",
+      "name": "Dorfbäck",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.2902105,
+        "lng": 11.8871608
+      }
+    },
+    {
+      "osmId": "node/8510785322",
+      "name": "Tiatta",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2920459,
+        "lng": 11.8859395
+      }
+    },
+    {
+      "osmId": "node/12724159742",
+      "name": "La Pasta Hotel & Restaurant",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2914875,
+        "lng": 11.886476
+      }
+    },
+    {
+      "osmId": "node/4225591192",
+      "name": "Märzenklamm",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.298127,
+        "lng": 11.8873657
+      }
+    },
+    {
+      "osmId": "node/320648931",
+      "name": "Jägerklause",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.29931,
+        "lng": 11.8909063
       }
     },
     {
@@ -1758,6 +2266,51 @@
       }
     },
     {
+      "osmId": "way/59315727",
+      "name": "Gasthof Wasserfall",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.11979936,
+        "lng": 11.872151200000001
+      }
+    },
+    {
+      "osmId": "way/141323612",
+      "name": "Filzenstadl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.13531578571428,
+        "lng": 11.872301714285713
+      }
+    },
+    {
+      "osmId": "way/141323531",
+      "name": "Edelhütte",
+      "amenityType": "alpine_hut",
+      "geo": {
+        "lat": 47.130524539999996,
+        "lng": 11.897443899999999
+      }
+    },
+    {
+      "osmId": "way/141323563",
+      "name": "Wh. Alpenrose",
+      "amenityType": "drinking_water",
+      "geo": {
+        "lat": 47.14667392222222,
+        "lng": 11.884659722222223
+      }
+    },
+    {
+      "osmId": "way/140499376",
+      "name": "Steinerkogl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.16734108888889,
+        "lng": 11.881531033333333
+      }
+    },
+    {
       "osmId": "way/62277705",
       "name": "Gasthof Thanner",
       "amenityType": "restaurant",
@@ -1947,6 +2500,60 @@
       }
     },
     {
+      "osmId": "way/178314526",
+      "name": "Schlittenstadl",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.20814438,
+        "lng": 11.8981326
+      }
+    },
+    {
+      "osmId": "way/132454315",
+      "name": "Schulhaus",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.23770732,
+        "lng": 11.874202819999999
+      }
+    },
+    {
+      "osmId": "way/106561358",
+      "name": "Hotel-Gasthof Bräu",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.23323419411765,
+        "lng": 11.88119829411765
+      }
+    },
+    {
+      "osmId": "way/106561363",
+      "name": "Neuwirt",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.234352,
+        "lng": 11.880648
+      }
+    },
+    {
+      "osmId": "way/106561373",
+      "name": "Café Kerzenstüberl",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.23402936,
+        "lng": 11.87967884
+      }
+    },
+    {
+      "osmId": "way/106434930",
+      "name": "Hotel-Restaurant Rosengarten",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.234285240000006,
+        "lng": 11.88608678
+      }
+    },
+    {
       "osmId": "way/228792486",
       "name": "Jogg'l Kessl",
       "amenityType": "bar",
@@ -2001,6 +2608,60 @@
       }
     },
     {
+      "osmId": "way/178298815",
+      "name": "Gasthaus Weiherwirt",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.25811248000001,
+        "lng": 11.894047519999999
+      }
+    },
+    {
+      "osmId": "way/131325196",
+      "name": "Cafe Veit",
+      "amenityType": "cafe",
+      "geo": {
+        "lat": 47.26665084,
+        "lng": 11.89604632
+      }
+    },
+    {
+      "osmId": "way/142296416",
+      "name": "Kruma",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.2630727,
+        "lng": 11.89576146
+      }
+    },
+    {
+      "osmId": "way/131518435",
+      "name": "Gasthof Rissbacherhof",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.27981896666667,
+        "lng": 11.893629444444445
+      }
+    },
+    {
+      "osmId": "way/158472484",
+      "name": "Gasthof Neumeister",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.29040632,
+        "lng": 11.88708866
+      }
+    },
+    {
+      "osmId": "way/158476789",
+      "name": "GuatzEssen",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.29689936666667,
+        "lng": 11.886703633333333
+      }
+    },
+    {
       "osmId": "way/132458729",
       "name": "Schnitzelstation Klammlhof",
       "amenityType": "restaurant",
@@ -2016,6 +2677,15 @@
       "geo": {
         "lat": 47.29595157272727,
         "lng": 11.907261954545454
+      }
+    },
+    {
+      "osmId": "way/89549024",
+      "name": "Gasthof Almdiele",
+      "amenityType": "restaurant",
+      "geo": {
+        "lat": 47.33099646153846,
+        "lng": 11.870070353846152
       }
     },
     {

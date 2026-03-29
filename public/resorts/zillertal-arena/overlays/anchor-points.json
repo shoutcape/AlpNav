@@ -424,8 +424,8 @@
     "name": "Rosenalmbahn 1 (valley)",
     "type": "lift-station",
     "geo": {
-      "lat": 47.2372201,
-      "lng": 11.8998785
+      "lat": 47.2371939,
+      "lng": 11.899442
     },
     "panorama": {
       "x": 454.404,
@@ -760,8 +760,8 @@
     "name": "2er Sonnalm (valley)",
     "type": "lift-station",
     "geo": {
-      "lat": 47.2084944,
-      "lng": 11.8985787
+      "lat": 47.2095553,
+      "lng": 11.8972597
     },
     "panorama": {
       "x": 1233.78,
@@ -1456,6 +1456,20 @@
     "snapRadius": 20
   },
   {
+    "id": "gastro_47133",
+    "name": "Sonnalm 1.350m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.20814438,
+      "lng": 11.8981326
+    },
+    "panorama": {
+      "x": 1312,
+      "y": 2140
+    },
+    "snapRadius": 20
+  },
+  {
     "id": "gastro_47152",
     "name": "Arena Bistro",
     "type": "restaurant",
@@ -1586,8 +1600,8 @@
     "name": "mountain hotel Gerlosstein",
     "type": "restaurant",
     "geo": {
-      "lat": 47.2512196,
-      "lng": 12.1236025
+      "lat": 47.2914875,
+      "lng": 11.886476
     },
     "panorama": {
       "x": 1300,

@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const BBOXES = {
-  "zillertal-arena": { south: 47.10, west: 11.90, north: 47.35, east: 12.25 },
+  "zillertal-arena": { south: 47.10, west: 11.87, north: 47.35, east: 12.25 },
 };
 
 const OVERPASS_URL = "https://overpass-api.de/api/interpreter";
