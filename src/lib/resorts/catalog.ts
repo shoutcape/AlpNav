@@ -22,6 +22,7 @@ export const RESORTS: ResortDefinition[] = [
     conditionsUrl: "https://www.bergfex.com/zell-am-ziller/wetter/",
     manifest: arenaManifest,
     visualScale: 1.0,
+    labelTierScales: [0, 0.1, 0.2, 0.7],
     loadOverlayData: loadArenaOverlayData,
   },
   {
@@ -35,6 +36,7 @@ export const RESORTS: ResortDefinition[] = [
     conditionsUrl: "https://www.bergfex.com/mayrhofen/wetter/",
     manifest: mayrhofenManifest,
     visualScale: 2.0,
+    labelTierScales: [0, 0.1, 0.0, 0.0],
     loadOverlayData: loadMayrhofenOverlayData,
   },
   {
@@ -47,6 +49,8 @@ export const RESORTS: ResortDefinition[] = [
     elevationLabel: "630 - 3,250 m",
     conditionsUrl: "https://www.bergfex.com/hintertuxer-gletscher/wetter/",
     manifest: zillertal3000Manifest,
+    visualScale: 2.0,
+    labelTierScales: [0, 0.1, 0.0, 0.0],
     loadOverlayData: loadZillertal3000OverlayData,
   },
   {
@@ -60,6 +64,7 @@ export const RESORTS: ResortDefinition[] = [
     conditionsUrl: "https://www.bergfex.com/hochzillertal-hochfuegen/wetter/",
     manifest: hochzillertalManifest,
     visualScale: 2.0,
+    labelTierScales: [0, 0.1, 0.4, 0.0],
     loadOverlayData: loadHochzillertalOverlayData,
   },
 ];
