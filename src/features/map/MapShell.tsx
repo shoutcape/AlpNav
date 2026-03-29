@@ -100,6 +100,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const pisteLinesByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const pisteMarkersByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
+  const [controlsExpanded, setControlsExpanded] = useState(false);
+  const controlsExpandedRef = useRef(false);
   const gastronomyOverlayRef = useRef<Container | null>(null);
   const [gastronomyVisible, setGastronomyVisible] = useState(true);
   const gastronomyVisibleRef = useRef(true);
@@ -545,6 +547,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       syncLabelTiers();
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
+        if (controlsExpandedRef.current) {
+          controlsExpandedRef.current = false;
+          setControlsExpanded(false);
+          setFilterPanelOpen(false);
+          return;
+        }
         setFilterPanelOpen(false);
         setLegendOpen(false);
 
@@ -1030,7 +1038,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         <div className="relative">
           <LegendPanel open={legendOpen} />
           <button
-            onClick={() => setLegendOpen(o => !o)}
+            onClick={() => {
+              setLegendOpen(o => !o);
+              setControlsExpanded(false);
+              controlsExpandedRef.current = false;
+              setFilterPanelOpen(false);
+            }}
             className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${legendOpen ? "bg-yellow-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
             aria-label="Toggle legend"
           >
