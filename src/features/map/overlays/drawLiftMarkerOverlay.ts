@@ -8,14 +8,31 @@ const BADGE_STROKE_W = 2;
 
 const WHITE = 0xffffff;
 const CABIN_FILL = 0x4a9b4e; // slightly darker than badge — cabin interior
+const CLOSED_FILL = 0x9e9e9e;
+const CLOSED_CABIN_FILL = 0x757575;
 
 export function drawLiftBadge(g: Graphics, lift: Lift, visualScale: number = 1): void {
   if (!lift.icon) return;
   const { x, y } = lift.icon;
+  const isClosed = lift.status === "closed";
+  
+  const fill = isClosed ? CLOSED_FILL : BADGE_FILL;
+  const cabinFill = isClosed ? CLOSED_CABIN_FILL : CABIN_FILL;
+
   g.circle(x, y, BADGE_R * visualScale)
-    .fill({ color: BADGE_FILL })
+    .fill({ color: fill })
     .stroke({ color: BADGE_STROKE_COLOR, width: BADGE_STROKE_W * visualScale });
-  drawSymbol(g, lift.liftType, x, y, visualScale);
+  
+  drawSymbol(g, lift.liftType, x, y, visualScale, cabinFill);
+
+  if (isClosed) {
+    const SLASH_INSET = BADGE_R * visualScale * 0.707;
+    g.moveTo(x - SLASH_INSET, y + SLASH_INSET)
+     .lineTo(x + SLASH_INSET, y - SLASH_INSET)
+     .moveTo(x - SLASH_INSET, y - SLASH_INSET)
+     .lineTo(x + SLASH_INSET, y + SLASH_INSET)
+     .stroke({ color: 0x000000, width: 2 * visualScale, alpha: 0.8 });
+  }
 }
 
 export function drawLiftMarkerOverlay(container: Container, lifts: Lift[], visualScale: number = 1): void {
@@ -26,9 +43,9 @@ export function drawLiftMarkerOverlay(container: Container, lifts: Lift[], visua
   }
 }
 
-function drawSymbol(g: Graphics, liftType: LiftType, cx: number, cy: number, s: number): void {
+function drawSymbol(g: Graphics, liftType: LiftType, cx: number, cy: number, s: number, cabinFill: number): void {
   switch (liftType) {
-    case "gondola":   drawGondola(g, cx, cy, s);   break;
+    case "gondola":   drawGondola(g, cx, cy, s, cabinFill);   break;
     case "chairlift": drawChairlift(g, cx, cy, s); break;
     case "drag":      drawDragLift(g, cx, cy, s);  break;
     default:
@@ -39,7 +56,7 @@ function drawSymbol(g: Graphics, liftType: LiftType, cx: number, cy: number, s: 
 /**
  * Gondola / cable car
  */
-function drawGondola(g: Graphics, cx: number, cy: number, s: number): void {
+function drawGondola(g: Graphics, cx: number, cy: number, s: number, cabinFill: number): void {
   // Angled cable
   g.moveTo(cx - 13 * s, cy - 5 * s)
     .lineTo(cx + 13 * s, cy - 12 * s)
@@ -57,12 +74,12 @@ function drawGondola(g: Graphics, cx: number, cy: number, s: number): void {
 
   // Top mounting deck (flat section between hangers and main cabin)
   g.rect(cx - 8 * s, cy - 3 * s, 16 * s, 3 * s)
-    .fill({ color: CABIN_FILL })
+    .fill({ color: cabinFill })
     .stroke({ color: WHITE, width: 1.5 * s });
 
   // Main cabin body
   g.roundRect(cx - 8 * s, cy, 16 * s, 12 * s, 2 * s)
-    .fill({ color: CABIN_FILL })
+    .fill({ color: cabinFill })
     .stroke({ color: WHITE, width: 1.5 * s });
 
   // Left window

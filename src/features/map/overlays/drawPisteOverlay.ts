@@ -8,6 +8,12 @@ const DIFFICULTY_COLORS: Record<PisteDifficulty, number> = {
   unknown:   0x9e9e9e,
 };
 
+const CLOSED_COLOR = 0x9e9e9e;
+
+function pisteColor(piste: Piste): number {
+  return piste.status === "closed" ? CLOSED_COLOR : DIFFICULTY_COLORS[piste.difficulty];
+}
+
 const STROKE_WIDTH = 3;
 const DASH_LEN = 8;
 const GAP_LEN = 6;
@@ -52,17 +58,17 @@ function drawDashedSegment(g: Graphics, seg: Point[], visualScale: number): void
 }
 
 export function drawPisteOverlay(container: Container, pistes: Piste[], visualScale: number = 1): void {
-  const byDifficulty = new Map<PisteDifficulty, Piste[]>();
+  const byColor = new Map<number, Piste[]>();
 
   for (const piste of pistes) {
-    const group = byDifficulty.get(piste.difficulty) ?? [];
+    const color = pisteColor(piste);
+    const group = byColor.get(color) ?? [];
     group.push(piste);
-    byDifficulty.set(piste.difficulty, group);
+    byColor.set(color, group);
   }
 
   // Solid segments
-  for (const [difficulty, group] of byDifficulty) {
-    const color = DIFFICULTY_COLORS[difficulty];
+  for (const [color, group] of byColor) {
     const g = new Graphics();
 
     for (const piste of group) {
@@ -86,7 +92,7 @@ export function drawPisteOverlay(container: Container, pistes: Piste[], visualSc
   // Dashed ski route segments
   for (const piste of pistes) {
     if (!piste.skiRouteSegments?.length) continue;
-    const color = DIFFICULTY_COLORS[piste.difficulty];
+    const color = pisteColor(piste);
     const g = new Graphics();
 
     for (const seg of piste.skiRouteSegments) {

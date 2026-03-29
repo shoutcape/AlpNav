@@ -27,13 +27,20 @@ export function drawLabelOverlay(container: Container, labels: MapLabel[]): [Con
     const tc = tierContainers[t];
     const g = new Graphics();
 
-    // Background pass
+    const BG_PAD = 2;
+
+    // Background pass — deduplicate boxes that are shared by multiple labels
+    const drawnBgs = new Set<string>();
     for (const label of byTier[t]) {
       if (label.bgColor === undefined || label.bgX === undefined || label.bgY === undefined || label.bgW === undefined || label.bgH === undefined) {
         continue;
       }
 
-      g.rect(label.bgX, label.bgY, label.bgW, label.bgH);
+      const key = `${label.bgX},${label.bgY},${label.bgW},${label.bgH}`;
+      if (drawnBgs.has(key)) continue;
+      drawnBgs.add(key);
+
+      g.rect(label.bgX - BG_PAD, label.bgY - BG_PAD, label.bgW + BG_PAD * 2, label.bgH + BG_PAD * 2);
       g.fill({ color: label.bgColor });
       g.stroke({ width: 1, color: 0x000000, alpha: 0.5 });
     }
@@ -53,9 +60,11 @@ export function drawLabelOverlay(container: Container, labels: MapLabel[]): [Con
       });
       text.x = label.x;
 
-      if (label.bgY !== undefined && label.bgH !== undefined) {
+      if (label.bgY !== undefined) {
+        // SVG y = baseline; PixiJS anchor(0,0.5) = vertical center.
+        // Ascent is ~0.7× fontSize, so center ≈ baseline − 0.35× fontSize.
         text.anchor.set(0, 0.5);
-        text.y = label.bgY + label.bgH / 2;
+        text.y = label.y - label.fontSize * 0.35;
       } else {
         text.anchor.set(0, 1);
         text.y = label.y;
