@@ -1,4 +1,5 @@
 export type Point = { x: number; y: number };
+export type GeoPoint = { lat: number; lng: number };
 export type PisteDifficulty = "easy" | "medium" | "difficult" | "unknown";
 export type LiftType = "gondola" | "chairlift" | "drag" | "other";
 
@@ -12,6 +13,7 @@ export type Piste = {
   icons?: Point[];
   lengthM?: number;
   status?: "open" | "closed";
+  variants?: PisteVariant[];
 };
 
 export type Lift = {
@@ -92,6 +94,27 @@ export type Webcam = {
   position: Point;
   thumbnailUrl?: string;
   streamUrl: string;
+};
+
+export type PisteVariant = {
+  variantId: string; // "at", "rt-1", "rt-2"
+  segments: Point[][];
+};
+
+/** A single segment of a route with both coordinate representations */
+export type MappedSegment = {
+  id: string; // e.g. "R_45135_main_0"
+  svgPoints: Point[]; // panorama-space polyline
+  geoPoints: GeoPoint[]; // real-world GPS polyline
+  svgCumulDist: number[]; // cumulative distance along SVG path per point
+  geoCumulDist: number[]; // cumulative distance along geo path per point
+};
+
+/** A route with all its segments mapped between SVG and OSM */
+export type MappedRoute = {
+  pisteId: string; // "R_45135"
+  number: string; // "32"
+  segments: MappedSegment[]; // all branches/variants
 };
 
 export type ResortOverlayData = {

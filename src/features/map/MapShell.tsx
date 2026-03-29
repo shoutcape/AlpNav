@@ -16,9 +16,16 @@ import { drawWebcamMarkerOverlay } from "./overlays/drawWebcamMarkerOverlay";
 import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay";
 import { drawSportFunOverlay } from "./overlays/drawSportFunOverlay";
 import { hitTestOverlays } from "./hitTest";
+import { drawUserPositionOverlay } from "./overlays/drawUserPositionOverlay";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
+import { useGeolocation } from "@/lib/geo/use-geolocation";
+import type { GeoFix } from "@/lib/geo/use-geolocation";
+import { loadOsmPistes } from "@/lib/geo/load-osm-pistes";
+import { matchRoutes } from "@/lib/geo/route-matcher";
+import { GpsToPanoramaMapper } from "@/lib/geo/gps-to-panorama";
+import type { ProjectionResult } from "@/lib/geo/gps-to-panorama";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -75,6 +82,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const liftHighlightRef = useRef<Graphics | null>(null);
   const badgeHighlightRef = useRef<Graphics | null>(null);
 
+  const userPositionOverlayRef = useRef<Container | null>(null);
+  const mapperRef = useRef<GpsToPanoramaMapper | null>(null);
+  const followLocationRef = useRef(false);
+
   const [selectedAreaId, setSelectedAreaId] = useState(() => resolveActiveResort(initialAreaId).id);
   const activeArea = useMemo(() => resolveActiveResort(selectedAreaId), [selectedAreaId]);
   const manifest = activeArea.manifest;
@@ -113,7 +124,13 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const redrawDebugRef = useRef<(() => void) | null>(null);
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const [followLocation, setFollowLocation] = useState(false);
+  const [geoMapperStatus, setGeoMapperStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [geoSegmentCount, setGeoSegmentCount] = useState(0);
+  const [lastProjection, setLastProjection] = useState<ProjectionResult | null>(null);
+  const [lastFix, setLastFix] = useState<GeoFix | null>(null);
   const minScaleRef = useRef(0.05);
+
+  const { fix: geoFix, status: geoStatus } = useGeolocation(followLocation);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
   const [legendOpen, setLegendOpen] = useState(false);
@@ -169,7 +186,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     hasInteractedRef.current = false;
     overlayDataRef.current = null;
     setFollowLocation(false);
+    followLocationRef.current = false;
     setLoadError(null);
+    setLastProjection(null);
+    setLastFix(null);
   }, [activeArea.id]);
 
   useEffect(() => {
@@ -254,6 +274,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true }).decelerate({ friction: 0.95, minSpeed: 0.01 });
       viewport.on("drag-start", () => {
         hasInteractedRef.current = true;
+        if (followLocationRef.current) {
+          followLocationRef.current = false;
+          setFollowLocation(false);
+        }
       });
       viewport.on("pinch-start", () => {
         hasInteractedRef.current = true;
@@ -414,6 +438,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       badgeHighlight.label = "overlay-badge-highlight";
       viewport.addChild(badgeHighlight);
       badgeHighlightRef.current = badgeHighlight;
+
+      // User position dot — above all overlays
+      const userPosContainer = new Container();
+      userPosContainer.label = "overlay-user-position";
+      viewport.addChild(userPosContainer);
+      userPositionOverlayRef.current = userPosContainer;
 
       // Debug layer — above all overlays, invisible unless debug mode is active
       const debugLayer = new Graphics();
@@ -607,6 +637,93 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     redrawDebugRef.current?.();
   }, [debugMode]);
 
+  // Load OSM pistes and build mapper when resort changes
+  useEffect(() => {
+    let cancelled = false;
+    mapperRef.current = null;
+    setGeoMapperStatus("loading");
+    setGeoSegmentCount(0);
+    setLastProjection(null);
+
+    if (!activeArea.bbox) {
+      setGeoMapperStatus("idle");
+      return;
+    }
+
+    const build = async () => {
+      try {
+        const osmPistes = await loadOsmPistes(activeArea.id);
+        if (cancelled) return;
+
+        // Wait for overlay data to be available
+        const waitForOverlays = () =>
+          new Promise<void>((resolve) => {
+            const check = () => {
+              if (overlayDataRef.current || cancelled) return resolve();
+              setTimeout(check, 100);
+            };
+            check();
+          });
+        await waitForOverlays();
+        if (cancelled || !overlayDataRef.current) return;
+
+        const mapped = matchRoutes(overlayDataRef.current.pistes, osmPistes);
+        const mapper = new GpsToPanoramaMapper(mapped);
+        if (cancelled) return;
+
+        mapperRef.current = mapper;
+        setGeoSegmentCount(mapper.segmentCount);
+        setGeoMapperStatus("ready");
+        console.log(`[geo] Mapper ready: ${mapped.length} routes, ${mapper.segmentCount} segments`);
+      } catch (err) {
+        if (!cancelled) {
+          console.error("[geo] Failed to build mapper:", err);
+          setGeoMapperStatus("error");
+        }
+      }
+    };
+
+    build();
+    return () => { cancelled = true; };
+  }, [activeArea.id, activeArea.bbox]);
+
+  // Project GPS fix to panorama and update user dot
+  useEffect(() => {
+    if (!geoFix) {
+      setLastFix(null);
+      setLastProjection(null);
+      if (userPositionOverlayRef.current) {
+        drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+      }
+      return;
+    }
+
+    setLastFix(geoFix);
+    const mapper = mapperRef.current;
+    if (!mapper) return;
+
+    const result = mapper.project(geoFix.position);
+    setLastProjection(result);
+
+    if (result && userPositionOverlayRef.current) {
+      // Rough meters-to-pixels conversion using accuracy
+      const accuracyPx = geoFix.accuracy * 2; // approximate scale
+      drawUserPositionOverlay(
+        userPositionOverlayRef.current,
+        result.point,
+        accuracyPx,
+        activeArea.visualScale,
+      );
+
+      // Follow mode: center viewport on user position
+      if (followLocationRef.current && viewportRef.current) {
+        viewportRef.current.moveCenter(result.point.x, result.point.y);
+      }
+    } else if (userPositionOverlayRef.current) {
+      drawUserPositionOverlay(userPositionOverlayRef.current, null, 0, activeArea.visualScale);
+    }
+  }, [geoFix, activeArea.visualScale]);
+
   useEffect(() => {
     const pg = pisteHighlightRef.current;
     const lg = liftHighlightRef.current;
@@ -714,7 +831,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   const toggleDebug = () => setDebugMode((currentMode) => (currentMode === false ? "normal" : false));
 
-  const toggleFollowLocation = () => setFollowLocation(f => !f);
+  const toggleFollowLocation = () => setFollowLocation(f => {
+    followLocationRef.current = !f;
+    return !f;
+  });
 
   const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const vp = viewportRef.current;
@@ -905,8 +1025,21 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           )}
 
           {debugMode === "geo" && (
-            <div className="text-white/40 text-[10px] py-2 text-center">
-              Geo positioning — not yet connected
+            <div className="space-y-0.5 pointer-events-none">
+              <div>mapper: {geoMapperStatus} ({geoSegmentCount} segs)</div>
+              <div>gps: {geoStatus}{lastFix ? ` ±${lastFix.accuracy.toFixed(0)}m` : ""}</div>
+              {lastFix && (
+                <div>pos: {lastFix.position.lat.toFixed(5)}, {lastFix.position.lng.toFixed(5)}</div>
+              )}
+              {lastProjection ? (
+                <>
+                  <div>proj: {lastProjection.point.x.toFixed(1)}, {lastProjection.point.y.toFixed(1)}</div>
+                  <div>route: {lastProjection.routeNumber} ({lastProjection.distance.toFixed(0)}m)</div>
+                  <div className="text-[9px] text-white/40 truncate">seg: {lastProjection.segmentId}</div>
+                </>
+              ) : followLocation ? (
+                <div className="text-white/40">no route match</div>
+              ) : null}
             </div>
           )}
         </div>

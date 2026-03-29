@@ -26,6 +26,7 @@ export const RESORTS: ResortDefinition[] = [
     visualScale: 1.0,
     labelTierScales: [0, 0.1, 0.2, 0.7],
     loadOverlayData: loadArenaOverlayData,
+    bbox: { south: 47.15, west: 12.03, north: 47.28, east: 12.23 },
   },
   {
     id: "mayrhofner-bergbahnen",

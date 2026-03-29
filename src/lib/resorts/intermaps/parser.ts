@@ -1,4 +1,4 @@
-import type { GastronomySpot, GastronomyType, InfrastructureCategory, InfrastructurePoi, Lift, LiftType, MapLabel, Piste, PisteDifficulty, Point, ResortOverlayData, SportFunCategory, SportFunPoi, Webcam, WebcamProvider } from "@/lib/domain/types";
+import type { GastronomySpot, GastronomyType, InfrastructureCategory, InfrastructurePoi, Lift, LiftType, MapLabel, Piste, PisteDifficulty, PisteVariant, Point, ResortOverlayData, SportFunCategory, SportFunPoi, Webcam, WebcamProvider } from "@/lib/domain/types";
 
 // The scale factor is dynamically calculated based on the panorama manifest and SVG width.
 
@@ -452,6 +452,30 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>, scale: number)
       const symbolText = symbolGroup?.querySelector("text")?.textContent?.trim();
       if (symbolText) number = symbolText;
     }
+
+    // Parse variant groups (e.g. R_45135_at_group, R_45135_rt-1_group)
+    const variants: PisteVariant[] = [];
+    const variantPattern = new RegExp(`^R_${oid}_(at|rt-\\d+)_group$`);
+    for (const vGroup of Array.from(doc.querySelectorAll("g[id]"))) {
+      const vId = vGroup.getAttribute("id") ?? "";
+      const vMatch = variantPattern.exec(vId);
+      if (!vMatch) continue;
+
+      const variantId = vMatch[1];
+      const vPathGroup = vGroup.querySelector(`g[id="R_${oid}_${variantId}_path"]`);
+      if (!vPathGroup) continue;
+
+      const vSegments: Point[][] = [];
+      for (const pathEl of Array.from(vPathGroup.querySelectorAll("path"))) {
+        const d = pathEl.getAttribute("d");
+        if (!d) continue;
+        vSegments.push(...parseSvgPathD(d, scale));
+      }
+      if (vSegments.length > 0) {
+        variants.push({ variantId, segments: vSegments });
+      }
+    }
+
     pistes.push({
       id: featureId,
       name: m?.name ?? featureId,
@@ -459,6 +483,7 @@ function parsePistes(doc: Document, meta: Map<string, PisteMeta>, scale: number)
       segments,
       ...(skiRouteSegments.length > 0 ? { skiRouteSegments } : {}),
       ...(icons.length > 0 ? { icons } : {}),
+      ...(variants.length > 0 ? { variants } : {}),
       number,
       lengthM: m?.lengthM,
       status: m?.status,
