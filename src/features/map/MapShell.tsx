@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { Application, Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import type { PanoramaLevel, PanoramaManifest } from "./types";
@@ -100,6 +101,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const pisteLinesByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const pisteMarkersByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
+  const [controlsExpanded, setControlsExpanded] = useState(false);
+  const controlsExpandedRef = useRef(false);
+  const [controlsDismissing, setControlsDismissing] = useState(false);
   const gastronomyOverlayRef = useRef<Container | null>(null);
   const [gastronomyVisible, setGastronomyVisible] = useState(true);
   const gastronomyVisibleRef = useRef(true);
@@ -175,7 +179,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     setDebugStats(null);
     setLegendOpen(false);
     setFilterPanelOpen(false);
-    setDrawerOpen(false);
     setLoadedLevelCount(0);
     setLiftVisible(true);
     liftVisibleRef.current = true;
@@ -545,6 +548,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       syncLabelTiers();
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
+        if (controlsExpandedRef.current) {
+          controlsExpandedRef.current = false;
+          setControlsExpanded(false);
+          setControlsDismissing(true);
+          setTimeout(() => setControlsDismissing(false), 75);
+          setFilterPanelOpen(false);
+          return;
+        }
         setFilterPanelOpen(false);
         setLegendOpen(false);
 
@@ -1030,7 +1041,16 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         <div className="relative">
           <LegendPanel open={legendOpen} />
           <button
-            onClick={() => setLegendOpen(o => !o)}
+            onClick={() => {
+              setLegendOpen(o => !o);
+              setFilterPanelOpen(false);
+              if (controlsExpandedRef.current) {
+                setControlsDismissing(true);
+                setTimeout(() => setControlsDismissing(false), 75);
+              }
+              setControlsExpanded(false);
+              controlsExpandedRef.current = false;
+            }}
             className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${legendOpen ? "bg-yellow-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
             aria-label="Toggle legend"
           >
@@ -1083,36 +1103,51 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       {/* Bottom: primary map controls */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
-        <div className="pointer-events-auto grid grid-cols-3 gap-1 rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md">
-          <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
-          <div className="relative">
-            <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} onToggleAll={toggleAllPistes} />
+        <motion.div
+          layout
+          className={`pointer-events-auto rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md${controlsExpanded && !controlsDismissing ? "" : " overflow-hidden"}`}
+          transition={{ layout: { duration: 0.3, ease: [0.32, 0.72, 0, 1] } }}
+          onLayoutAnimationComplete={() => { if (!controlsDismissing) return; setControlsDismissing(false); }}
+        >
+          {!controlsExpanded ? (
             <button
-              onClick={() => setFilterPanelOpen(o => !o)}
+              onClick={() => {
+                setControlsExpanded(true);
+                controlsExpandedRef.current = true;
+                setLegendOpen(false);
+                setFilterPanelOpen(false);
+              }}
+              aria-expanded={controlsExpanded}
+              aria-label="Map layer controls"
               onContextMenu={e => e.preventDefault()}
-              className={`touch-none select-none flex w-full flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+              className={`touch-none select-none flex flex-col items-center gap-1 rounded-[14px] px-4 py-2 text-ivory/70 hover:bg-white/[0.07] hover:text-ivory transition-opacity duration-150${controlsDismissing ? " opacity-0" : " opacity-100"}`}
             >
-              <SlopeIcon />
-              <div className="flex gap-[3px] items-center h-[5px]">
-                {DIFFICULTIES.map(diff => (
-                  <span
-                    key={diff}
-                    className="w-[5px] h-[5px] rounded-full transition-opacity duration-150"
-                    style={{
-                      backgroundColor: DIFFICULTY_CSS_COLORS[diff],
-                      opacity: pisteVisible && pisteFilter[diff] ? 1 : 0.15,
-                    }}
-                  />
-                ))}
-              </div>
-              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
+              <LayersIcon />
+              <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
+              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Layers</span>
             </button>
-          </div>
-          <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
-          <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
-          <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
-          <MapControlButton icon={<SportFunMapIcon />} label="Sport" active={sportFunVisible} onClick={toggleSportFun} />
-        </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-1">
+              <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
+              <div className="relative">
+                <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} onToggleAll={toggleAllPistes} />
+                <button
+                  onClick={() => setFilterPanelOpen(o => !o)}
+                  onContextMenu={e => e.preventDefault()}
+                  className={`touch-none select-none flex w-full flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+                >
+                  <SlopeIcon />
+                  <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
+                  <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
+                </button>
+              </div>
+              <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
+              <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
+              <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
+              <MapControlButton icon={<SportFunMapIcon />} label="Sport" active={sportFunVisible} onClick={toggleSportFun} />
+            </div>
+          )}
+        </motion.div>
       </div>
 
       <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
@@ -1347,6 +1382,23 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   );
 }
 
+function DifficultyDots({ pisteVisible, pisteFilter }: { pisteVisible: boolean; pisteFilter: Record<string, boolean> }) {
+  return (
+    <div className="flex gap-[3px] items-center h-[5px]">
+      {DIFFICULTIES.map(diff => (
+        <span
+          key={diff}
+          className="w-[5px] h-[5px] rounded-full"
+          style={{
+            backgroundColor: DIFFICULTY_CSS_COLORS[diff],
+            opacity: pisteVisible && pisteFilter[diff] ? 1 : 0.15,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function MapControlButton({ icon, label, active, onClick, onPointerDown, onPointerUp, onPointerLeave }: {
   icon: React.ReactNode; label: string; active: boolean;
   onClick?: () => void;
@@ -1361,7 +1413,7 @@ function MapControlButton({ icon, label, active, onClick, onPointerDown, onPoint
       onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
       onContextMenu={e => e.preventDefault()}
-      className={`touch-none select-none flex w-full flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 transition-[transform,background-color,color] active:scale-[0.96] ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
+      className={`touch-none select-none flex w-full flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
     >
       {icon}
       <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">{label}</span>
@@ -1444,6 +1496,19 @@ function SlopeIcon() {
       <path d="M2 16 L10 3 L18 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.5" />
       {/* piste line */}
       <path d="M10 3 L14.5 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function LayersIcon() {
+  return (
+    <svg width="22" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true">
+      <line x1="3" y1="4" x2="21" y2="4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="3" y1="16" x2="21" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="8" cy="4" r="2.5" fill="#07111f" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="16" cy="10" r="2.5" fill="#07111f" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="11" cy="16" r="2.5" fill="#07111f" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }
