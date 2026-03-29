@@ -97,6 +97,68 @@ export class GpsToPanoramaMapper {
       anchorName: bestAnchor.name,
     };
   }
+
+  /** Reverse project: find estimated GPS coords for a panorama point */
+  reverseProject(px: number, py: number): { geo: GeoPoint; source: string } | null {
+    // Check anchors first (nearest by panorama distance)
+    let bestAnchorDist = Infinity;
+    let bestAnchor: AnchorPoint | null = null;
+    for (const anchor of this.anchors) {
+      const d = Math.hypot(px - anchor.panorama.x, py - anchor.panorama.y);
+      if (d < bestAnchorDist) {
+        bestAnchorDist = d;
+        bestAnchor = anchor;
+      }
+    }
+
+    // Check route segments (nearest point on SVG polyline → map to geo)
+    let bestSegDist = Infinity;
+    let bestGeo: GeoPoint | null = null;
+    let bestSource = "";
+
+    for (const entry of this.segments) {
+      const seg = entry.seg;
+      const svgTotal = seg.svgCumulDist[seg.svgCumulDist.length - 1];
+      const geoTotal = seg.geoCumulDist[seg.geoCumulDist.length - 1];
+      if (svgTotal === 0 || geoTotal === 0) continue;
+
+      // Find closest point on SVG polyline
+      for (let i = 0; i < seg.svgPoints.length - 1; i++) {
+        const a = seg.svgPoints[i];
+        const b = seg.svgPoints[i + 1];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const lenSq = dx * dx + dy * dy;
+        if (lenSq === 0) continue;
+        const t = Math.max(0, Math.min(1, ((px - a.x) * dx + (py - a.y) * dy) / lenSq));
+        const projX = a.x + t * dx;
+        const projY = a.y + t * dy;
+        const d = Math.hypot(px - projX, py - projY);
+
+        if (d < bestSegDist) {
+          bestSegDist = d;
+          // Map SVG position back to geo
+          const segLen = seg.svgCumulDist[i + 1] - seg.svgCumulDist[i];
+          const svgDist = seg.svgCumulDist[i] + t * segLen;
+          const tGeo = svgDist / svgTotal;
+          const geoDist = tGeo * geoTotal;
+          bestGeo = interpolateGeoAtDistance(seg.geoPoints, seg.geoCumulDist, geoDist);
+          bestSource = `route ${entry.routeNumber}`;
+        }
+      }
+    }
+
+    // Prefer anchor if it's closer in panorama space (within 40px)
+    if (bestAnchor && bestAnchorDist < 40 && bestAnchorDist <= bestSegDist) {
+      return { geo: bestAnchor.geo, source: bestAnchor.name };
+    }
+
+    if (bestGeo) {
+      return { geo: bestGeo, source: bestSource };
+    }
+
+    return null;
+  }
 }
 
 // ─── Geometry helpers ────────────────────────────────────────────────────────
@@ -183,5 +245,24 @@ function interpolateAtDistance(points: Point[], cumulDist: number[], targetDist:
   }
 
   // Fallback: return last point
+  return points[points.length - 1];
+}
+
+/** Interpolate a point along a geo polyline at a given cumulative distance */
+function interpolateGeoAtDistance(points: GeoPoint[], cumulDist: number[], targetDist: number): GeoPoint {
+  const totalLen = cumulDist[cumulDist.length - 1];
+  const d = Math.max(0, Math.min(totalLen, targetDist));
+
+  for (let i = 0; i < points.length - 1; i++) {
+    if (d >= cumulDist[i] && d <= cumulDist[i + 1]) {
+      const segLen = cumulDist[i + 1] - cumulDist[i];
+      const t = segLen === 0 ? 0 : (d - cumulDist[i]) / segLen;
+      return {
+        lat: points[i].lat + t * (points[i + 1].lat - points[i].lat),
+        lng: points[i].lng + t * (points[i + 1].lng - points[i].lng),
+      };
+    }
+  }
+
   return points[points.length - 1];
 }

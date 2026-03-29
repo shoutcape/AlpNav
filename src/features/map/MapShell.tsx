@@ -129,6 +129,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [geoSegmentCount, setGeoSegmentCount] = useState(0);
   const [lastProjection, setLastProjection] = useState<ProjectionResult | null>(null);
   const [lastFix, setLastFix] = useState<GeoFix | null>(null);
+  const [pickedPoint, setPickedPoint] = useState<{ px: number; py: number; geo: { lat: number; lng: number } | null; source: string } | null>(null);
   const [mockGeoInput, setMockGeoInput] = useState("47.2414193, 12.0377060");
   const [mockGeoActive, setMockGeoActive] = useState(false);
   const [simRoute, setSimRoute] = useState<string>(""); // route number
@@ -546,6 +547,35 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
         setFilterPanelOpen(false);
         setLegendOpen(false);
+
+        // In geo debug mode, pick point for reverse projection
+        if (debugModeRef.current === "geo" && mapperRef.current) {
+          const result = mapperRef.current.reverseProject(world.x, world.y);
+          setPickedPoint({
+            px: world.x,
+            py: world.y,
+            geo: result?.geo ?? null,
+            source: result?.source ?? "",
+          });
+
+          // Draw pick marker on debug layer
+          const g = debugLayerRef.current;
+          const vp = viewportRef.current;
+          if (g && vp) {
+            g.clear();
+            const s = 12 / vp.scale.x; // constant screen size
+            const lw = 2 / vp.scale.x;
+            // Crosshair
+            g.moveTo(world.x - s, world.y).lineTo(world.x + s, world.y);
+            g.moveTo(world.x, world.y - s).lineTo(world.x, world.y + s);
+            g.stroke({ width: lw, color: 0xff3366 });
+            // Circle
+            g.circle(world.x, world.y, s * 0.6);
+            g.stroke({ width: lw, color: 0xff3366 });
+          }
+          return;
+        }
+
         const data = overlayDataRef.current;
         if (!data) return;
         const activePistes = pisteVisibleRef.current
@@ -1254,6 +1284,38 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               ) : (followLocation || mockGeoActive) ? (
                 <div className="text-white/40 pointer-events-none">no route match</div>
               ) : null}
+
+              {/* Picked point (click-to-inspect) */}
+              {pickedPoint && (
+                <div className="border-t border-white/10 pt-1.5 space-y-0.5">
+                  <div className="text-[9px] uppercase tracking-widest text-white/40">picked point</div>
+                  <div className="pointer-events-none">pano: {pickedPoint.px.toFixed(0)}, {pickedPoint.py.toFixed(0)}</div>
+                  {pickedPoint.geo ? (
+                    <>
+                      <div className="flex items-center gap-1">
+                        <span className="pointer-events-none">{pickedPoint.geo.lat.toFixed(6)}, {pickedPoint.geo.lng.toFixed(6)}</span>
+                        <button
+                          onClick={() => navigator.clipboard.writeText(`${pickedPoint.geo!.lat.toFixed(6)}, ${pickedPoint.geo!.lng.toFixed(6)}`)}
+                          className="shrink-0 rounded px-1 py-0.5 text-[9px] text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
+                        >
+                          copy
+                        </button>
+                        <a
+                          href={`https://www.openstreetmap.org/?mlat=${pickedPoint.geo!.lat.toFixed(6)}&mlon=${pickedPoint.geo!.lng.toFixed(6)}#map=17/${pickedPoint.geo!.lat.toFixed(6)}/${pickedPoint.geo!.lng.toFixed(6)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 rounded px-1 py-0.5 text-[9px] text-blue-400/80 hover:bg-white/10 hover:text-blue-300 transition-colors"
+                        >
+                          OSM
+                        </a>
+                      </div>
+                      <div className="text-[9px] text-white/40 truncate">via: {pickedPoint.source}</div>
+                    </>
+                  ) : (
+                    <div className="text-white/40">no geo match</div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
