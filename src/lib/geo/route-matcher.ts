@@ -105,6 +105,8 @@ function matchSegments(
   svgSegs: LabeledSegment<Point>[],
   geoSegs: LabeledSegment<GeoPoint>[],
 ): MappedSegment[] {
+  if (svgSegs.length === 0 || geoSegs.length === 0) return [];
+
   // Compute lengths and bearings for all segments
   const svgInfos = svgSegs.map((s) => ({
     seg: s,
@@ -117,49 +119,38 @@ function matchSegments(
     bearing: bearingGeo(s.points[0], s.points[s.points.length - 1]),
   }));
 
-  // Sort both by length (longest first) for stable matching
-  svgInfos.sort((a, b) => b.length - a.length);
-  geoInfos.sort((a, b) => b.length - a.length);
-
-  const usedGeo = new Set<number>();
   const result: MappedSegment[] = [];
 
-  for (const svg of svgInfos) {
-    let bestIdx = -1;
+  // For each geo segment, find the best SVG segment to pair with.
+  // Multiple geo segments can map to the same SVG segment — this handles
+  // routes where OSM has many more ways than the SVG has subpaths.
+  for (const geo of geoInfos) {
+    let bestSvg = svgInfos[0];
     let bestScore = -Infinity;
 
-    for (let gi = 0; gi < geoInfos.length; gi++) {
-      if (usedGeo.has(gi)) continue;
-      const geo = geoInfos[gi];
-
-      // Score: combination of length ratio similarity and bearing similarity
+    for (const svg of svgInfos) {
       const lengthRatio = Math.min(svg.length, geo.length) / Math.max(svg.length, geo.length);
       const bearingDiff = angleDiff(svg.bearing, geo.bearing);
-      const bearingScore = 1 - bearingDiff / 180; // 1 = same direction, 0 = opposite
+      // Consider both forward and reverse bearing (route direction may differ)
+      const reverseBearingDiff = angleDiff(svg.bearing, (geo.bearing + 180) % 360);
+      const bearingScore = 1 - Math.min(bearingDiff, reverseBearingDiff) / 180;
 
       const score = lengthRatio * 0.4 + bearingScore * 0.6;
-
       if (score > bestScore) {
         bestScore = score;
-        bestIdx = gi;
+        bestSvg = svg;
       }
     }
 
-    // Accept match if score is reasonable (> 0.3)
-    if (bestIdx >= 0 && bestScore > 0.3) {
-      usedGeo.add(bestIdx);
-      const geo = geoInfos[bestIdx];
+    // Check if we need to reverse the geo segment to match SVG direction
+    const forwardBearingDiff = angleDiff(bestSvg.bearing, geo.bearing);
+    const reverseBearingDiff = angleDiff(bestSvg.bearing, (geo.bearing + 180) % 360);
+    const geoPoints =
+      reverseBearingDiff < forwardBearingDiff ? [...geo.seg.points].reverse() : geo.seg.points;
 
-      // Check if we need to reverse the geo segment to match SVG direction
-      const forwardBearingDiff = angleDiff(svg.bearing, geo.bearing);
-      const reverseBearingDiff = angleDiff(svg.bearing, (geo.bearing + 180) % 360);
-      const geoPoints =
-        reverseBearingDiff < forwardBearingDiff ? [...geo.seg.points].reverse() : geo.seg.points;
-
-      result.push(
-        buildMappedSegment(`${pisteId}_${svg.seg.label}`, svg.seg.points, geoPoints),
-      );
-    }
+    result.push(
+      buildMappedSegment(`${pisteId}_${geo.seg.label}`, bestSvg.seg.points, geoPoints),
+    );
   }
 
   return result;
