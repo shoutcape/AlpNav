@@ -84,7 +84,7 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
 
     const suspiciousLongNumber = typeof rawNumber === "string" && /^\d{5,}$/.test(rawNumber);
     let number = rawNumber;
-    const namePrefixMatch = name.match(/^(\d+[a-zA-Z]?)\s/);
+    const namePrefixMatch = name.match(/^(\d+[a-zA-Z]?)(\s|$)/);
     if (namePrefixMatch) {
       if (!rawNumber || suspiciousLongNumber || namePrefixMatch[1].startsWith(rawNumber)) {
         number = namePrefixMatch[1];
