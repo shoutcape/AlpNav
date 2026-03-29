@@ -29,82 +29,88 @@ async function main() {
   // ─── Match lifts ─────────────────────────────────────────────────────────
   const liftEndpoints = parseLiftEndpoints(lSvgText, scale);
   let liftMatches = 0;
+  const usedOsmLifts = new Set();
 
-  for (const osmLift of osmAnchors.lifts) {
-    if (!osmLift.name) continue;
+  // Iterate Intermaps lifts and find the single best OSM match for each
+  for (const imLift of dataJson.lifts) {
+    const imName = imLift.popup?.title;
+    if (!imName) continue;
 
-    let bestLift = null;
+    const endpoints = liftEndpoints.get(imLift.id);
+    if (!endpoints) continue;
+
+    let bestOsm = null;
     let bestScore = 0;
-    for (const imLift of dataJson.lifts) {
-      const imName = imLift.popup?.title;
-      if (!imName) continue;
+    for (const osmLift of osmAnchors.lifts) {
+      if (!osmLift.name || usedOsmLifts.has(osmLift.osmId)) continue;
       const score = nameSimilarity(osmLift.name, imName);
       if (score > bestScore) {
         bestScore = score;
-        bestLift = imLift;
+        bestOsm = osmLift;
       }
     }
 
-    if (!bestLift || bestScore < 0.4) continue;
+    if (!bestOsm || bestScore < 0.4) continue;
 
-    const endpoints = liftEndpoints.get(bestLift.id);
-    if (!endpoints) continue;
-
+    usedOsmLifts.add(bestOsm.osmId);
     liftMatches++;
 
     anchors.push({
-      id: `${bestLift.id}_valley`,
-      name: bestLift.popup.title + " (valley)",
+      id: `${imLift.id}_valley`,
+      name: imName + " (valley)",
       type: "lift-station",
-      geo: osmLift.valley,
+      geo: bestOsm.valley,
       panorama: endpoints.valley,
       snapRadius: 30,
     });
 
     anchors.push({
-      id: `${bestLift.id}_mountain`,
-      name: bestLift.popup.title + " (mountain)",
+      id: `${imLift.id}_mountain`,
+      name: imName + " (mountain)",
       type: "lift-station",
-      geo: osmLift.mountain,
+      geo: bestOsm.mountain,
       panorama: endpoints.mountain,
       snapRadius: 30,
     });
   }
 
   // ─── Match restaurants ───────────────────────────────────────────────────
+  // Iterate Intermaps entries and find the single best OSM match for each,
+  // preventing duplicates (multiple OSM restaurants matching the same entry).
   const gastroEntries = [
     ...(dataJson.pois["202"] ?? []),
     ...(dataJson.pois["3001"] ?? []),
     ...(dataJson.pois["3002"] ?? []),
   ];
   let restaurantMatches = 0;
+  const usedOsmRestaurants = new Set();
 
-  for (const osmRest of osmAnchors.restaurants) {
-    if (!osmRest.name) continue;
+  for (const g of gastroEntries) {
+    const gName = g.popup?.title;
+    if (!gName) continue;
+    const pos = g.position;
+    if (!pos || pos.x == null || pos.y == null) continue;
 
-    let bestGastro = null;
+    let bestOsm = null;
     let bestScore = 0;
-    for (const g of gastroEntries) {
-      const gName = g.popup?.title;
-      if (!gName) continue;
+    for (const osmRest of osmAnchors.restaurants) {
+      if (!osmRest.name || usedOsmRestaurants.has(osmRest.osmId)) continue;
       const score = nameSimilarity(osmRest.name, gName);
       if (score > bestScore) {
         bestScore = score;
-        bestGastro = g;
+        bestOsm = osmRest;
       }
     }
 
-    if (!bestGastro || bestScore < 0.4) continue;
+    if (!bestOsm || bestScore < 0.4) continue;
 
-    const pos = bestGastro.position;
-    if (!pos || pos.x == null || pos.y == null) continue;
-
+    usedOsmRestaurants.add(bestOsm.osmId);
     restaurantMatches++;
     anchors.push({
-      id: `gastro_${bestGastro.id}`,
-      name: bestGastro.popup.title,
+      id: `gastro_${g.id}`,
+      name: g.popup.title,
       type: "restaurant",
-      geo: osmRest.geo,
+      geo: bestOsm.geo,
       panorama: { x: pos.x * scale, y: pos.y * scale },
       snapRadius: 20,
     });
