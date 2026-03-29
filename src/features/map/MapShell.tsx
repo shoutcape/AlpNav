@@ -723,6 +723,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         result.point,
         accuracyPx,
         activeArea.visualScale,
+        followLocationRef.current,
       );
 
       if (followLocationRef.current && viewportRef.current) {
@@ -922,9 +923,18 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const toggleFollowLocation = () => setFollowLocation(f => {
     const next = !f;
     followLocationRef.current = next;
-    // If enabling follow and we already have a projected position, center immediately
-    if (next && lastProjection && viewportRef.current) {
-      viewportRef.current.moveCenter(lastProjection.point.x, lastProjection.point.y);
+    // If enabling follow and we already have a projected position, center and redraw with halo
+    if (lastProjection && userPositionOverlayRef.current) {
+      drawUserPositionOverlay(
+        userPositionOverlayRef.current,
+        lastProjection.point,
+        (lastFix?.accuracy ?? 5) * 2,
+        activeArea.visualScale,
+        next,
+      );
+      if (next && viewportRef.current) {
+        viewportRef.current.moveCenter(lastProjection.point.x, lastProjection.point.y);
+      }
     }
     return next;
   });
