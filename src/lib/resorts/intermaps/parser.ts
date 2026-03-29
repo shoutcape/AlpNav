@@ -545,8 +545,21 @@ function parseLifts(doc: Document, meta: Map<string, LiftMeta>, scale: number): 
 // ─── label parsing ────────────────────────────────────────────────────────────
 
 function parseHexColor(fill: string | null): number | undefined {
-  if (!fill || !fill.startsWith("#")) return undefined;
-  return parseInt(fill.slice(1), 16);
+  if (!fill) return undefined;
+
+  const lowerFill = fill.toLowerCase();
+  if (lowerFill === "white") return 0xffffff;
+  if (lowerFill === "black") return 0x000000;
+  if (lowerFill === "aqua" || lowerFill === "cyan") return 0x00ffff;
+  if (lowerFill === "none" || lowerFill === "transparent") return undefined;
+
+  if (!fill.startsWith("#")) return undefined;
+
+  let hex = fill.slice(1);
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  return parseInt(hex, 16);
 }
 
 function parseLabels(doc: Document, scale: number): MapLabel[] {
