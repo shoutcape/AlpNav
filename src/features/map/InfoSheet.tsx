@@ -74,8 +74,6 @@ const LIFT_TYPE_LABEL: Record<LiftType, string> = {
 };
 
 export function InfoSheet({ selectedItem, onDismiss }: Props) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [liveMode, setLiveMode] = useState(false);
 
   // lastItem: the most recently shown non-null item; kept alive so content stays rendered during exit animation
@@ -93,10 +91,12 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
   const prevHeightRef = useRef(0);
   const prevItemRef = useRef(displayedItem);
 
+  const dragStartX = useRef(0);
   const dragStartY = useRef(0);
   const dragStartTime = useRef(0);
   const sheetHeightAtDragStart = useRef(0);
   const isDragging = useRef(false);
+  const axisLocked = useRef<"h" | "v" | null>(null);
 
   // Keep lastItem in sync; manually animate wrapper on dismiss so we control easing and height is irrelevant
   useEffect(() => {
@@ -157,54 +157,75 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
   }
 
   function handlePointerDown(e: React.PointerEvent) {
-    e.currentTarget.setPointerCapture(e.pointerId);
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    dragStartX.current = e.clientX;
     dragStartY.current = e.clientY;
     dragStartTime.current = Date.now();
     sheetHeightAtDragStart.current = wrapperRef.current?.offsetHeight || window.innerHeight * 0.5;
     isDragging.current = true;
+    axisLocked.current = null;
   }
 
   function handlePointerMove(e: React.PointerEvent) {
     if (!isDragging.current) return;
-    const dy = Math.max(0, e.clientY - dragStartY.current);
-    if (dy < 6) return; // dead-zone to avoid jitter on tap
-    const el = wrapperRef.current;
-    if (!el) return;
-    el.style.transition = "none";
-    el.style.transform = `translateY(${dy}px)`;
+    const dx = e.clientX - dragStartX.current;
+    const dy = e.clientY - dragStartY.current;
+
+    if (!axisLocked.current) {
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+        axisLocked.current = Math.abs(dx) > Math.abs(dy) ? "h" : "v";
+        if (axisLocked.current === "v") {
+          e.currentTarget.setPointerCapture(e.pointerId);
+        }
+      }
+    }
+
+    if (axisLocked.current === "v") {
+      const moveY = Math.max(0, dy);
+      const el = wrapperRef.current;
+      if (!el) return;
+      el.style.transition = "none";
+      el.style.transform = `translateY(${moveY}px)`;
+    }
   }
 
   function handlePointerUp(e: React.PointerEvent) {
     if (!isDragging.current) return;
     isDragging.current = false;
-    const dy = Math.max(0, e.clientY - dragStartY.current);
-    const velocity = dy / (Date.now() - dragStartTime.current);
-    const el = wrapperRef.current;
-    if (!el) return;
+    
+    if (axisLocked.current === "v") {
+      const dy = Math.max(0, e.clientY - dragStartY.current);
+      const velocity = dy / (Date.now() - dragStartTime.current);
+      const el = wrapperRef.current;
+      if (!el) return;
 
-    const shouldDismiss = velocity > 0.4 || dy >= sheetHeightAtDragStart.current * 0.25;
+      const shouldDismiss = velocity > 0.4 || dy >= sheetHeightAtDragStart.current * 0.25;
 
-    if (shouldDismiss) {
-      isDragDismissing.current = true;
-      el.style.transition = "transform 0.25s ease-out";
-      el.style.transform = "translateY(100%)";
-      const onEnd = (ev: TransitionEvent) => {
-        if (ev.propertyName !== "transform") return;
-        el.removeEventListener("transitionend", onEnd);
-        el.style.transition = "";
-        el.style.transform = "";
-        onDismiss();
-      };
-      el.addEventListener("transitionend", onEnd);
-    } else {
-      snapBack(el);
+      if (shouldDismiss) {
+        isDragDismissing.current = true;
+        el.style.transition = "transform 0.25s ease-out";
+        el.style.transform = "translateY(100%)";
+        const onEnd = (ev: TransitionEvent) => {
+          if (ev.propertyName !== "transform") return;
+          el.removeEventListener("transitionend", onEnd);
+          el.style.transition = "";
+          el.style.transform = "";
+          onDismiss();
+        };
+        el.addEventListener("transitionend", onEnd);
+      } else {
+        snapBack(el);
+      }
     }
   }
 
   function handlePointerCancel() {
     isDragging.current = false;
-    const el = wrapperRef.current;
-    if (el) snapBack(el);
+    if (axisLocked.current === "v") {
+      const el = wrapperRef.current;
+      if (el) snapBack(el);
+    }
+    axisLocked.current = null;
   }
 
   // Animate height when displayed content changes
@@ -232,60 +253,27 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
 
   // Reset UI state on item change
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLightboxOpen(false);
-    setLightboxIndex(0);
-    setLiveMode(false);
+    if (selectedItem) {
+      setLiveMode(false);
+    }
   }, [selectedItem]);
 
   return (
     <>
-    {lightboxOpen && selectedItem && (
-      "liftType" in selectedItem ||
-      "category" in selectedItem ||
-      ("position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem))
-    ) && selectedItem.imageUrls && selectedItem.imageUrls.length > 0 && (
-      <div
-        className="fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-        onClick={() => setLightboxOpen(false)}
-      >
-        <img
-          src={selectedItem.imageUrls[lightboxIndex]}
-          alt={selectedItem.name}
-          className="max-h-screen max-w-screen w-auto h-auto rounded-xl"
-          onClick={e => e.stopPropagation()}
-        />
-        {selectedItem.imageUrls.length > 1 && (
-          <>
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm"
-              onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + selectedItem.imageUrls!.length) % selectedItem.imageUrls!.length); }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm"
-              onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % selectedItem.imageUrls!.length); }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </>
-        )}
-      </div>
-    )}
     <div
       ref={wrapperRef}
       className={`absolute inset-x-0 bottom-0 z-20 will-change-transform transition-transform duration-300 ease-out ${isVisible ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"}`}
     >
-      <div ref={cardRef} className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
+      <div 
+        ref={cardRef} 
+        className="rounded-t-[20px] border-t border-white/[0.09] bg-[#07111f]/85 px-5 pb-8 pt-5 shadow-[0_-8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
         {/* Drag handle */}
-        <div
-          className="flex mb-2 w-full cursor-grab touch-none select-none items-center justify-center -my-2 py-2"
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerCancel}
-        >
+        <div className="flex mb-2 w-full justify-center -my-6 py-6 touch-none">
           <div className="h-[3px] w-10 rounded-full bg-white/20" />
         </div>
 
@@ -420,8 +408,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                   <ImageCarousel
                     imageUrls={displayedItem.imageUrls}
                     alt={displayedItem.name}
-                    onOpenLightbox={() => setLightboxOpen(true)}
-                    onIndexChange={setLightboxIndex}
                   />
                 )}
               </div>
@@ -429,7 +415,7 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
 
             {"streamUrl" in displayedItem && (
               <div className="mt-3 flex flex-col gap-3">
-                <div className="relative mx-auto w-full max-w-[350px] aspect-[4/3] overflow-hidden rounded-xl bg-black">
+                <div className="relative w-full max-w-[400px] aspect-video overflow-hidden rounded-xl bg-black">
                   {liveMode ? (
                     <iframe
                       src={displayedItem.streamUrl}
@@ -483,8 +469,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                   <ImageCarousel
                     imageUrls={displayedItem.imageUrls}
                     alt={displayedItem.name}
-                    onOpenLightbox={() => setLightboxOpen(true)}
-                    onIndexChange={setLightboxIndex}
                   />
                 )}
               </div>
@@ -501,8 +485,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                   <ImageCarousel
                     imageUrls={displayedItem.imageUrls}
                     alt={displayedItem.name}
-                    onOpenLightbox={() => setLightboxOpen(true)}
-                    onIndexChange={setLightboxIndex}
                   />
                 )}
               </div>
@@ -543,8 +525,6 @@ export function InfoSheet({ selectedItem, onDismiss }: Props) {
                   <ImageCarousel
                     imageUrls={displayedItem.imageUrls}
                     alt={displayedItem.name}
-                    onOpenLightbox={() => setLightboxOpen(true)}
-                    onIndexChange={setLightboxIndex}
                   />
                 )}
               </div>
