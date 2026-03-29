@@ -148,8 +148,8 @@ export class GpsToPanoramaMapper {
       }
     }
 
-    // Anchors take priority within a generous radius (lifts/restaurants are ground truth)
-    if (bestAnchor && bestAnchorDist < 80) {
+    // Prefer anchor if it's closer in panorama space (within 40px)
+    if (bestAnchor && bestAnchorDist < 40 && bestAnchorDist <= bestSegDist) {
       return { geo: bestAnchor.geo, source: bestAnchor.name };
     }
 

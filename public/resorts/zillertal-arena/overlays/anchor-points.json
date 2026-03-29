@@ -672,6 +672,34 @@
     "snapRadius": 30
   },
   {
+    "id": "L_45099_valley",
+    "name": "6er Kreuzwiesn-X-Press (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2287652,
+      "lng": 11.9611918
+    },
+    "panorama": {
+      "x": 1280.104,
+      "y": 1240.404
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45099_mountain",
+    "name": "6er Kreuzwiesn-X-Press (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2394637,
+      "lng": 11.9581179
+    },
+    "panorama": {
+      "x": 957.228,
+      "y": 923.532
+    },
+    "snapRadius": 30
+  },
+  {
     "id": "L_45102_valley",
     "name": "Larchkopf (valley)",
     "type": "lift-station",
@@ -1260,6 +1288,34 @@
     "snapRadius": 30
   },
   {
+    "id": "L_45233_valley",
+    "name": "Förderbahnd Duxeralm (valley)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2342908,
+      "lng": 12.1445402
+    },
+    "panorama": {
+      "x": 3764.464,
+      "y": 1755.588
+    },
+    "snapRadius": 30
+  },
+  {
+    "id": "L_45233_mountain",
+    "name": "Förderbahnd Duxeralm (mountain)",
+    "type": "lift-station",
+    "geo": {
+      "lat": 47.2342908,
+      "lng": 12.1445402
+    },
+    "panorama": {
+      "x": 3723.324,
+      "y": 1740.74
+    },
+    "snapRadius": 30
+  },
+  {
     "id": "gastro_45311",
     "name": "Arena Schirmbar",
     "type": "restaurant",
@@ -1554,6 +1610,20 @@
     "snapRadius": 20
   },
   {
+    "id": "gastro_47178",
+    "name": "Simon's Skisstadl 1.744m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2187986,
+      "lng": 12.0639112
+    },
+    "panorama": {
+      "x": 416,
+      "y": 1196
+    },
+    "snapRadius": 20
+  },
+  {
     "id": "gastro_47186",
     "name": "delicacy-hut Kreuzwiesenalm 1.880m",
     "type": "restaurant",
@@ -1578,6 +1648,20 @@
     "panorama": {
       "x": 404,
       "y": 1876
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_47193",
+    "name": "Rosi's escalope hut 1.780m",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.233438,
+      "lng": 11.9397762
+    },
+    "panorama": {
+      "x": 1056,
+      "y": 1312
     },
     "snapRadius": 20
   },

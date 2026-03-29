@@ -186,16 +186,22 @@ function nameSimilarity(a, b) {
   if (aWords.size === 0 || bWords.size === 0) return 0;
 
   let matches = 0;
+  let significantMatch = false; // a distinctive word (4+ chars) matched
   for (const w of aWords) {
     for (const bw of bWords) {
       if (w === bw || w.includes(bw) || bw.includes(w)) {
         matches++;
+        if (w.length >= 4 || bw.length >= 4) significantMatch = true;
         break;
       }
     }
   }
 
-  return matches / Math.max(aWords.size, bWords.size);
+  const ratio = matches / Math.max(aWords.size, bWords.size);
+  // Boost score when a distinctive word matches (handles translated names
+  // like "Rosi's Schnitzelhütte" ↔ "Rosi's escalope hut")
+  if (significantMatch && matches >= 1 && ratio < 0.4) return 0.4;
+  return ratio;
 }
 
 main().catch((error) => {
