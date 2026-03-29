@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { Application, Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import type { PanoramaLevel, PanoramaManifest } from "./types";
@@ -1099,65 +1099,47 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
         <motion.div
           layout
-          className="pointer-events-auto rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md"
+          className="pointer-events-auto overflow-hidden rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md"
           transition={{ layout: { duration: 0.3, ease: [0.32, 0.72, 0, 1] } }}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            {!controlsExpanded ? (
-              <motion.div
-                key="collapsed"
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ duration: 0.15 }}
-              >
+          {!controlsExpanded ? (
+            <button
+              onClick={() => {
+                setControlsExpanded(true);
+                controlsExpandedRef.current = true;
+                setLegendOpen(false);
+                setFilterPanelOpen(false);
+              }}
+              aria-expanded={controlsExpanded}
+              aria-label="Map layer controls"
+              onContextMenu={e => e.preventDefault()}
+              className="touch-none select-none flex flex-col items-center gap-1 rounded-[14px] px-4 py-2 text-ivory/70 hover:bg-white/[0.07] hover:text-ivory"
+            >
+              <LayersIcon />
+              <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
+              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Layers</span>
+            </button>
+          ) : (
+            <div className="grid grid-cols-3 gap-1">
+              <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
+              <div className="relative">
+                <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} onToggleAll={toggleAllPistes} />
                 <button
-                  onClick={() => {
-                    setControlsExpanded(true);
-                    controlsExpandedRef.current = true;
-                    setLegendOpen(false);
-                    setFilterPanelOpen(false);
-                  }}
-                  aria-expanded={controlsExpanded}
-                  aria-label="Map layer controls"
+                  onClick={() => setFilterPanelOpen(o => !o)}
                   onContextMenu={e => e.preventDefault()}
-                  className="touch-none select-none flex flex-col items-center gap-1 rounded-[14px] px-4 py-2 text-ivory/70 hover:bg-white/[0.07] hover:text-ivory"
+                  className={`touch-none select-none flex w-full flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
                 >
-                  <LayersIcon />
+                  <SlopeIcon />
                   <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Layers</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
                 </button>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="expanded"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="grid grid-cols-3 gap-1">
-                  <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
-                  <div className="relative">
-                    <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} onToggleAll={toggleAllPistes} />
-                    <button
-                      onClick={() => setFilterPanelOpen(o => !o)}
-                      onContextMenu={e => e.preventDefault()}
-                      className={`touch-none select-none flex w-full flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
-                    >
-                      <SlopeIcon />
-                      <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
-                      <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
-                    </button>
-                  </div>
-                  <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
-                  <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
-                  <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
-                  <MapControlButton icon={<SportFunMapIcon />} label="Sport" active={sportFunVisible} onClick={toggleSportFun} />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
+              <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
+              <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
+              <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
+              <MapControlButton icon={<SportFunMapIcon />} label="Sport" active={sportFunVisible} onClick={toggleSportFun} />
+            </div>
+          )}
         </motion.div>
       </div>
 
