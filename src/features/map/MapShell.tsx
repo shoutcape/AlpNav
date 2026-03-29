@@ -1461,6 +1461,19 @@ function SlopeIcon() {
   );
 }
 
+function LayersIcon() {
+  return (
+    <svg width="22" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true">
+      <line x1="3" y1="4" x2="21" y2="4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="3" y1="16" x2="21" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="8" cy="4" r="2.5" fill="#07111f" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="16" cy="10" r="2.5" fill="#07111f" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="11" cy="16" r="2.5" fill="#07111f" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 function LegendPanel({ open }: { open: boolean }) {
   return (
     <div className={`select-none absolute right-0 top-full z-20 mt-2 w-[220px] rounded-[18px] border border-white/[0.09] bg-[#07111f]/85 p-4 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-opacity duration-200 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
