@@ -1,6 +1,8 @@
 import arenaManifest from "../../../public/resorts/zillertal-arena/panorama/manifest.json";
+import hochzillertalManifest from "../../../public/resorts/hochzillertal-hochfugen-spieljoch/panorama/manifest.json";
 import mayrhofenManifest from "../../../public/resorts/mayrhofner-bergbahnen/panorama/manifest.json";
 import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
+import { loadHochzillertalOverlayData } from "@/lib/resorts/hochzillertal/adapter";
 import { loadMayrhofenOverlayData } from "@/lib/resorts/mayrhofen/adapter";
 import type { ResortDefinition } from "@/lib/resorts/types";
 
@@ -49,13 +51,14 @@ export const RESORTS: ResortDefinition[] = [
     id: "hochzillertal-hochfugen-spieljoch",
     name: "Hochzillertal-Hochfugen-Spieljoch",
     shortName: "Hochzillertal",
-    subtitle: "Coming soon",
-    availability: "coming-soon",
-    locationLabel: "Kaltenbach-Fugen, Austria",
+    subtitle: "Available now",
+    availability: "available",
+    locationLabel: "Fugen-Kaltenbach, Austria",
     elevationLabel: "600 - 2,500 m",
     conditionsUrl: "https://www.bergfex.com/hochzillertal-hochfuegen/wetter/",
-    manifest: arenaManifest,
-    loadOverlayData: loadArenaOverlayData,
+    manifest: hochzillertalManifest,
+    visualScale: 2.0,
+    loadOverlayData: loadHochzillertalOverlayData,
   },
 ];
 

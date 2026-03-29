@@ -11,6 +11,10 @@ const CONFIGS = {
     intermapsId: "mayrhofen",
     remoteBaseZoom: 16,
   },
+  "hochzillertal-hochfugen-spieljoch": {
+    intermapsId: "hochzillertal_spieljoch",
+    remoteBaseZoom: 16,
+  },
 };
 
 const resortId = process.argv[2];

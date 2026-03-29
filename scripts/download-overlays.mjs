@@ -1,4 +1,4 @@
-import { mkdir, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,6 +10,10 @@ const CONFIGS = {
   "mayrhofner-bergbahnen": {
     intermapsId: "mayrhofen",
     imagePath: "mayrhofen",
+  },
+  "hochzillertal-hochfugen-spieljoch": {
+    intermapsId: "hochzillertal_spieljoch",
+    imagePath: "hochzillertal_spieljoch_srm",
   },
 };
 
@@ -43,9 +47,41 @@ async function main() {
   await downloadFile(`${BASE_URL}/image/${config.imagePath}/svg/R.svg`, path.join(OUTPUT_ROOT, "R.svg"));
   await downloadFile(`${BASE_URL}/image/${config.imagePath}/svg/L.svg`, path.join(OUTPUT_ROOT, "L.svg"));
   await downloadFile(`${BASE_URL}/${config.intermapsId}/data?lang=en`, path.join(OUTPUT_ROOT, "data.json"));
-  await downloadFile(`${BASE_URL}/image/${config.imagePath}/svg/text.svg`, path.join(OUTPUT_ROOT, "text.svg"));
+  await downloadTextOverlay(path.join(OUTPUT_ROOT, "text.svg"));
 
   process.stdout.write(`Overlay files are available in ${OUTPUT_ROOT}\n`);
+}
+
+async function downloadTextOverlay(dest) {
+  if (await hasUsableTextOverlay(dest)) {
+    process.stdout.write(`Already exists: ${path.basename(dest)}\n`);
+    return;
+  }
+
+  const candidates = [
+    `${BASE_URL}/image/${config.imagePath}/svg/text.svg`,
+    `${BASE_URL}/image/${config.imagePath}/svg/text+logos.svg`,
+  ];
+
+  for (const url of candidates) {
+    const response = await fetch(url, { headers: HEADERS });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        continue;
+      }
+
+      throw new Error(`Failed to download ${url}: ${response.status} ${response.statusText}`);
+    }
+
+    const bytes = Buffer.from(await response.arrayBuffer());
+    await writeFile(dest, bytes);
+    process.stdout.write(`Downloaded: ${path.basename(dest)} from ${path.basename(url)}\n`);
+    return;
+  }
+
+  await writeFile(dest, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"></svg>\n');
+  console.warn("WARNING: Missing text overlay SVGs, created empty text.svg fallback");
 }
 
 async function downloadFile(url, dest) {
@@ -58,15 +94,30 @@ async function downloadFile(url, dest) {
 
   if (!response.ok) {
     if (response.status === 404) {
-       console.warn(`WARNING: Missing file ${url}, continuing...`);
-       return;
-    }
+      if (path.basename(dest) === "text.svg") {
+        await writeFile(dest, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"></svg>\n');
+        console.warn(`WARNING: Missing file ${url}, created empty text.svg fallback`);
+        return;
+      }
+
+      console.warn(`WARNING: Missing file ${url}, continuing...`);
+      return;
+     }
     throw new Error(`Failed to download ${url}: ${response.status} ${response.statusText}`);
   }
 
   const bytes = Buffer.from(await response.arrayBuffer());
   await writeFile(dest, bytes);
   process.stdout.write(`Downloaded: ${path.basename(dest)}\n`);
+}
+
+async function hasUsableTextOverlay(filePath) {
+  if (!(await fileExists(filePath))) {
+    return false;
+  }
+
+  const content = await readFile(filePath, "utf8");
+  return content.includes("<text");
 }
 
 async function fileExists(filePath) {

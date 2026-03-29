@@ -1,0 +1,49 @@
+{
+  "resortId": "hochzillertal-hochfugen-spieljoch",
+  "pageUrl": "https://zillertal.intermaps.com/hochzillertal_spieljoch?lang=en",
+  "tileSize": 256,
+  "remoteBaseZoom": 16,
+  "localTemplate": "/resorts/hochzillertal-hochfugen-spieljoch/panorama/{z}/pano_{x}_{y}.webp",
+  "levels": [
+    {
+      "localIndex": 0,
+      "remoteZoom": 16,
+      "width": 512,
+      "height": 252,
+      "columns": 2,
+      "rows": 1
+    },
+    {
+      "localIndex": 1,
+      "remoteZoom": 17,
+      "width": 1024,
+      "height": 504,
+      "columns": 4,
+      "rows": 2
+    },
+    {
+      "localIndex": 2,
+      "remoteZoom": 18,
+      "width": 2048,
+      "height": 1008,
+      "columns": 8,
+      "rows": 4
+    },
+    {
+      "localIndex": 3,
+      "remoteZoom": 19,
+      "width": 4096,
+      "height": 2016,
+      "columns": 16,
+      "rows": 8
+    },
+    {
+      "localIndex": 4,
+      "remoteZoom": 20,
+      "width": 8192,
+      "height": 4032,
+      "columns": 32,
+      "rows": 16
+    }
+  ]
+}

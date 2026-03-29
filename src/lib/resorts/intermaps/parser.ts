@@ -81,11 +81,12 @@ function buildPisteMetaMap(data: Record<string, unknown>): Map<string, PisteMeta
       : typeof popup.number === "number"
       ? String(popup.number)
       : undefined;
-    
+
+    const suspiciousLongNumber = typeof rawNumber === "string" && /^\d{5,}$/.test(rawNumber);
     let number = rawNumber;
     const namePrefixMatch = name.match(/^(\d+[a-zA-Z]?)\s/);
     if (namePrefixMatch) {
-      if (!rawNumber || namePrefixMatch[1].startsWith(rawNumber)) {
+      if (!rawNumber || suspiciousLongNumber || namePrefixMatch[1].startsWith(rawNumber)) {
         number = namePrefixMatch[1];
       }
     }
@@ -321,7 +322,7 @@ function parseSportFun(data: Record<string, unknown>, scale: number): SportFunPo
 
 function parseWebcams(data: Record<string, unknown>, scale: number): Webcam[] {
   const pois = (data.pois ?? {}) as Record<string, unknown>;
-  const feratel = [...(pois["2816"] ?? []) as RawPoi[], ...(pois["2810"] ?? []) as RawPoi[]].map(item => ({ ...item, _provider: "feratel" }));
+  const feratel = [...(pois["2816"] ?? []) as RawPoi[], ...(pois["2810"] ?? []) as RawPoi[], ...(pois["2809"] ?? []) as RawPoi[]].map(item => ({ ...item, _provider: "feratel" }));
   const panomax = ((pois["2807"] ?? []) as RawPoi[]).map(item => ({ ...item, _provider: "panomax" }));
 
   return [...feratel, ...panomax]

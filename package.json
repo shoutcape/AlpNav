@@ -10,8 +10,10 @@
     "lint": "eslint",
     "sync:arena": "node scripts/download-artwork.mjs zillertal-arena && node scripts/download-overlays.mjs zillertal-arena && node scripts/convert-tiles.mjs public/resorts/zillertal-arena/panorama",
     "sync:mayrhofen": "node scripts/download-artwork.mjs mayrhofner-bergbahnen && node scripts/download-overlays.mjs mayrhofner-bergbahnen && node scripts/convert-tiles.mjs public/resorts/mayrhofner-bergbahnen/panorama",
+    "sync:hochzillertal": "node scripts/download-artwork.mjs hochzillertal-hochfugen-spieljoch && node scripts/download-overlays.mjs hochzillertal-hochfugen-spieljoch && node scripts/convert-tiles.mjs public/resorts/hochzillertal-hochfugen-spieljoch/panorama",
     "enrich:arena": "node scripts/enrich-lift-info.mjs zillertal-arena && node scripts/enrich-gastronomy-images.mjs zillertal-arena && node scripts/enrich-gastronomy-websites.mjs zillertal-arena",
-    "enrich:mayrhofen": "node scripts/enrich-lift-info.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-images.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-websites.mjs mayrhofner-bergbahnen"
+    "enrich:mayrhofen": "node scripts/enrich-lift-info.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-images.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-websites.mjs mayrhofner-bergbahnen",
+    "enrich:hochzillertal": "node scripts/enrich-lift-info.mjs hochzillertal-hochfugen-spieljoch && node scripts/enrich-gastronomy-images.mjs hochzillertal-hochfugen-spieljoch && node scripts/enrich-gastronomy-websites.mjs hochzillertal-hochfugen-spieljoch"
   },
   "dependencies": {
     "@deck.gl/core": "9.2.11",

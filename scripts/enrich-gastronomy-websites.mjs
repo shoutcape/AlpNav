@@ -9,7 +9,7 @@ import { dirname, join } from "path";
 const resortId = process.argv[2];
 if (!resortId) {
   console.error("Usage: node scripts/enrich-gastronomy-websites.mjs <resort-id>");
-  console.error("Available resorts: zillertal-arena, mayrhofner-bergbahnen");
+  console.error("Available resorts: zillertal-arena, mayrhofner-bergbahnen, hochzillertal-hochfugen-spieljoch");
   process.exit(1);
 }
 
@@ -22,6 +22,9 @@ const RESORT_CONFIG = {
   },
   "mayrhofner-bergbahnen": {
     clientKey: "mayrhofen",
+  },
+  "hochzillertal-hochfugen-spieljoch": {
+    clientKey: "hochzillertal_spieljoch",
   }
 };
 
