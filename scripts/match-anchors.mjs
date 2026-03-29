@@ -77,11 +77,9 @@ async function main() {
   // ─── Match restaurants ───────────────────────────────────────────────────
   // Iterate Intermaps entries and find the single best OSM match for each,
   // preventing duplicates (multiple OSM restaurants matching the same entry).
-  const gastroEntries = [
-    ...(dataJson.pois["202"] ?? []),
-    ...(dataJson.pois["3001"] ?? []),
-    ...(dataJson.pois["3002"] ?? []),
-  ];
+  // Gastronomy categories — same IDs used by the parser (202, 3001, 3002)
+  const GASTRO_CATEGORIES = ["202", "3001", "3002"];
+  const gastroEntries = GASTRO_CATEGORIES.flatMap((id) => dataJson.pois?.[id] ?? []);
   let restaurantMatches = 0;
   const usedOsmRestaurants = new Set();
 
@@ -145,7 +143,7 @@ function parseLiftEndpoints(svgText, scale) {
     const oid = gm[1];
     const block = gm[0];
 
-    // Look for polyline points in the _path subgroup
+    // Try polyline first
     const polyMatch = block.match(/id="L_\d+_path"[\s\S]*?<polyline[^>]+points="([^"]+)"/);
     if (polyMatch) {
       const pairs = polyMatch[1].trim().split(/\s+/).map((p) => {
@@ -158,7 +156,17 @@ function parseLiftEndpoints(svgText, scale) {
       }
     }
 
-    // Fallback: look for line elements
+    // Try path element (extract first M coords and trace to last point)
+    const pathMatch = block.match(/id="L_\d+_path"[\s\S]*?<path[^>]+d="([^"]+)"/);
+    if (pathMatch) {
+      const pts = extractPathEndpoints(pathMatch[1], scale);
+      if (pts) {
+        endpoints.set(`L_${oid}`, pts);
+        continue;
+      }
+    }
+
+    // Fallback: line elements
     const lineMatch = block.match(/<line[^>]+x1="([\d.]+)"[^>]+y1="([\d.]+)"[^>]+x2="([\d.]+)"[^>]+y2="([\d.]+)"/);
     if (lineMatch) {
       endpoints.set(`L_${oid}`, {
@@ -172,6 +180,56 @@ function parseLiftEndpoints(svgText, scale) {
 }
 
 // ─── Name matching ───────────────────────────────────────────────────────────
+
+/** Extract first and last points from an SVG path d-attribute */
+function extractPathEndpoints(d, scale) {
+  // Get the starting M point
+  const mMatch = d.match(/^M\s*([\d.e+-]+)[\s,]+([\d.e+-]+)/i);
+  if (!mMatch) return null;
+
+  const firstX = parseFloat(mMatch[1]) * scale;
+  const firstY = parseFloat(mMatch[2]) * scale;
+
+  // Walk through all coordinate pairs to find the last absolute position
+  // Simple approach: find all number pairs and track absolute position
+  let cx = parseFloat(mMatch[1]);
+  let cy = parseFloat(mMatch[2]);
+  let lastAbsCmd = "M";
+
+  // Tokenize: split into commands and numbers
+  const tokens = d.match(/[a-zA-Z]|[-+]?[\d.]+(?:e[-+]?\d+)?/gi) || [];
+  let i = 0;
+  while (i < tokens.length) {
+    const t = tokens[i];
+    if (/^[a-zA-Z]$/.test(t)) {
+      lastAbsCmd = t;
+      i++;
+      continue;
+    }
+    // It's a number — consume coordinate pairs based on last command
+    const x = parseFloat(tokens[i]);
+    const y = parseFloat(tokens[i + 1]);
+    if (isNaN(x) || isNaN(y)) { i++; continue; }
+
+    if (lastAbsCmd === lastAbsCmd.toUpperCase()) {
+      // Absolute
+      cx = x; cy = y;
+    } else {
+      // Relative
+      cx += x; cy += y;
+    }
+    i += 2;
+    // Cubic bezier has 6 numbers per segment, skip the control points
+    if (lastAbsCmd === "c" || lastAbsCmd === "C") i += 4;
+    if (lastAbsCmd === "s" || lastAbsCmd === "S") i += 2;
+    if (lastAbsCmd === "q" || lastAbsCmd === "Q") i += 2;
+  }
+
+  return {
+    valley: { x: firstX, y: firstY },
+    mountain: { x: cx * scale, y: cy * scale },
+  };
+}
 
 /** Extract meaningful keywords from a URL domain (e.g. "schnitzelhuette.at" → ["schnitzelhuette"]) */
 function extractUrlKeywords(url) {
