@@ -1,0 +1,6297 @@
+{
+  "lifts": [
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Hochzillertal I",
+        "types": [],
+        "additional-info": {
+          "length": 3053,
+          "altitude-valley": 558,
+          "altitude-mountain": 1738
+        },
+        "oid": "23265",
+        "status": "closed",
+        "id": "23265",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23265",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Hochzillertal III",
+        "types": [],
+        "additional-info": {
+          "length": 3063,
+          "altitude-valley": 558,
+          "altitude-mountain": 1733
+        },
+        "oid": "23266",
+        "status": "open",
+        "id": "23266",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23266",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Schnee-Express",
+        "types": [],
+        "additional-info": {
+          "length": 1633,
+          "altitude-valley": 1615,
+          "altitude-mountain": 2143
+        },
+        "oid": "23267",
+        "status": "open",
+        "id": "23267",
+        "subtitle": "8-person chairlift",
+        "clients-sub-id": 1
+      },
+      "number": null,
+      "type": 1,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23267",
+      "subtitle": "8-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Sonnenjet",
+        "types": [],
+        "additional-info": {
+          "length": 2044,
+          "altitude-valley": 1677,
+          "altitude-mountain": 2193
+        },
+        "oid": "23268",
+        "status": "open",
+        "id": "23268",
+        "subtitle": "6-person chairlift",
+        "clients-sub-id": 30
+      },
+      "number": null,
+      "type": 30,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23268",
+      "subtitle": "6-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Neuhüttenbahn",
+        "types": [],
+        "additional-info": {
+          "length": 1440,
+          "altitude-valley": 1701,
+          "altitude-mountain": 2168
+        },
+        "oid": "23269",
+        "status": "open",
+        "id": "23269",
+        "subtitle": "6-person chairlift",
+        "clients-sub-id": 30
+      },
+      "number": null,
+      "type": 30,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23269",
+      "subtitle": "6-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Wedelexpress",
+        "types": [],
+        "additional-info": {
+          "length": 1167,
+          "altitude-valley": 2036,
+          "altitude-mountain": 2374
+        },
+        "oid": "23270",
+        "status": "open",
+        "id": "23270",
+        "subtitle": "4-person chairlift",
+        "clients-sub-id": 25
+      },
+      "number": null,
+      "type": 25,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23270",
+      "subtitle": "4-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Öfelerbahn",
+        "types": [],
+        "additional-info": {
+          "length": 899,
+          "altitude-valley": 1933,
+          "altitude-mountain": 2146
+        },
+        "oid": "23272",
+        "status": "closed",
+        "id": "23272",
+        "subtitle": "2-person chairlift",
+        "clients-sub-id": 13
+      },
+      "number": null,
+      "type": 13,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23272",
+      "subtitle": "2-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Panoramalift",
+        "types": [],
+        "additional-info": {
+          "length": 874,
+          "altitude-valley": 1938,
+          "altitude-mountain": 2149
+        },
+        "oid": "23273",
+        "status": "open",
+        "id": "23273",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23273",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Hirschbichllift",
+        "types": [],
+        "oid": "23274",
+        "status": "open",
+        "id": "23274",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23274",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Parklift",
+        "types": [],
+        "oid": "23275",
+        "status": "open",
+        "id": "23275",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23275",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Zirbenlift I + II",
+        "types": [],
+        "additional-info": {
+          "length": 587,
+          "altitude-valley": 1682,
+          "altitude-mountain": 1819
+        },
+        "oid": "23276",
+        "status": "open",
+        "id": "23276",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23276",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Marendalmlift I",
+        "types": [],
+        "additional-info": {
+          "length": 625,
+          "altitude-valley": 1679,
+          "altitude-mountain": 1730
+        },
+        "oid": "23277",
+        "status": "open",
+        "id": "23277",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23277",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Marendalmlift II",
+        "types": [],
+        "additional-info": {
+          "length": 91,
+          "altitude-valley": 1713,
+          "altitude-mountain": 1722
+        },
+        "oid": "23278",
+        "status": "open",
+        "id": "23278",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23278",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Übungslift I + II",
+        "types": [],
+        "additional-info": {
+          "length": 80,
+          "altitude-valley": 1738,
+          "altitude-mountain": 1746
+        },
+        "oid": "23279",
+        "status": "open",
+        "id": "23279",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23279",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Übungslift-Telecorde I",
+        "types": [],
+        "additional-info": {
+          "length": 240,
+          "altitude-valley": 1690,
+          "altitude-mountain": 1699
+        },
+        "oid": "23280",
+        "status": "open",
+        "id": "23280",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23280",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Übungslift Telecorde II - III",
+        "types": [],
+        "additional-info": {
+          "length": 210,
+          "altitude-valley": 1678,
+          "altitude-mountain": 1697
+        },
+        "oid": "23281",
+        "status": "closed",
+        "id": "23281",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23281",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Übungslift-Telecorde III",
+        "types": [],
+        "additional-info": {
+          "length": 235,
+          "altitude-valley": 1700,
+          "altitude-mountain": 1722
+        },
+        "oid": "23282",
+        "status": "closed",
+        "id": "23282",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23282",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Kristall- Express",
+        "types": [],
+        "additional-info": {
+          "length": 1408,
+          "altitude-valley": 1761,
+          "altitude-mountain": 2161
+        },
+        "oid": "23294",
+        "status": "open",
+        "id": "23294",
+        "subtitle": "8-person chairlift",
+        "clients-sub-id": 1
+      },
+      "number": null,
+      "type": 1,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23294",
+      "subtitle": "8-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Mizunbahn",
+        "types": [],
+        "additional-info": {
+          "length": 1703,
+          "altitude-valley": 1650,
+          "altitude-mountain": 2050
+        },
+        "oid": "23295",
+        "status": "closed",
+        "id": "23295",
+        "subtitle": "6-person chairlift",
+        "clients-sub-id": 30
+      },
+      "number": null,
+      "type": 30,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23295",
+      "subtitle": "6-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Zirbenlift II",
+        "types": [],
+        "oid": "23304",
+        "status": "open",
+        "id": "23304",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23304",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Übungslift II",
+        "types": [],
+        "oid": "23305",
+        "status": "open",
+        "id": "23305",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23305",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Hochzillertal II",
+        "types": [],
+        "oid": "23306",
+        "status": "closed",
+        "id": "23306",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23306",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Wimbachexpress",
+        "types": [],
+        "additional-info": {
+          "length": 2181,
+          "altitude-valley": 1632,
+          "altitude-mountain": 2340
+        },
+        "oid": "23307",
+        "status": "open",
+        "id": "23307",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23307",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Zauberteppich Marendalm",
+        "types": [],
+        "additional-info": {
+          "length": 80,
+          "altitude-valley": 1690,
+          "altitude-mountain": 1698
+        },
+        "oid": "23315",
+        "status": "open",
+        "id": "23315",
+        "subtitle": "Magic carpet",
+        "clients-sub-id": 21
+      },
+      "number": null,
+      "type": 21,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23315",
+      "subtitle": "Magic carpet",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Topjet",
+        "types": [],
+        "oid": "23390",
+        "status": "open",
+        "id": "23390",
+        "subtitle": "4-person chairlift",
+        "clients-sub-id": 25
+      },
+      "number": null,
+      "type": 25,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23390",
+      "subtitle": "4-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "8er Jet Hochfügen",
+        "types": [],
+        "additional-info": {
+          "length": 2240,
+          "capacity": 2000,
+          "altitude-valley": 1486,
+          "altitude-mountain": 2133
+        },
+        "oid": "23402",
+        "status": "open",
+        "id": "23402",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23402",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "6er KSB Holzalm",
+        "types": [],
+        "additional-info": {
+          "length": 1934,
+          "capacity": 2000,
+          "altitude-valley": 1472,
+          "altitude-mountain": 2170
+        },
+        "oid": "23403",
+        "status": "open",
+        "id": "23403",
+        "subtitle": "6-person chairlift",
+        "clients-sub-id": 30
+      },
+      "number": null,
+      "type": 30,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23403",
+      "subtitle": "6-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "8er EUB Zillertal Shuttle",
+        "types": [],
+        "additional-info": {
+          "length": 2504,
+          "capacity": 2164,
+          "altitude-valley": 1494,
+          "altitude-mountain": 2378
+        },
+        "oid": "23404",
+        "status": "open",
+        "id": "23404",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23404",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "DSL Pfaffenbühel",
+        "types": [],
+        "additional-info": {
+          "length": 1687,
+          "capacity": 1346,
+          "altitude-valley": 1501,
+          "altitude-mountain": 2075
+        },
+        "oid": "23406",
+        "status": "closed",
+        "id": "23406",
+        "subtitle": "2-person chairlift",
+        "clients-sub-id": 13
+      },
+      "number": null,
+      "type": 13,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23406",
+      "subtitle": "2-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "SL Pfaffenbühel II",
+        "types": [],
+        "additional-info": {
+          "length": 800,
+          "capacity": 1250,
+          "altitude-valley": 1740,
+          "altitude-mountain": 1940
+        },
+        "oid": "23407",
+        "status": "closed",
+        "id": "23407",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23407",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "SL Pfaffenbühel III",
+        "types": [],
+        "additional-info": {
+          "length": 750,
+          "capacity": 1230,
+          "altitude-valley": 1500,
+          "altitude-mountain": 1760
+        },
+        "oid": "23408",
+        "status": "open",
+        "id": "23408",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23408",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "SL Lamarklift I",
+        "types": [],
+        "additional-info": {
+          "length": 430,
+          "capacity": 1300,
+          "altitude-valley": 1460,
+          "altitude-mountain": 1572
+        },
+        "oid": "23409",
+        "status": "open",
+        "id": "23409",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23409",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "SL Lamarklift II",
+        "types": [],
+        "additional-info": {
+          "length": 430,
+          "capacity": 1300,
+          "altitude-valley": 1460,
+          "altitude-mountain": 1572
+        },
+        "oid": "23410",
+        "status": "open",
+        "id": "23410",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23410",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "SL Lamarklift IV",
+        "types": [],
+        "additional-info": {
+          "length": 250,
+          "capacity": 720,
+          "altitude-valley": 1460,
+          "altitude-mountain": 1513
+        },
+        "oid": "23411",
+        "status": "open",
+        "id": "23411",
+        "subtitle": "T-bar lift",
+        "clients-sub-id": 9
+      },
+      "number": null,
+      "type": 9,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23411",
+      "subtitle": "T-bar lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "SL Achteralm",
+        "types": [],
+        "additional-info": {
+          "length": 250,
+          "capacity": 720,
+          "altitude-valley": 2115,
+          "altitude-mountain": 2156
+        },
+        "oid": "23412",
+        "status": "open",
+        "id": "23412",
+        "subtitle": "T-bar lift",
+        "clients-sub-id": 9
+      },
+      "number": null,
+      "type": 9,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23412",
+      "subtitle": "T-bar lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Förderband I",
+        "types": [],
+        "additional-info": {
+          "length": 175,
+          "capacity": 720,
+          "altitude-valley": 1460,
+          "altitude-mountain": 1500
+        },
+        "oid": "23451",
+        "status": "open",
+        "id": "23451",
+        "subtitle": "Magic carpet",
+        "clients-sub-id": 21
+      },
+      "number": null,
+      "type": 21,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23451",
+      "subtitle": "Magic carpet",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "6er Sesselbahn Waidoffen",
+        "types": [],
+        "additional-info": {
+          "length": 1090,
+          "capacity": 2388,
+          "altitude-valley": 1992,
+          "altitude-mountain": 2313
+        },
+        "oid": "23452",
+        "status": "open",
+        "id": "23452",
+        "subtitle": "6-person chairlift",
+        "clients-sub-id": 30
+      },
+      "number": null,
+      "type": 30,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23452",
+      "subtitle": "6-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "I Spieljochbahn",
+        "types": [],
+        "additional-info": {
+          "length": 2074,
+          "capacity": 3000,
+          "altitude-valley": 650,
+          "altitude-mountain": 1197
+        },
+        "oid": "23611",
+        "status": "open",
+        "id": "23611",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23,
+        "info": {
+          "imgs": [
+            "https://clients.intermaps.com/admin/imgupload/2018_08_22_15_59_28_200_0.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23611",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "II Spieljochbahn",
+        "types": [],
+        "additional-info": {
+          "length": 1542,
+          "capacity": 3000,
+          "altitude-valley": 1197,
+          "altitude-mountain": 1858
+        },
+        "oid": "23612",
+        "status": "open",
+        "id": "23612",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23,
+        "info": {
+          "imgs": [
+            "https://clients.intermaps.com/admin/imgupload/2018_08_22_16_00_04_725_0.jpg"
+          ]
+        }
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23612",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Panoramabahn Geols",
+        "types": [],
+        "additional-info": {
+          "length": 1992,
+          "capacity": 2422,
+          "altitude-valley": 1239,
+          "altitude-mountain": 2054
+        },
+        "oid": "23613",
+        "status": "closed",
+        "id": "23613",
+        "subtitle": "Mono-cable gondola",
+        "clients-sub-id": 23
+      },
+      "number": null,
+      "type": 23,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23613",
+      "subtitle": "Mono-cable gondola",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Onkeljochlift",
+        "types": [],
+        "additional-info": {
+          "length": 604,
+          "capacity": 1200,
+          "altitude-valley": 1865,
+          "altitude-mountain": 2035
+        },
+        "oid": "23614",
+        "status": "open",
+        "id": "23614",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23614",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Mösllift",
+        "types": [],
+        "additional-info": {
+          "length": 534,
+          "capacity": 605,
+          "altitude-valley": 1865,
+          "altitude-mountain": 1991
+        },
+        "oid": "23615",
+        "status": "open",
+        "id": "23615",
+        "subtitle": "Ski lift",
+        "clients-sub-id": 31
+      },
+      "number": null,
+      "type": 31,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23615",
+      "subtitle": "Ski lift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Onkeljochbahn",
+        "types": [],
+        "additional-info": {
+          "length": 1720,
+          "capacity": 1500,
+          "altitude-valley": 1572,
+          "altitude-mountain": 2037
+        },
+        "oid": "23634",
+        "status": "open",
+        "id": "23634",
+        "subtitle": "3-person chairlift",
+        "clients-sub-id": 33
+      },
+      "number": null,
+      "type": 33,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23634",
+      "subtitle": "3-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Arzjochbahn",
+        "types": [],
+        "additional-info": {
+          "length": 818,
+          "capacity": 2000,
+          "altitude-valley": 1610,
+          "altitude-mountain": 1858
+        },
+        "oid": "23635",
+        "status": "open",
+        "id": "23635",
+        "subtitle": "6-person chairlift",
+        "clients-sub-id": 30
+      },
+      "number": null,
+      "type": 30,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23635",
+      "subtitle": "6-person chairlift",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Förderband Übungswiese Berg",
+        "types": [],
+        "additional-info": {
+          "length": 70
+        },
+        "oid": "23644",
+        "status": "open",
+        "id": "23644",
+        "subtitle": "Magic carpet",
+        "clients-sub-id": 21
+      },
+      "number": null,
+      "type": 21,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23644",
+      "subtitle": "Magic carpet",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Zauberteppich",
+        "types": [],
+        "oid": "23646",
+        "status": "open",
+        "id": "23646",
+        "subtitle": "Magic carpet",
+        "clients-sub-id": 21
+      },
+      "number": null,
+      "type": 21,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_23646",
+      "subtitle": "Magic carpet",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Kinderskiwiese",
+        "types": [],
+        "oid": "23647",
+        "status": "closed",
+        "id": "23647",
+        "subtitle": "Magic carpet",
+        "clients-sub-id": 21
+      },
+      "number": null,
+      "type": 21,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "L_23647",
+      "subtitle": "Magic carpet",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "lift",
+        "title": "Förderband II",
+        "types": [],
+        "oid": "24624",
+        "status": "open",
+        "id": "24624",
+        "subtitle": "Magic carpet",
+        "clients-sub-id": 21
+      },
+      "number": null,
+      "type": 21,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "L_24624",
+      "subtitle": "Magic carpet",
+      "searchdesc": null
+    }
+  ],
+  "slopes": [
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "1 Stephan Eberharter Goldpiste Tal",
+        "types": [],
+        "additional-info": {
+          "length": 2510,
+          "difficulty": "medium"
+        },
+        "oid": "23244",
+        "status": "closed",
+        "id": "23244",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23244",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "1 Stephan Eberharter Goldpiste Mitte",
+        "types": [],
+        "additional-info": {
+          "length": 2240,
+          "difficulty": "difficult"
+        },
+        "oid": "23245",
+        "status": "closed",
+        "id": "23245",
+        "subtitle": "Slopes, Difficult, Valley run",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23245",
+      "subtitle": "Slopes, Difficult, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "3 6er Neuhütten",
+        "types": [],
+        "additional-info": {
+          "length": 2271,
+          "difficulty": "medium"
+        },
+        "oid": "23246",
+        "status": "open",
+        "id": "23246",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23246",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "3 Stephan Eberharter Olympiaabfahrt - 6er Neuhütten",
+        "types": [],
+        "additional-info": {
+          "length": 480,
+          "difficulty": "difficult"
+        },
+        "oid": "23247",
+        "status": "open",
+        "id": "23247",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23247",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "4 Sonnenjet über Neuhütten zur Zentralstation",
+        "types": [],
+        "additional-info": {
+          "length": 2060,
+          "difficulty": "medium"
+        },
+        "oid": "23248",
+        "status": "open",
+        "id": "23248",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23248",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "5 Sonnenjet zur Marendalm",
+        "types": [],
+        "additional-info": {
+          "length": 2200,
+          "difficulty": "medium"
+        },
+        "oid": "23249",
+        "status": "open",
+        "id": "23249",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23249",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "6 Krössbichl",
+        "types": [],
+        "additional-info": {
+          "length": 3130,
+          "difficulty": "medium"
+        },
+        "oid": "23250",
+        "status": "open",
+        "id": "23250",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23250",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "7 Krössbichl zur Talstation Schnee Express",
+        "types": [],
+        "additional-info": {
+          "length": 1420,
+          "difficulty": "difficult"
+        },
+        "oid": "23251",
+        "status": "open",
+        "id": "23251",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23251",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "8 Schnee Express über Öfeler",
+        "types": [],
+        "additional-info": {
+          "length": 950,
+          "difficulty": "medium"
+        },
+        "oid": "23252",
+        "status": "open",
+        "id": "23252",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23252",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "9 Öfelerbahn",
+        "types": [],
+        "additional-info": {
+          "length": 960,
+          "difficulty": "easy"
+        },
+        "oid": "23253",
+        "status": "open",
+        "id": "23253",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23253",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "10 Panoramalift - Normal",
+        "types": [],
+        "additional-info": {
+          "length": 1620,
+          "difficulty": "medium"
+        },
+        "oid": "23254",
+        "status": "open",
+        "id": "23254",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23254",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "11 Panoramalift - Rennstrecke",
+        "types": [],
+        "additional-info": {
+          "length": 900,
+          "difficulty": "medium"
+        },
+        "oid": "23255",
+        "status": "open",
+        "id": "23255",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23255",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "12 Topjet - Normal",
+        "types": [],
+        "additional-info": {
+          "length": 980,
+          "difficulty": "easy"
+        },
+        "oid": "23256",
+        "status": "open",
+        "id": "23256",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23256",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "12 Topjet - Schwarz",
+        "types": [],
+        "additional-info": {
+          "length": 490,
+          "difficulty": "difficult"
+        },
+        "oid": "23257",
+        "status": "open",
+        "id": "23257",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23257",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "13 Wedelexpress - Normal",
+        "types": [],
+        "additional-info": {
+          "length": 1590,
+          "difficulty": "medium"
+        },
+        "oid": "23258",
+        "status": "open",
+        "id": "23258",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23258",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "13 Wedelexpress - Schwarz",
+        "types": [],
+        "additional-info": {
+          "length": 530,
+          "difficulty": "difficult"
+        },
+        "oid": "23259",
+        "status": "open",
+        "id": "23259",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23259",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "14 Anfängerlifte bei Marendalm",
+        "types": [],
+        "additional-info": {
+          "length": 1120,
+          "difficulty": "easy"
+        },
+        "oid": "23260",
+        "status": "open",
+        "id": "23260",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23260",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "6 Mizunbahn schwer",
+        "types": [],
+        "additional-info": {
+          "length": 570,
+          "difficulty": "difficult"
+        },
+        "oid": "23261",
+        "status": "open",
+        "id": "23261",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23261",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "Z Zentralstation",
+        "types": [],
+        "additional-info": {
+          "length": 13620,
+          "difficulty": "easy"
+        },
+        "oid": "23262",
+        "status": "open",
+        "id": "23262",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23262",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "3 Neuhüttenbahn - leicht",
+        "types": [],
+        "additional-info": {
+          "length": 0,
+          "difficulty": "easy"
+        },
+        "oid": "23263",
+        "status": "open",
+        "id": "23263",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23263",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "5 Zirbenlift - leicht",
+        "types": [],
+        "additional-info": {
+          "length": 490,
+          "difficulty": "easy"
+        },
+        "oid": "23264",
+        "status": "open",
+        "id": "23264",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23264",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "17 Skiroute Aschau",
+        "types": [],
+        "additional-info": {
+          "length": 3060
+        },
+        "oid": "23285",
+        "status": "closed",
+        "id": "23285",
+        "subtitle": "Ski routes, Valley run",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23285",
+      "subtitle": "Ski routes, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "8 Schnee Express",
+        "types": [],
+        "additional-info": {
+          "length": 1010,
+          "difficulty": "difficult"
+        },
+        "oid": "23286",
+        "status": "open",
+        "id": "23286",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23286",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "16 Funpark",
+        "types": [],
+        "additional-info": {
+          "length": 1490,
+          "difficulty": "difficult"
+        },
+        "oid": "23287",
+        "status": "open",
+        "id": "23287",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23287",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "6 Mizunbahn leicht",
+        "types": [],
+        "additional-info": {
+          "length": 2440,
+          "difficulty": "easy"
+        },
+        "oid": "23296",
+        "status": "open",
+        "id": "23296",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23296",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "7 Krössbichl mittel",
+        "types": [],
+        "additional-info": {
+          "length": 1000,
+          "difficulty": "medium"
+        },
+        "oid": "23297",
+        "status": "open",
+        "id": "23297",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23297",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "10 Skiroute Schneeexpress",
+        "types": [],
+        "additional-info": {
+          "length": 1000
+        },
+        "oid": "23298",
+        "status": "open",
+        "id": "23298",
+        "subtitle": "Ski routes",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23298",
+      "subtitle": "Ski routes",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "15 Funnyslope",
+        "types": [],
+        "additional-info": {
+          "length": 2000,
+          "difficulty": "easy"
+        },
+        "oid": "23303",
+        "status": "open",
+        "id": "23303",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23303",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "2 Neuhütte",
+        "types": [],
+        "additional-info": {
+          "length": 700,
+          "difficulty": "difficult"
+        },
+        "oid": "23311",
+        "status": "open",
+        "id": "23311",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23311",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "7",
+        "types": [],
+        "additional-info": {
+          "length": 1500,
+          "difficulty": "easy"
+        },
+        "oid": "23316",
+        "status": "open",
+        "id": "23316",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23316",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "17 Talabfahrt Aschau",
+        "types": [],
+        "additional-info": {
+          "difficulty": "difficult"
+        },
+        "oid": "23317",
+        "status": "closed",
+        "id": "23317",
+        "subtitle": "Slopes, Difficult, Valley run",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23317",
+      "subtitle": "Slopes, Difficult, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "1 Zillertal Shuttle Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 5488,
+          "difficulty": "medium"
+        },
+        "oid": "23413",
+        "status": "open",
+        "id": "23413",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23413",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "2 6 KSB Holzalm Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 1564,
+          "difficulty": "medium"
+        },
+        "oid": "23414",
+        "status": "open",
+        "id": "23414",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23414",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "3 6 KSB Holzalm Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 8473,
+          "difficulty": "medium"
+        },
+        "oid": "23415",
+        "status": "open",
+        "id": "23415",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23415",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "4 Obitraudi – Zillertal Shuttle Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 1067,
+          "difficulty": "difficult"
+        },
+        "oid": "23416",
+        "status": "open",
+        "id": "23416",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23416",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "5 Umfahrung Steilhang",
+        "types": [],
+        "additional-info": {
+          "length": 775,
+          "difficulty": "easy"
+        },
+        "oid": "23417",
+        "status": "open",
+        "id": "23417",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23417",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "6 DSL Pfaffenbühel Berg zu 8er Jet Tal",
+        "types": [],
+        "additional-info": {
+          "length": 2139,
+          "difficulty": "difficult"
+        },
+        "oid": "23418",
+        "status": "open",
+        "id": "23418",
+        "subtitle": "Slopes, Difficult, Valley run",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23418",
+      "subtitle": "Slopes, Difficult, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "7 SL Pfaffenbühel II Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 807,
+          "difficulty": "difficult"
+        },
+        "oid": "23419",
+        "status": "open",
+        "id": "23419",
+        "subtitle": "Slopes, Difficult",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23419",
+      "subtitle": "Slopes, Difficult",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "8 SL Pfaffenbühel III Berg zu Tal (RacePoint)",
+        "types": [],
+        "additional-info": {
+          "length": 901,
+          "difficulty": "medium"
+        },
+        "oid": "23420",
+        "status": "open",
+        "id": "23420",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23420",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "9 SL Lamark I + II Berg zu Tal – Anschluss Piste 13",
+        "types": [],
+        "additional-info": {
+          "length": 638,
+          "difficulty": "easy"
+        },
+        "oid": "23421",
+        "status": "open",
+        "id": "23421",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23421",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "9a SL Lamark I + II Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 630,
+          "difficulty": "easy"
+        },
+        "oid": "23422",
+        "status": "open",
+        "id": "23422",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23422",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "10 DSL Pfaffenbühel Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 1950,
+          "difficulty": "medium"
+        },
+        "oid": "23423",
+        "status": "open",
+        "id": "23423",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23423",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "11 6er Waidoffen Berg zu Tal, Anschluss an die Pisten 10, 13 und 14",
+        "types": [],
+        "additional-info": {
+          "length": 2417,
+          "difficulty": "easy"
+        },
+        "oid": "23424",
+        "status": "open",
+        "id": "23424",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23424",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "11a 6er Waidoffen Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 621,
+          "difficulty": "easy"
+        },
+        "oid": "23425",
+        "status": "open",
+        "id": "23425",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23425",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "12 DSB Pfaffenbühel Berg zu 6er Waidoffen Tal",
+        "types": [],
+        "additional-info": {
+          "length": 924,
+          "difficulty": "easy"
+        },
+        "oid": "23426",
+        "status": "open",
+        "id": "23426",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23426",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "13 8er Jet Berg zu Tal",
+        "types": [],
+        "additional-info": {
+          "length": 9220,
+          "difficulty": "easy"
+        },
+        "oid": "23427",
+        "status": "open",
+        "id": "23427",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23427",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "14 6er Waidoffen Tal zu SL Pfaffenbühel II Tal",
+        "types": [],
+        "additional-info": {
+          "length": 1037,
+          "difficulty": "medium"
+        },
+        "oid": "23428",
+        "status": "open",
+        "id": "23428",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23428",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "10a Projekt",
+        "types": [],
+        "additional-info": {
+          "difficulty": "medium"
+        },
+        "oid": "23448",
+        "status": "closed",
+        "id": "23448",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23448",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "1 Onkeljoch",
+        "types": [],
+        "additional-info": {
+          "length": 1849,
+          "difficulty": "medium"
+        },
+        "oid": "23616",
+        "status": "open",
+        "id": "23616",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23616",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "number": "60652",
+        "difficulty": "easy",
+        "title": "1a Moesl",
+        "types": [],
+        "additional-info": {
+          "length": 1120,
+          "difficulty": "easy"
+        },
+        "oid": "23617",
+        "status": "open",
+        "id": "23617",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": "60652",
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23617",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "1b Rennstrecke",
+        "types": [],
+        "additional-info": {
+          "length": 705,
+          "difficulty": "medium"
+        },
+        "oid": "23618",
+        "status": "open",
+        "id": "23618",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23618",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "2 Arzjoch",
+        "types": [],
+        "additional-info": {
+          "length": 933,
+          "difficulty": "medium"
+        },
+        "oid": "23619",
+        "status": "open",
+        "id": "23619",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23619",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "difficult",
+        "title": "3 Geols",
+        "types": [],
+        "additional-info": {
+          "length": 2750,
+          "difficulty": "difficult"
+        },
+        "oid": "23620",
+        "status": "closed",
+        "id": "23620",
+        "subtitle": "Slopes, Difficult, Valley run",
+        "clients-sub-id": 2616
+      },
+      "number": null,
+      "type": "2616-difficult",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23620",
+      "subtitle": "Slopes, Difficult, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "4 Mittelstation",
+        "types": [],
+        "additional-info": {
+          "length": 2896,
+          "difficulty": "medium"
+        },
+        "oid": "23621",
+        "status": "open",
+        "id": "23621",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23621",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "5 Talabfahrt",
+        "types": [],
+        "additional-info": {
+          "length": 5605,
+          "difficulty": "medium"
+        },
+        "oid": "23622",
+        "status": "closed",
+        "id": "23622",
+        "subtitle": "Slopes, Intermediate, Valley run",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23622",
+      "subtitle": "Slopes, Intermediate, Valley run",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "8 Geols",
+        "types": [],
+        "additional-info": {
+          "length": 2030
+        },
+        "oid": "23623",
+        "status": "closed",
+        "id": "23623",
+        "subtitle": "Ski routes",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23623",
+      "subtitle": "Ski routes",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "4a",
+        "types": [],
+        "additional-info": {
+          "difficulty": "medium"
+        },
+        "oid": "23639",
+        "status": "closed",
+        "id": "23639",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23639",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "1a Skiweg Onkeljoch Talstation",
+        "types": [],
+        "additional-info": {
+          "length": 2400,
+          "difficulty": "easy"
+        },
+        "oid": "23645",
+        "status": "closed",
+        "id": "23645",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23645",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "Übungspisten",
+        "types": [],
+        "additional-info": {
+          "length": 170
+        },
+        "oid": "23650",
+        "status": "closed",
+        "id": "23650",
+        "subtitle": "Slopes",
+        "clients-sub-id": 382
+      },
+      "number": null,
+      "type": 382,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_23650",
+      "subtitle": "Slopes",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "Funny-Slope",
+        "types": [],
+        "additional-info": {
+          "length": 600,
+          "difficulty": "easy"
+        },
+        "oid": "23675",
+        "status": "open",
+        "id": "23675",
+        "subtitle": "Fun park, Funslope, Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_23675",
+      "subtitle": "Fun park, Funslope, Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "medium",
+        "title": "1c Trainingspiste",
+        "types": [],
+        "additional-info": {
+          "length": 1500,
+          "difficulty": "medium"
+        },
+        "oid": "24196",
+        "status": "open",
+        "id": "24196",
+        "subtitle": "Slopes, Intermediate",
+        "clients-sub-id": 2615
+      },
+      "number": null,
+      "type": "2615-medium",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "R_24196",
+      "subtitle": "Slopes, Intermediate",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "difficulty": "easy",
+        "title": "Übungspisten 1 + 2",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "24251",
+        "status": "closed",
+        "id": "24251",
+        "subtitle": "Slopes, Easy",
+        "clients-sub-id": 2614
+      },
+      "number": null,
+      "type": "2614-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_24251",
+      "subtitle": "Slopes, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "slope",
+        "title": "K2 Mindbender Canyon",
+        "types": [],
+        "additional-info": {
+          "length": 512
+        },
+        "oid": "25020",
+        "status": "closed",
+        "id": "25020",
+        "subtitle": "Ski routes",
+        "clients-sub-id": 2617
+      },
+      "number": null,
+      "type": 2617,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "R_25020",
+      "subtitle": "Ski routes",
+      "searchdesc": null
+    }
+  ],
+  "routes": [
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Betterpark Hochzillertal",
+        "types": [],
+        "oid": "23288",
+        "status": "open",
+        "id": "23288",
+        "subtitle": "Fun park",
+        "clients-sub-id": 362
+      },
+      "number": null,
+      "type": 362,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "362_23288",
+      "subtitle": "Fun park",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winteralpinsteig",
+        "types": [],
+        "oid": "23364",
+        "status": "open",
+        "id": "23364",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "400_23364",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winterwanderweg Bergstation - Marendalm - Wimbachexpress",
+        "types": [],
+        "oid": "23366",
+        "status": "open",
+        "id": "23366",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "400_23366",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winterwanderweg Skistadl - Mittelstation Hochzillertal I",
+        "types": [],
+        "oid": "23367",
+        "status": "closed",
+        "id": "23367",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "400_23367",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winterwanderweg Neuhütten",
+        "types": [],
+        "oid": "23389",
+        "status": "open",
+        "id": "23389",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "400_23389",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "NaturCanyon",
+        "types": [],
+        "oid": "23430",
+        "status": "closed",
+        "id": "23430",
+        "subtitle": "Fun park",
+        "clients-sub-id": 362
+      },
+      "number": null,
+      "type": 362,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "362_23430",
+      "subtitle": "Fun park",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Rodelbahn Hochfügen",
+        "types": [],
+        "oid": "23431",
+        "status": "open",
+        "id": "23431",
+        "subtitle": "Sledding",
+        "clients-sub-id": 386
+      },
+      "number": null,
+      "type": 386,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "386_23431",
+      "subtitle": "Sledding",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Loipe Hochfügen",
+        "types": [],
+        "oid": "23432",
+        "status": "open",
+        "id": "23432",
+        "subtitle": "Ski trails",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": 373,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "373_23432",
+      "subtitle": "Ski trails",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Rodelbahn Goglhof",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23453",
+        "status": "closed",
+        "id": "23453",
+        "subtitle": "Sledding, Easy",
+        "clients-sub-id": 386
+      },
+      "number": null,
+      "type": "386-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "386_23453",
+      "subtitle": "Sledding, Easy",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "toboggan run Almluft, Gattererberg",
+        "types": [],
+        "oid": "23454",
+        "status": "closed",
+        "id": "23454",
+        "subtitle": "Sledding",
+        "clients-sub-id": 386
+      },
+      "number": null,
+      "type": 386,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "386_23454",
+      "subtitle": "Sledding",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Loipe Uderns",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23455",
+        "status": "closed",
+        "id": "23455",
+        "subtitle": "Ski trails, Easy, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": "373-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_23455",
+      "subtitle": "Ski trails, Easy, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Loipe Ried",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23456",
+        "status": "closed",
+        "id": "23456",
+        "subtitle": "Ski trails, Easy, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": "373-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_23456",
+      "subtitle": "Ski trails, Easy, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Loipe Stumm - Aschau",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23457",
+        "status": "closed",
+        "id": "23457",
+        "subtitle": "Ski trails, Easy, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": "373-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_23457",
+      "subtitle": "Ski trails, Easy, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Loipe Aschau",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23458",
+        "status": "closed",
+        "id": "23458",
+        "subtitle": "Ski trails, Easy, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": "373-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_23458",
+      "subtitle": "Ski trails, Easy, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Loipe Fügenberg",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23459",
+        "status": "closed",
+        "id": "23459",
+        "subtitle": "Ski trails, Easy, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": "373-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_23459",
+      "subtitle": "Ski trails, Easy, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "difficulty": "easy",
+        "title": "Loipe Strass - Schlitters",
+        "types": [],
+        "additional-info": {
+          "difficulty": "easy"
+        },
+        "oid": "23460",
+        "status": "closed",
+        "id": "23460",
+        "subtitle": "Ski trails, Easy, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": "373-easy",
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_23460",
+      "subtitle": "Ski trails, Easy, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winter-Wanderwege",
+        "types": [],
+        "oid": "23464",
+        "status": "closed",
+        "id": "23464",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "400_23464",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winterwanderweg",
+        "types": [],
+        "oid": "23648",
+        "status": "open",
+        "id": "23648",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "400_23648",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Gipfelwanderung zum Gipfelkreuz Spieljoch",
+        "types": [],
+        "oid": "23657",
+        "status": "open",
+        "id": "23657",
+        "subtitle": "Winter hiking",
+        "clients-sub-id": 400
+      },
+      "number": null,
+      "type": 400,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "400_23657",
+      "subtitle": "Winter hiking",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "desc": "yes",
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Rodelbahn Spieljochbahn",
+        "types": [],
+        "additional-info": {
+          "length": 5500
+        },
+        "oid": "23679",
+        "status": "open",
+        "id": "23679",
+        "subtitle": "Sledding",
+        "clients-sub-id": 386
+      },
+      "number": null,
+      "type": 386,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "386_23679",
+      "subtitle": "Sledding",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "FunLine",
+        "types": [],
+        "oid": "24025",
+        "status": "closed",
+        "id": "24025",
+        "subtitle": "Fun park",
+        "clients-sub-id": 362
+      },
+      "number": null,
+      "type": 362,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "362_24025",
+      "subtitle": "Fun park",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Juzi Line",
+        "types": [],
+        "oid": "24026",
+        "status": "open",
+        "id": "24026",
+        "subtitle": "Fun park",
+        "clients-sub-id": 362
+      },
+      "number": null,
+      "type": 362,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "362_24026",
+      "subtitle": "Fun park",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "SpeedLine",
+        "types": [],
+        "oid": "24027",
+        "status": "open",
+        "id": "24027",
+        "subtitle": "Fun park",
+        "clients-sub-id": 362
+      },
+      "number": null,
+      "type": 362,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "362_24027",
+      "subtitle": "Fun park",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Kinderklettersteig",
+        "types": [],
+        "oid": "24171",
+        "status": "closed",
+        "id": "24171",
+        "subtitle": "Via ferrata",
+        "clients-sub-id": 369
+      },
+      "number": null,
+      "type": 369,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "369_24171",
+      "subtitle": "Via ferrata",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Climbing route",
+        "types": [],
+        "oid": "24172",
+        "status": "open",
+        "id": "24172",
+        "subtitle": "Via ferrata",
+        "clients-sub-id": 369
+      },
+      "number": null,
+      "type": 369,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "369_24172",
+      "subtitle": "Via ferrata",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winterwanderweg Neuhütten",
+        "types": [],
+        "oid": "24250",
+        "status": "closed",
+        "id": "24250",
+        "subtitle": "Winter hiking, Classic, Skating",
+        "clients-sub-id": 373
+      },
+      "number": null,
+      "type": 373,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "closed",
+      "id": "373_24250",
+      "subtitle": "Winter hiking, Classic, Skating",
+      "searchdesc": null
+    },
+    {
+      "popup": {
+        "warning-messages": [],
+        "lynx-type": "route",
+        "title": "Winterklettersteig",
+        "types": [],
+        "oid": "70168",
+        "status": "open",
+        "id": "70168",
+        "subtitle": "Via ferrata",
+        "clients-sub-id": 369
+      },
+      "number": null,
+      "type": 369,
+      "icon": "no_icon",
+      "iconOrientation": "right",
+      "status": "open",
+      "id": "369_70168",
+      "subtitle": "Via ferrata",
+      "searchdesc": null
+    }
+  ],
+  "pois": {
+    "202": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Abfahrtshütte",
+          "types": [],
+          "oid": "23326",
+          "status": "unknown",
+          "id": "23326",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "website": "https://www.abfahrtshuette.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23326",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 84,
+          "y": 402
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Albergo",
+          "types": [],
+          "oid": "23327",
+          "status": "unknown",
+          "id": "23327",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_10_13_22_906_0.jpg"
+            ],
+            "website": "https://www.albergo.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23327",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 299,
+          "y": 133
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Bergrestaurant Mountain View",
+          "types": [],
+          "oid": "23328",
+          "status": "unknown",
+          "id": "23328",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_10_56_50_685_0.jpg"
+            ],
+            "website": "https://www.hochzillertal.com/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23328",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 355,
+          "y": 272
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Die Kashütte",
+          "types": [],
+          "oid": "23333",
+          "status": "unknown",
+          "id": "23333",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2019_10_21_15_29_22_480_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23333",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 130,
+          "y": 158
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Firnhütte",
+          "types": [],
+          "oid": "23334",
+          "status": "unknown",
+          "id": "23334",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2015_11_02_14_17_42_436_0.jpg"
+            ],
+            "website": "https://firnhuette.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23334",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 457,
+          "y": 319
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Kaltenbacher Skihütte",
+          "types": [],
+          "oid": "23338",
+          "status": "unknown",
+          "id": "23338",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_11_43_48_555_0.png"
+            ],
+            "website": "https://www.murmelland-zillertal.at/cms/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23338",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 432,
+          "y": 257
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Kristallhütte",
+          "types": [],
+          "oid": "23341",
+          "status": "unknown",
+          "id": "23341",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_22_10_46_45_781_0.JPG"
+            ],
+            "website": "https://www.kristallhuette.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23341",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 69,
+          "y": 154
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Marendalm",
+          "types": [],
+          "oid": "23348",
+          "status": "unknown",
+          "id": "23348",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_11_55_25_423_0.jpg"
+            ],
+            "website": "https://www.hochzillertal.com/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23348",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 244,
+          "y": 330
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Platzlalm",
+          "types": [],
+          "oid": "23352",
+          "status": "unknown",
+          "id": "23352",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_02_07_08_14_31_520_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2018_02_07_09_04_52_975_0.jpg"
+            ],
+            "website": "https://platzlalm.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23352",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 377,
+          "y": 265
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Postalm",
+          "types": [],
+          "oid": "23353",
+          "status": "unknown",
+          "id": "23353",
+          "subtitle": "Bar/Pub, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2015_11_02_16_47_57_686_0.jpg"
+            ],
+            "website": "https://www.postalm.info/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23353",
+        "subtitle": "Bar/Pub, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 392,
+          "y": 454
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "sCHIC Bar I LIfestyle & Bar",
+          "types": [],
+          "oid": "23356",
+          "status": "unknown",
+          "id": "23356",
+          "subtitle": "Bar/Pub, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2015_11_02_15_53_19_952_0.bmp"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23356",
+        "subtitle": "Bar/Pub, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 403,
+          "y": 459
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Schirmbar",
+          "types": [],
+          "oid": "23357",
+          "status": "unknown",
+          "id": "23357",
+          "subtitle": "Bar/Pub, Gastronomy",
+          "clients-sub-id": 202
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23357",
+        "subtitle": "Bar/Pub, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 430,
+          "y": 426
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skistadl",
+          "types": [],
+          "oid": "23359",
+          "status": "unknown",
+          "id": "23359",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "website": "https://www.restaurant-schistadl.at/index"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23359",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 381,
+          "y": 339
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sonnenlounge",
+          "types": [],
+          "oid": "23361",
+          "status": "unknown",
+          "id": "23361",
+          "subtitle": "Bar/Pub, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2019_10_21_15_26_18_55_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23361",
+        "subtitle": "Bar/Pub, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 254,
+          "y": 327
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wedelhütte",
+          "types": [],
+          "oid": "23363",
+          "status": "unknown",
+          "id": "23363",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_11_21_34_859_0.jpg"
+            ],
+            "website": "https://www.wedelhuette.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23363",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 475,
+          "y": 134
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Zirmstadl",
+          "types": [],
+          "oid": "23384",
+          "status": "unknown",
+          "id": "23384",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_22_10_43_11_921_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2023_11_22_08_19_13_632_0.jpeg"
+            ],
+            "website": "https://www.zirmstadl.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23384",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 396,
+          "y": 258
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Aar Wirt",
+          "types": [],
+          "oid": "24116",
+          "status": "open",
+          "id": "24116",
+          "subtitle": "Restaurant, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_26_54_706_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_19_14_09_07_789_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_19_14_09_07_805_1.jpg"
+            ],
+            "website": "https://www.aar-wirt.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24116",
+        "subtitle": "Restaurant, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 628,
+          "y": 270
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Aparthotel Montana und Alm",
+          "types": [],
+          "oid": "24117",
+          "status": "open",
+          "id": "24117",
+          "subtitle": "Restaurant, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_29_41_318_0.jpg"
+            ],
+            "website": "https://www.montana.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24117",
+        "subtitle": "Restaurant, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 640,
+          "y": 275
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Restaurunt Alexaner (3 Hauben)",
+          "types": [],
+          "oid": "24120",
+          "status": "open",
+          "id": "24120",
+          "subtitle": "Restaurant, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_16_43_55_422_0.png"
+            ],
+            "website": "https://www.lamark.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24120",
+        "subtitle": "Restaurant, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 668,
+          "y": 282
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Berghotel",
+          "types": [],
+          "oid": "24122",
+          "status": "open",
+          "id": "24122",
+          "subtitle": "Restaurant, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_18_09_24_35_36_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_18_09_30_57_152_0.jpg"
+            ],
+            "website": "https://www.berghotel-hochfuegen.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24122",
+        "subtitle": "Restaurant, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 668,
+          "y": 264
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Panorama",
+          "types": [],
+          "oid": "24123",
+          "status": "open",
+          "id": "24123",
+          "subtitle": "Restaurant, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://ski3.intermaps.com/zillertal/mcms3/imgupload/panorama%20free%20flow.jpg",
+              "https://ski3.intermaps.com/zillertal/mcms3/imgupload/panorama%20zimmer.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_02_18_865_0.jpg"
+            ],
+            "website": "https://www.hochfuegenski.com/hochfuegen/gastronomie-apres-ski/panorama-sb-restaurant/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24123",
+        "subtitle": "Restaurant, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 640,
+          "y": 242
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "8er Alm (mit Pizzeria)",
+          "types": [],
+          "oid": "24124",
+          "status": "open",
+          "id": "24124",
+          "subtitle": "Restaurant, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://ski3.intermaps.com/zillertal/mcms3/imgupload/8er%20alm%20free%20flow.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_16_59_41_971_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_18_09_38_26_536_0.JPG",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_18_09_38_36_270_0.JPG",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_18_09_38_49_208_0.JPG"
+            ],
+            "website": "https://www.hochfuegenski.com/hochfuegen/gastronomie-apres-ski/8er-alm/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24124",
+        "subtitle": "Restaurant, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 683,
+          "y": 256
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "8er Treff Bistro",
+          "types": [],
+          "oid": "24130",
+          "status": "open",
+          "id": "24130",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_18_25_962_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_18_25_977_2.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_18_25_977_3.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_18_25_962_1.jpg"
+            ],
+            "website": "https://www.hochfuegenski.com/hochfuegen/gastronomie-apres-ski/8er-treff/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24130",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 675,
+          "y": 257
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Almhof",
+          "types": [],
+          "oid": "24131",
+          "status": "unknown",
+          "id": "24131",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_31_17_13_45_874_0.jpg"
+            ],
+            "website": "https://www.hochfuegen.com"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24131",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 679,
+          "y": 286
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Holzalm",
+          "types": [],
+          "oid": "24136",
+          "status": "unknown",
+          "id": "24136",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_17_17_06_44_339_0.jpg"
+            ]
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24136",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 549,
+          "y": 210
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Zirbenhof",
+          "types": [],
+          "oid": "24164",
+          "status": "unknown",
+          "id": "24164",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2014_12_19_19_44_40_670_0.jpg",
+              "https://clients.intermaps.com/admin/imgupload/2014_12_19_19_44_40_670_1.jpg"
+            ],
+            "website": "https://htpp.//www.zirbenhof.net"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24164",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 656,
+          "y": 280
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Bergrestaurant Mountain Loft",
+          "types": [],
+          "oid": "24180",
+          "status": "open",
+          "id": "24180",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_10_30_07_204_0.jpg"
+            ],
+            "website": "https://www.spieljochbahn.at/de/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24180",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 949,
+          "y": 261
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Geolsalm",
+          "types": [],
+          "oid": "24182",
+          "status": "open",
+          "id": "24182",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_22_15_48_25_744_0.jpg"
+            ],
+            "website": "https://www.goglhof.at"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24182",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 800,
+          "y": 259
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Kohleralm",
+          "types": [],
+          "oid": "24185",
+          "status": "open",
+          "id": "24185",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_14_11_48_07_344_0.jpg"
+            ],
+            "website": "https://www.kohleralmhof.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24185",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 870,
+          "y": 369
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skihütte",
+          "types": [],
+          "oid": "24188",
+          "status": "open",
+          "id": "24188",
+          "subtitle": "Bar/Pub, Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_22_15_56_22_755_0.jpg"
+            ],
+            "website": "https://www.kohleralmhof.at/WWW/front_content.php?idcat=37"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24188",
+        "subtitle": "Bar/Pub, Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 939,
+          "y": 322
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sonnberg",
+          "types": [],
+          "oid": "24190",
+          "status": "open",
+          "id": "24190",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202,
+          "info": {
+            "imgs": [
+              "https://clients.intermaps.com/admin/imgupload/2018_08_23_14_42_59_384_0.jpg"
+            ],
+            "website": "https://www.sonnberg-zillertal.at/"
+          }
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24190",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 827,
+          "y": 398
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Weps´n Nest",
+          "types": [],
+          "oid": "24194",
+          "status": "open",
+          "id": "24194",
+          "subtitle": "Gastronomy",
+          "clients-sub-id": 202
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24194",
+        "subtitle": "Gastronomy",
+        "searchdesc": null,
+        "position": {
+          "x": 881,
+          "y": 394
+        }
+      }
+    ],
+    "209": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Erlebnis-Therme Zillertal",
+          "types": [],
+          "oid": "24181",
+          "status": "open",
+          "id": "24181",
+          "subtitle": "Indoor pool/spa",
+          "clients-sub-id": 209
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24181",
+        "subtitle": "Indoor pool/spa",
+        "searchdesc": null,
+        "position": {
+          "x": 851,
+          "y": 470
+        }
+      }
+    ],
+    "222": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Hochzillertal I + II",
+          "types": [],
+          "oid": "23350",
+          "status": "unknown",
+          "id": "23350",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23350",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 398,
+          "y": 452
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Hochzillertal III",
+          "types": [],
+          "oid": "23351",
+          "status": "unknown",
+          "id": "23351",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23351",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 428,
+          "y": 460
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation 8er Jet",
+          "types": [],
+          "oid": "24143",
+          "status": "unknown",
+          "id": "24143",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24143",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 684,
+          "y": 278
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Holzalm",
+          "types": [],
+          "oid": "24144",
+          "status": "unknown",
+          "id": "24144",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24144",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 691,
+          "y": 285
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Lamark III+IV",
+          "types": [],
+          "oid": "24145",
+          "status": "unknown",
+          "id": "24145",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24145",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 701,
+          "y": 283
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Spieljochbahn 1",
+          "types": [],
+          "oid": "24186",
+          "status": "open",
+          "id": "24186",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24186",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 796,
+          "y": 443
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Parkplatz Talstation Spieljochbahn 2",
+          "types": [],
+          "oid": "24187",
+          "status": "open",
+          "id": "24187",
+          "subtitle": "Parking lot",
+          "clients-sub-id": 222
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24187",
+        "subtitle": "Parking lot",
+        "searchdesc": null,
+        "position": {
+          "x": 826,
+          "y": 440
+        }
+      }
+    ],
+    "247": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skimovie",
+          "types": [],
+          "oid": "24148",
+          "status": "unknown",
+          "id": "24148",
+          "subtitle": "Skimovie",
+          "clients-sub-id": 247
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24148",
+        "subtitle": "Skimovie",
+        "searchdesc": null,
+        "position": {
+          "x": 575,
+          "y": 249
+        }
+      }
+    ],
+    "258": [
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Infopoint 1",
+          "types": [],
+          "oid": "23337",
+          "status": "unknown",
+          "id": "23337",
+          "subtitle": "Tourist information",
+          "clients-sub-id": 258
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23337",
+        "subtitle": "Tourist information",
+        "searchdesc": null,
+        "position": {
+          "x": 367,
+          "y": 280
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Freeridepoint Hochfuegen",
+          "types": [],
+          "oid": "24133",
+          "status": "unknown",
+          "id": "24133",
+          "subtitle": "Tourist information",
+          "clients-sub-id": 258
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24133",
+        "subtitle": "Tourist information",
+        "searchdesc": null,
+        "position": {
+          "x": 681,
+          "y": 271
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Infopoint 2",
+          "types": [],
+          "oid": "24137",
+          "status": "unknown",
+          "id": "24137",
+          "subtitle": "Tourist information",
+          "clients-sub-id": 258
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24137",
+        "subtitle": "Tourist information",
+        "searchdesc": null,
+        "position": {
+          "x": 665,
+          "y": 257
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Information Spieljochbahn",
+          "types": [],
+          "oid": "24183",
+          "status": "open",
+          "id": "24183",
+          "subtitle": "Tourist information",
+          "clients-sub-id": 258
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24183",
+        "subtitle": "Tourist information",
+        "searchdesc": null,
+        "position": {
+          "x": 810,
+          "y": 458
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Tourismusinformation Fügen",
+          "types": [],
+          "oid": "24192",
+          "status": "open",
+          "id": "24192",
+          "subtitle": "Tourist information",
+          "clients-sub-id": 258
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24192",
+        "subtitle": "Tourist information",
+        "searchdesc": null,
+        "position": {
+          "x": 705,
+          "y": 288
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Tourismusinformation Uderns",
+          "types": [],
+          "oid": "24193",
+          "status": "unknown",
+          "id": "24193",
+          "subtitle": "Tourist information",
+          "clients-sub-id": 258
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24193",
+        "subtitle": "Tourist information",
+        "searchdesc": null,
+        "position": {
+          "x": 754,
+          "y": 433
+        }
+      }
+    ],
+    "265": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Al bergo",
+          "types": [],
+          "oid": "23368",
+          "status": "unknown",
+          "id": "23368",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23368",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 299,
+          "y": 136
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Firnhütte",
+          "types": [],
+          "oid": "23369",
+          "status": "unknown",
+          "id": "23369",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23369",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 461,
+          "y": 320
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Geols Berg",
+          "types": [],
+          "oid": "23370",
+          "status": "unknown",
+          "id": "23370",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23370",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 884,
+          "y": 212
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Geols Tal",
+          "types": [],
+          "oid": "23371",
+          "status": "unknown",
+          "id": "23371",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23371",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 724,
+          "y": 320
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Geolsalm",
+          "types": [],
+          "oid": "23372",
+          "status": "unknown",
+          "id": "23372",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23372",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 805,
+          "y": 259
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Intersport Bründl",
+          "types": [],
+          "oid": "23373",
+          "status": "unknown",
+          "id": "23373",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23373",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 804,
+          "y": 450
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Jausenstation Sonnberg",
+          "types": [],
+          "oid": "23374",
+          "status": "unknown",
+          "id": "23374",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23374",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 837,
+          "y": 392
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Kohleralmhof",
+          "types": [],
+          "oid": "23375",
+          "status": "unknown",
+          "id": "23375",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23375",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 872,
+          "y": 370
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Kristallhütte",
+          "types": [],
+          "oid": "23376",
+          "status": "unknown",
+          "id": "23376",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23376",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 75,
+          "y": 158
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Marendalm",
+          "types": [],
+          "oid": "23377",
+          "status": "unknown",
+          "id": "23377",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23377",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 245,
+          "y": 326
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Mountain Loft",
+          "types": [],
+          "oid": "23378",
+          "status": "unknown",
+          "id": "23378",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23378",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 948,
+          "y": 262
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Mountain View",
+          "types": [],
+          "oid": "23379",
+          "status": "unknown",
+          "id": "23379",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23379",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 360,
+          "y": 280
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Platzlalm",
+          "types": [],
+          "oid": "23380",
+          "status": "unknown",
+          "id": "23380",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23380",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 384,
+          "y": 266
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN sChic Bar",
+          "types": [],
+          "oid": "23381",
+          "status": "unknown",
+          "id": "23381",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23381",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 413,
+          "y": 452
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Sport Stock",
+          "types": [],
+          "oid": "23382",
+          "status": "unknown",
+          "id": "23382",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23382",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 402,
+          "y": 451
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "W-LAN Wedelhütte",
+          "types": [],
+          "oid": "23383",
+          "status": "unknown",
+          "id": "23383",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23383",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 478,
+          "y": 135
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot 8er Alm Restaurant",
+          "types": [],
+          "oid": "24155",
+          "status": "unknown",
+          "id": "24155",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24155",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 698,
+          "y": 123
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot 8er Treff Restaurant",
+          "types": [],
+          "oid": "24156",
+          "status": "unknown",
+          "id": "24156",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24156",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 677,
+          "y": 246
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Hochfügen 2000",
+          "types": [],
+          "oid": "24157",
+          "status": "unknown",
+          "id": "24157",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24157",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 845,
+          "y": 178
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Holzalm",
+          "types": [],
+          "oid": "24158",
+          "status": "unknown",
+          "id": "24158",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24158",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 674,
+          "y": 275
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Holzalm Restaurant",
+          "types": [],
+          "oid": "24159",
+          "status": "unknown",
+          "id": "24159",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24159",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 557,
+          "y": 210
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Lamark Lifte",
+          "types": [],
+          "oid": "24160",
+          "status": "unknown",
+          "id": "24160",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24160",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 709,
+          "y": 281
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Panorama Restaurant",
+          "types": [],
+          "oid": "24161",
+          "status": "unknown",
+          "id": "24161",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24161",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 640,
+          "y": 242
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Touristinfo",
+          "types": [],
+          "oid": "24162",
+          "status": "unknown",
+          "id": "24162",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24162",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 712,
+          "y": 288
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Wlan Hotspot Zillertal Shuttle",
+          "types": [],
+          "oid": "24163",
+          "status": "unknown",
+          "id": "24163",
+          "subtitle": "Wi-Fi",
+          "clients-sub-id": 265
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24163",
+        "subtitle": "Wi-Fi",
+        "searchdesc": null,
+        "position": {
+          "x": 514,
+          "y": 120
+        }
+      }
+    ],
+    "398": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Verbindung nach Hochfügen",
+          "types": [],
+          "oid": "23283",
+          "status": "open",
+          "id": "23283",
+          "subtitle": "Slopes, Connection",
+          "clients-sub-id": 398
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "23283",
+        "subtitle": "Slopes, Connection",
+        "searchdesc": null,
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    ],
+    "451": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skiverleih Sport Stock Bergstation",
+          "types": [],
+          "oid": "23360",
+          "status": "unknown",
+          "id": "23360",
+          "subtitle": "Ski rental",
+          "clients-sub-id": 451
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23360",
+        "subtitle": "Ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 365,
+          "y": 265
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "skiCHECK und TOPprivate",
+          "types": [],
+          "oid": "24147",
+          "status": "unknown",
+          "id": "24147",
+          "subtitle": "Ski rental",
+          "clients-sub-id": 451
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24147",
+        "subtitle": "Ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 670,
+          "y": 251
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sport 2000 - Rent a sport Unterlecher",
+          "types": [],
+          "oid": "24153",
+          "status": "unknown",
+          "id": "24153",
+          "subtitle": "Ski rental",
+          "clients-sub-id": 451
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24153",
+        "subtitle": "Ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 682,
+          "y": 263
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Intersport Bründl",
+          "types": [],
+          "oid": "24184",
+          "status": "open",
+          "id": "24184",
+          "subtitle": "Ski rental",
+          "clients-sub-id": 451
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24184",
+        "subtitle": "Ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 811,
+          "y": 451
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Skischule Aktiv",
+          "types": [],
+          "oid": "24189",
+          "status": "open",
+          "id": "24189",
+          "subtitle": "Ski rental",
+          "clients-sub-id": 451
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24189",
+        "subtitle": "Ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 816,
+          "y": 448
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Sport Stock GmbH",
+          "types": [],
+          "oid": "24191",
+          "status": "open",
+          "id": "24191",
+          "subtitle": "Ski rental",
+          "clients-sub-id": 451
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "open",
+        "id": "24191",
+        "subtitle": "Ski rental",
+        "searchdesc": null,
+        "position": {
+          "x": 400,
+          "y": 461
+        }
+      }
+    ],
+    "956": [
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "LVS-Checkpoint 1",
+          "types": [],
+          "oid": "24140",
+          "status": "unknown",
+          "id": "24140",
+          "subtitle": "LVS",
+          "clients-sub-id": 956
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24140",
+        "subtitle": "LVS",
+        "searchdesc": null,
+        "position": {
+          "x": 516,
+          "y": 142
+        }
+      },
+      {
+        "popup": {
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "LVS-Checkpoint 2",
+          "types": [],
+          "oid": "24141",
+          "status": "unknown",
+          "id": "24141",
+          "subtitle": "LVS",
+          "clients-sub-id": 956
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24141",
+        "subtitle": "LVS",
+        "searchdesc": null,
+        "position": {
+          "x": 677,
+          "y": 144
+        }
+      },
+      {
+        "popup": {
+          "desc": "yes",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "LVS-Suchfeld",
+          "types": [],
+          "oid": "24142",
+          "status": "unknown",
+          "id": "24142",
+          "subtitle": "LVS",
+          "clients-sub-id": 956
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24142",
+        "subtitle": "LVS",
+        "searchdesc": null,
+        "position": {
+          "x": 699,
+          "y": 114
+        }
+      }
+    ],
+    "2807": [
+      {
+        "popup": {
+          "desc": "https://hochfuegen.panomax.com",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Hochfügen Berggipfel",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Flive-image.panomax.com%2Fcams%2F4137%2Fmobile_800x600.jpg&img_width=248&img_height=188",
+          "oid": "24621",
+          "status": "unknown",
+          "id": "24621",
+          "subtitle": "Webcam (Panomax)",
+          "clients-sub-id": 2807
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24621",
+        "subtitle": "Webcam (Panomax)",
+        "searchdesc": null,
+        "position": {
+          "x": 686,
+          "y": 111
+        }
+      }
+    ],
+    "2809": [
+      {
+        "popup": {
+          "desc": "https://www.webcamshochzillertal.schultz.at/webcam/marendalm/current/640.jpg",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Marendalm",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwww.webcamshochzillertal.schultz.at%2Fwebcam%2Fmarendalm%2Fcurrent%2F640.jpg&img_width=248&img_height=188",
+          "oid": "23342",
+          "status": "unknown",
+          "id": "23342",
+          "subtitle": "WebCam (image link)",
+          "clients-sub-id": 2809
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23342",
+        "subtitle": "WebCam (image link)",
+        "searchdesc": null,
+        "position": {
+          "x": 240,
+          "y": 325
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://www.webcamshochzillertal.schultz.at/webcam/hochzillertal1/current/640.jpg",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Mountain View",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwww.webcamshochzillertal.schultz.at%2Fwebcam%2Fhochzillertal1%2Fcurrent%2F640.jpg&img_width=248&img_height=188",
+          "oid": "23343",
+          "status": "unknown",
+          "id": "23343",
+          "subtitle": "WebCam (image link)",
+          "clients-sub-id": 2809
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23343",
+        "subtitle": "WebCam (image link)",
+        "searchdesc": null,
+        "position": {
+          "x": 369,
+          "y": 201
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://www.webcamshochzillertal.schultz.at/webcam/SonnenJet-1/current/180.jpg",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Sonnenjet",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwww.webcamshochzillertal.schultz.at%2Fwebcam%2FSonnenJet-1%2Fcurrent%2F180.jpg&img_width=248&img_height=188",
+          "oid": "23345",
+          "status": "unknown",
+          "id": "23345",
+          "subtitle": "WebCam (image link)",
+          "clients-sub-id": 2809
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23345",
+        "subtitle": "WebCam (image link)",
+        "searchdesc": null,
+        "position": {
+          "x": 202,
+          "y": 216
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://www.webcamshochzillertal.schultz.at/webcam/wedelhuette-Wedelexpress/current/640.jpg",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Wedelhütte",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwww.webcamshochzillertal.schultz.at%2Fwebcam%2Fwedelhuette-Wedelexpress%2Fcurrent%2F640.jpg&img_width=248&img_height=188",
+          "oid": "23346",
+          "status": "unknown",
+          "id": "23346",
+          "subtitle": "WebCam (image link)",
+          "clients-sub-id": 2809
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23346",
+        "subtitle": "WebCam (image link)",
+        "searchdesc": null,
+        "position": {
+          "x": 387,
+          "y": 185
+        }
+      }
+    ],
+    "2816": [
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v3&pg=A2CA5813-2332-446C-A7E6-3A5480304592&cam=5569&c0=0",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Kristallexpress",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5569.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "23302",
+          "status": "unknown",
+          "id": "23302",
+          "subtitle": "WebCam (FeratelCAM)",
+          "clients-sub-id": 2816
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23302",
+        "subtitle": "WebCam (FeratelCAM)",
+        "searchdesc": null,
+        "position": {
+          "x": 100,
+          "y": 163
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v3&pg=A2CA5813-2332-446C-A7E6-3A5480304592&cam=5566&c0=0",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Schnee-Express",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5566.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "23344",
+          "status": "unknown",
+          "id": "23344",
+          "subtitle": "WebCam (FeratelCAM)",
+          "clients-sub-id": 2816
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23344",
+        "subtitle": "WebCam (FeratelCAM)",
+        "searchdesc": null,
+        "position": {
+          "x": 170,
+          "y": 161
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&cam=5565&c0=0",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Wimbachexpress Berg",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5565.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "23347",
+          "status": "unknown",
+          "id": "23347",
+          "subtitle": "WebCam (FeratelCAM)",
+          "clients-sub-id": 2816
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23347",
+        "subtitle": "WebCam (FeratelCAM)",
+        "searchdesc": null,
+        "position": {
+          "x": 193,
+          "y": 235
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&c0=0&cam=5545",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Onkeljoch",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5545.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "23609",
+          "status": "unknown",
+          "id": "23609",
+          "subtitle": "WebCam (FeratelCAM)",
+          "clients-sub-id": 2816
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "23609",
+        "subtitle": "WebCam (FeratelCAM)",
+        "searchdesc": null,
+        "position": {
+          "x": 888,
+          "y": 211
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&c0=0&cam=5560",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Hochfuegen Klausboden",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5560.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "24619",
+          "status": "unknown",
+          "id": "24619",
+          "subtitle": "WebCam (FeratelCAM)",
+          "clients-sub-id": 2816
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24619",
+        "subtitle": "WebCam (FeratelCAM)",
+        "searchdesc": null,
+        "position": {
+          "x": 673,
+          "y": 263
+        }
+      },
+      {
+        "popup": {
+          "desc": "https://webtv.feratel.com/webtv/?design=v5&pg=A2CA5813-2332-446C-A7E6-3A5480304592&c0=0&cam=5561",
+          "warning-messages": [],
+          "lynx-type": "poi",
+          "title": "Livecam Waidoffen Bergstation",
+          "types": [],
+          "thumbnail": "https://images.intermaps.com/web_skimap_thumbs_f4/default.aspx?link=https%3A%2F%2Fwtvthmb.feratel.com%2Fthumbnails%2F5561.jpeg%3Ft%3D38%26dcsdesign%3Dintermaps%26design%3Dv5&img_width=248&img_height=188",
+          "oid": "24620",
+          "status": "unknown",
+          "id": "24620",
+          "subtitle": "WebCam (FeratelCAM)",
+          "clients-sub-id": 2816
+        },
+        "number": null,
+        "icon": "no_icon",
+        "iconOrientation": "right",
+        "types": [],
+        "status": "unknown",
+        "id": "24620",
+        "subtitle": "WebCam (FeratelCAM)",
+        "searchdesc": null,
+        "position": {
+          "x": 686,
+          "y": 107
+        }
+      }
+    ]
+  },
+  "lookup": {
+    "Förderband I | Magic carpet | ": "L_23451_group",
+    "Skihütte | Bar/Pub, Gastronomy | ": "24188",
+    "W-LAN Geols Tal | Wi-Fi | ": "23371",
+    "Onkeljoch | WebCam (FeratelCAM) | ": "23609",
+    "Kinderklettersteig | Via ferrata | ": "369_24171_group",
+    "Wlan Hotspot Hochfügen 2000 | Wi-Fi | ": "24157",
+    "Hochzillertal III | Mono-cable gondola | ": "L_23266_group",
+    "3 6er Neuhütten | Slopes, Intermediate | ": "R_23246_group",
+    "Livecam Schnee-Express | WebCam (FeratelCAM) | ": "23344",
+    "W-LAN Firnhütte | Wi-Fi | ": "23369",
+    "Betterpark Hochzillertal | Fun park | ": "362_23288_group",
+    "Loipe Strass - Schlitters | Ski trails, Easy, Classic, Skating | ": "373_23460_group",
+    "Skiverleih Sport Stock Bergstation | Ski rental | ": "23360",
+    "Hochzillertal II | Mono-cable gondola | ": "L_23306_group",
+    "Winterwanderweg Neuhütten | Winter hiking, Classic, Skating | ": "373_24250_group",
+    "Parklift | Ski lift | ": "L_23275_group",
+    "6 Mizunbahn schwer | Slopes, Difficult | ": "R_23261_group",
+    "9 Öfelerbahn | Slopes, Easy | ": "R_23253_group",
+    "Kaltenbacher Skihütte | Gastronomy | ": "23338",
+    "Skischule Aktiv | Ski rental | ": "24189",
+    "4 Obitraudi – Zillertal Shuttle Berg zu Tal | Slopes, Difficult | ": "R_23416_group",
+    "Zirbenlift II | Ski lift | ": "L_23304_group",
+    "17 Talabfahrt Aschau | Slopes, Difficult, Valley run | ": "R_23317_group",
+    "W-LAN Marendalm | Wi-Fi | ": "23377",
+    "Übungslift-Telecorde III | Ski lift | ": "L_23282_group",
+    "SL Pfaffenbühel III | Ski lift | ": "L_23408_group",
+    "Juzi Line | Fun park | ": "362_24026_group",
+    "Livecam Wimbachexpress Berg | WebCam (FeratelCAM) | ": "23347",
+    "Wlan Hotspot Lamark Lifte | Wi-Fi | ": "24160",
+    "2 Neuhütte | Slopes, Difficult | ": "R_23311_group",
+    "14 Anfängerlifte bei Marendalm | Slopes, Easy | ": "R_23260_group",
+    "Rodelbahn Hochfügen | Sledding | ": "386_23431_group",
+    "Die Kashütte | Gastronomy | ": "23333",
+    "W-LAN Jausenstation Sonnberg | Wi-Fi | ": "23374",
+    "8er Alm (mit Pizzeria) | Restaurant, Gastronomy | ": "24124",
+    "Wlan Hotspot Zillertal Shuttle | Wi-Fi | ": "24163",
+    "Wlan Hotspot Touristinfo | Wi-Fi | ": "24162",
+    "Verbindung nach Hochfügen | Slopes, Connection | ": "23283",
+    "Livecam Kristallexpress | WebCam (FeratelCAM) | ": "23302",
+    "Aar Wirt | Restaurant, Gastronomy | ": "24116",
+    "W-LAN Geols Berg | Wi-Fi | ": "23370",
+    "Almhof | Gastronomy | ": "24131",
+    "Rodelbahn Goglhof | Sledding, Easy | ": "386_23453_group",
+    "II Spieljochbahn | Mono-cable gondola | ": "L_23612_group",
+    "Onkeljochlift | Ski lift | ": "L_23614_group",
+    "Z Zentralstation | Slopes, Easy | ": "R_23262_group",
+    "2 Arzjoch | Slopes, Intermediate | ": "R_23619_group",
+    "Skistadl | Gastronomy | ": "23359",
+    "Firnhütte | Gastronomy | ": "23334",
+    "SL Pfaffenbühel II | Ski lift | ": "L_23407_group",
+    "W-LAN Mountain View | Wi-Fi | ": "23379",
+    "12 Topjet - Schwarz | Slopes, Difficult | ": "R_23257_group",
+    "DSL Pfaffenbühel | 2-person chairlift | ": "L_23406_group",
+    "Hochzillertal I | Mono-cable gondola | ": "L_23265_group",
+    "1 Zillertal Shuttle Berg zu Tal | Slopes, Intermediate, Valley run | ": "R_23413_group",
+    "W-LAN Sport Stock | Wi-Fi | ": "23382",
+    "6er Sesselbahn Waidoffen | 6-person chairlift | ": "L_23452_group",
+    "Livecam Waidoffen Bergstation | WebCam (FeratelCAM) | ": "24620",
+    "10 Skiroute Schneeexpress | Ski routes | ": "R_23298_group",
+    "Livecam Mountain View | WebCam (image link) | ": "23343",
+    "Sonnenlounge | Bar/Pub, Gastronomy | ": "23361",
+    "5 Umfahrung Steilhang | Slopes, Easy | ": "R_23417_group",
+    "W-LAN sChic Bar | Wi-Fi | ": "23381",
+    "17 Skiroute Aschau | Ski routes, Valley run | ": "R_23285_group",
+    "Holzalm | Gastronomy | ": "24136",
+    "1 Onkeljoch | Slopes, Intermediate | ": "R_23616_group",
+    "8er EUB Zillertal Shuttle | Mono-cable gondola | ": "L_23404_group",
+    "Winterwanderweg Neuhütten | Winter hiking | ": "400_23389_group",
+    "Übungslift II | Ski lift | ": "L_23305_group",
+    "Parkplatz Talstation Holzalm | Parking lot | ": "24144",
+    "Panoramabahn Geols | Mono-cable gondola | ": "L_23613_group",
+    "Marendalmlift II | Ski lift | ": "L_23278_group",
+    "6 Krössbichl | Slopes, Intermediate | ": "R_23250_group",
+    "Climbing route | Via ferrata | ": "369_24172_group",
+    "Arzjochbahn | 6-person chairlift | ": "L_23635_group",
+    "11 6er Waidoffen Berg zu Tal, Anschluss an die Pisten 10, 13 und 14 | Slopes, Easy | ": "R_23424_group",
+    "3 Stephan Eberharter Olympiaabfahrt - 6er Neuhütten | Slopes, Difficult | ": "R_23247_group",
+    "4a | Slopes, Intermediate | ": "R_23639_group",
+    "Loipe Uderns | Ski trails, Easy, Classic, Skating | ": "373_23455_group",
+    "Loipe Hochfügen | Ski trails | ": "373_23432_group",
+    "6 Mizunbahn leicht | Slopes, Easy | ": "R_23296_group",
+    "Öfelerbahn | 2-person chairlift | ": "L_23272_group",
+    "Berghotel | Restaurant, Gastronomy | ": "24122",
+    "Hochfügen Berggipfel | Webcam (Panomax) | ": "24621",
+    "SL Lamarklift IV | T-bar lift | ": "L_23411_group",
+    "W-LAN Wedelhütte | Wi-Fi | ": "23383",
+    "LVS-Checkpoint 2 | LVS | ": "24141",
+    "FunLine | Fun park | ": "362_24025_group",
+    "1a Moesl | Slopes, Easy | ": "R_23617_group",
+    "8er Jet Hochfügen | Mono-cable gondola | ": "L_23402_group",
+    "Erlebnis-Therme Zillertal | Indoor pool/spa | ": "24181",
+    "15 Funnyslope | Slopes, Easy | ": "R_23303_group",
+    "4 Mittelstation | Slopes, Intermediate | ": "R_23621_group",
+    "9a SL Lamark I + II Berg zu Tal | Slopes, Easy | ": "R_23422_group",
+    "Panorama | Restaurant, Gastronomy | ": "24123",
+    "Wimbachexpress | Mono-cable gondola | ": "L_23307_group",
+    "Funny-Slope | Fun park, Funslope, Slopes, Easy | ": "R_23675_group",
+    "Loipe Fügenberg | Ski trails, Easy, Classic, Skating | ": "373_23459_group",
+    "Kristallhütte | Gastronomy | ": "23341",
+    "5 Talabfahrt | Slopes, Intermediate, Valley run | ": "R_23622_group",
+    "Livecam Marendalm | WebCam (image link) | ": "23342",
+    "Mizunbahn | 6-person chairlift | ": "L_23295_group",
+    "Albergo | Gastronomy | ": "23327",
+    "Schnee-Express | 8-person chairlift | ": "L_23267_group",
+    "Bergrestaurant Mountain Loft | Gastronomy | ": "24180",
+    "Zauberteppich | Magic carpet | ": "L_23646_group",
+    "Zirbenlift I + II | Ski lift | ": "L_23276_group",
+    "Parkplatz Talstation Spieljochbahn 1 | Parking lot | ": "24186",
+    "7 Krössbichl mittel | Slopes, Intermediate | ": "R_23297_group",
+    "Förderband II | Magic carpet | ": "L_24624_group",
+    "SpeedLine | Fun park | ": "362_24027_group",
+    "12 Topjet - Normal | Slopes, Easy | ": "R_23256_group",
+    "7 SL Pfaffenbühel II Berg zu Tal | Slopes, Difficult | ": "R_23419_group",
+    "Parkplatz Talstation 8er Jet | Parking lot | ": "24143",
+    "5 Zirbenlift - leicht | Slopes, Easy | ": "R_23264_group",
+    "Wedelexpress | 4-person chairlift | ": "L_23270_group",
+    "Wlan Hotspot Panorama Restaurant | Wi-Fi | ": "24161",
+    "Sonnenjet | 6-person chairlift | ": "L_23268_group",
+    "W-LAN Mountain Loft | Wi-Fi | ": "23378",
+    "8er Treff Bistro | Gastronomy | ": "24130",
+    "W-LAN Kristallhütte | Wi-Fi | ": "23376",
+    "7 Krössbichl zur Talstation Schnee Express | Slopes, Difficult | ": "R_23251_group",
+    "Geolsalm | Gastronomy | ": "24182",
+    "4 Sonnenjet über Neuhütten zur Zentralstation | Slopes, Intermediate | ": "R_23248_group",
+    "Winterklettersteig | Via ferrata | ": "369_70168_group",
+    "W-LAN Geolsalm | Wi-Fi | ": "23372",
+    "12 DSB Pfaffenbühel Berg zu 6er Waidoffen Tal | Slopes, Easy | ": "R_23426_group",
+    "I Spieljochbahn | Mono-cable gondola | ": "L_23611_group",
+    "Panoramalift | Ski lift | ": "L_23273_group",
+    "Förderband Übungswiese Berg | Magic carpet | ": "L_23644_group",
+    "Livecam Wedelhütte | WebCam (image link) | ": "23346",
+    "1 Stephan Eberharter Goldpiste Tal | Slopes, Intermediate, Valley run | ": "R_23244_group",
+    "3 6 KSB Holzalm Berg zu Tal | Slopes, Intermediate, Valley run | ": "R_23415_group",
+    "10 Panoramalift - Normal | Slopes, Intermediate | ": "R_23254_group",
+    "Übungslift-Telecorde I | Ski lift | ": "L_23280_group",
+    "Rodelbahn Spieljochbahn | Sledding | ": "386_23679_group",
+    "Winterwanderweg Bergstation - Marendalm - Wimbachexpress | Winter hiking | ": "400_23366_group",
+    "Übungslift I + II | Ski lift | ": "L_23279_group",
+    "14 6er Waidoffen Tal zu SL Pfaffenbühel II Tal | Slopes, Intermediate | ": "R_23428_group",
+    "Postalm | Bar/Pub, Gastronomy | ": "23353",
+    "13 Wedelexpress - Normal | Slopes, Intermediate | ": "R_23258_group",
+    "Wedelhütte | Gastronomy | ": "23363",
+    "Platzlalm | Gastronomy | ": "23352",
+    "6 DSL Pfaffenbühel Berg zu 8er Jet Tal | Slopes, Difficult, Valley run | ": "R_23418_group",
+    "Kohleralm | Gastronomy | ": "24185",
+    "Sport Stock GmbH | Ski rental | ": "24191",
+    "Livecam Sonnenjet | WebCam (image link) | ": "23345",
+    "Weps´n Nest | Gastronomy | ": "24194",
+    "5 Sonnenjet zur Marendalm | Slopes, Intermediate | ": "R_23249_group",
+    "Wlan Hotspot 8er Treff Restaurant | Wi-Fi | ": "24156",
+    "3 Geols | Slopes, Difficult, Valley run | ": "R_23620_group",
+    "Winteralpinsteig | Winter hiking | ": "400_23364_group",
+    "6er KSB Holzalm | 6-person chairlift | ": "L_23403_group",
+    "sCHIC Bar I LIfestyle & Bar | Bar/Pub, Gastronomy | ": "23356",
+    "Onkeljochbahn | 3-person chairlift | ": "L_23634_group",
+    "8 Schnee Express | Slopes, Difficult | ": "R_23286_group",
+    "Neuhüttenbahn | 6-person chairlift | ": "L_23269_group",
+    "Übungspisten 1 + 2 | Slopes, Easy | ": "R_24251_group",
+    "W-LAN Intersport Bründl | Wi-Fi | ": "23373",
+    "Intersport Bründl | Ski rental | ": "24184",
+    "Zirmstadl | Gastronomy | ": "23384",
+    "Gipfelwanderung zum Gipfelkreuz Spieljoch | Winter hiking | ": "400_23657_group",
+    "Wlan Hotspot Holzalm Restaurant | Wi-Fi | ": "24159",
+    "Parkplatz Talstation Lamark III+IV | Parking lot | ": "24145",
+    "skiCHECK und TOPprivate | Ski rental | ": "24147",
+    "10a Projekt | Slopes, Intermediate | ": "R_23448_group",
+    "Aparthotel Montana und Alm | Restaurant, Gastronomy | ": "24117",
+    "Schirmbar | Bar/Pub, Gastronomy | ": "23357",
+    "8 SL Pfaffenbühel III Berg zu Tal (RacePoint) | Slopes, Intermediate, Valley run | ": "R_23420_group",
+    "Loipe Aschau | Ski trails, Easy, Classic, Skating | ": "373_23458_group",
+    "Livecam Hochfuegen Klausboden | WebCam (FeratelCAM) | ": "24619",
+    "Winterwanderweg | Winter hiking | ": "400_23648_group",
+    "Kinderskiwiese | Magic carpet | ": "L_23647_group",
+    "Sonnberg | Gastronomy | ": "24190",
+    "LVS-Checkpoint 1 | LVS | ": "24140",
+    "13 Wedelexpress - Schwarz | Slopes, Difficult | ": "R_23259_group",
+    "11 Panoramalift - Rennstrecke | Slopes, Intermediate | ": "R_23255_group",
+    "Zauberteppich Marendalm | Magic carpet | ": "L_23315_group",
+    "Infopoint 1 | Tourist information | ": "23337",
+    "Marendalmlift I | Ski lift | ": "L_23277_group",
+    "Loipe Stumm - Aschau | Ski trails, Easy, Classic, Skating | ": "373_23457_group",
+    "9 SL Lamark I + II Berg zu Tal – Anschluss Piste 13 | Slopes, Easy | ": "R_23421_group",
+    "Abfahrtshütte | Gastronomy | ": "23326",
+    "2 6 KSB Holzalm Berg zu Tal | Slopes, Intermediate, Valley run | ": "R_23414_group",
+    "SL Achteralm | T-bar lift | ": "L_23412_group",
+    "NaturCanyon | Fun park | ": "362_23430_group",
+    "K2 Mindbender Canyon | Ski routes | ": "R_25020_group",
+    "Tourismusinformation Uderns | Tourist information | ": "24193",
+    "Winter-Wanderwege | Winter hiking | ": "400_23464_group",
+    "W-LAN Al bergo | Wi-Fi | ": "23368",
+    "Bergrestaurant Mountain View | Gastronomy | ": "23328",
+    "Parkplatz Talstation Hochzillertal I + II | Parking lot | ": "23350",
+    "Sport 2000 - Rent a sport Unterlecher | Ski rental | ": "24153",
+    "W-LAN Kohleralmhof | Wi-Fi | ": "23375",
+    "Wlan Hotspot Holzalm | Wi-Fi | ": "24158",
+    "1a Skiweg Onkeljoch Talstation | Slopes, Easy | ": "R_23645_group",
+    "Winterwanderweg Skistadl - Mittelstation Hochzillertal I | Winter hiking | ": "400_23367_group",
+    "Wlan Hotspot 8er Alm Restaurant | Wi-Fi | ": "24155",
+    "Kristall- Express | 8-person chairlift | ": "L_23294_group",
+    "8 Geols | Ski routes | ": "R_23623_group",
+    "Marendalm | Gastronomy | ": "23348",
+    "16 Funpark | Slopes, Difficult | ": "R_23287_group",
+    "Information Spieljochbahn | Tourist information | ": "24183",
+    "Hirschbichllift | Ski lift | ": "L_23274_group",
+    "Zirbenhof | Gastronomy | ": "24164",
+    "Restaurunt Alexaner (3 Hauben) | Restaurant, Gastronomy | ": "24120",
+    "toboggan run Almluft, Gattererberg | Sledding | ": "386_23454_group",
+    "Mösllift | Ski lift | ": "L_23615_group",
+    "Infopoint 2 | Tourist information | ": "24137",
+    "8 Schnee Express über Öfeler | Slopes, Intermediate | ": "R_23252_group",
+    "Tourismusinformation Fügen | Tourist information | ": "24192",
+    "Loipe Ried | Ski trails, Easy, Classic, Skating | ": "373_23456_group",
+    "1c Trainingspiste | Slopes, Intermediate | ": "R_24196_group",
+    "Parkplatz Talstation Spieljochbahn 2 | Parking lot | ": "24187",
+    "1b Rennstrecke | Slopes, Intermediate | ": "R_23618_group",
+    "10 DSL Pfaffenbühel Berg zu Tal | Slopes, Intermediate, Valley run | ": "R_23423_group",
+    "11a 6er Waidoffen Berg zu Tal | Slopes, Easy | ": "R_23425_group",
+    "Freeridepoint Hochfuegen | Tourist information | ": "24133",
+    "7 | Slopes, Easy | ": "R_23316_group",
+    "Skimovie | Skimovie | ": "24148",
+    "SL Lamarklift II | Ski lift | ": "L_23410_group",
+    "SL Lamarklift I | Ski lift | ": "L_23409_group",
+    "13 8er Jet Berg zu Tal | Slopes, Easy | ": "R_23427_group",
+    "Topjet | 4-person chairlift | ": "L_23390_group",
+    "Übungslift Telecorde II - III | Ski lift | ": "L_23281_group",
+    "1 Stephan Eberharter Goldpiste Mitte | Slopes, Difficult, Valley run | ": "R_23245_group",
+    "LVS-Suchfeld | LVS | ": "24142",
+    "Parkplatz Talstation Hochzillertal III | Parking lot | ": "23351",
+    "3 Neuhüttenbahn - leicht | Slopes, Easy | ": "R_23263_group",
+    "Übungspisten | Slopes | ": "R_23650_group",
+    "W-LAN Platzlalm | Wi-Fi | ": "23380"
+  },
+  "lastUpdate": "2026-03-29T09:29:44"
+}
