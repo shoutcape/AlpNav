@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
 import type { ResortDefinition } from "@/lib/resorts/types";
 
 const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -76,18 +77,25 @@ export function Drawer({ open, onClose, areas, activeAreaId, currentArea, onSele
       />
 
       {/* Panel */}
-      <div
+      <motion.div
         ref={panelRef}
-        hidden={!open}
+        initial={false}
+        animate={{ x: open ? 0 : -280 }}
+        transition={
+          open
+            ? { type: "spring", stiffness: 400, damping: 30, mass: 0.8 }
+            : { type: "tween", duration: 0.2, ease: [0.32, 0.72, 0, 1] }
+        }
         inert={!open || undefined}
         role="dialog"
         aria-label="Menu"
+        aria-hidden={!open}
         onKeyDown={handleKeyDown}
-        className={`fixed left-0 top-0 z-40 h-full w-[280px] border-r border-white/[0.09] bg-[#07111f]/90 shadow-[4px_0_32px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300 ease-out ${open ? "translate-x-0" : "-translate-x-full"}`}
+        className="fixed left-0 top-0 z-40 h-full w-[280px] border-r border-white/[0.09] bg-[#07111f]/90 shadow-[4px_0_32px_rgba(0,0,0,0.5)] backdrop-blur-md"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 pt-8 pb-3">
-          <span className="text-[15px] font-semibold tracking-tight text-ivory">{currentArea.name}</span>
+        <div className="flex items-start justify-between px-4 pt-8 pb-3 min-h-[82px]">
+          <span className="max-w-[200px] text-[15px] font-semibold tracking-tight text-ivory leading-tight">{currentArea.name}</span>
           <button
             onClick={onClose}
             className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-white/[0.09] bg-white/[0.06] text-ivory/50 transition-colors hover:text-ivory active:scale-95"
@@ -111,7 +119,7 @@ export function Drawer({ open, onClose, areas, activeAreaId, currentArea, onSele
         <div className="mx-5 h-px bg-white/[0.07]" />
 
         {/* Areas */}
-        <div className="px-3 py-3" aria-label="Browse area">
+        <div className="px-3 py-3 space-y-1" aria-label="Browse area">
           {areas.map((area) => {
             const isActive = area.id === activeAreaId;
             const isAvailable = area.availability === "available";
@@ -122,11 +130,8 @@ export function Drawer({ open, onClose, areas, activeAreaId, currentArea, onSele
                 type="button"
                 disabled={!isAvailable}
                 aria-pressed={isActive}
-                onClick={() => {
-                  onSelectArea(area.id);
-                  onClose();
-                }}
-                className={`flex w-full items-center justify-between gap-3 rounded-[14px] px-3 py-3 text-left transition-colors ${
+                onClick={() => onSelectArea(area.id)}
+                className={`flex w-full items-center justify-between gap-3 rounded-[14px] px-3 min-h-[52px] py-2 text-left transition-colors ${
                   isActive
                     ? "bg-white/[0.11] text-ivory shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
                     : isAvailable
@@ -134,17 +139,7 @@ export function Drawer({ open, onClose, areas, activeAreaId, currentArea, onSele
                       : "cursor-not-allowed text-ivory/28"
                 }`}
               >
-                <div>
-                  <p className="text-sm font-medium tracking-tight">{area.name}</p>
-                  <p className={`mt-1 text-xs ${isActive ? "text-ivory/65" : isAvailable ? "text-ivory/45" : "text-ivory/25"}`}>
-                    {area.subtitle}
-                  </p>
-                </div>
-                {isActive ? (
-                  <span className="rounded-full border border-white/[0.12] bg-white/[0.08] px-2 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-ivory/70">
-                    Active
-                  </span>
-                ) : null}
+                <p className="text-sm font-medium tracking-tight">{area.name}</p>
               </button>
             );
           })}
@@ -191,7 +186,7 @@ export function Drawer({ open, onClose, areas, activeAreaId, currentArea, onSele
           <p className="text-xs text-ivory/30 leading-relaxed">Alpine navigation for skiers. Explore runs, lifts, and mountain services.</p>
           <p className="mt-1 text-[10px] text-ivory/20">AlpNav v0.1.0</p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

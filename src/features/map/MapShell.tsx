@@ -179,7 +179,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     setDebugStats(null);
     setLegendOpen(false);
     setFilterPanelOpen(false);
-    setDrawerOpen(false);
     setLoadedLevelCount(0);
     setLiftVisible(true);
     liftVisibleRef.current = true;
