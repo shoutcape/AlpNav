@@ -25,6 +25,8 @@ import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
 import { useGeolocation } from "@/lib/geo/use-geolocation";
 import type { GeoFix } from "@/lib/geo/use-geolocation";
+import { fetchFreshStatus } from "@/lib/resorts/status-refresh";
+import { RefreshButton } from "./RefreshButton";
 import { loadOsmPistes } from "@/lib/geo/load-osm-pistes";
 import { loadAnchorPoints } from "@/lib/geo/load-anchor-points";
 import { matchRoutes } from "@/lib/geo/route-matcher";
@@ -1016,6 +1018,51 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     return next;
   });
 
+  const handleRefreshStatus = async () => {
+    const data = overlayDataRef.current;
+    if (!data) return;
+
+    const fresh = await fetchFreshStatus(activeArea.id);
+
+    for (const lift of data.lifts) {
+      const s = fresh.lifts.get(lift.id);
+      if (s) lift.status = s;
+    }
+    for (const piste of data.pistes) {
+      const s = fresh.slopes.get(piste.id);
+      if (s) piste.status = s;
+    }
+
+    // Redraw lift overlays
+    if (liftOverlayRef.current) {
+      liftOverlayRef.current.removeChildren();
+      drawLiftOverlay(liftOverlayRef.current, data.lifts, activeArea.visualScale);
+    }
+    if (liftMarkerOverlayRef.current) {
+      liftMarkerOverlayRef.current.removeChildren();
+      drawLiftMarkerOverlay(liftMarkerOverlayRef.current, data.lifts, activeArea.visualScale);
+    }
+
+    // Redraw piste overlays per difficulty
+    if (pisteLinesByDiffRef.current && pisteMarkersByDiffRef.current) {
+      for (const diff of DIFFICULTIES) {
+        const filtered = data.pistes.filter(p => p.difficulty === diff);
+        const lineSub = pisteLinesByDiffRef.current[diff];
+        lineSub.removeChildren();
+        drawPisteOverlay(lineSub, filtered, activeArea.visualScale);
+
+        const markerSub = pisteMarkersByDiffRef.current[diff];
+        markerSub.removeChildren();
+        drawPisteMarkerOverlay(markerSub, filtered, activeArea.visualScale);
+      }
+    }
+
+    // Update selected item if it has a status field
+    if (selectedItem && "status" in selectedItem) {
+      setSelectedItem({ ...selectedItem } as typeof selectedItem);
+    }
+  };
+
   const onZoomSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const vp = viewportRef.current;
     if (!vp) return;
@@ -1135,6 +1182,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             <line x1="12.5" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
+
+        {/* Refresh status */}
+        <RefreshButton onRefresh={handleRefreshStatus} />
       </div>
 
       {/* Bottom: primary map controls */}
