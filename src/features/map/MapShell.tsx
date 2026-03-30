@@ -1706,23 +1706,23 @@ function applyLevelBlend(
     return;
   }
 
+  // Reset all containers, but always keep the base (lowest) level visible
+  // so it acts as a backdrop while higher-res tiles are still loading.
+  const baseZoom = available[0].remoteZoom;
   for (const level of levels) {
     const container = containers.get(level.remoteZoom);
+    if (!container) continue;
 
-    if (container) {
+    if (level.remoteZoom === baseZoom) {
+      container.alpha = 1;
+      container.visible = true;
+    } else {
       container.alpha = 0;
       container.visible = false;
     }
   }
 
   if (available.length === 1) {
-    const container = containers.get(available[0].remoteZoom);
-
-    if (container) {
-      container.alpha = 1;
-      container.visible = true;
-    }
-
     return;
   }
 
