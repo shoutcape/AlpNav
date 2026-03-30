@@ -4,7 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { Application, Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { Viewport } from "pixi-viewport";
-import type { PanoramaLevel, PanoramaManifest } from "./types";
+import type { PanoramaLevel } from "./types";
+import { createTileDescriptors } from "./tile-types";
+import { TileScheduler } from "./tile-scheduler";
 import { RESORTS, canActivateResort, resolveActiveResort } from "@/lib/resorts/catalog";
 import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
 import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
@@ -48,16 +50,6 @@ type DebugStats = {
   totalCount: number;
 };
 
-type TileDescriptor = {
-  key: string;
-  src: string;
-  left: number;
-  top: number;
-  width: number;
-  height: number;
-  srcWidth: number;
-  srcHeight: number;
-};
 
 const DEFAULT_PISTE_FILTER: Record<PisteDifficulty, boolean> = {
   easy: true,
@@ -75,6 +67,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const levelContainersRef = useRef<Map<number, Container>>(new Map());
   const loadedLevelsRef = useRef<Set<number>>(new Set());
   const hasInteractedRef = useRef(false);
+  const schedulerRef = useRef<TileScheduler | null>(null);
   const overlayDataRef = useRef<ResortOverlayData | null>(null);
   const pisteOverlayRef = useRef<Container | null>(null);
   const liftOverlayRef = useRef<Container | null>(null);
@@ -302,7 +295,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.on("wheel", () => {
         hasInteractedRef.current = true;
       });
-      viewport.on("moved", syncLevelBlend);
+      viewport.on("moved", () => {
+        syncLevelBlend();
+        schedulerRef.current?.scheduleUpdate(viewport);
+      });
 
       wheelPanHandler = (e: WheelEvent) => {
         // ctrlKey = trackpad pinch — pixi-viewport's wheel plugin handles this via trackpadPinch.
@@ -522,31 +518,53 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       redrawDebugRef.current = redrawDebug;
 
+      // Load base level immediately — only 4 tiles, always needed as fallback
       const firstLevel = manifest.levels[0];
-      await loadLevelIntoViewport(
-        tileLayer,
-        levelContainers,
-        firstLevel,
-        levelTiles.get(firstLevel.remoteZoom) ?? [],
-      );
+      const firstTiles = levelTiles.get(firstLevel.remoteZoom) ?? [];
+      await Assets.load(firstTiles.map((tile) => tile.src));
 
-      if (cancelled) {
-        return;
+      if (cancelled) return;
+
+      const baseContainer = new Container();
+      baseContainer.label = `panorama-level-${firstLevel.remoteZoom}`;
+      baseContainer.alpha = 0;
+      for (const tile of firstTiles) {
+        const fullTexture = Assets.get<Texture>(tile.src);
+        const croppedTexture = new Texture({
+          source: fullTexture.source,
+          frame: new Rectangle(0, 0, tile.srcWidth, tile.srcHeight),
+        });
+        const sprite = new Sprite(croppedTexture);
+        sprite.x = tile.left;
+        sprite.y = tile.top;
+        sprite.width = tile.width;
+        sprite.height = tile.height;
+        baseContainer.addChild(sprite);
       }
-
+      tileLayer.addChild(baseContainer);
+      levelContainers.set(firstLevel.remoteZoom, baseContainer);
       loadedLevels.add(firstLevel.remoteZoom);
       setLoadedLevelCount(1);
       syncLevelBlend();
 
-      await Promise.all(
-        manifest.levels.slice(1).map(async (level) => {
-          await loadLevelIntoViewport(tileLayer, levelContainers, level, levelTiles.get(level.remoteZoom) ?? []);
-          if (cancelled) return;
-          loadedLevels.add(level.remoteZoom);
+      // Initialize viewport-aware tile scheduler for remaining zoom levels
+      const scheduler = new TileScheduler({
+        manifest,
+        maxLevel,
+        levels: manifest.levels,
+        levelTiles,
+        tileLayer,
+        levelContainers,
+        loadedLevels,
+        baseZoom: firstLevel.remoteZoom,
+        onLevelReady: (zoom) => {
+          loadedLevels.add(zoom);
           setLoadedLevelCount(loadedLevels.size);
           syncLevelBlend();
-        }),
-      );
+        },
+      });
+      schedulerRef.current = scheduler;
+      scheduler.scheduleUpdate(viewport);
 
       const syncLabelTiers = () => {
         const scale = viewport.scale.x;
@@ -649,6 +667,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
     return () => {
       cancelled = true;
+
+      schedulerRef.current?.dispose();
+      schedulerRef.current = null;
 
       resizeObserverRef.current?.disconnect();
       resizeObserverRef.current = null;
@@ -1672,60 +1693,6 @@ function SportFunMapIcon() {
   );
 }
 
-async function loadLevelIntoViewport(
-  tileLayer: Container,
-  levelContainers: Map<number, Container>,
-  level: PanoramaLevel,
-  tiles: TileDescriptor[],
-) {
-  await Assets.load(tiles.map((tile) => tile.src));
-
-  const container = new Container();
-  container.label = `panorama-level-${level.remoteZoom}`;
-  container.alpha = 0;
-
-  for (const tile of tiles) {
-    const fullTexture = Assets.get<Texture>(tile.src);
-    const croppedTexture = new Texture({
-      source: fullTexture.source,
-      frame: new Rectangle(0, 0, tile.srcWidth, tile.srcHeight),
-    });
-    const sprite = new Sprite(croppedTexture);
-    sprite.x = tile.left;
-    sprite.y = tile.top;
-    sprite.width = tile.width;
-    sprite.height = tile.height;
-    container.addChild(sprite);
-  }
-
-  tileLayer.addChild(container);
-  levelContainers.set(level.remoteZoom, container);
-}
-
-function createTileDescriptors(manifest: PanoramaManifest, level: PanoramaLevel, maxLevel: PanoramaLevel) {
-  const scale = maxLevel.width / level.width;
-  const tiles: TileDescriptor[] = [];
-
-  for (let y = 0; y < level.rows; y += 1) {
-    for (let x = 0; x < level.columns; x += 1) {
-      const tileWidth = Math.min(manifest.tileSize, level.width - x * manifest.tileSize);
-      const tileHeight = Math.min(manifest.tileSize, level.height - y * manifest.tileSize);
-
-      tiles.push({
-        key: `${level.remoteZoom}-${x}-${y}`,
-        src: buildTileUrl(manifest.localTemplate, level.remoteZoom, x, y),
-        left: x * manifest.tileSize * scale,
-        top: y * manifest.tileSize * scale,
-        width: tileWidth * scale,
-        height: tileHeight * scale,
-        srcWidth: tileWidth,
-        srcHeight: tileHeight,
-      });
-    }
-  }
-
-  return tiles;
-}
 
 function applyLevelBlend(
   levels: PanoramaLevel[],
@@ -1810,12 +1777,6 @@ function computeMinScale(screenWidth: number, screenHeight: number, worldWidth: 
   return Math.min(screenWidth / worldWidth, screenHeight / worldHeight) * 0.92;
 }
 
-function buildTileUrl(template: string, remoteZoom: number, x: number, y: number) {
-  return template
-    .replaceAll("{z}", String(remoteZoom))
-    .replaceAll("{x}", String(x))
-    .replaceAll("{y}", String(y));
-}
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(Math.max(value, minimum), maximum);
