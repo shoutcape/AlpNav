@@ -252,6 +252,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     };
 
     let wheelPanHandler: ((e: WheelEvent) => void) | null = null;
+    const suppressGesture = (e: Event) => e.preventDefault();
 
     const initialize = async () => {
       const app = new Application();
@@ -280,6 +281,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         worldWidth: maxLevel.width,
         worldHeight: maxLevel.height,
         events: app.renderer.events,
+        passiveWheel: false,
       });
 
       viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true }).decelerate({ friction: 0.95, minSpeed: 0.01 });
@@ -299,8 +301,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.on("moved", syncLevelBlend);
 
       wheelPanHandler = (e: WheelEvent) => {
-        // ctrlKey = trackpad pinch — pixi-viewport's wheel plugin handles this via trackpadPinch
-        if (e.ctrlKey) return;
+        // ctrlKey = trackpad pinch — pixi-viewport's wheel plugin handles this via trackpadPinch.
+        // preventDefault suppresses the browser's native page zoom on macOS.
+        if (e.ctrlKey) {
+          e.preventDefault();
+          return;
+        }
 
         // Only intercept events with a significant horizontal component — a reliable indicator of
         // trackpad 2D scroll. Pure vertical events (mouse wheel or trackpad vertical-only) fall
@@ -338,6 +344,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       };
 
       app.canvas.addEventListener("wheel", wheelPanHandler, { capture: true, passive: false });
+      // Suppress Safari's proprietary pinch-zoom gesture on the canvas.
+      app.canvas.addEventListener("gesturestart", suppressGesture);
+      app.canvas.addEventListener("gesturechange", suppressGesture);
 
       app.stage.addChild(viewport);
       viewportRef.current = viewport;
@@ -642,6 +651,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       if (wheelPanHandler && appRef.current?.canvas) {
         appRef.current.canvas.removeEventListener("wheel", wheelPanHandler, { capture: true });
+        appRef.current.canvas.removeEventListener("gesturestart", suppressGesture);
+        appRef.current.canvas.removeEventListener("gesturechange", suppressGesture);
       }
 
       viewportRef.current?.destroy({ children: true });
