@@ -25,7 +25,7 @@ import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
 import { useGeolocation } from "@/lib/geo/use-geolocation";
 import type { GeoFix } from "@/lib/geo/use-geolocation";
-import { fetchFreshStatus } from "@/lib/resorts/status-refresh";
+import { applyFreshStatus, fetchFreshStatus } from "@/lib/resorts/status-refresh";
 import { RefreshButton } from "./RefreshButton";
 import { loadOsmPistes } from "@/lib/geo/load-osm-pistes";
 import { loadAnchorPoints } from "@/lib/geo/load-anchor-points";
@@ -370,6 +370,13 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       if (cancelled) {
         return;
+      }
+
+      try {
+        const fresh = await fetchFreshStatus(activeArea.id);
+        applyFreshStatus(overlayData.lifts, overlayData.pistes, fresh);
+      } catch {
+        // Silent fallback — static data is used; user can tap refresh manually
       }
 
       overlayDataRef.current = overlayData;
@@ -1023,15 +1030,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     if (!data) return;
 
     const fresh = await fetchFreshStatus(activeArea.id);
-
-    for (const lift of data.lifts) {
-      const s = fresh.lifts.get(lift.id);
-      if (s) lift.status = s;
-    }
-    for (const piste of data.pistes) {
-      const s = fresh.slopes.get(piste.id);
-      if (s) piste.status = s;
-    }
+    applyFreshStatus(data.lifts, data.pistes, fresh);
 
     // Redraw lift overlays
     if (liftOverlayRef.current) {
