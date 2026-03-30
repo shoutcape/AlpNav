@@ -5,6 +5,8 @@ import type { TileDescriptor } from "./tile-types";
 
 const MAX_CONCURRENCY = 6;
 const DEBOUNCE_MS = 80;
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 1000;
 
 type TileSchedulerOptions = {
   manifest: PanoramaManifest;
@@ -45,8 +47,9 @@ export class TileScheduler {
   private pendingViewport: Viewport | null = null;
   private hasRunOnce = false;
 
-  // Track visible tile counts per level for completion detection
-  private visibleCountByZoom = new Map<number, number>();
+  // Track currently visible tile keys per level for completion detection
+  private visibleKeysByZoom = new Map<number, Set<string>>();
+  private retryCount = new Map<string, number>();
 
   constructor(options: TileSchedulerOptions) {
     this.manifest = options.manifest;
@@ -110,7 +113,7 @@ export class TileScheduler {
       const buffer = this.manifest.tileSize * scale;
 
       const visible = computeVisibleTiles(tiles, viewLeft, viewTop, viewRight, viewBottom, buffer);
-      this.visibleCountByZoom.set(level.remoteZoom, visible.length);
+      this.visibleKeysByZoom.set(level.remoteZoom, new Set(visible.map((t) => t.key)));
 
       for (const tile of visible) {
         neededKeys.add(tile.key);
@@ -187,9 +190,21 @@ export class TileScheduler {
         this.drainQueue();
       })
       .catch(() => {
-        // Network error — tile will be retried on next update cycle
         this.inflightKeys.delete(tile.key);
         this.cancelledKeys.delete(tile.key);
+
+        if (this.disposed) return;
+
+        const attempts = (this.retryCount.get(tile.key) ?? 0) + 1;
+        if (attempts < MAX_RETRIES) {
+          this.retryCount.set(tile.key, attempts);
+          setTimeout(() => {
+            if (!this.disposed && !this.loadedTileKeys.has(tile.key)) {
+              this.loadTile(tile, zoom);
+            }
+          }, RETRY_DELAY_MS * attempts);
+        }
+
         this.drainQueue();
       });
   }
@@ -209,21 +224,15 @@ export class TileScheduler {
   private checkLevelCompletion(zoom: number): void {
     if (this.loadedLevels.has(zoom)) return;
 
-    const tiles = this.levelTiles.get(zoom);
-    if (!tiles) return;
+    const visibleKeys = this.visibleKeysByZoom.get(zoom);
+    if (!visibleKeys || visibleKeys.size === 0) return;
 
-    const visibleCount = this.visibleCountByZoom.get(zoom) ?? 0;
-    let loadedVisible = 0;
-    for (const tile of tiles) {
-      if (this.loadedTileKeys.has(tile.key)) {
-        loadedVisible++;
-      }
+    // Only count tiles that are both currently visible AND loaded
+    for (const key of visibleKeys) {
+      if (!this.loadedTileKeys.has(key)) return;
     }
 
-    // Mark level ready when all visible tiles are loaded
-    if (loadedVisible >= visibleCount && visibleCount > 0) {
-      this.onLevelReady(zoom);
-    }
+    this.onLevelReady(zoom);
   }
 
   dispose(): void {
@@ -239,7 +248,7 @@ export class TileScheduler {
 }
 
 /** Returns tiles whose world-space rectangles overlap the viewport + buffer. */
-function computeVisibleTiles(
+export function computeVisibleTiles(
   tiles: TileDescriptor[],
   viewLeft: number,
   viewTop: number,
@@ -269,7 +278,7 @@ function computeVisibleTiles(
  * So a level becomes relevant when projectedWidth approaches its range.
  * We preload slightly earlier (at 0.6x) to have tiles ready before the blend starts.
  */
-function getTargetLevels(
+export function getTargetLevels(
   levels: PanoramaLevel[],
   projectedWidth: number,
   baseZoom: number,
