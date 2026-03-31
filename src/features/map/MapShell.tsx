@@ -114,6 +114,16 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const minScaleRef = useRef(0.05);
 
+  // Debug: anchor point testing
+  const [debugAnchors, setDebugAnchors] = useState<{ id: string; name: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number } }[]>([]);
+  const [debugSelectedAnchor, setDebugSelectedAnchor] = useState<string>("");
+  const debugDotRef = useRef<Graphics | null>(null);
+
+  // Debug panel drag
+  const [debugPanelPos, setDebugPanelPos] = useState({ x: 16, y: -1 }); // x from left, y: -1 means "bottom-anchored"
+  const debugDragRef = useRef<{ startX: number; startY: number; startPosX: number; startPosY: number } | null>(null);
+  const debugPanelRef = useRef<HTMLDivElement | null>(null);
+
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
   const [legendOpen, setLegendOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -435,6 +445,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.addChild(badgeHighlight);
       badgeHighlightRef.current = badgeHighlight;
 
+      // Debug: anchor test dot
+      const debugDot = new Graphics();
+      debugDot.label = "debug-anchor-dot";
+      viewport.addChild(debugDot);
+      debugDotRef.current = debugDot;
+
       // Debug layer — above all overlays, invisible unless debug mode is active
       const debugLayer = new Graphics();
       debugLayer.label = "debug-layer";
@@ -663,6 +679,36 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     redrawDebugRef.current?.();
   }, [debugMode]);
 
+  // Load anchor points for debug testing
+  useEffect(() => {
+    if (!debugMode) return;
+    fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
+      .then((r) => r.ok ? r.json() : [])
+      .then((data) => setDebugAnchors(Array.isArray(data) ? data : []))
+      .catch(() => setDebugAnchors([]));
+  }, [debugMode, activeArea.id]);
+
+  // Draw debug dot + center viewport when an anchor is selected
+  useEffect(() => {
+    const dot = debugDotRef.current;
+    if (!dot) return;
+    dot.clear();
+
+    if (!debugSelectedAnchor) return;
+    const anchor = debugAnchors.find((a) => a.id === debugSelectedAnchor);
+    if (!anchor) return;
+
+    const { x, y } = anchor.panorama;
+    const s = activeArea.visualScale ?? 1;
+    dot.circle(x, y, 12 * s);
+    dot.fill({ color: 0x3b82f6, alpha: 0.8 });
+    dot.circle(x, y, 12 * s);
+    dot.stroke({ color: 0xffffff, width: 3 * s });
+
+    if (viewportRef.current) {
+      viewportRef.current.moveCenter(x, y);
+    }
+  }, [debugSelectedAnchor, debugAnchors, activeArea.visualScale]);
 
   useEffect(() => {
     const pg = pisteHighlightRef.current;
@@ -960,8 +1006,40 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
 
       {debugMode && (
-        <div className="absolute bottom-4 left-4 z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5 w-64 pointer-events-auto">
-          <div className="flex items-center justify-between gap-2 border-b border-white/20 pb-1.5">
+        <div
+          ref={debugPanelRef}
+          className="absolute z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5 w-64 pointer-events-auto"
+          style={debugPanelPos.y === -1
+            ? { left: debugPanelPos.x, bottom: 16 }
+            : { left: debugPanelPos.x, top: debugPanelPos.y }
+          }
+        >
+          <div
+            className="flex items-center justify-between gap-2 border-b border-white/20 pb-1.5 cursor-grab active:cursor-grabbing select-none"
+            onPointerDown={(e) => {
+              const panel = debugPanelRef.current;
+              if (!panel) return;
+              const rect = panel.getBoundingClientRect();
+              debugDragRef.current = {
+                startX: e.clientX,
+                startY: e.clientY,
+                startPosX: rect.left,
+                startPosY: rect.top,
+              };
+              e.currentTarget.setPointerCapture(e.pointerId);
+            }}
+            onPointerMove={(e) => {
+              const drag = debugDragRef.current;
+              if (!drag) return;
+              const dx = e.clientX - drag.startX;
+              const dy = e.clientY - drag.startY;
+              setDebugPanelPos({
+                x: drag.startPosX + dx,
+                y: drag.startPosY + dy,
+              });
+            }}
+            onPointerUp={() => { debugDragRef.current = null; }}
+          >
             <span className="text-[9px] uppercase tracking-widest text-white/50">Debug</span>
             <div className="flex gap-1">
               <button
@@ -999,6 +1077,48 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               </div>
             </>
           )}
+
+          {/* Anchor point tester */}
+          <div className="border-t border-white/10 pt-1.5 space-y-1">
+            <div className="text-[9px] uppercase tracking-widest text-white/40">Anchor Test ({debugAnchors.length})</div>
+            {debugAnchors.length === 0 ? (
+              <div className="text-[10px] text-white/30">no anchor-points.json for {activeArea.id}</div>
+            ) : (
+              <></>
+            )}
+            {debugAnchors.length > 0 && (
+              <>
+              <select
+                value={debugSelectedAnchor}
+                onChange={(e) => setDebugSelectedAnchor(e.target.value)}
+                className="w-full rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
+              >
+                <option value="" className="bg-[#111]">select restaurant...</option>
+                {debugAnchors.map((a) => (
+                  <option key={a.id} value={a.id} className="bg-[#111]">{a.name}</option>
+                ))}
+              </select>
+              {(() => {
+                const a = debugAnchors.find((x) => x.id === debugSelectedAnchor);
+                if (!a) return null;
+                return (
+                  <div className="space-y-0.5">
+                    <div className="text-[10px] text-white/70">{a.geo.lat.toFixed(6)}, {a.geo.lng.toFixed(6)}</div>
+                    <a
+                      href={`https://www.openstreetmap.org/#map=19/${a.geo.lat}/${a.geo.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] text-blue-400 hover:text-blue-300 underline"
+                    >
+                      view on OSM
+                    </a>
+                    <div className="text-[10px] text-white/40">pano: {a.panorama.x.toFixed(0)}, {a.panorama.y.toFixed(0)}</div>
+                  </div>
+                );
+              })()}
+            </>
+            )}
+          </div>
 
         </div>
       )}
