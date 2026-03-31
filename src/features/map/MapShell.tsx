@@ -730,17 +730,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     redrawDebugRef.current?.();
   }, [debugMode]);
 
-  // Auto-apply default mock GPS when mapper becomes ready
-  useEffect(() => {
-    if (geoMapperStatus !== "ready" || mockGeoActive) return;
-    const parts = mockGeoInput.split(",").map((s) => parseFloat(s.trim()));
-    if (parts.length !== 2 || parts.some(isNaN)) return;
-    const [lat, lng] = parts;
-    setMockGeoActive(true);
-    setLastFix({ position: { lat, lng }, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
-    projectAndDraw(lat, lng, 5);
-  }, [geoMapperStatus]);
-
   // Load OSM pistes and build mapper when resort changes
   useEffect(() => {
     let cancelled = false;
