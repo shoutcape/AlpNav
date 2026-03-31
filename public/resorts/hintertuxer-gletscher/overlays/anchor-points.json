@@ -1,0 +1,100 @@
+[
+  {
+    "id": "gastro_4119",
+    "name": "Gletscherhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.05797358333333,
+      "lng": 11.673892283333336
+    },
+    "panorama": {
+      "x": 1284.0,
+      "y": 2480.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4120",
+    "name": "Tuxer-Joch-Haus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.09884394285715,
+      "lng": 11.64955202857143
+    },
+    "panorama": {
+      "x": 3784.0,
+      "y": 2296.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4122",
+    "name": "Panorama Restaurant Sommerberg",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.0973082,
+      "lng": 11.6632779
+    },
+    "panorama": {
+      "x": 2524.0,
+      "y": 2544.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4123",
+    "name": "Tuxer Fernerhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.077041,
+      "lng": 11.6703144
+    },
+    "panorama": {
+      "x": 1792.0,
+      "y": 1380.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_17946",
+    "name": "Spannagelhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.07997791111111,
+      "lng": 11.6712493
+    },
+    "panorama": {
+      "x": 1668.0,
+      "y": 1600.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4117",
+    "name": "Sommerberg Arena",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.09669641,
+      "lng": 11.663240495
+    },
+    "panorama": {
+      "x": 2476.0,
+      "y": 2564.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_293655",
+    "name": "Panoramabar im Tuxer Fernerhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.077041,
+      "lng": 11.6703144
+    },
+    "panorama": {
+      "x": 1776.0,
+      "y": 1404.0
+    },
+    "snapRadius": 200
+  }
+]

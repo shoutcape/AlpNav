@@ -1,0 +1,128 @@
+[
+  {
+    "osmId": "node/5869225019",
+    "name": "s'Raschtl",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.0404378,
+      "lng": 11.7039924
+    }
+  },
+  {
+    "osmId": "node/27337828",
+    "name": "Sommerbergalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.0973082,
+      "lng": 11.6632779
+    }
+  },
+  {
+    "osmId": "node/27337841",
+    "name": "Fernerhaus",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.077041,
+      "lng": 11.6703144
+    }
+  },
+  {
+    "osmId": "way/137132960",
+    "name": "Geraer Hütte",
+    "amenityType": "alpine_hut",
+    "geo": {
+      "lat": 47.04339533846155,
+      "lng": 11.628046469230771
+    }
+  },
+  {
+    "osmId": "way/39911021",
+    "name": "Olpererhütte",
+    "amenityType": "alpine_hut",
+    "geo": {
+      "lat": 47.04202472857143,
+      "lng": 11.68832047142857
+    }
+  },
+  {
+    "osmId": "way/521595166",
+    "name": "Winterraum",
+    "amenityType": "wilderness_hut",
+    "geo": {
+      "lat": 47.04183956,
+      "lng": 11.68803402
+    }
+  },
+  {
+    "osmId": "way/39728958",
+    "name": "Zamsgatterl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.02884914285714,
+      "lng": 11.695432657142858
+    }
+  },
+  {
+    "osmId": "way/101965313",
+    "name": "Zamsereck",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.030594619999995,
+      "lng": 11.69851362
+    }
+  },
+  {
+    "osmId": "way/521595169",
+    "name": "Fischerhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.02913986,
+      "lng": 11.701468080000001
+    }
+  },
+  {
+    "osmId": "way/265688569",
+    "name": "Gletscherhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.05797358333333,
+      "lng": 11.673892283333336
+    }
+  },
+  {
+    "osmId": "way/1170341761",
+    "name": "Schirmbar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.09669641,
+      "lng": 11.663240495
+    }
+  },
+  {
+    "osmId": "way/135564255",
+    "name": "Spannagelhaus",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.07997791111111,
+      "lng": 11.6712493
+    }
+  },
+  {
+    "osmId": "way/178754385",
+    "name": "Friesenberghaus",
+    "amenityType": "alpine_hut",
+    "geo": {
+      "lat": 47.06763603636364,
+      "lng": 11.702071354545454
+    }
+  },
+  {
+    "osmId": "way/121648748",
+    "name": "Tuxerjoch Haus",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.09884394285715,
+      "lng": 11.64955202857143
+    }
+  }
+]
