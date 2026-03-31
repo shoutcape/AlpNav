@@ -1,537 +1,5 @@
 [
   {
-    "id": "L_6042_valley",
-    "name": "6SB Ebenwald (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1435366,
-      "lng": 11.8535593
-    },
-    "panorama": {
-      "x": 2820.096,
-      "y": 3884.776
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6042_mountain",
-    "name": "6SB Ebenwald (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.135774,
-      "lng": 11.8638067
-    },
-    "panorama": {
-      "x": 2835.416000000002,
-      "y": 3882.1200000000013
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60432_valley",
-    "name": "6SB Penken Express (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1725878,
-      "lng": 11.8274234
-    },
-    "panorama": {
-      "x": 5277.08,
-      "y": 2451.592
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60432_mountain",
-    "name": "6SB Penken Express (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1734597,
-      "lng": 11.819693
-    },
-    "panorama": {
-      "x": 5261.744000000002,
-      "y": 2448.8240000000037
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6043_valley",
-    "name": "8SB Ahorn (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1352487,
-      "lng": 11.8641551
-    },
-    "panorama": {
-      "x": 1978.408,
-      "y": 3497.016
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6043_mountain",
-    "name": "8SB Ahorn (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1356007,
-      "lng": 11.8728671
-    },
-    "panorama": {
-      "x": 1907.359999999998,
-      "y": 3444.7999999999997
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604204_valley",
-    "name": "8er Horbergjoch (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1884559,
-      "lng": 11.8588905
-    },
-    "panorama": {
-      "x": 6860.68,
-      "y": 1056.984
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604204_mountain",
-    "name": "8er Horbergjoch (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1883958,
-      "lng": 11.8567658
-    },
-    "panorama": {
-      "x": 6620.792,
-      "y": 1153.5919999999999
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6045_valley",
-    "name": "Filzenlift (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1383991,
-      "lng": 11.8652487
-    },
-    "panorama": {
-      "x": 1958.752,
-      "y": 3890.568
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6045_mountain",
-    "name": "Filzenlift (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1365292,
-      "lng": 11.8698955
-    },
-    "panorama": {
-      "x": 1931.76,
-      "y": 3893.304
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6046_valley",
-    "name": "Filzenalmlift (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1347618,
-      "lng": 11.8668332
-    },
-    "panorama": {
-      "x": 2234.896,
-      "y": 3346.184
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6046_mountain",
-    "name": "Filzenalmlift (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1344117,
-      "lng": 11.8725165
-    },
-    "panorama": {
-      "x": 2207.9040000000005,
-      "y": 3348.936000000001
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60440_valley",
-    "name": "Penkenkuli (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1734331,
-      "lng": 11.8281498
-    },
-    "panorama": {
-      "x": 5421.912,
-      "y": 2845.984
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60440_mountain",
-    "name": "Penkenkuli (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1750104,
-      "lng": 11.8277379
-    },
-    "panorama": {
-      "x": 5448.888,
-      "y": 2848.7199999999993
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60441_valley",
-    "name": "Babylift Penken (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1749203,
-      "lng": 11.82985
-    },
-    "panorama": {
-      "x": 5718.032,
-      "y": 2984.52
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60441_mountain",
-    "name": "Babylift Penken (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1755791,
-      "lng": 11.8318446
-    },
-    "panorama": {
-      "x": 5691.048,
-      "y": 2987.272000000001
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604110_valley",
-    "name": "Babylift Penkenjoch (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1756554,
-      "lng": 11.8275372
-    },
-    "panorama": {
-      "x": 5393.904,
-      "y": 1957.96
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604110_mountain",
-    "name": "Babylift Penkenjoch (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1758802,
-      "lng": 11.8191434
-    },
-    "panorama": {
-      "x": 5420.896,
-      "y": 1960.68
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6047_valley",
-    "name": "Übungslift (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1341208,
-      "lng": 11.8726688
-    },
-    "panorama": {
-      "x": 1806.168,
-      "y": 3223.72
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6047_mountain",
-    "name": "Übungslift (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1339733,
-      "lng": 11.8756094
-    },
-    "panorama": {
-      "x": 1779.184,
-      "y": 3226.440000000001
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6041_valley",
-    "name": "Ahornbahn (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1603521,
-      "lng": 11.8597265
-    },
-    "panorama": {
-      "x": 1472.96,
-      "y": 3812.672
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6041_mountain",
-    "name": "Ahornbahn (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1365629,
-      "lng": 11.870503
-    },
-    "panorama": {
-      "x": 2263.6,
-      "y": 4035.216
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6048_valley",
-    "name": "ÜbungsLand Ahorn (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1764667,
-      "lng": 11.8305802
-    },
-    "panorama": {
-      "x": 1528.968,
-      "y": 3499.984
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_6048_mountain",
-    "name": "ÜbungsLand Ahorn (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1756663,
-      "lng": 11.8313044
-    },
-    "panorama": {
-      "x": 1528.5679999999982,
-      "y": 3554.871999999993
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60444_valley",
-    "name": "ÜbungsLand Lärchwald (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.176133,
-      "lng": 11.8299298
-    },
-    "panorama": {
-      "x": 5575.664,
-      "y": 2184.84
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60444_mountain",
-    "name": "ÜbungsLand Lärchwald (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1756125,
-      "lng": 11.82973
-    },
-    "panorama": {
-      "x": 5576.0480000000025,
-      "y": 2239.687999999997
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60443_valley",
-    "name": "Horberg Shuttle (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1905607,
-      "lng": 11.857775
-    },
-    "panorama": {
-      "x": 6639.72,
-      "y": 2698.544
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60443_mountain",
-    "name": "Horberg Shuttle (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1838431,
-      "lng": 11.8176693
-    },
-    "panorama": {
-      "x": 6640.128000000005,
-      "y": 2753.4399999999914
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60445_valley",
-    "name": "ÜbungsLand Penken (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.176484,
-      "lng": 11.8300612
-    },
-    "panorama": {
-      "x": 5934.136,
-      "y": 3053.752
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60445_mountain",
-    "name": "ÜbungsLand Penken (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1758787,
-      "lng": 11.8287174
-    },
-    "panorama": {
-      "x": 6161.304000000001,
-      "y": 2998.776
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60446_valley",
-    "name": "KinderLand Horberg (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1905687,
-      "lng": 11.8574065
-    },
-    "panorama": {
-      "x": 7326.144,
-      "y": 3965.424
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60446_mountain",
-    "name": "KinderLand Horberg (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1905687,
-      "lng": 11.8574065
-    },
-    "panorama": {
-      "x": 7396.944,
-      "y": 3991.256
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604299_valley",
-    "name": "Eggalmbahn (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1524988,
-      "lng": 11.8221728
-    },
-    "panorama": {
-      "x": 3593.544,
-      "y": 1753.408
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604299_mountain",
-    "name": "Eggalmbahn (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1542559,
-      "lng": 11.8195133
-    },
-    "panorama": {
-      "x": 3522.8479999999995,
-      "y": 1721.1519999999998
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604100_valley",
-    "name": "Finkenberger Almbahn (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1523255,
-      "lng": 11.8220106
-    },
-    "panorama": {
-      "x": 3745.84,
-      "y": 2988.96
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_604100_mountain",
-    "name": "Finkenberger Almbahn (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1523255,
-      "lng": 11.8220106
-    },
-    "panorama": {
-      "x": 3675.1599999999994,
-      "y": 2956.727999999999
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60429_valley",
-    "name": "Penkenbahn (valley)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1634171,
-      "lng": 11.8606363
-    },
-    "panorama": {
-      "x": 5693.536,
-      "y": 2813.632
-    },
-    "snapRadius": 30
-  },
-  {
-    "id": "L_60429_mountain",
-    "name": "Penkenbahn (mountain)",
-    "type": "lift-station",
-    "geo": {
-      "lat": 47.1754503,
-      "lng": 11.8293403
-    },
-    "panorama": {
-      "x": 5350.352,
-      "y": 3434.576
-    },
-    "snapRadius": 30
-  },
-  {
     "id": "gastro_4981",
     "name": "Ahornhütte",
     "type": "restaurant",
@@ -540,24 +8,24 @@
       "lng": 11.8696274
     },
     "panorama": {
-      "x": 1704,
-      "y": 3656
+      "x": 1704.0,
+      "y": 3656.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4982",
     "name": "Almstüberl Finkenberg",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1760029,
-      "lng": 11.8282279
+      "lat": 47.162496738461535,
+      "lng": 11.808098592307694
     },
     "panorama": {
-      "x": 4120,
-      "y": 2744
+      "x": 4120.0,
+      "y": 2744.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4983",
@@ -568,66 +36,94 @@
       "lng": 11.8283605
     },
     "panorama": {
-      "x": 5768,
-      "y": 2800
+      "x": 5768.0,
+      "y": 2800.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4984",
     "name": "Bergrestaurant Eggalm",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1748312,
-      "lng": 11.827362
+      "lat": 47.16253685,
+      "lng": 11.712077975
     },
     "panorama": {
-      "x": 3712,
-      "y": 1432
+      "x": 3712.0,
+      "y": 1432.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4985",
     "name": "Bergrestaurant Horberg",
     "type": "restaurant",
     "geo": {
-      "lat": 47.13698516666667,
-      "lng": 11.8691764
+      "lat": 47.1826957,
+      "lng": 11.8101456
     },
     "panorama": {
-      "x": 6384,
-      "y": 2736
+      "x": 6384.0,
+      "y": 2736.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4986",
     "name": "Bergrestaurant Lämmerbichl",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1608588,
-      "lng": 11.86137
+      "lat": 47.1813684,
+      "lng": 11.747714
     },
     "panorama": {
-      "x": 5112,
-      "y": 1544
+      "x": 5112.0,
+      "y": 1544.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4987",
+    "name": "Granatalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16956898421053,
+      "lng": 11.800230105263159
+    },
+    "panorama": {
+      "x": 5344.0,
+      "y": 1912.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_4989",
     "name": "Egger Skialm",
     "type": "restaurant",
     "geo": {
-      "lat": 47.17006904,
-      "lng": 11.865245420000003
+      "lat": 47.16197512,
+      "lng": 11.710783359999999
     },
     "panorama": {
-      "x": 3704,
-      "y": 1368
+      "x": 3704.0,
+      "y": 1368.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4990",
+    "name": "Eisberghütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.18414261428571,
+      "lng": 11.809662942857143
+    },
+    "panorama": {
+      "x": 7024.0,
+      "y": 2752.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_4991",
@@ -638,10 +134,24 @@
       "lng": 11.872301714285713
     },
     "panorama": {
-      "x": 1720,
-      "y": 3288
+      "x": 1720.0,
+      "y": 3288.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4992",
+    "name": "Grillhofalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.17925454,
+      "lng": 11.798472819999999
+    },
+    "panorama": {
+      "x": 6576.0,
+      "y": 2040.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_4993",
@@ -652,38 +162,220 @@
       "lng": 11.8340092
     },
     "panorama": {
-      "x": 5928,
-      "y": 3136
+      "x": 5928.0,
+      "y": 3136.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4994",
     "name": "Heidi's Hütte",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1749523,
-      "lng": 11.8270687
+      "lat": 47.17961678181818,
+      "lng": 11.73574568181818
     },
     "panorama": {
-      "x": 4824,
-      "y": 1456
+      "x": 4824.0,
+      "y": 1456.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4995",
+    "name": "Hildes Skitenne",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1814331,
+      "lng": 11.80143118
+    },
+    "panorama": {
+      "x": 6672.0,
+      "y": 2296.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4996",
+    "name": "Jausenstation Tappenalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.181835,
+      "lng": 11.802466957142856
+    },
+    "panorama": {
+      "x": 6744.0,
+      "y": 2352.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4997",
+    "name": "Kressbrunnalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1837868,
+      "lng": 11.80876266
+    },
+    "panorama": {
+      "x": 6880.0,
+      "y": 2824.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4998",
+    "name": "Lattenalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1644733,
+      "lng": 11.7241766
+    },
+    "panorama": {
+      "x": 3992.0,
+      "y": 1640.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_5000",
     "name": "Bergrestaurant Panorama",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1661852,
-      "lng": 11.8651832
+      "lat": 47.13698516666667,
+      "lng": 11.8691764
     },
     "panorama": {
-      "x": 1520,
-      "y": 3792
+      "x": 1520.0,
+      "y": 3792.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5001",
+    "name": "Kasermandl am Penken",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1749682,
+      "lng": 11.8149077
+    },
+    "panorama": {
+      "x": 5432.0,
+      "y": 2176.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5002",
+    "name": "Penkenjochhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.168555157142855,
+      "lng": 11.799950242857145
+    },
+    "panorama": {
+      "x": 5216.0,
+      "y": 1832.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5003",
+    "name": "Penkentenne",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16866605,
+      "lng": 11.80101195
+    },
+    "panorama": {
+      "x": 5240.0,
+      "y": 1920.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5004",
+    "name": "Pilzbar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1748312,
+      "lng": 11.827362
+    },
+    "panorama": {
+      "x": 5648.0,
+      "y": 2792.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5005",
+    "name": "Schiestls Sunnalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.18851712857143,
+      "lng": 11.810213857142857
+    },
+    "panorama": {
+      "x": 7016.0,
+      "y": 2488.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5006",
+    "name": "Schneekarhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.18990620434783,
+      "lng": 11.792446004347825
+    },
+    "panorama": {
+      "x": 7312.0,
+      "y": 1304.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5007",
+    "name": "Stieralm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1760029,
+      "lng": 11.8282279
+    },
+    "panorama": {
+      "x": 5864.0,
+      "y": 2888.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5008",
+    "name": "Vogelnest",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.173025611111115,
+      "lng": 11.7236127
+    },
+    "panorama": {
+      "x": 4320.0,
+      "y": 1768.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5012",
+    "name": "Waldhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    },
+    "panorama": {
+      "x": 4528.0,
+      "y": 1680.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_5013",
@@ -694,24 +386,52 @@
       "lng": 11.85805564
     },
     "panorama": {
-      "x": 3392,
-      "y": 4376
+      "x": 3392.0,
+      "y": 4376.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_5014",
     "name": "Panorahma Restaurant",
     "type": "restaurant",
     "geo": {
-      "lat": 47.15409238571429,
-      "lng": 11.825081342857143
+      "lat": 47.1710431,
+      "lng": 11.80850424
     },
     "panorama": {
-      "x": 5328,
-      "y": 2032
+      "x": 5328.0,
+      "y": 2032.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5016",
+    "name": "Unterbergalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.19628371428571,
+      "lng": 11.796875400000001
+    },
+    "panorama": {
+      "x": 7728.0,
+      "y": 1728.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_28683",
+    "name": "Lärchwaldhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    },
+    "panorama": {
+      "x": 5520.0,
+      "y": 2120.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_43557",
@@ -722,10 +442,10 @@
       "lng": 11.8603009
     },
     "panorama": {
-      "x": 4288,
-      "y": 4672
+      "x": 4288.0,
+      "y": 4672.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4975",
@@ -736,10 +456,10 @@
       "lng": 11.8283139
     },
     "panorama": {
-      "x": 5760,
-      "y": 2760
+      "x": 5760.0,
+      "y": 2760.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4976",
@@ -750,10 +470,10 @@
       "lng": 11.8610721
     },
     "panorama": {
-      "x": 4792,
-      "y": 4608
+      "x": 4792.0,
+      "y": 4608.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4977",
@@ -764,38 +484,52 @@
       "lng": 11.8583029
     },
     "panorama": {
-      "x": 7456,
-      "y": 3992
+      "x": 7456.0,
+      "y": 3992.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_4978",
     "name": "Ice Bar",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1649119,
-      "lng": 11.8620238
+      "lat": 47.163422,
+      "lng": 11.8610826
     },
     "panorama": {
-      "x": 4992,
-      "y": 4600
+      "x": 4992.0,
+      "y": 4600.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4979",
+    "name": "Pilzbar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1749523,
+      "lng": 11.8270687
+    },
+    "panorama": {
+      "x": 5640.0,
+      "y": 2776.0
+    },
+    "snapRadius": 200
   },
   {
     "id": "gastro_4980",
     "name": "Yeti Bar",
     "type": "restaurant",
     "geo": {
-      "lat": 47.1655044,
-      "lng": 11.8627915
+      "lat": 47.19093018947368,
+      "lng": 11.858129710526315
     },
     "panorama": {
-      "x": 7560,
-      "y": 3896
+      "x": 7560.0,
+      "y": 3896.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_43555",
@@ -806,9 +540,9 @@
       "lng": 11.8607189
     },
     "panorama": {
-      "x": 4480,
-      "y": 4656
+      "x": 4480.0,
+      "y": 4656.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   }
 ]

@@ -19,19 +19,11 @@ import { drawWebcamMarkerOverlay } from "./overlays/drawWebcamMarkerOverlay";
 import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay";
 import { drawSportFunOverlay } from "./overlays/drawSportFunOverlay";
 import { hitTestOverlays } from "./hitTest";
-import { drawUserPositionOverlay } from "./overlays/drawUserPositionOverlay";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
-import { useGeolocation } from "@/lib/geo/use-geolocation";
-import type { GeoFix } from "@/lib/geo/use-geolocation";
 import { applyFreshStatus, fetchFreshStatus } from "@/lib/resorts/status-refresh";
 import { RefreshButton } from "./RefreshButton";
-import { loadOsmPistes } from "@/lib/geo/load-osm-pistes";
-import { loadAnchorPoints } from "@/lib/geo/load-anchor-points";
-import { matchRoutes } from "@/lib/geo/route-matcher";
-import { GpsToPanoramaMapper } from "@/lib/geo/gps-to-panorama";
-import type { ProjectionResult } from "@/lib/geo/gps-to-panorama";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -79,9 +71,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const liftHighlightRef = useRef<Graphics | null>(null);
   const badgeHighlightRef = useRef<Graphics | null>(null);
 
-  const userPositionOverlayRef = useRef<Container | null>(null);
-  const mapperRef = useRef<GpsToPanoramaMapper | null>(null);
-  const followLocationRef = useRef(false);
 
   const [selectedAreaId, setSelectedAreaId] = useState(() => resolveActiveResort(initialAreaId).id);
   const activeArea = useMemo(() => resolveActiveResort(selectedAreaId), [selectedAreaId]);
@@ -113,31 +102,36 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const sportFunVisibleRef = useRef(true);
 
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null>(null);
-  const [debugMode, setDebugMode] = useState<false | "normal" | "geo">(() => {
+  const [debugMode, setDebugMode] = useState<false | "normal">(() => {
     if (typeof window === "undefined") return false;
     const saved = localStorage.getItem("alpnav_debug_mode");
-    if (saved === "normal" || saved === "geo") return saved;
+    if (saved === "normal") return saved;
     return false;
   });
-  const debugModeRef = useRef<false | "normal" | "geo">(false);
+  const debugModeRef = useRef<false | "normal">(false);
   const debugLayerRef = useRef<Graphics | null>(null);
   const redrawDebugRef = useRef<(() => void) | null>(null);
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
-  const [followLocation, setFollowLocation] = useState(false);
-  const [geoMapperStatus, setGeoMapperStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
-  const [geoSegmentCount, setGeoSegmentCount] = useState(0);
-  const [lastProjection, setLastProjection] = useState<ProjectionResult | null>(null);
-  const [lastFix, setLastFix] = useState<GeoFix | null>(null);
-  const [pickedPoint, setPickedPoint] = useState<{ px: number; py: number; geo: { lat: number; lng: number } | null; source: string } | null>(null);
-  const [mockGeoInput, setMockGeoInput] = useState("47.2414193, 12.0377060");
-  const [mockGeoActive, setMockGeoActive] = useState(false);
-  const [simRoute, setSimRoute] = useState<string>(""); // route number
-  const [simPlaying, setSimPlaying] = useState(false);
-  const [simProgress, setSimProgress] = useState(0); // index into flattened geo points
-  const simIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const minScaleRef = useRef(0.05);
 
-  const { fix: geoFix, status: geoStatus } = useGeolocation(followLocation);
+  // GPS location
+  type AnchorPoint = { id: string; name: string; type: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number }; snapRadius: number };
+  const [gpsActive, setGpsActive] = useState(false);
+  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "active" | "denied" | "unavailable" | "error">("idle");
+  const [gpsMatch, setGpsMatch] = useState<AnchorPoint | null>(null);
+  const gpsAnchorsRef = useRef<AnchorPoint[]>([]);
+  const gpsDotRef = useRef<Graphics | null>(null);
+  const gpsWatchRef = useRef<number | null>(null);
+
+  // Debug: anchor point testing
+  const [debugAnchors, setDebugAnchors] = useState<{ id: string; name: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number } }[]>([]);
+  const [debugSelectedAnchor, setDebugSelectedAnchor] = useState<string>("");
+  const debugDotRef = useRef<Graphics | null>(null);
+
+  // Debug panel drag
+  const [debugPanelPos, setDebugPanelPos] = useState({ x: 16, y: -1 }); // x from left, y: -1 means "bottom-anchored"
+  const debugDragRef = useRef<{ startX: number; startY: number; startPosX: number; startPosY: number } | null>(null);
+  const debugPanelRef = useRef<HTMLDivElement | null>(null);
 
   const [loadedLevelCount, setLoadedLevelCount] = useState(0);
   const [legendOpen, setLegendOpen] = useState(false);
@@ -191,11 +185,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     sportFunVisibleRef.current = true;
     hasInteractedRef.current = false;
     overlayDataRef.current = null;
-    setFollowLocation(false);
-    followLocationRef.current = false;
     setLoadError(null);
-    setLastProjection(null);
-    setLastFix(null);
   }, [activeArea.id]);
 
   useEffect(() => {
@@ -286,10 +276,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.drag().pinch().wheel({ smooth: 6, trackpadPinch: true }).decelerate({ friction: 0.95, minSpeed: 0.01 });
       viewport.on("drag-start", () => {
         hasInteractedRef.current = true;
-        if (followLocationRef.current) {
-          followLocationRef.current = false;
-          setFollowLocation(false);
-        }
       });
       viewport.on("pinch-start", () => {
         hasInteractedRef.current = true;
@@ -468,11 +454,17 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.addChild(badgeHighlight);
       badgeHighlightRef.current = badgeHighlight;
 
-      // User position dot — above all overlays
-      const userPosContainer = new Container();
-      userPosContainer.label = "overlay-user-position";
-      viewport.addChild(userPosContainer);
-      userPositionOverlayRef.current = userPosContainer;
+      // GPS location dot
+      const gpsDot = new Graphics();
+      gpsDot.label = "gps-location-dot";
+      viewport.addChild(gpsDot);
+      gpsDotRef.current = gpsDot;
+
+      // Debug: anchor test dot
+      const debugDot = new Graphics();
+      debugDot.label = "debug-anchor-dot";
+      viewport.addChild(debugDot);
+      debugDotRef.current = debugDot;
 
       // Debug layer — above all overlays, invisible unless debug mode is active
       const debugLayer = new Graphics();
@@ -599,34 +591,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         setFilterPanelOpen(false);
         setLegendOpen(false);
 
-        // In geo debug mode, pick point for reverse projection
-        if (debugModeRef.current === "geo" && mapperRef.current) {
-          const result = mapperRef.current.reverseProject(world.x, world.y);
-          setPickedPoint({
-            px: world.x,
-            py: world.y,
-            geo: result?.geo ?? null,
-            source: result?.source ?? "",
-          });
-
-          // Draw pick marker on debug layer
-          const g = debugLayerRef.current;
-          const vp = viewportRef.current;
-          if (g && vp) {
-            g.clear();
-            const s = 12 / vp.scale.x; // constant screen size
-            const lw = 2 / vp.scale.x;
-            // Crosshair
-            g.moveTo(world.x - s, world.y).lineTo(world.x + s, world.y);
-            g.moveTo(world.x, world.y - s).lineTo(world.x, world.y + s);
-            g.stroke({ width: lw, color: 0xff3366 });
-            // Circle
-            g.circle(world.x, world.y, s * 0.6);
-            g.stroke({ width: lw, color: 0xff3366 });
-          }
-          return;
-        }
-
         const data = overlayDataRef.current;
         if (!data) return;
         const activePistes = pisteVisibleRef.current
@@ -730,111 +694,141 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     redrawDebugRef.current?.();
   }, [debugMode]);
 
-  // Auto-apply default mock GPS when mapper becomes ready
+  // Load anchor points for debug testing
   useEffect(() => {
-    if (geoMapperStatus !== "ready" || mockGeoActive) return;
-    const parts = mockGeoInput.split(",").map((s) => parseFloat(s.trim()));
-    if (parts.length !== 2 || parts.some(isNaN)) return;
-    const [lat, lng] = parts;
-    setMockGeoActive(true);
-    setLastFix({ position: { lat, lng }, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
-    projectAndDraw(lat, lng, 5);
-  }, [geoMapperStatus]);
+    if (!debugMode) return;
+    fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
+      .then((r) => r.ok ? r.json() : [])
+      .then((data) => setDebugAnchors(Array.isArray(data) ? data : []))
+      .catch(() => setDebugAnchors([]));
+  }, [debugMode, activeArea.id]);
 
-  // Load OSM pistes and build mapper when resort changes
+  // Draw debug dot + center viewport when an anchor is selected
   useEffect(() => {
-    let cancelled = false;
-    mapperRef.current = null;
-    setGeoMapperStatus("loading");
-    setGeoSegmentCount(0);
-    setLastProjection(null);
+    const dot = debugDotRef.current;
+    if (!dot) return;
+    dot.clear();
 
-    if (!activeArea.bbox) {
-      setGeoMapperStatus("idle");
+    if (!debugSelectedAnchor) return;
+    const anchor = debugAnchors.find((a) => a.id === debugSelectedAnchor);
+    if (!anchor) return;
+
+    const { x, y } = anchor.panorama;
+    const s = activeArea.visualScale ?? 1;
+
+    // Snap radius indicator (outer ring)
+    const radiusPx = 60 * s;
+    dot.circle(x, y, radiusPx);
+    dot.fill({ color: 0x3b82f6, alpha: 0.1 });
+    dot.circle(x, y, radiusPx);
+    dot.stroke({ color: 0x3b82f6, width: 1.5 * s, alpha: 0.4 });
+
+    // Center dot
+    dot.circle(x, y, 10 * s);
+    dot.fill({ color: 0x3b82f6, alpha: 0.85 });
+    dot.circle(x, y, 10 * s);
+    dot.stroke({ color: 0xffffff, width: 2.5 * s });
+
+    if (viewportRef.current) {
+      viewportRef.current.moveCenter(x, y);
+    }
+  }, [debugSelectedAnchor, debugAnchors, activeArea.visualScale]);
+
+  // Load anchors for GPS snapping
+  useEffect(() => {
+    fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
+      .then((r) => r.ok ? r.json() : [])
+      .then((data) => { gpsAnchorsRef.current = Array.isArray(data) ? data : []; })
+      .catch(() => { gpsAnchorsRef.current = []; });
+  }, [activeArea.id]);
+
+  // GPS watch position
+  useEffect(() => {
+    if (!gpsActive) {
+      if (gpsWatchRef.current !== null) {
+        navigator.geolocation.clearWatch(gpsWatchRef.current);
+        gpsWatchRef.current = null;
+      }
+      setGpsStatus("idle");
+      setGpsMatch(null);
+      const dot = gpsDotRef.current;
+      if (dot) dot.clear();
       return;
     }
 
-    const build = async () => {
-      try {
-        const [osmPistes, anchorPoints] = await Promise.all([
-          loadOsmPistes(activeArea.id),
-          loadAnchorPoints(activeArea.id).catch(() => []),
-        ]);
-        if (cancelled) return;
+    if (!("geolocation" in navigator)) {
+      setGpsStatus("unavailable");
+      return;
+    }
 
-        // Wait for overlay data to be available
-        const waitForOverlays = () =>
-          new Promise<void>((resolve) => {
-            const check = () => {
-              if (overlayDataRef.current || cancelled) return resolve();
-              setTimeout(check, 100);
-            };
-            check();
-          });
-        await waitForOverlays();
-        if (cancelled || !overlayDataRef.current) return;
+    setGpsStatus("requesting");
 
-        const mapped = matchRoutes(overlayDataRef.current.pistes, osmPistes);
-        const mapper = new GpsToPanoramaMapper(mapped, anchorPoints);
-        if (cancelled) return;
-
-        mapperRef.current = mapper;
-        setGeoSegmentCount(mapper.segmentCount);
-        setGeoMapperStatus("ready");
-        console.log(`[geo] Mapper ready: ${mapped.length} routes, ${mapper.segmentCount} segments, ${mapper.anchorCount} anchors`);
-      } catch (err) {
-        if (!cancelled) {
-          console.error("[geo] Failed to build mapper:", err);
-          setGeoMapperStatus("error");
-        }
-      }
+    const haversine = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+      const R = 6371000;
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLng = ((lng2 - lng1) * Math.PI) / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(a));
     };
 
-    build();
-    return () => { cancelled = true; };
-  }, [activeArea.id, activeArea.bbox]);
+    gpsWatchRef.current = navigator.geolocation.watchPosition(
+      (pos) => {
+        setGpsStatus("active");
+        const { latitude: lat, longitude: lng } = pos.coords;
 
-  // Project a geo position to panorama and update the user dot
-  const projectAndDraw = (lat: number, lng: number, _accuracy: number) => {
-    const mapper = mapperRef.current;
-    if (!mapper) return;
+        // Find nearest anchor within snap radius
+        let best: AnchorPoint | null = null;
+        let bestDist = Infinity;
+        for (const anchor of gpsAnchorsRef.current) {
+          const d = haversine(lat, lng, anchor.geo.lat, anchor.geo.lng);
+          if (d <= anchor.snapRadius && d < bestDist) {
+            bestDist = d;
+            best = anchor;
+          }
+        }
 
-    const result = mapper.project({ lat, lng });
-    setLastProjection(result);
+        setGpsMatch(best);
 
-    if (result && userPositionOverlayRef.current) {
-      const isAnchor = !!result.anchorName;
-      drawUserPositionOverlay(
-        userPositionOverlayRef.current,
-        result.point,
-        activeArea.visualScale,
-        isAnchor,
-        followLocationRef.current,
-      );
+        const dot = gpsDotRef.current;
+        if (!dot) return;
+        dot.clear();
 
-      if (followLocationRef.current && viewportRef.current) {
-        viewportRef.current.moveCenter(result.point.x, result.point.y);
+        if (best) {
+          const { x, y } = best.panorama;
+          const s = activeArea.visualScale ?? 1;
+
+          // Accuracy ring
+          dot.circle(x, y, 50 * s);
+          dot.fill({ color: 0x3b82f6, alpha: 0.1 });
+          dot.circle(x, y, 50 * s);
+          dot.stroke({ color: 0x3b82f6, width: 1.5 * s, alpha: 0.3 });
+
+          // Center dot
+          dot.circle(x, y, 10 * s);
+          dot.fill({ color: 0x3b82f6, alpha: 0.9 });
+          dot.circle(x, y, 10 * s);
+          dot.stroke({ color: 0xffffff, width: 2.5 * s });
+
+          if (viewportRef.current) {
+            viewportRef.current.moveCenter(x, y);
+          }
+        }
+      },
+      (err) => {
+        if (err.code === err.PERMISSION_DENIED) setGpsStatus("denied");
+        else if (err.code === err.POSITION_UNAVAILABLE) setGpsStatus("unavailable");
+        else setGpsStatus("error");
+      },
+      { enableHighAccuracy: true, maximumAge: 3000, timeout: 10000 },
+    );
+
+    return () => {
+      if (gpsWatchRef.current !== null) {
+        navigator.geolocation.clearWatch(gpsWatchRef.current);
+        gpsWatchRef.current = null;
       }
-    } else if (userPositionOverlayRef.current) {
-      drawUserPositionOverlay(userPositionOverlayRef.current, null, activeArea.visualScale);
-    }
-  };
-
-  // Project real GPS fix to panorama
-  useEffect(() => {
-    if (mockGeoActive) return; // mock overrides real GPS
-    if (!geoFix) {
-      setLastFix(null);
-      setLastProjection(null);
-      if (userPositionOverlayRef.current) {
-        drawUserPositionOverlay(userPositionOverlayRef.current, null, activeArea.visualScale);
-      }
-      return;
-    }
-
-    setLastFix(geoFix);
-    projectAndDraw(geoFix.position.lat, geoFix.position.lng, geoFix.accuracy);
-  }, [geoFix, activeArea.visualScale, mockGeoActive]);
+    };
+  }, [gpsActive, activeArea.visualScale]);
 
   useEffect(() => {
     const pg = pisteHighlightRef.current;
@@ -942,88 +936,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   };
 
   const toggleDebug = () => setDebugMode((currentMode) => (currentMode === false ? "normal" : false));
-
-  const applyMockGeo = () => {
-    const parts = mockGeoInput.split(",").map((s) => parseFloat(s.trim()));
-    if (parts.length !== 2 || parts.some(isNaN)) return;
-    const [lat, lng] = parts;
-    setMockGeoActive(true);
-    setLastFix({ position: { lat, lng }, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
-    projectAndDraw(lat, lng, 5);
-  };
-
-  const clearMockGeo = () => {
-    setMockGeoActive(false);
-    stopSim();
-    setLastProjection(null);
-    if (userPositionOverlayRef.current) {
-      drawUserPositionOverlay(userPositionOverlayRef.current, null, activeArea.visualScale);
-    }
-  };
-
-  /** Flatten all geo points for the selected simulation route */
-  const getSimPoints = () => {
-    const mapper = mapperRef.current;
-    if (!mapper || !simRoute) return [];
-    const route = mapper.routes.find((r) => r.number === simRoute);
-    if (!route) return [];
-    return route.segments.flatMap((s) => s.geoPoints);
-  };
-
-  const startSim = () => {
-    const pts = getSimPoints();
-    if (pts.length === 0) return;
-    stopSim();
-    setMockGeoActive(true);
-    setSimPlaying(true);
-    setSimProgress(0);
-    // Apply first point immediately
-    const p = pts[0];
-    setLastFix({ position: p, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
-    setMockGeoInput(`${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`);
-    projectAndDraw(p.lat, p.lng, 5);
-
-    let idx = 1;
-    simIntervalRef.current = setInterval(() => {
-      if (idx >= pts.length) {
-        stopSim();
-        return;
-      }
-      const pt = pts[idx];
-      setSimProgress(idx);
-      setLastFix({ position: pt, accuracy: 5, altitude: null, heading: null, speed: null, timestamp: Date.now() });
-      setMockGeoInput(`${pt.lat.toFixed(6)}, ${pt.lng.toFixed(6)}`);
-      projectAndDraw(pt.lat, pt.lng, 5);
-      idx++;
-    }, 200);
-  };
-
-  const stopSim = () => {
-    if (simIntervalRef.current) {
-      clearInterval(simIntervalRef.current);
-      simIntervalRef.current = null;
-    }
-    setSimPlaying(false);
-  };
-
-  const toggleFollowLocation = () => setFollowLocation(f => {
-    const next = !f;
-    followLocationRef.current = next;
-    // If enabling follow and we already have a projected position, center and redraw with halo
-    if (lastProjection && userPositionOverlayRef.current) {
-      drawUserPositionOverlay(
-        userPositionOverlayRef.current,
-        lastProjection.point,
-        activeArea.visualScale,
-        !!lastProjection.anchorName,
-        next,
-      );
-      if (next && viewportRef.current) {
-        viewportRef.current.moveCenter(lastProjection.point.x, lastProjection.point.y);
-      }
-    }
-    return next;
-  });
 
   const handleRefreshStatus = async () => {
     const data = overlayDataRef.current;
@@ -1158,27 +1070,46 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           </svg>
         </button>
 
-        {/* Follow location toggle */}
+        {/* GPS location */}
         <button
-          onClick={toggleFollowLocation}
-          className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
-            geoStatus === "denied" || geoStatus === "unavailable"
-              ? "bg-red-400/70 text-black/80"
-              : followLocation
-                ? geoStatus === "active" && lastProjection
-                  ? "bg-blue-400/90 text-black"
-                  : "bg-blue-400/50 text-black/60 animate-pulse"
+          onClick={() => setGpsActive((v) => !v)}
+          className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
+            gpsStatus === "denied" || gpsStatus === "unavailable"
+              ? "bg-red-500/80 text-white"
+              : gpsActive
+                ? "bg-blue-500/90 text-white"
                 : "bg-[#07111f]/65 text-white/70"
           }`}
-          aria-label="Toggle follow location"
+          aria-label="Toggle GPS location"
         >
+          {gpsStatus === "requesting" && (
+            <motion.div
+              className="absolute inset-0 rounded-[13px] border-2 border-blue-400/60"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
+          {gpsStatus === "active" && gpsMatch && (
+            <motion.div
+              className="absolute inset-0 rounded-[13px] border-2 border-blue-400/50"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
+          {gpsStatus === "active" && !gpsMatch && (
+            <motion.div
+              className="absolute inset-0 rounded-[13px] border-2 border-orange-400/50"
+              animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.15, 0.5] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="8" cy="8" r="2.5" fill="currentColor" />
-            <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="8" y1="1" x2="8" y2="3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="8" y1="12.5" x2="8" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="1" y1="8" x2="3.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="12.5" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" />
+            <circle cx="8" cy="8" r="1" fill="currentColor" />
+            <line x1="8" y1="0.5" x2="8" y2="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="8" y1="13" x2="8" y2="15.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="0.5" y1="8" x2="3" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="13" y1="8" x2="15.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
 
@@ -1238,8 +1169,40 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
 
       {debugMode && (
-        <div className="absolute bottom-4 left-4 z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5 w-64 pointer-events-auto">
-          <div className="flex items-center justify-between gap-2 border-b border-white/20 pb-1.5">
+        <div
+          ref={debugPanelRef}
+          className="absolute z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5 w-64 pointer-events-auto"
+          style={debugPanelPos.y === -1
+            ? { left: debugPanelPos.x, bottom: 16 }
+            : { left: debugPanelPos.x, top: debugPanelPos.y }
+          }
+        >
+          <div
+            className="flex items-center justify-between gap-2 border-b border-white/20 pb-1.5 cursor-grab active:cursor-grabbing select-none"
+            onPointerDown={(e) => {
+              const panel = debugPanelRef.current;
+              if (!panel) return;
+              const rect = panel.getBoundingClientRect();
+              debugDragRef.current = {
+                startX: e.clientX,
+                startY: e.clientY,
+                startPosX: rect.left,
+                startPosY: rect.top,
+              };
+              e.currentTarget.setPointerCapture(e.pointerId);
+            }}
+            onPointerMove={(e) => {
+              const drag = debugDragRef.current;
+              if (!drag) return;
+              const dx = e.clientX - drag.startX;
+              const dy = e.clientY - drag.startY;
+              setDebugPanelPos({
+                x: drag.startPosX + dx,
+                y: drag.startPosY + dy,
+              });
+            }}
+            onPointerUp={() => { debugDragRef.current = null; }}
+          >
             <span className="text-[9px] uppercase tracking-widest text-white/50">Debug</span>
             <div className="flex gap-1">
               <button
@@ -1248,13 +1211,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                 aria-label="Show normal debug mode"
               >
                 normal
-              </button>
-              <button
-                onClick={() => setDebugMode("geo")}
-                className={`rounded px-1.5 py-0.5 text-[9px] uppercase tracking-widest transition-colors ${debugMode === "geo" ? "bg-yellow-400/90 text-black" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                aria-label="Show geo debug mode"
-              >
-                geo
               </button>
             </div>
           </div>
@@ -1285,159 +1241,48 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             </>
           )}
 
-          {debugMode === "geo" && (
-            <div className="space-y-1.5">
-              <div className="space-y-0.5 pointer-events-none">
-                <div>mapper: {geoMapperStatus} ({geoSegmentCount} segs, {mapperRef.current?.anchorCount ?? 0} anchors)</div>
-                <div>gps: {geoStatus}{lastFix ? ` ±${lastFix.accuracy.toFixed(0)}m` : ""}</div>
-              </div>
-
-              {/* Current location */}
-              {lastFix && (
-                <div className="flex items-center gap-1">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40 shrink-0">loc:</span>
-                  <span className="text-[10px] text-white/70 truncate">{lastFix.position.lat.toFixed(5)}, {lastFix.position.lng.toFixed(5)}</span>
-                  <button
-                    onClick={() => navigator.clipboard.writeText(`${lastFix.position.lat.toFixed(6)}, ${lastFix.position.lng.toFixed(6)}`)}
-                    className="shrink-0 rounded px-1 py-0.5 text-[9px] text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
-                    aria-label="Copy coordinates"
-                  >
-                    copy
-                  </button>
-                </div>
-              )}
-
-              {/* Mock GPS input */}
-              <div className="border-t border-white/10 pt-1.5">
-                <div className="text-[9px] uppercase tracking-widest text-white/40 mb-1">mock gps</div>
-                <div className="flex gap-1">
-                  <input
-                    type="text"
-                    value={mockGeoInput}
-                    onChange={(e) => setMockGeoInput(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyMockGeo(); } }}
-                    placeholder="lat, lng"
-                    className="flex-1 min-w-0 rounded bg-white/10 px-1.5 py-1 text-[10px] text-white placeholder:text-white/30 outline-none focus:bg-white/15"
-                  />
-                  <button
-                    onClick={applyMockGeo}
-                    className="shrink-0 rounded bg-blue-500/80 px-2 py-1 text-[10px] text-white hover:bg-blue-500 transition-colors"
-                  >
-                    set
-                  </button>
-                  {mockGeoActive && (
-                    <button
-                      onClick={clearMockGeo}
-                      className="shrink-0 rounded bg-white/10 px-2 py-1 text-[10px] text-white/70 hover:bg-white/20 transition-colors"
+          {/* Anchor point tester */}
+          <div className="border-t border-white/10 pt-1.5 space-y-1">
+            <div className="text-[9px] uppercase tracking-widest text-white/40">Anchor Test ({debugAnchors.length})</div>
+            {debugAnchors.length === 0 ? (
+              <div className="text-[10px] text-white/30">no anchor-points.json for {activeArea.id}</div>
+            ) : (
+              <></>
+            )}
+            {debugAnchors.length > 0 && (
+              <>
+              <select
+                value={debugSelectedAnchor}
+                onChange={(e) => setDebugSelectedAnchor(e.target.value)}
+                className="w-full rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
+              >
+                <option value="" className="bg-[#111]">select restaurant...</option>
+                {debugAnchors.map((a) => (
+                  <option key={a.id} value={a.id} className="bg-[#111]">{a.name}</option>
+                ))}
+              </select>
+              {(() => {
+                const a = debugAnchors.find((x) => x.id === debugSelectedAnchor);
+                if (!a) return null;
+                return (
+                  <div className="space-y-0.5">
+                    <div className="text-[10px] text-white/70">{a.geo.lat.toFixed(6)}, {a.geo.lng.toFixed(6)}</div>
+                    <a
+                      href={`https://www.openstreetmap.org/#map=19/${a.geo.lat}/${a.geo.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] text-blue-400 hover:text-blue-300 underline"
                     >
-                      clear
-                    </button>
-                  )}
-                </div>
-                <div className="text-[10px] mt-0.5 h-4">
-                  {mockGeoActive && (
-                    <span className="text-yellow-400/80">mock active</span>
-                  )}
-                </div>
-              </div>
-
-              {/* Route simulation */}
-              {geoMapperStatus === "ready" && mapperRef.current && (
-                <div className="border-t border-white/10 pt-1.5">
-                  <div className="text-[9px] uppercase tracking-widest text-white/40 mb-1">simulate route</div>
-                  <div className="flex gap-1 items-center">
-                    <select
-                      value={simRoute}
-                      onChange={(e) => { stopSim(); setSimRoute(e.target.value); }}
-                      className="flex-1 min-w-0 rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
-                    >
-                      <option value="" className="bg-[#111]">select route</option>
-                      {mapperRef.current.routes
-                        .slice()
-                        .sort((a, b) => {
-                          const na = parseInt(a.number), nb = parseInt(b.number);
-                          if (!isNaN(na) && !isNaN(nb)) return na - nb;
-                          return a.number.localeCompare(b.number);
-                        })
-                        .map((r) => (
-                          <option key={r.pisteId} value={r.number} className="bg-[#111]">
-                            {r.number} ({r.segments.length} seg, {r.segments.reduce((n, s) => n + s.geoPoints.length, 0)} pts)
-                          </option>
-                        ))}
-                    </select>
-                    {!simPlaying ? (
-                      <button
-                        onClick={startSim}
-                        disabled={!simRoute}
-                        className="shrink-0 rounded bg-green-500/80 px-2 py-1 text-[10px] text-white hover:bg-green-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        ▶
-                      </button>
-                    ) : (
-                      <button
-                        onClick={stopSim}
-                        className="shrink-0 rounded bg-red-500/80 px-2 py-1 text-[10px] text-white hover:bg-red-500 transition-colors"
-                      >
-                        ■
-                      </button>
-                    )}
+                      view on OSM
+                    </a>
+                    <div className="text-[10px] text-white/40">pano: {a.panorama.x.toFixed(0)}, {a.panorama.y.toFixed(0)}</div>
                   </div>
-                  <div className="text-[10px] mt-0.5 h-4">
-                    {simPlaying && (
-                      <span className="text-green-400/80">simulating: {simProgress + 1}/{getSimPoints().length}</span>
-                    )}
-                  </div>
-                </div>
-              )}
+                );
+              })()}
+            </>
+            )}
+          </div>
 
-              {/* Projection result */}
-              {lastProjection ? (
-                <div className="space-y-0.5 pointer-events-none border-t border-white/10 pt-1.5">
-                  <div>proj: {lastProjection.point.x.toFixed(1)}, {lastProjection.point.y.toFixed(1)}</div>
-                  {lastProjection.anchorName ? (
-                    <div className="text-green-400/90">anchor: {lastProjection.anchorName} ({lastProjection.distance.toFixed(0)}m)</div>
-                  ) : (
-                    <div>route: {lastProjection.routeNumber} ({lastProjection.distance.toFixed(0)}m)</div>
-                  )}
-                  <div className="text-[9px] text-white/40 truncate">seg: {lastProjection.segmentId}</div>
-                </div>
-              ) : (followLocation || mockGeoActive) ? (
-                <div className="text-white/40 pointer-events-none">no route match</div>
-              ) : null}
-
-              {/* Picked point (click-to-inspect) */}
-              {pickedPoint && (
-                <div className="border-t border-white/10 pt-1.5 space-y-0.5">
-                  <div className="text-[9px] uppercase tracking-widest text-white/40">picked point</div>
-                  <div className="pointer-events-none">pano: {pickedPoint.px.toFixed(0)}, {pickedPoint.py.toFixed(0)}</div>
-                  {pickedPoint.geo ? (
-                    <>
-                      <div className="flex items-center gap-1">
-                        <span className="pointer-events-none">{pickedPoint.geo.lat.toFixed(6)}, {pickedPoint.geo.lng.toFixed(6)}</span>
-                        <button
-                          onClick={() => navigator.clipboard.writeText(`${pickedPoint.geo!.lat.toFixed(6)}, ${pickedPoint.geo!.lng.toFixed(6)}`)}
-                          className="shrink-0 rounded px-1 py-0.5 text-[9px] text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
-                        >
-                          copy
-                        </button>
-                        <a
-                          href={`https://www.openstreetmap.org/?mlat=${pickedPoint.geo!.lat.toFixed(6)}&mlon=${pickedPoint.geo!.lng.toFixed(6)}#map=17/${pickedPoint.geo!.lat.toFixed(6)}/${pickedPoint.geo!.lng.toFixed(6)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="shrink-0 rounded px-1 py-0.5 text-[9px] text-blue-400/80 hover:bg-white/10 hover:text-blue-300 transition-colors"
-                        >
-                          OSM
-                        </a>
-                      </div>
-                      <div className="text-[9px] text-white/40 truncate">via: {pickedPoint.source}</div>
-                    </>
-                  ) : (
-                    <div className="text-white/40">no geo match</div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
         </div>
       )}
 
