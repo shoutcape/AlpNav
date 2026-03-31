@@ -1,0 +1,1640 @@
+[
+  {
+    "osmId": "node/8535885301",
+    "name": "Laterndl Pub",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.1522251,
+      "lng": 11.8218692
+    }
+  },
+  {
+    "osmId": "node/7733731407",
+    "name": "Melcherbar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1687236,
+      "lng": 11.8008474
+    }
+  },
+  {
+    "osmId": "node/7733731408",
+    "name": "Kasermandl am Penken",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1749682,
+      "lng": 11.8149077
+    }
+  },
+  {
+    "osmId": "node/8535885299",
+    "name": "Gasthaus Lärchwaldhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    }
+  },
+  {
+    "osmId": "node/5248322122",
+    "name": "Stieralm Penken",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1760029,
+      "lng": 11.8282279
+    }
+  },
+  {
+    "osmId": "node/7313174791",
+    "name": "Bergrast",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.175427,
+      "lng": 11.8283605
+    }
+  },
+  {
+    "osmId": "node/7313185694",
+    "name": "Skihütte Pilzbar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1749523,
+      "lng": 11.8270687
+    }
+  },
+  {
+    "osmId": "node/7315466585",
+    "name": "Restaurant Pilzbar",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1748312,
+      "lng": 11.827362
+    }
+  },
+  {
+    "osmId": "node/7315468353",
+    "name": "Elchbar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1752921,
+      "lng": 11.8283139
+    }
+  },
+  {
+    "osmId": "node/1891130275",
+    "name": "Gschößwandhaus",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.174623,
+      "lng": 11.8340092
+    }
+  },
+  {
+    "osmId": "node/357331196",
+    "name": "Restaurant Horberg",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1826957,
+      "lng": 11.8101456
+    }
+  },
+  {
+    "osmId": "node/2470318403",
+    "name": "Wirtshaus zum Griena",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1587752,
+      "lng": 11.8562521
+    }
+  },
+  {
+    "osmId": "node/8901802197",
+    "name": "Stoaner's Bienenhäusl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1598653,
+      "lng": 11.8603009
+    }
+  },
+  {
+    "osmId": "node/8911921331",
+    "name": "Brück'n Stadl",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1614121,
+      "lng": 11.8607189
+    }
+  },
+  {
+    "osmId": "node/13430346701",
+    "name": "Café-Restaurant Mount Everest",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1608588,
+      "lng": 11.86137
+    }
+  },
+  {
+    "osmId": "node/8901711135",
+    "name": "Ländenhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1592082,
+      "lng": 11.8645741
+    }
+  },
+  {
+    "osmId": "node/357592097",
+    "name": "Eisbar",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.163422,
+      "lng": 11.8610826
+    }
+  },
+  {
+    "osmId": "node/2419736798",
+    "name": "Happy End",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.1631787,
+      "lng": 11.8610721
+    }
+  },
+  {
+    "osmId": "node/8904426605",
+    "name": "Pane e Vino da Michele",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1646364,
+      "lng": 11.8618162
+    }
+  },
+  {
+    "osmId": "node/690430862",
+    "name": "Kostner",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.1674754,
+      "lng": 11.8629603
+    }
+  },
+  {
+    "osmId": "node/1405608370",
+    "name": "Hotel Neue Post",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1688964,
+      "lng": 11.864529
+    }
+  },
+  {
+    "osmId": "node/1405608379",
+    "name": "Neue Post",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.1690032,
+      "lng": 11.8647304
+    }
+  },
+  {
+    "osmId": "node/1413626042",
+    "name": "Cadillac",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.1676571,
+      "lng": 11.8630774
+    }
+  },
+  {
+    "osmId": "node/2453510991",
+    "name": "Wald Cafe",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1638285,
+      "lng": 11.8648466
+    }
+  },
+  {
+    "osmId": "node/3012908226",
+    "name": "Mo's",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1669636,
+      "lng": 11.8631601
+    }
+  },
+  {
+    "osmId": "node/3446133777",
+    "name": "New York Bistro",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.167899,
+      "lng": 11.8633476
+    }
+  },
+  {
+    "osmId": "node/3450054886",
+    "name": "Nachtcafe Apropos",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.1679644,
+      "lng": 11.863369
+    }
+  },
+  {
+    "osmId": "node/3635172809",
+    "name": "Café Tirol",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.165557,
+      "lng": 11.8621755
+    }
+  },
+  {
+    "osmId": "node/4753305177",
+    "name": "Harakiri bar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1649119,
+      "lng": 11.8620238
+    }
+  },
+  {
+    "osmId": "node/5688619700",
+    "name": "Bacher Brot",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.1646386,
+      "lng": 11.8633535
+    }
+  },
+  {
+    "osmId": "node/8900027186",
+    "name": "El Toro",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1662852,
+      "lng": 11.8653039
+    }
+  },
+  {
+    "osmId": "node/8900027271",
+    "name": "Piccadilly Pub",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.1664806,
+      "lng": 11.8653431
+    }
+  },
+  {
+    "osmId": "node/8901511225",
+    "name": "Edelweiss Lounge",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.166543,
+      "lng": 11.8650811
+    }
+  },
+  {
+    "osmId": "node/8901881378",
+    "name": "China Restaurant Singapore",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1661852,
+      "lng": 11.8651832
+    }
+  },
+  {
+    "osmId": "node/8904340485",
+    "name": "Berg & Tal",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1650467,
+      "lng": 11.8620547
+    }
+  },
+  {
+    "osmId": "node/8904467534",
+    "name": "Mr.Lei",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1672077,
+      "lng": 11.8628045
+    }
+  },
+  {
+    "osmId": "node/8911921332",
+    "name": "BrasserieQ",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.164536,
+      "lng": 11.8620479
+    }
+  },
+  {
+    "osmId": "node/8911921333",
+    "name": "Goldkind",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1654388,
+      "lng": 11.8623886
+    }
+  },
+  {
+    "osmId": "node/8928758606",
+    "name": "Cafe Ciao",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.165473,
+      "lng": 11.8627785
+    }
+  },
+  {
+    "osmId": "node/8928758615",
+    "name": "Mike's Sportsbar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1687194,
+      "lng": 11.8659494
+    }
+  },
+  {
+    "osmId": "node/12022231781",
+    "name": "Bar Rique",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.1655044,
+      "lng": 11.8627915
+    }
+  },
+  {
+    "osmId": "node/8928815020",
+    "name": "GH Forellenstüberl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.176012,
+      "lng": 11.8667271
+    }
+  },
+  {
+    "osmId": "node/9916928689",
+    "name": "Ernesto’s Lounge-Bar",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1703449,
+      "lng": 11.8629111
+    }
+  },
+  {
+    "osmId": "node/12846799936",
+    "name": "Landhotel Denggerhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1754616,
+      "lng": 11.8690502
+    }
+  },
+  {
+    "osmId": "node/8928815026",
+    "name": "GH Bruggerstube",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1818946,
+      "lng": 11.8712241
+    }
+  },
+  {
+    "osmId": "node/12444009101",
+    "name": "Hiatamadl Apres Ski Stadl",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.190463,
+      "lng": 11.8583029
+    }
+  },
+  {
+    "osmId": "node/8922302502",
+    "name": "GH Berghof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2000585,
+      "lng": 11.8512255
+    }
+  },
+  {
+    "osmId": "node/1421020906",
+    "name": "Schwendach'er Pub",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.198115,
+      "lng": 11.8587616
+    }
+  },
+  {
+    "osmId": "node/8922790871",
+    "name": "Cafe Smash",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2015657,
+      "lng": 11.8666785
+    }
+  },
+  {
+    "osmId": "node/11035723804",
+    "name": "Brindling Alm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2075122,
+      "lng": 11.8340945
+    }
+  },
+  {
+    "osmId": "node/9009722823",
+    "name": "Jausenstation Nasenalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.210179,
+      "lng": 11.8366688
+    }
+  },
+  {
+    "osmId": "node/5892929285",
+    "name": "Rieserhütte",
+    "amenityType": "alpine_hut",
+    "geo": {
+      "lat": 47.2199846,
+      "lng": 11.8365471
+    }
+  },
+  {
+    "osmId": "node/298876748",
+    "name": "Zellberg Stüberl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2433503,
+      "lng": 11.834063
+    }
+  },
+  {
+    "osmId": "node/298876750",
+    "name": "Hirschbichlalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2435127,
+      "lng": 11.8348838
+    }
+  },
+  {
+    "osmId": "node/331948842",
+    "name": "Kristallhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2502008,
+      "lng": 11.8385679
+    }
+  },
+  {
+    "osmId": "node/613114549",
+    "name": "Wedelhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2559582,
+      "lng": 11.8106187
+    }
+  },
+  {
+    "osmId": "node/6187838672",
+    "name": "Albergo",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2581072,
+      "lng": 11.8266702
+    }
+  },
+  {
+    "osmId": "node/298876694",
+    "name": "Zirmstadl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2698608,
+      "lng": 11.8444175
+    }
+  },
+  {
+    "osmId": "node/333787245",
+    "name": "Boxenstopp",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.2738374,
+      "lng": 11.8449173
+    }
+  },
+  {
+    "osmId": "node/4785922803",
+    "name": "Berggasthof Platzlalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2686301,
+      "lng": 11.8456542
+    }
+  },
+  {
+    "osmId": "node/6187854099",
+    "name": "Mountain View",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2696421,
+      "lng": 11.8471034
+    }
+  },
+  {
+    "osmId": "node/8922302516",
+    "name": "Hotel Garberwirt",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2047211,
+      "lng": 11.8649751
+    }
+  },
+  {
+    "osmId": "node/8922351617",
+    "name": "GH Christlwirt",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2049299,
+      "lng": 11.8649354
+    }
+  },
+  {
+    "osmId": "node/8922790872",
+    "name": "Bar Ramba Zamba",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.2034509,
+      "lng": 11.8667926
+    }
+  },
+  {
+    "osmId": "node/4736864850",
+    "name": "Gasthof Tipotsch",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2049268,
+      "lng": 11.8703226
+    }
+  },
+  {
+    "osmId": "node/8624737818",
+    "name": "Zillertaler Hausmannskost",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2055303,
+      "lng": 11.8703963
+    }
+  },
+  {
+    "osmId": "node/8624737826",
+    "name": "Des Iss",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2066655,
+      "lng": 11.8715198
+    }
+  },
+  {
+    "osmId": "node/11632615501",
+    "name": "Lebenshilfe Kantine Ramsau",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2056612,
+      "lng": 11.8722631
+    }
+  },
+  {
+    "osmId": "node/11632615502",
+    "name": "La Rustica",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2048962,
+      "lng": 11.8739222
+    }
+  },
+  {
+    "osmId": "node/5693670036",
+    "name": "Baguette",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2096551,
+      "lng": 11.8728411
+    }
+  },
+  {
+    "osmId": "node/9647698899",
+    "name": "Tweets",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2049813,
+      "lng": 11.8770629
+    }
+  },
+  {
+    "osmId": "node/1423412344",
+    "name": "Taverne Hellas",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2223251,
+      "lng": 11.890391
+    }
+  },
+  {
+    "osmId": "node/9003069864",
+    "name": "Jausenstation Söggen Aste",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2470709,
+      "lng": 11.8525985
+    }
+  },
+  {
+    "osmId": "node/1369891133",
+    "name": "Quat4ro",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.232505,
+      "lng": 11.8814809
+    }
+  },
+  {
+    "osmId": "node/5543217683",
+    "name": "Cafe X-press",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2336575,
+      "lng": 11.8813347
+    }
+  },
+  {
+    "osmId": "node/7221744246",
+    "name": "Restaurant Zeller Stuben",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2342477,
+      "lng": 11.8808819
+    }
+  },
+  {
+    "osmId": "node/8574571296",
+    "name": "Gredler",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2344264,
+      "lng": 11.8803684
+    }
+  },
+  {
+    "osmId": "node/11078741029",
+    "name": "Cafe Restaurant im Park",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.231164,
+      "lng": 11.8779829
+    }
+  },
+  {
+    "osmId": "node/12952501408",
+    "name": "Gasthof Kirchenwirt",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2334557,
+      "lng": 11.8815996
+    }
+  },
+  {
+    "osmId": "node/4385743549",
+    "name": "Spitz Bua",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.22868,
+      "lng": 11.8858593
+    }
+  },
+  {
+    "osmId": "node/8574876223",
+    "name": "Waldrast",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2303562,
+      "lng": 11.8960785
+    }
+  },
+  {
+    "osmId": "node/4385753051",
+    "name": "zum Tuxer",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2374996,
+      "lng": 11.8987506
+    }
+  },
+  {
+    "osmId": "node/11475785626",
+    "name": "dasDörfl412",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.2166961,
+      "lng": 11.9031841
+    }
+  },
+  {
+    "osmId": "node/514525897",
+    "name": "Bergrestaurant Wiesenalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2391441,
+      "lng": 11.9225695
+    }
+  },
+  {
+    "osmId": "node/659541228",
+    "name": "Rosi's Schnitzelhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.233438,
+      "lng": 11.9397762
+    }
+  },
+  {
+    "osmId": "node/331956561",
+    "name": "Marendalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2645524,
+      "lng": 11.8526326
+    }
+  },
+  {
+    "osmId": "node/10956789653",
+    "name": "Beach Cafe Aufenfeld",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2657899,
+      "lng": 11.9011049
+    }
+  },
+  {
+    "osmId": "node/8524859270",
+    "name": "White Horse",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.267857,
+      "lng": 11.9012935
+    }
+  },
+  {
+    "osmId": "node/8911921320",
+    "name": "Tina's Café",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2779425,
+      "lng": 11.890478
+    }
+  },
+  {
+    "osmId": "node/12692667416",
+    "name": "zum Mug",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2785073,
+      "lng": 11.8944926
+    }
+  },
+  {
+    "osmId": "node/8233957566",
+    "name": "Restaurant Liebstöckl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2914194,
+      "lng": 11.8710854
+    }
+  },
+  {
+    "osmId": "node/8524732584",
+    "name": "Gasthof Brücke",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2929124,
+      "lng": 11.8750845
+    }
+  },
+  {
+    "osmId": "node/8997743414",
+    "name": "Zum Franz",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2934088,
+      "lng": 11.874425
+    }
+  },
+  {
+    "osmId": "node/11190419273",
+    "name": "Cafe Wedelstube",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2889607,
+      "lng": 11.8729042
+    }
+  },
+  {
+    "osmId": "node/11190419275",
+    "name": "sChic Lifestyle & Bar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.2893318,
+      "lng": 11.8729337
+    }
+  },
+  {
+    "osmId": "node/12861205684",
+    "name": "Café & Bar Schmied IN",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.293613,
+      "lng": 11.8749288
+    }
+  },
+  {
+    "osmId": "node/12507624146",
+    "name": "Pizzeria Pub Trend",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.294327,
+      "lng": 11.8748528
+    }
+  },
+  {
+    "osmId": "node/6852539075",
+    "name": "Baguette",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2902633,
+      "lng": 11.8769677
+    }
+  },
+  {
+    "osmId": "node/681301176",
+    "name": "SowiesO",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2936903,
+      "lng": 11.8839857
+    }
+  },
+  {
+    "osmId": "node/681317046",
+    "name": "Riedl",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2932418,
+      "lng": 11.8831262
+    }
+  },
+  {
+    "osmId": "node/681324567",
+    "name": "Landgasthof Linde",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2907132,
+      "lng": 11.8873609
+    }
+  },
+  {
+    "osmId": "node/1809930091",
+    "name": "Gasthaus Nester",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2911042,
+      "lng": 11.8865748
+    }
+  },
+  {
+    "osmId": "node/1809955738",
+    "name": "Nester Bar",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.2911479,
+      "lng": 11.8866734
+    }
+  },
+  {
+    "osmId": "node/8329082212",
+    "name": "Dorfbäck",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2902105,
+      "lng": 11.8871608
+    }
+  },
+  {
+    "osmId": "node/8510785322",
+    "name": "Tiatta",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2920459,
+      "lng": 11.8859395
+    }
+  },
+  {
+    "osmId": "node/12724159742",
+    "name": "La Pasta Hotel & Restaurant",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2914875,
+      "lng": 11.886476
+    }
+  },
+  {
+    "osmId": "node/4225591192",
+    "name": "Märzenklamm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.298127,
+      "lng": 11.8873657
+    }
+  },
+  {
+    "osmId": "node/320648931",
+    "name": "Jägerklause",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.29931,
+      "lng": 11.8909063
+    }
+  },
+  {
+    "osmId": "node/9805520546",
+    "name": "Jagdhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2635612,
+      "lng": 11.9024275
+    }
+  },
+  {
+    "osmId": "node/9065758195",
+    "name": "Jausenstation Stuana Hitte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2587531,
+      "lng": 11.9160122
+    }
+  },
+  {
+    "osmId": "node/7228424699",
+    "name": "Gasthof Talblick",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.267097,
+      "lng": 11.9178967
+    }
+  },
+  {
+    "osmId": "node/1420367588",
+    "name": "s'legal",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2549182,
+      "lng": 11.9494919
+    }
+  },
+  {
+    "osmId": "node/1420367587",
+    "name": "Kapaunsalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2691035,
+      "lng": 11.9458409
+    }
+  },
+  {
+    "osmId": "way/141123076",
+    "name": "Almstüberl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.162496738461535,
+      "lng": 11.808098592307694
+    }
+  },
+  {
+    "osmId": "way/141195792",
+    "name": "Penkenjochhaus",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.168555157142855,
+      "lng": 11.799950242857141
+    }
+  },
+  {
+    "osmId": "way/141195977",
+    "name": "Penkentenne",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.168666050000006,
+      "lng": 11.80101195
+    }
+  },
+  {
+    "osmId": "way/141195738",
+    "name": "Granatalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.16956898421053,
+      "lng": 11.800230105263157
+    }
+  },
+  {
+    "osmId": "way/141122856",
+    "name": "Penken Panorahma Restaurant",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1710431,
+      "lng": 11.808504240000001
+    }
+  },
+  {
+    "osmId": "way/142272746",
+    "name": "Hotel Restaurant Neuwirt",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.15409238571429,
+      "lng": 11.825081342857143
+    }
+  },
+  {
+    "osmId": "way/142272657",
+    "name": "Gasthaus Hochsteg",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.15500558,
+      "lng": 11.835698019999999
+    }
+  },
+  {
+    "osmId": "way/141122901",
+    "name": "Gasthaus Astegg",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.166607357142865,
+      "lng": 11.837147842857144
+    }
+  },
+  {
+    "osmId": "way/139080639",
+    "name": "Hildes Schitenne",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1814331,
+      "lng": 11.80143118
+    }
+  },
+  {
+    "osmId": "way/139080734",
+    "name": "Jausenstation Tappenalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.181835,
+      "lng": 11.802466957142855
+    }
+  },
+  {
+    "osmId": "way/96717058",
+    "name": "Eisberghütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.184142614285726,
+      "lng": 11.809662942857143
+    }
+  },
+  {
+    "osmId": "way/96717060",
+    "name": "Kressbrunnalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1837868,
+      "lng": 11.80876266
+    }
+  },
+  {
+    "osmId": "way/139080668",
+    "name": "Schiestl's Sunnalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.188517128571426,
+      "lng": 11.810213857142857
+    }
+  },
+  {
+    "osmId": "way/141323564",
+    "name": "Wiesenhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.15098934,
+      "lng": 11.85805564
+    }
+  },
+  {
+    "osmId": "way/129120806",
+    "name": "Gasthof Perauer",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.1610484,
+      "lng": 11.861052933333333
+    }
+  },
+  {
+    "osmId": "way/141092132",
+    "name": "Gasthof Brücke",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.16152592142857,
+      "lng": 11.860148999999998
+    }
+  },
+  {
+    "osmId": "way/129121114",
+    "name": "Würstelstand Blechhotel",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.15861148571429,
+      "lng": 11.863650971428571
+    }
+  },
+  {
+    "osmId": "way/139308407",
+    "name": "Gasthaus Zimmereben",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.17347118,
+      "lng": 11.85908748
+    }
+  },
+  {
+    "osmId": "way/122563165",
+    "name": "Scotland Yard Pub",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.16611133333333,
+      "lng": 11.864544483333333
+    }
+  },
+  {
+    "osmId": "way/505249566",
+    "name": "Zwei Ender",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.16374242,
+      "lng": 11.8670097
+    }
+  },
+  {
+    "osmId": "way/129024177",
+    "name": "Alpenhof Kristall",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.17006904,
+      "lng": 11.865245420000003
+    }
+  },
+  {
+    "osmId": "way/140499376",
+    "name": "Steinerkogl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.16734108888889,
+      "lng": 11.881531033333333
+    }
+  },
+  {
+    "osmId": "way/62277705",
+    "name": "Gasthof Thanner",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.167631914285714,
+      "lng": 11.900237285714285
+    }
+  },
+  {
+    "osmId": "way/139071145",
+    "name": "Schrofenblick",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.17900174,
+      "lng": 11.861785489999999
+    }
+  },
+  {
+    "osmId": "way/128948722",
+    "name": "Yeti-Bar",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.19093018947368,
+      "lng": 11.858129710526313
+    }
+  },
+  {
+    "osmId": "way/128949140",
+    "name": "Sidan",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.189505485714285,
+      "lng": 11.860769885714287
+    }
+  },
+  {
+    "osmId": "way/123466395",
+    "name": "Kolmhaus",
+    "amenityType": "alpine_hut",
+    "geo": {
+      "lat": 47.17364487142857,
+      "lng": 11.935870157142856
+    }
+  },
+  {
+    "osmId": "way/140499450",
+    "name": "Karlalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.18423639,
+      "lng": 11.904905730000001
+    }
+  },
+  {
+    "osmId": "way/123233627",
+    "name": "Berghotel Gerlosstein",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.202352700000006,
+      "lng": 11.913396914285714
+    }
+  },
+  {
+    "osmId": "way/295093339",
+    "name": "Neue Kotahornalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.19974585714285,
+      "lng": 11.904586628571428
+    }
+  },
+  {
+    "osmId": "way/369599848",
+    "name": "Sonnenstüberl Arbiskogel",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.198922319999994,
+      "lng": 11.91107249
+    }
+  },
+  {
+    "osmId": "way/140152793",
+    "name": "Almhof Roswitha",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.20708783333334,
+      "lng": 11.817523977777778
+    }
+  },
+  {
+    "osmId": "way/140241573",
+    "name": "Jausenstation Melchboden",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.21840518571429,
+      "lng": 11.823407457142858
+    }
+  },
+  {
+    "osmId": "way/142809406",
+    "name": "Grünalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.241676285714284,
+      "lng": 11.837096057142857
+    }
+  },
+  {
+    "osmId": "way/835065658",
+    "name": "Kashütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.25129946923077,
+      "lng": 11.83411122307692
+    }
+  },
+  {
+    "osmId": "way/86912996",
+    "name": "Kaltenbacher Skihütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2738692,
+      "lng": 11.83980378
+    }
+  },
+  {
+    "osmId": "way/86912990",
+    "name": "Boxenstopp",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.27383962857143,
+      "lng": 11.845056299999998
+    }
+  },
+  {
+    "osmId": "way/93477027",
+    "name": "Zillertaler Schi-Alm",
+    "amenityType": "alpine_hut",
+    "geo": {
+      "lat": 47.269996500000005,
+      "lng": 11.84611992857143
+    }
+  },
+  {
+    "osmId": "way/416844562",
+    "name": "Firnhütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.273812379999995,
+      "lng": 11.844878
+    }
+  },
+  {
+    "osmId": "way/126980345",
+    "name": "Kröll",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.204843644444445,
+      "lng": 11.865336288888887
+    }
+  },
+  {
+    "osmId": "way/126980388",
+    "name": "Zillertaler Weinstadl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.20354007142857,
+      "lng": 11.86610152857143
+    }
+  },
+  {
+    "osmId": "way/127065432",
+    "name": "Sonnengartl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.20409106,
+      "lng": 11.86928796
+    }
+  },
+  {
+    "osmId": "way/140330246",
+    "name": "Jausenstüberl Talbach",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.2250110888889,
+      "lng": 11.863577344444444
+    }
+  },
+  {
+    "osmId": "way/178314526",
+    "name": "Schlittenstadl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.20814438,
+      "lng": 11.8981326
+    }
+  },
+  {
+    "osmId": "way/132454315",
+    "name": "Schulhaus",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.23770732,
+      "lng": 11.874202819999999
+    }
+  },
+  {
+    "osmId": "way/106561358",
+    "name": "Hotel-Gasthof Bräu",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.23323419411765,
+      "lng": 11.88119829411765
+    }
+  },
+  {
+    "osmId": "way/106561363",
+    "name": "Neuwirt",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.234352,
+      "lng": 11.880648
+    }
+  },
+  {
+    "osmId": "way/106561373",
+    "name": "Café Kerzenstüberl",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.23402936,
+      "lng": 11.87967884
+    }
+  },
+  {
+    "osmId": "way/106434930",
+    "name": "Hotel-Restaurant Rosengarten",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.234285240000006,
+      "lng": 11.88608678
+    }
+  },
+  {
+    "osmId": "way/106673094",
+    "name": "Saustadl",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.237649368750006,
+      "lng": 11.899528668750001
+    }
+  },
+  {
+    "osmId": "way/106673124",
+    "name": "Krocha Alm",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.23758906923077,
+      "lng": 11.899128876923076
+    }
+  },
+  {
+    "osmId": "way/228792486",
+    "name": "Jogg'l Kessl",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.2401197,
+      "lng": 11.9001059
+    }
+  },
+  {
+    "osmId": "way/292673478",
+    "name": "Gerlosstein Lodge",
+    "amenityType": "bar",
+    "geo": {
+      "lat": 47.21302592,
+      "lng": 11.90333416
+    }
+  },
+  {
+    "osmId": "way/158589806",
+    "name": "Alpengasthof Enzianhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.22891663076923,
+      "lng": 11.916419715384617
+    }
+  },
+  {
+    "osmId": "way/158582017",
+    "name": "Kreithütte",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2469877,
+      "lng": 11.938888185714285
+    }
+  },
+  {
+    "osmId": "way/158582020",
+    "name": "Rosenalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.24692242307693,
+      "lng": 11.941310676923079
+    }
+  },
+  {
+    "osmId": "way/143777227",
+    "name": "Simons Skistadl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.24906207894737,
+      "lng": 11.941803757894736
+    }
+  },
+  {
+    "osmId": "way/179763573",
+    "name": "Abfahrtsalm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.26314026666667,
+      "lng": 11.869424877777778
+    }
+  },
+  {
+    "osmId": "way/96562577",
+    "name": "Schistadl",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.27932304,
+      "lng": 11.85920982
+    }
+  },
+  {
+    "osmId": "way/178298815",
+    "name": "Gasthaus Weiherwirt",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.25811248000001,
+      "lng": 11.894047519999999
+    }
+  },
+  {
+    "osmId": "way/131325196",
+    "name": "Cafe Veit",
+    "amenityType": "cafe",
+    "geo": {
+      "lat": 47.26665084,
+      "lng": 11.89604632
+    }
+  },
+  {
+    "osmId": "way/142296416",
+    "name": "Kruma",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.2630727,
+      "lng": 11.89576146
+    }
+  },
+  {
+    "osmId": "way/131518435",
+    "name": "Gasthof Rissbacherhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.27981896666667,
+      "lng": 11.893629444444445
+    }
+  },
+  {
+    "osmId": "way/97224255",
+    "name": "Postalm",
+    "amenityType": "pub",
+    "geo": {
+      "lat": 47.28819579090909,
+      "lng": 11.87339351818182
+    }
+  },
+  {
+    "osmId": "way/292552642",
+    "name": "Ferienhotel Platzlhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.299482221052635,
+      "lng": 11.862676310526316
+    }
+  },
+  {
+    "osmId": "way/158472484",
+    "name": "Gasthof Neumeister",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.29040632,
+      "lng": 11.88708866
+    }
+  },
+  {
+    "osmId": "way/158476789",
+    "name": "GuatzEssen",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.29689936666667,
+      "lng": 11.886703633333333
+    }
+  },
+  {
+    "osmId": "way/132458729",
+    "name": "Schnitzelstation Klammlhof",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.25509414444444,
+      "lng": 11.905985744444445
+    }
+  },
+  {
+    "osmId": "way/117810124",
+    "name": "Tannen - Alm",
+    "amenityType": "restaurant",
+    "geo": {
+      "lat": 47.29595157272727,
+      "lng": 11.907261954545454
+    }
+  }
+]

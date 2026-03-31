@@ -1,0 +1,226 @@
+[
+  {
+    "id": "gastro_23326",
+    "name": "Abfahrtshütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.26314026666667,
+      "lng": 11.869424877777778
+    },
+    "panorama": {
+      "x": 672.0,
+      "y": 3216.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23327",
+    "name": "Albergo",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2581072,
+      "lng": 11.8266702
+    },
+    "panorama": {
+      "x": 2392.0,
+      "y": 1064.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23328",
+    "name": "Bergrestaurant Mountain View",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2696421,
+      "lng": 11.8471034
+    },
+    "panorama": {
+      "x": 2840.0,
+      "y": 2176.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23333",
+    "name": "Die Kashütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.25129946923077,
+      "lng": 11.83411122307692
+    },
+    "panorama": {
+      "x": 1040.0,
+      "y": 1264.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23334",
+    "name": "Firnhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.273812379999995,
+      "lng": 11.844878
+    },
+    "panorama": {
+      "x": 3656.0,
+      "y": 2552.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23338",
+    "name": "Kaltenbacher Skihütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2738692,
+      "lng": 11.83980378
+    },
+    "panorama": {
+      "x": 3456.0,
+      "y": 2056.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23341",
+    "name": "Kristallhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2502008,
+      "lng": 11.8385679
+    },
+    "panorama": {
+      "x": 552.0,
+      "y": 1232.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23348",
+    "name": "Marendalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2645524,
+      "lng": 11.8526326
+    },
+    "panorama": {
+      "x": 1952.0,
+      "y": 2640.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23352",
+    "name": "Platzlalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2686301,
+      "lng": 11.8456542
+    },
+    "panorama": {
+      "x": 3016.0,
+      "y": 2120.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23353",
+    "name": "Postalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.28819579090909,
+      "lng": 11.87339351818182
+    },
+    "panorama": {
+      "x": 3136.0,
+      "y": 3632.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23356",
+    "name": "sCHIC Bar I LIfestyle & Bar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2893318,
+      "lng": 11.8729337
+    },
+    "panorama": {
+      "x": 3224.0,
+      "y": 3672.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23359",
+    "name": "Skistadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.27932304,
+      "lng": 11.85920982
+    },
+    "panorama": {
+      "x": 3048.0,
+      "y": 2712.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23363",
+    "name": "Wedelhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2559582,
+      "lng": 11.8106187
+    },
+    "panorama": {
+      "x": 3800.0,
+      "y": 1072.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_23384",
+    "name": "Zirmstadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.2698608,
+      "lng": 11.8444175
+    },
+    "panorama": {
+      "x": 3168.0,
+      "y": 2064.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_24122",
+    "name": "Berghotel",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.202352700000006,
+      "lng": 11.913396914285714
+    },
+    "panorama": {
+      "x": 5344.0,
+      "y": 2112.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_24131",
+    "name": "Almhof",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.20708783333334,
+      "lng": 11.817523977777778
+    },
+    "panorama": {
+      "x": 5432.0,
+      "y": 2288.0
+    },
+    "snapRadius": 200
+  }
+]
