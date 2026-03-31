@@ -1096,6 +1096,13 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
           )}
+          {gpsStatus === "active" && !gpsMatch && (
+            <motion.div
+              className="absolute inset-0 rounded-[13px] border-2 border-orange-400/50"
+              animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.15, 0.5] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" />
             <circle cx="8" cy="8" r="1" fill="currentColor" />
