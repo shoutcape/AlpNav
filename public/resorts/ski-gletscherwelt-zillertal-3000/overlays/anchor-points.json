@@ -1,0 +1,310 @@
+[
+  {
+    "id": "gastro_4982",
+    "name": "Almstüberl Finkenberg",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.162496738461535,
+      "lng": 11.808098592307694
+    },
+    "panorama": {
+      "x": 4120.0,
+      "y": 2744.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4984",
+    "name": "Bergrestaurant Eggalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16253685,
+      "lng": 11.712077975000001
+    },
+    "panorama": {
+      "x": 3712.0,
+      "y": 1432.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4987",
+    "name": "Granatalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16956898421053,
+      "lng": 11.800230105263157
+    },
+    "panorama": {
+      "x": 5344.0,
+      "y": 1912.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4989",
+    "name": "Egger Skialm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16197512,
+      "lng": 11.710783359999999
+    },
+    "panorama": {
+      "x": 3704.0,
+      "y": 1368.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4992",
+    "name": "Grillhofalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.17925454,
+      "lng": 11.79847282
+    },
+    "panorama": {
+      "x": 6576.0,
+      "y": 2040.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4994",
+    "name": "Heidi's Hütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.17961678181818,
+      "lng": 11.735745681818184
+    },
+    "panorama": {
+      "x": 4824.0,
+      "y": 1456.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4998",
+    "name": "Lattenalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1644733,
+      "lng": 11.7241766
+    },
+    "panorama": {
+      "x": 3992.0,
+      "y": 1640.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5001",
+    "name": "Kasermandl am Penken",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1749682,
+      "lng": 11.8149077
+    },
+    "panorama": {
+      "x": 5432.0,
+      "y": 2176.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5002",
+    "name": "Penkenjochhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.168555157142855,
+      "lng": 11.799950242857141
+    },
+    "panorama": {
+      "x": 5216.0,
+      "y": 1832.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5003",
+    "name": "Penkentenne",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.168666050000006,
+      "lng": 11.80101195
+    },
+    "panorama": {
+      "x": 5240.0,
+      "y": 1920.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5008",
+    "name": "Vogelnest",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.173025611111115,
+      "lng": 11.7236127
+    },
+    "panorama": {
+      "x": 4320.0,
+      "y": 1768.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5012",
+    "name": "Waldhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    },
+    "panorama": {
+      "x": 4528.0,
+      "y": 1680.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_5014",
+    "name": "Panorahma Restaurant",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1710431,
+      "lng": 11.808504240000001
+    },
+    "panorama": {
+      "x": 5328.0,
+      "y": 2032.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_28683",
+    "name": "Lärchwaldhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    },
+    "panorama": {
+      "x": 5520.0,
+      "y": 2120.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4119",
+    "name": "Gletscherhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.05797358333333,
+      "lng": 11.673892283333336
+    },
+    "panorama": {
+      "x": 384.0,
+      "y": 704.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4120",
+    "name": "Tuxer-Joch-Haus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.09884394285715,
+      "lng": 11.64955202857143
+    },
+    "panorama": {
+      "x": 2376.0,
+      "y": 664.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4121",
+    "name": "Bichlalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1188326,
+      "lng": 11.6791246
+    },
+    "panorama": {
+      "x": 2216.0,
+      "y": 1360.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4122",
+    "name": "Panorama Restaurant Sommerberg",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.0973082,
+      "lng": 11.6632779
+    },
+    "panorama": {
+      "x": 1904.0,
+      "y": 1232.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4123",
+    "name": "Tuxer Fernerhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.077041,
+      "lng": 11.6703144
+    },
+    "panorama": {
+      "x": 1152.0,
+      "y": 1088.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_17946",
+    "name": "Spannagelhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.07997791111111,
+      "lng": 11.6712493
+    },
+    "panorama": {
+      "x": 1024.0,
+      "y": 1232.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_4117",
+    "name": "Sommerberg Arena",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.09669641,
+      "lng": 11.663240495
+    },
+    "panorama": {
+      "x": 1824.0,
+      "y": 1184.0
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "gastro_293655",
+    "name": "Panoramabar im Tuxer Fernerhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.077041,
+      "lng": 11.6703144
+    },
+    "panorama": {
+      "x": 1160.0,
+      "y": 1120.0
+    },
+    "snapRadius": 200
+  }
+]
