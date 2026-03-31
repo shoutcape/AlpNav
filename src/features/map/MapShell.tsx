@@ -124,7 +124,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const gpsWatchRef = useRef<number | null>(null);
 
   // Debug: anchor point testing
-  const [debugAnchors, setDebugAnchors] = useState<{ id: string; name: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number } }[]>([]);
+  const [debugAnchors, setDebugAnchors] = useState<{ id: string; name: string; type: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number } }[]>([]);
   const [debugSelectedAnchor, setDebugSelectedAnchor] = useState<string>("");
   const debugDotRef = useRef<Graphics | null>(null);
 
@@ -1257,7 +1257,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                 className="w-full rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
               >
                 <option value="" className="bg-[#111]">select restaurant...</option>
-                {debugAnchors.map((a) => (
+                {debugAnchors.filter((a) => a.type === "restaurant").map((a) => (
                   <option key={a.id} value={a.id} className="bg-[#111]">{a.name}</option>
                 ))}
               </select>
