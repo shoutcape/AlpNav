@@ -1,0 +1,548 @@
+[
+  {
+    "id": "gastro_4981",
+    "name": "Ahornhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1361477,
+      "lng": 11.8696274
+    },
+    "panorama": {
+      "x": 1704.0,
+      "y": 3656.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4982",
+    "name": "Almstüberl Finkenberg",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.162496738461535,
+      "lng": 11.808098592307694
+    },
+    "panorama": {
+      "x": 4120.0,
+      "y": 2744.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4983",
+    "name": "Bergrast",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.175427,
+      "lng": 11.8283605
+    },
+    "panorama": {
+      "x": 5768.0,
+      "y": 2800.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4984",
+    "name": "Bergrestaurant Eggalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16253685,
+      "lng": 11.712077975
+    },
+    "panorama": {
+      "x": 3712.0,
+      "y": 1432.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4985",
+    "name": "Bergrestaurant Horberg",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1826957,
+      "lng": 11.8101456
+    },
+    "panorama": {
+      "x": 6384.0,
+      "y": 2736.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4986",
+    "name": "Bergrestaurant Lämmerbichl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1813684,
+      "lng": 11.747714
+    },
+    "panorama": {
+      "x": 5112.0,
+      "y": 1544.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4987",
+    "name": "Granatalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16956898421053,
+      "lng": 11.800230105263159
+    },
+    "panorama": {
+      "x": 5344.0,
+      "y": 1912.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4989",
+    "name": "Egger Skialm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16197512,
+      "lng": 11.710783359999999
+    },
+    "panorama": {
+      "x": 3704.0,
+      "y": 1368.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4990",
+    "name": "Eisberghütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.18414261428571,
+      "lng": 11.809662942857143
+    },
+    "panorama": {
+      "x": 7024.0,
+      "y": 2752.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4991",
+    "name": "Filzenstadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.13531578571428,
+      "lng": 11.872301714285713
+    },
+    "panorama": {
+      "x": 1720.0,
+      "y": 3288.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4992",
+    "name": "Grillhofalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.17925454,
+      "lng": 11.798472819999999
+    },
+    "panorama": {
+      "x": 6576.0,
+      "y": 2040.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4993",
+    "name": "Gschößwandhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.174623,
+      "lng": 11.8340092
+    },
+    "panorama": {
+      "x": 5928.0,
+      "y": 3136.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4994",
+    "name": "Heidi's Hütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.17961678181818,
+      "lng": 11.73574568181818
+    },
+    "panorama": {
+      "x": 4824.0,
+      "y": 1456.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4995",
+    "name": "Hildes Skitenne",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1814331,
+      "lng": 11.80143118
+    },
+    "panorama": {
+      "x": 6672.0,
+      "y": 2296.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4996",
+    "name": "Jausenstation Tappenalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.181835,
+      "lng": 11.802466957142856
+    },
+    "panorama": {
+      "x": 6744.0,
+      "y": 2352.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4997",
+    "name": "Kressbrunnalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1837868,
+      "lng": 11.80876266
+    },
+    "panorama": {
+      "x": 6880.0,
+      "y": 2824.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4998",
+    "name": "Lattenalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1644733,
+      "lng": 11.7241766
+    },
+    "panorama": {
+      "x": 3992.0,
+      "y": 1640.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5000",
+    "name": "Bergrestaurant Panorama",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.13698516666667,
+      "lng": 11.8691764
+    },
+    "panorama": {
+      "x": 1520.0,
+      "y": 3792.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5001",
+    "name": "Kasermandl am Penken",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1749682,
+      "lng": 11.8149077
+    },
+    "panorama": {
+      "x": 5432.0,
+      "y": 2176.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5002",
+    "name": "Penkenjochhaus",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.168555157142855,
+      "lng": 11.799950242857145
+    },
+    "panorama": {
+      "x": 5216.0,
+      "y": 1832.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5003",
+    "name": "Penkentenne",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.16866605,
+      "lng": 11.80101195
+    },
+    "panorama": {
+      "x": 5240.0,
+      "y": 1920.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5004",
+    "name": "Pilzbar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1748312,
+      "lng": 11.827362
+    },
+    "panorama": {
+      "x": 5648.0,
+      "y": 2792.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5005",
+    "name": "Schiestls Sunnalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.18851712857143,
+      "lng": 11.810213857142857
+    },
+    "panorama": {
+      "x": 7016.0,
+      "y": 2488.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5006",
+    "name": "Schneekarhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.18990620434783,
+      "lng": 11.792446004347825
+    },
+    "panorama": {
+      "x": 7312.0,
+      "y": 1304.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5007",
+    "name": "Stieralm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1760029,
+      "lng": 11.8282279
+    },
+    "panorama": {
+      "x": 5864.0,
+      "y": 2888.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5008",
+    "name": "Vogelnest",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.173025611111115,
+      "lng": 11.7236127
+    },
+    "panorama": {
+      "x": 4320.0,
+      "y": 1768.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5012",
+    "name": "Waldhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    },
+    "panorama": {
+      "x": 4528.0,
+      "y": 1680.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5013",
+    "name": "Alpengasthof Wiesenhof",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.15098934,
+      "lng": 11.85805564
+    },
+    "panorama": {
+      "x": 3392.0,
+      "y": 4376.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5014",
+    "name": "Panorahma Restaurant",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1710431,
+      "lng": 11.80850424
+    },
+    "panorama": {
+      "x": 5328.0,
+      "y": 2032.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_5016",
+    "name": "Unterbergalm",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.19628371428571,
+      "lng": 11.796875400000001
+    },
+    "panorama": {
+      "x": 7728.0,
+      "y": 1728.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_28683",
+    "name": "Lärchwaldhütte",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752391,
+      "lng": 11.8157055
+    },
+    "panorama": {
+      "x": 5520.0,
+      "y": 2120.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_43557",
+    "name": "Stoaners Bienenhäusl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1598653,
+      "lng": 11.8603009
+    },
+    "panorama": {
+      "x": 4288.0,
+      "y": 4672.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4975",
+    "name": "Elchbar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1752921,
+      "lng": 11.8283139
+    },
+    "panorama": {
+      "x": 5760.0,
+      "y": 2760.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4976",
+    "name": "Happy End Cafe/Bar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1631787,
+      "lng": 11.8610721
+    },
+    "panorama": {
+      "x": 4792.0,
+      "y": 4608.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4977",
+    "name": "Hiatamadl",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.190463,
+      "lng": 11.8583029
+    },
+    "panorama": {
+      "x": 7456.0,
+      "y": 3992.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4978",
+    "name": "Ice Bar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.163422,
+      "lng": 11.8610826
+    },
+    "panorama": {
+      "x": 4992.0,
+      "y": 4600.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4979",
+    "name": "Pilzbar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1749523,
+      "lng": 11.8270687
+    },
+    "panorama": {
+      "x": 5640.0,
+      "y": 2776.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_4980",
+    "name": "Yeti Bar",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.19093018947368,
+      "lng": 11.858129710526315
+    },
+    "panorama": {
+      "x": 7560.0,
+      "y": 3896.0
+    },
+    "snapRadius": 20
+  },
+  {
+    "id": "gastro_43555",
+    "name": "Brück'n Stadl Mayrhofen",
+    "type": "restaurant",
+    "geo": {
+      "lat": 47.1614121,
+      "lng": 11.8607189
+    },
+    "panorama": {
+      "x": 4480.0,
+      "y": 4656.0
+    },
+    "snapRadius": 20
+  }
+]
