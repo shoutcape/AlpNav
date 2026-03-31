@@ -114,6 +114,15 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const minScaleRef = useRef(0.05);
 
+  // GPS location
+  type AnchorPoint = { id: string; name: string; type: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number }; snapRadius: number };
+  const [gpsActive, setGpsActive] = useState(false);
+  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "active" | "denied" | "unavailable" | "error">("idle");
+  const [gpsMatch, setGpsMatch] = useState<AnchorPoint | null>(null);
+  const gpsAnchorsRef = useRef<AnchorPoint[]>([]);
+  const gpsDotRef = useRef<Graphics | null>(null);
+  const gpsWatchRef = useRef<number | null>(null);
+
   // Debug: anchor point testing
   const [debugAnchors, setDebugAnchors] = useState<{ id: string; name: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number } }[]>([]);
   const [debugSelectedAnchor, setDebugSelectedAnchor] = useState<string>("");
@@ -445,6 +454,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       viewport.addChild(badgeHighlight);
       badgeHighlightRef.current = badgeHighlight;
 
+      // GPS location dot
+      const gpsDot = new Graphics();
+      gpsDot.label = "gps-location-dot";
+      viewport.addChild(gpsDot);
+      gpsDotRef.current = gpsDot;
+
       // Debug: anchor test dot
       const debugDot = new Graphics();
       debugDot.label = "debug-anchor-dot";
@@ -719,6 +734,102 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     }
   }, [debugSelectedAnchor, debugAnchors, activeArea.visualScale]);
 
+  // Load anchors for GPS snapping
+  useEffect(() => {
+    fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
+      .then((r) => r.ok ? r.json() : [])
+      .then((data) => { gpsAnchorsRef.current = Array.isArray(data) ? data : []; })
+      .catch(() => { gpsAnchorsRef.current = []; });
+  }, [activeArea.id]);
+
+  // GPS watch position
+  useEffect(() => {
+    if (!gpsActive) {
+      if (gpsWatchRef.current !== null) {
+        navigator.geolocation.clearWatch(gpsWatchRef.current);
+        gpsWatchRef.current = null;
+      }
+      setGpsStatus("idle");
+      setGpsMatch(null);
+      const dot = gpsDotRef.current;
+      if (dot) dot.clear();
+      return;
+    }
+
+    if (!("geolocation" in navigator)) {
+      setGpsStatus("unavailable");
+      return;
+    }
+
+    setGpsStatus("requesting");
+
+    const haversine = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+      const R = 6371000;
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLng = ((lng2 - lng1) * Math.PI) / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(a));
+    };
+
+    gpsWatchRef.current = navigator.geolocation.watchPosition(
+      (pos) => {
+        setGpsStatus("active");
+        const { latitude: lat, longitude: lng } = pos.coords;
+
+        // Find nearest anchor within snap radius
+        let best: AnchorPoint | null = null;
+        let bestDist = Infinity;
+        for (const anchor of gpsAnchorsRef.current) {
+          const d = haversine(lat, lng, anchor.geo.lat, anchor.geo.lng);
+          if (d <= anchor.snapRadius && d < bestDist) {
+            bestDist = d;
+            best = anchor;
+          }
+        }
+
+        setGpsMatch(best);
+
+        const dot = gpsDotRef.current;
+        if (!dot) return;
+        dot.clear();
+
+        if (best) {
+          const { x, y } = best.panorama;
+          const s = activeArea.visualScale ?? 1;
+
+          // Accuracy ring
+          dot.circle(x, y, 50 * s);
+          dot.fill({ color: 0x3b82f6, alpha: 0.1 });
+          dot.circle(x, y, 50 * s);
+          dot.stroke({ color: 0x3b82f6, width: 1.5 * s, alpha: 0.3 });
+
+          // Center dot
+          dot.circle(x, y, 10 * s);
+          dot.fill({ color: 0x3b82f6, alpha: 0.9 });
+          dot.circle(x, y, 10 * s);
+          dot.stroke({ color: 0xffffff, width: 2.5 * s });
+
+          if (viewportRef.current) {
+            viewportRef.current.moveCenter(x, y);
+          }
+        }
+      },
+      (err) => {
+        if (err.code === err.PERMISSION_DENIED) setGpsStatus("denied");
+        else if (err.code === err.POSITION_UNAVAILABLE) setGpsStatus("unavailable");
+        else setGpsStatus("error");
+      },
+      { enableHighAccuracy: true, maximumAge: 3000, timeout: 10000 },
+    );
+
+    return () => {
+      if (gpsWatchRef.current !== null) {
+        navigator.geolocation.clearWatch(gpsWatchRef.current);
+        gpsWatchRef.current = null;
+      }
+    };
+  }, [gpsActive, activeArea.visualScale]);
+
   useEffect(() => {
     const pg = pisteHighlightRef.current;
     const lg = liftHighlightRef.current;
@@ -956,6 +1067,42 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             <rect x="9.5" y="0.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
             <rect x="0.5" y="9.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
             <rect x="9.5" y="9.5" width="6" height="6" rx="0.75" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+        </button>
+
+        {/* GPS location */}
+        <button
+          onClick={() => setGpsActive((v) => !v)}
+          className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
+            gpsStatus === "denied" || gpsStatus === "unavailable"
+              ? "bg-red-500/80 text-white"
+              : gpsActive
+                ? "bg-blue-500/90 text-white"
+                : "bg-[#07111f]/65 text-white/70"
+          }`}
+          aria-label="Toggle GPS location"
+        >
+          {gpsStatus === "requesting" && (
+            <motion.div
+              className="absolute inset-0 rounded-[13px] border-2 border-blue-400/60"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
+          {gpsStatus === "active" && gpsMatch && (
+            <motion.div
+              className="absolute inset-0 rounded-[13px] border-2 border-blue-400/50"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" />
+            <circle cx="8" cy="8" r="1" fill="currentColor" />
+            <line x1="8" y1="0.5" x2="8" y2="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="8" y1="13" x2="8" y2="15.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="0.5" y1="8" x2="3" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="13" y1="8" x2="15.5" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
 
