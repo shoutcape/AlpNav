@@ -700,10 +700,19 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
     const { x, y } = anchor.panorama;
     const s = activeArea.visualScale ?? 1;
-    dot.circle(x, y, 12 * s);
-    dot.fill({ color: 0x3b82f6, alpha: 0.8 });
-    dot.circle(x, y, 12 * s);
-    dot.stroke({ color: 0xffffff, width: 3 * s });
+
+    // Snap radius indicator (outer ring)
+    const radiusPx = 60 * s;
+    dot.circle(x, y, radiusPx);
+    dot.fill({ color: 0x3b82f6, alpha: 0.1 });
+    dot.circle(x, y, radiusPx);
+    dot.stroke({ color: 0x3b82f6, width: 1.5 * s, alpha: 0.4 });
+
+    // Center dot
+    dot.circle(x, y, 10 * s);
+    dot.fill({ color: 0x3b82f6, alpha: 0.85 });
+    dot.circle(x, y, 10 * s);
+    dot.stroke({ color: 0xffffff, width: 2.5 * s });
 
     if (viewportRef.current) {
       viewportRef.current.moveCenter(x, y);

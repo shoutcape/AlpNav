@@ -11,7 +11,7 @@
       "x": 3740.0,
       "y": 1952.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45927",
@@ -25,7 +25,7 @@
       "x": 2336.0,
       "y": 1236.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45944",
@@ -39,7 +39,7 @@
       "x": 2756.0,
       "y": 980.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45947",
@@ -53,7 +53,7 @@
       "x": 1920.0,
       "y": 948.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45949",
@@ -67,7 +67,7 @@
       "x": 2000.0,
       "y": 1208.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45952",
@@ -81,7 +81,7 @@
       "x": 2772.0,
       "y": 928.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45964",
@@ -95,7 +95,7 @@
       "x": 2000.0,
       "y": 1440.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_45967",
@@ -109,7 +109,7 @@
       "x": 2012.0,
       "y": 1012.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_46019",
@@ -123,7 +123,7 @@
       "x": 2488.0,
       "y": 1340.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_46439",
@@ -137,7 +137,7 @@
       "x": 3780.0,
       "y": 1688.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_46454",
@@ -151,7 +151,7 @@
       "x": 3480.0,
       "y": 1672.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_46464",
@@ -165,7 +165,7 @@
       "x": 3388.0,
       "y": 1688.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_46516",
@@ -179,7 +179,7 @@
       "x": 3708.0,
       "y": 2032.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_46560",
@@ -193,7 +193,7 @@
       "x": 3040.0,
       "y": 1604.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47131",
@@ -207,7 +207,7 @@
       "x": 444.0,
       "y": 1272.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47157",
@@ -221,7 +221,7 @@
       "x": 472.0,
       "y": 940.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47171",
@@ -235,7 +235,7 @@
       "x": 628.0,
       "y": 1580.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47177",
@@ -249,7 +249,7 @@
       "x": 372.0,
       "y": 1868.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47178",
@@ -263,7 +263,7 @@
       "x": 416.0,
       "y": 1196.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47186",
@@ -277,7 +277,7 @@
       "x": 1216.0,
       "y": 1212.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47191",
@@ -291,7 +291,7 @@
       "x": 404.0,
       "y": 1876.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47193",
@@ -305,7 +305,7 @@
       "x": 1056.0,
       "y": 1312.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47195",
@@ -319,7 +319,7 @@
       "x": 512.0,
       "y": 1228.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47196",
@@ -333,7 +333,7 @@
       "x": 580.0,
       "y": 648.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47255",
@@ -347,7 +347,7 @@
       "x": 1300.0,
       "y": 1900.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_47431",
@@ -361,7 +361,7 @@
       "x": 1496.0,
       "y": 1804.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_48743",
@@ -375,7 +375,7 @@
       "x": 3224.0,
       "y": 556.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_48766",
@@ -389,7 +389,7 @@
       "x": 3020.0,
       "y": 892.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   },
   {
     "id": "gastro_48773",
@@ -403,6 +403,6 @@
       "x": 3236.0,
       "y": 820.0
     },
-    "snapRadius": 20
+    "snapRadius": 200
   }
 ]
