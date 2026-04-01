@@ -440,7 +440,7 @@ async function main() {
         type: "lift-bottom",
         geo: bottom.geo,
         panorama: bottom.panorama,
-        snapRadius: 300,
+        snapRadius: 3000,
       });
       liftAnchors.push({
         id: `${im.id}_top`,
@@ -448,7 +448,7 @@ async function main() {
         type: "lift-top",
         geo: top.geo,
         panorama: top.panorama,
-        snapRadius: 300,
+        snapRadius: 3000,
       });
 
       console.log(`  ✓ ${im.name} ↔ ${osm.name} [${match.confidence}] elev: ${elev.start.toFixed(0)}m→${elev.end.toFixed(0)}m`);
