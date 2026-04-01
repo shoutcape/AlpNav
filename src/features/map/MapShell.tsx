@@ -824,10 +824,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           dot.fill({ color: 0x3b82f6, alpha: 0.9 });
           dot.circle(x, y, 10 * s);
           dot.stroke({ color: 0xffffff, width: 2.5 * s });
-
-          if (viewportRef.current) {
-            viewportRef.current.moveCenter(x, y);
-          }
         }
       },
       (err) => {
