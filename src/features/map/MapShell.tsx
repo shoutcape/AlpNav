@@ -787,6 +787,18 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           }
         }
 
+        // Hysteresis: stick to current anchor unless a different one is
+        // significantly closer (30m threshold prevents GPS-drift jank
+        // when multiple anchors cluster at base areas)
+        const HYSTERESIS_M = 30;
+        const prev = gpsAnchorsRef.current.find((a) => a.id === gpsMatch?.id);
+        if (prev && best && best.id !== prev.id) {
+          const prevDist = haversine(lat, lng, prev.geo.lat, prev.geo.lng);
+          if (prevDist <= prev.snapRadius && bestDist > prevDist - HYSTERESIS_M) {
+            best = prev;
+          }
+        }
+
         setGpsMatch(best);
 
         const dot = gpsDotRef.current;
