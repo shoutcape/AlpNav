@@ -119,6 +119,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [gpsActive, setGpsActive] = useState(false);
   const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "active" | "denied" | "unavailable" | "error">("idle");
   const [gpsMatch, setGpsMatch] = useState<AnchorPoint | null>(null);
+  const [gpsPos, setGpsPos] = useState<{ lat: number; lng: number; dist: number | null } | null>(null);
   const gpsAnchorsRef = useRef<AnchorPoint[]>([]);
   const gpsDotRef = useRef<Graphics | null>(null);
   const gpsWatchRef = useRef<number | null>(null);
@@ -751,6 +752,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       }
       setGpsStatus("idle");
       setGpsMatch(null);
+      setGpsPos(null);
       const dot = gpsDotRef.current;
       if (dot) dot.clear();
       return;
@@ -787,6 +789,20 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           }
         }
 
+        // Hysteresis: stick to current anchor unless a different one is
+        // significantly closer (30m threshold prevents GPS-drift jank
+        // when multiple anchors cluster at base areas)
+        const HYSTERESIS_M = 30;
+        const prev = gpsAnchorsRef.current.find((a) => a.id === gpsMatch?.id);
+        if (prev && best && best.id !== prev.id) {
+          const prevDist = haversine(lat, lng, prev.geo.lat, prev.geo.lng);
+          if (prevDist <= prev.snapRadius && bestDist > prevDist - HYSTERESIS_M) {
+            best = prev;
+          }
+        }
+
+        const finalDist = best ? haversine(lat, lng, best.geo.lat, best.geo.lng) : null;
+        setGpsPos({ lat, lng, dist: finalDist });
         setGpsMatch(best);
 
         const dot = gpsDotRef.current;
@@ -808,10 +824,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           dot.fill({ color: 0x3b82f6, alpha: 0.9 });
           dot.circle(x, y, 10 * s);
           dot.stroke({ color: 0xffffff, width: 2.5 * s });
-
-          if (viewportRef.current) {
-            viewportRef.current.moveCenter(x, y);
-          }
         }
       },
       (err) => {
@@ -1072,35 +1084,65 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
         {/* GPS location */}
         <button
-          onClick={() => setGpsActive((v) => !v)}
-          className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
+          onClick={() => {
+            if (gpsActive) {
+              // Re-fetch fresh position and recenter
+              setGpsStatus("requesting");
+              setGpsMatch(null);
+              navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                  setGpsStatus("active");
+                  const { latitude: lat, longitude: lng } = pos.coords;
+                  const hav = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+                    const R = 6371000;
+                    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+                    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+                    const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+                    return 2 * R * Math.asin(Math.sqrt(a));
+                  };
+                  let best: typeof gpsMatch = null;
+                  let bestDist = Infinity;
+                  for (const anchor of gpsAnchorsRef.current) {
+                    const d = hav(lat, lng, anchor.geo.lat, anchor.geo.lng);
+                    if (d <= anchor.snapRadius && d < bestDist) { bestDist = d; best = anchor; }
+                  }
+                  const finalDist = best ? hav(lat, lng, best.geo.lat, best.geo.lng) : null;
+                  setGpsPos({ lat, lng, dist: finalDist });
+                  setGpsMatch(best);
+                  if (best && viewportRef.current) {
+                    viewportRef.current.moveCenter(best.panorama.x, best.panorama.y);
+                  }
+                },
+                () => { setGpsStatus("active"); },
+                { enableHighAccuracy: true, timeout: 5000 },
+              );
+            } else {
+              setGpsActive(true);
+            }
+          }}
+          className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md active:scale-95 ${
             gpsStatus === "denied" || gpsStatus === "unavailable"
               ? "bg-red-500/80 text-white"
-              : gpsActive
+              : gpsActive && gpsMatch
                 ? "bg-blue-500/90 text-white"
-                : "bg-[#07111f]/65 text-white/70"
+                : gpsActive
+                  ? "text-white"
+                  : "bg-[#07111f]/65 text-white/70"
           }`}
           aria-label="Toggle GPS location"
         >
-          {gpsStatus === "requesting" && (
-            <motion.div
-              className="absolute inset-0 rounded-[13px] border-2 border-blue-400/60"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          )}
-          {gpsStatus === "active" && gpsMatch && (
+          {gpsActive && gpsMatch && (
             <motion.div
               className="absolute inset-0 rounded-[13px] border-2 border-blue-400/50"
               animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
           )}
-          {gpsStatus === "active" && !gpsMatch && (
+          {gpsActive && !gpsMatch && (
             <motion.div
-              className="absolute inset-0 rounded-[13px] border-2 border-orange-400/50"
-              animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.15, 0.5] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 -z-10 rounded-[13px] bg-blue-500/90"
+              animate={{ opacity: [0.9, 0.4, 0.9] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
           )}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -1241,6 +1283,20 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             </>
           )}
 
+          {/* GPS location */}
+          <div className="border-t border-white/10 pt-1.5 space-y-0.5">
+            <div className="text-[9px] uppercase tracking-widest text-white/40">GPS</div>
+            <div className="text-[10px] text-white/70">status: {gpsStatus}</div>
+            {gpsPos && (
+              <>
+                <div className="text-[10px] text-white/70">pos: {gpsPos.lat.toFixed(6)}, {gpsPos.lng.toFixed(6)}</div>
+                <div className="text-[10px] text-white/70">
+                  match: {gpsMatch ? `${gpsMatch.name} (${gpsPos.dist?.toFixed(0)}m)` : "none"}
+                </div>
+              </>
+            )}
+          </div>
+
           {/* Anchor point tester */}
           <div className="border-t border-white/10 pt-1.5 space-y-1">
             <div className="text-[9px] uppercase tracking-widest text-white/40">Anchor Test ({debugAnchors.length})</div>
@@ -1256,9 +1312,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                 onChange={(e) => setDebugSelectedAnchor(e.target.value)}
                 className="w-full rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
               >
-                <option value="" className="bg-[#111]">select restaurant...</option>
-                {debugAnchors.filter((a) => a.type === "restaurant").map((a) => (
-                  <option key={a.id} value={a.id} className="bg-[#111]">{a.name}</option>
+                <option value="" className="bg-[#111]">select anchor...</option>
+                {debugAnchors.map((a) => (
+                  <option key={a.id} value={a.id} className="bg-[#111]">[{a.type}] {a.name}</option>
                 ))}
               </select>
               {(() => {

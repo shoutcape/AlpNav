@@ -8,10 +8,10 @@
       "lng": 11.808098592307694
     },
     "panorama": {
-      "x": 4120.0,
-      "y": 2744.0
+      "x": 4120,
+      "y": 2744
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4984",
@@ -22,10 +22,10 @@
       "lng": 11.712077975000001
     },
     "panorama": {
-      "x": 3712.0,
-      "y": 1432.0
+      "x": 3712,
+      "y": 1432
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4987",
@@ -36,10 +36,10 @@
       "lng": 11.800230105263157
     },
     "panorama": {
-      "x": 5344.0,
-      "y": 1912.0
+      "x": 5344,
+      "y": 1912
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4989",
@@ -50,10 +50,10 @@
       "lng": 11.710783359999999
     },
     "panorama": {
-      "x": 3704.0,
-      "y": 1368.0
+      "x": 3704,
+      "y": 1368
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4992",
@@ -64,10 +64,10 @@
       "lng": 11.79847282
     },
     "panorama": {
-      "x": 6576.0,
-      "y": 2040.0
+      "x": 6576,
+      "y": 2040
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4994",
@@ -78,10 +78,10 @@
       "lng": 11.735745681818184
     },
     "panorama": {
-      "x": 4824.0,
-      "y": 1456.0
+      "x": 4824,
+      "y": 1456
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4998",
@@ -92,10 +92,10 @@
       "lng": 11.7241766
     },
     "panorama": {
-      "x": 3992.0,
-      "y": 1640.0
+      "x": 3992,
+      "y": 1640
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_5001",
@@ -106,10 +106,10 @@
       "lng": 11.8149077
     },
     "panorama": {
-      "x": 5432.0,
-      "y": 2176.0
+      "x": 5432,
+      "y": 2176
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_5002",
@@ -120,10 +120,10 @@
       "lng": 11.799950242857141
     },
     "panorama": {
-      "x": 5216.0,
-      "y": 1832.0
+      "x": 5216,
+      "y": 1832
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_5003",
@@ -134,10 +134,10 @@
       "lng": 11.80101195
     },
     "panorama": {
-      "x": 5240.0,
-      "y": 1920.0
+      "x": 5240,
+      "y": 1920
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_5008",
@@ -148,10 +148,10 @@
       "lng": 11.7236127
     },
     "panorama": {
-      "x": 4320.0,
-      "y": 1768.0
+      "x": 4320,
+      "y": 1768
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_5012",
@@ -162,10 +162,10 @@
       "lng": 11.8157055
     },
     "panorama": {
-      "x": 4528.0,
-      "y": 1680.0
+      "x": 4528,
+      "y": 1680
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_5014",
@@ -176,10 +176,10 @@
       "lng": 11.808504240000001
     },
     "panorama": {
-      "x": 5328.0,
-      "y": 2032.0
+      "x": 5328,
+      "y": 2032
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_28683",
@@ -190,10 +190,10 @@
       "lng": 11.8157055
     },
     "panorama": {
-      "x": 5520.0,
-      "y": 2120.0
+      "x": 5520,
+      "y": 2120
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4119",
@@ -204,10 +204,10 @@
       "lng": 11.673892283333336
     },
     "panorama": {
-      "x": 384.0,
-      "y": 704.0
+      "x": 384,
+      "y": 704
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4120",
@@ -218,10 +218,10 @@
       "lng": 11.64955202857143
     },
     "panorama": {
-      "x": 2376.0,
-      "y": 664.0
+      "x": 2376,
+      "y": 664
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4121",
@@ -232,10 +232,10 @@
       "lng": 11.6791246
     },
     "panorama": {
-      "x": 2216.0,
-      "y": 1360.0
+      "x": 2216,
+      "y": 1360
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4122",
@@ -246,10 +246,10 @@
       "lng": 11.6632779
     },
     "panorama": {
-      "x": 1904.0,
-      "y": 1232.0
+      "x": 1904,
+      "y": 1232
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4123",
@@ -260,10 +260,10 @@
       "lng": 11.6703144
     },
     "panorama": {
-      "x": 1152.0,
-      "y": 1088.0
+      "x": 1152,
+      "y": 1088
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_17946",
@@ -274,10 +274,10 @@
       "lng": 11.6712493
     },
     "panorama": {
-      "x": 1024.0,
-      "y": 1232.0
+      "x": 1024,
+      "y": 1232
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_4117",
@@ -288,10 +288,10 @@
       "lng": 11.663240495
     },
     "panorama": {
-      "x": 1824.0,
-      "y": 1184.0
+      "x": 1824,
+      "y": 1184
     },
-    "snapRadius": 200
+    "snapRadius": 400
   },
   {
     "id": "gastro_293655",
@@ -302,9 +302,961 @@
       "lng": 11.6703144
     },
     "panorama": {
-      "x": 1160.0,
-      "y": 1120.0
+      "x": 1160,
+      "y": 1120
     },
-    "snapRadius": 200
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60432_bottom",
+    "name": "6SB Penken Express (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1725878,
+      "lng": 11.8274234
+    },
+    "panorama": {
+      "x": 5056.088,
+      "y": 2864.248
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60432_top",
+    "name": "6SB Penken Express (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1741303,
+      "lng": 11.8138652
+    },
+    "panorama": {
+      "x": 5414.816,
+      "y": 2200.016
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604105_bottom",
+    "name": "6er Katzenmoos (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1603121,
+      "lng": 11.7857862
+    },
+    "panorama": {
+      "x": 3879.904,
+      "y": 2614.16
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604105_top",
+    "name": "6er Katzenmoos (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1688551,
+      "lng": 11.7991867
+    },
+    "panorama": {
+      "x": 5041.736,
+      "y": 1926.208
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604206_bottom",
+    "name": "6er Lämmerbichl (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1782666,
+      "lng": 11.731809
+    },
+    "panorama": {
+      "x": 4677.152,
+      "y": 1467.416
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604206_top",
+    "name": "6er Lämmerbichl (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1878608,
+      "lng": 11.7459855
+    },
+    "panorama": {
+      "x": 5914.432,
+      "y": 961.776
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60442_bottom",
+    "name": "Mittertrettlift (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1789558,
+      "lng": 11.7992115
+    },
+    "panorama": {
+      "x": 6541.032,
+      "y": 2119.8
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60442_top",
+    "name": "Mittertrettlift (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1818919,
+      "lng": 11.7989243
+    },
+    "panorama": {
+      "x": 6852.136,
+      "y": 1976.64
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604301_bottom",
+    "name": "Hinterangerlift (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1536677,
+      "lng": 11.7248229
+    },
+    "panorama": {
+      "x": 2944.216,
+      "y": 1916.28
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604301_top",
+    "name": "Hinterangerlift (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1523055,
+      "lng": 11.7213792
+    },
+    "panorama": {
+      "x": 3109.248,
+      "y": 2006.152
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604302_bottom",
+    "name": "Beilspitzlift (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1591488,
+      "lng": 11.7078209
+    },
+    "panorama": {
+      "x": 3880.144,
+      "y": 924.56
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604302_top",
+    "name": "Beilspitzlift (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1635563,
+      "lng": 11.7009865
+    },
+    "panorama": {
+      "x": 3638.616,
+      "y": 1290.456
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604110_bottom",
+    "name": "Babylift Penkenjoch (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1705491,
+      "lng": 11.7996889
+    },
+    "panorama": {
+      "x": 5282.336,
+      "y": 2012.656
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604110_top",
+    "name": "Babylift Penkenjoch (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1703553,
+      "lng": 11.8019071
+    },
+    "panorama": {
+      "x": 5541.08,
+      "y": 1894.992
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604201_bottom",
+    "name": "150er Tux (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1786764,
+      "lng": 11.7956581
+    },
+    "panorama": {
+      "x": 6488.632,
+      "y": 2029.416
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604201_top",
+    "name": "150er Tux (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1843346,
+      "lng": 11.7751349
+    },
+    "panorama": {
+      "x": 6461.84,
+      "y": 1322.072
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604299_bottom",
+    "name": "Eggalmbahn (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1571049,
+      "lng": 11.7285311
+    },
+    "panorama": {
+      "x": 3290.472,
+      "y": 2172.576
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604299_top",
+    "name": "Eggalmbahn (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1626581,
+      "lng": 11.7125372
+    },
+    "panorama": {
+      "x": 3856.68,
+      "y": 1319.04
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604200_bottom",
+    "name": "Rastkogelbahn (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1636727,
+      "lng": 11.7431126
+    },
+    "panorama": {
+      "x": 5353.608,
+      "y": 1286.32
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604200_top",
+    "name": "Rastkogelbahn (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1830116,
+      "lng": 11.7455485
+    },
+    "panorama": {
+      "x": 3701.808,
+      "y": 2217.3599999999997
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60514_bottom",
+    "name": "Gefrorene Wand 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0629667,
+      "lng": 11.6710049
+    },
+    "panorama": {
+      "x": 498.552,
+      "y": 763.512
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60514_top",
+    "name": "Gefrorene Wand 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0629547,
+      "lng": 11.680226
+    },
+    "panorama": {
+      "x": 832.456,
+      "y": 777.512
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60557_bottom",
+    "name": "Gefrorene Wand 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0630716,
+      "lng": 11.671001
+    },
+    "panorama": {
+      "x": 501.224,
+      "y": 742.144
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60557_top",
+    "name": "Gefrorene Wand 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0630456,
+      "lng": 11.6801288
+    },
+    "panorama": {
+      "x": 828.256,
+      "y": 757.968
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60518_bottom",
+    "name": "Olperer 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0606288,
+      "lng": 11.670104
+    },
+    "panorama": {
+      "x": 1036,
+      "y": 450.816
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60518_top",
+    "name": "Olperer 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0568399,
+      "lng": 11.6568656
+    },
+    "panorama": {
+      "x": 882.304,
+      "y": 731.16
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60520_bottom",
+    "name": "Kaserer 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0739453,
+      "lng": 11.6566198
+    },
+    "panorama": {
+      "x": 1254.2,
+      "y": 473.392
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60520_top",
+    "name": "Kaserer 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0612777,
+      "lng": 11.6572436
+    },
+    "panorama": {
+      "x": 1554.056,
+      "y": 846.4399999999999
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60521_bottom",
+    "name": "Kaserer 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.07428,
+      "lng": 11.6557049
+    },
+    "panorama": {
+      "x": 1568.12,
+      "y": 547.144
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60521_top",
+    "name": "Kaserer 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0646639,
+      "lng": 11.6506477
+    },
+    "panorama": {
+      "x": 1624.416,
+      "y": 756.6
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60526_bottom",
+    "name": "Ramsmoos (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0974201,
+      "lng": 11.6627891
+    },
+    "panorama": {
+      "x": 1968.624,
+      "y": 889.192
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60526_top",
+    "name": "Ramsmoos (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0937381,
+      "lng": 11.6577518
+    },
+    "panorama": {
+      "x": 1855.512,
+      "y": 1160.88
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60558_bottom",
+    "name": "Olperer 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0605265,
+      "lng": 11.6701201
+    },
+    "panorama": {
+      "x": 1012.848,
+      "y": 444.32
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60558_top",
+    "name": "Olperer 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0567761,
+      "lng": 11.6568988
+    },
+    "panorama": {
+      "x": 861.3119999999999,
+      "y": 724.664
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60581_bottom",
+    "name": "Babylift Hintertux (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1098553,
+      "lng": 11.6749356
+    },
+    "panorama": {
+      "x": 1858.552,
+      "y": 1606.624
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60581_top",
+    "name": "Babylift Hintertux (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1102337,
+      "lng": 11.6742815
+    },
+    "panorama": {
+      "x": 1981.824,
+      "y": 1570.488
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6053_bottom",
+    "name": "Gletscherbus 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1068255,
+      "lng": 11.6749802
+    },
+    "panorama": {
+      "x": 1851.184,
+      "y": 1205.8
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6053_top",
+    "name": "Gletscherbus 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0973756,
+      "lng": 11.663824
+    },
+    "panorama": {
+      "x": 1796.56,
+      "y": 1594.432
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6055_bottom",
+    "name": "Gletscherbus 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0969454,
+      "lng": 11.6634587
+    },
+    "panorama": {
+      "x": 1149.776,
+      "y": 1150.056
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6055_top",
+    "name": "Gletscherbus 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0774338,
+      "lng": 11.6705868
+    },
+    "panorama": {
+      "x": 1795.44,
+      "y": 1220.4080000000001
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6059_bottom",
+    "name": "Gletscherbus 3 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.077178,
+      "lng": 11.6725266
+    },
+    "panorama": {
+      "x": 472.44,
+      "y": 825.328
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6059_top",
+    "name": "Gletscherbus 3 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0626746,
+      "lng": 11.680531
+    },
+    "panorama": {
+      "x": 1120.008,
+      "y": 1141.3919999999998
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6052_bottom",
+    "name": "8er Sommerberg (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.106912,
+      "lng": 11.6748163
+    },
+    "panorama": {
+      "x": 1874.12,
+      "y": 1203.64
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6052_top",
+    "name": "8er Sommerberg (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0975034,
+      "lng": 11.6636371
+    },
+    "panorama": {
+      "x": 1824.208,
+      "y": 1579.392
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604300_bottom",
+    "name": "6er Eggalm Nord (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1726961,
+      "lng": 11.7234993
+    },
+    "panorama": {
+      "x": 4002.384,
+      "y": 1013.08
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604300_top",
+    "name": "6er Eggalm Nord (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1638094,
+      "lng": 11.7036078
+    },
+    "panorama": {
+      "x": 4353.656,
+      "y": 1731.288
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604303_bottom",
+    "name": "6SB Lattenalm (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1658175,
+      "lng": 11.7238338
+    },
+    "panorama": {
+      "x": 4013.656,
+      "y": 1220.376
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604303_top",
+    "name": "6SB Lattenalm (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1632683,
+      "lng": 11.7102427
+    },
+    "panorama": {
+      "x": 4043.864,
+      "y": 1653.168
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604100_bottom",
+    "name": "Finkenberger Almbahn (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1524988,
+      "lng": 11.8221728
+    },
+    "panorama": {
+      "x": 3333.952,
+      "y": 3256.432
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_604100_top",
+    "name": "Finkenberger Almbahn (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1621455,
+      "lng": 11.8075705
+    },
+    "panorama": {
+      "x": 4117.784,
+      "y": 2706.304
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60439_bottom",
+    "name": "Kombibahn (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1756554,
+      "lng": 11.8275372
+    },
+    "panorama": {
+      "x": 5740.104,
+      "y": 2800.352
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60439_top",
+    "name": "Kombibahn (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1759633,
+      "lng": 11.81604
+    },
+    "panorama": {
+      "x": 5461.464,
+      "y": 2177.272
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60513_bottom",
+    "name": "2er Gefrorene Wand 3b (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0679369,
+      "lng": 11.6712313
+    },
+    "panorama": {
+      "x": 493.168,
+      "y": 804.6
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60513_top",
+    "name": "2er Gefrorene Wand 3b (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0636416,
+      "lng": 11.6795346
+    },
+    "panorama": {
+      "x": 803.4,
+      "y": 949.272
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60517_bottom",
+    "name": "3er Schlegeis (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0499755,
+      "lng": 11.6787734
+    },
+    "panorama": {
+      "x": 19.984,
+      "y": 921.256
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60517_top",
+    "name": "3er Schlegeis (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0586339,
+      "lng": 11.6744278
+    },
+    "panorama": {
+      "x": 343.544,
+      "y": 780.232
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60528_bottom",
+    "name": "4erTuxerjoch (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0979745,
+      "lng": 11.6629405
+    },
+    "panorama": {
+      "x": 2342.6,
+      "y": 713.84
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60528_top",
+    "name": "4erTuxerjoch (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0938172,
+      "lng": 11.6473953
+    },
+    "panorama": {
+      "x": 1889.608,
+      "y": 1203.64
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60525_bottom",
+    "name": "6er Sommerberg (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0941998,
+      "lng": 11.6668863
+    },
+    "panorama": {
+      "x": 1688.56,
+      "y": 1261.864
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60525_top",
+    "name": "6er Sommerberg (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0967724,
+      "lng": 11.6627305
+    },
+    "panorama": {
+      "x": 1832.224,
+      "y": 1219.848
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60522_bottom",
+    "name": "6er Lärmstange 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0865274,
+      "lng": 11.6608962
+    },
+    "panorama": {
+      "x": 1479.488,
+      "y": 813.24
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60522_top",
+    "name": "6er Lärmstange 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0713379,
+      "lng": 11.6602536
+    },
+    "panorama": {
+      "x": 1764.392,
+      "y": 1061.288
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60519_bottom",
+    "name": "6er Lärmstange 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0720428,
+      "lng": 11.6609189
+    },
+    "panorama": {
+      "x": 1228.44,
+      "y": 495.488
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60519_top",
+    "name": "6er Lärmstange 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.062855,
+      "lng": 11.6581363
+    },
+    "panorama": {
+      "x": 1480.76,
+      "y": 851.0640000000001
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6056_bottom",
+    "name": "4er Fernerhaus (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0969988,
+      "lng": 11.6636463
+    },
+    "panorama": {
+      "x": 1156.264,
+      "y": 1122.896
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_6056_top",
+    "name": "4er Fernerhaus (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0773964,
+      "lng": 11.6708913
+    },
+    "panorama": {
+      "x": 1797.6,
+      "y": 1195.968
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60510_bottom",
+    "name": "10 EUB Gefrorene Wand (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0771745,
+      "lng": 11.6712856
+    },
+    "panorama": {
+      "x": 826.728,
+      "y": 961.152
+    },
+    "snapRadius": 400
+  },
+  {
+    "id": "L_60510_top",
+    "name": "10 EUB Gefrorene Wand (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0665448,
+      "lng": 11.673143
+    },
+    "panorama": {
+      "x": 1126.504,
+      "y": 1122.456
+    },
+    "snapRadius": 400
   }
 ]
