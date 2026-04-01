@@ -1092,12 +1092,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               setGpsActive((v) => !v);
             }
           }}
-          className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
+          className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md active:scale-95 ${
             gpsStatus === "denied" || gpsStatus === "unavailable"
               ? "bg-red-500/80 text-white"
-              : gpsActive
+              : gpsActive && gpsMatch
                 ? "bg-blue-500/90 text-white"
-                : "bg-[#07111f]/65 text-white/70"
+                : gpsActive
+                  ? "text-white"
+                  : "bg-[#07111f]/65 text-white/70"
           }`}
           aria-label="Toggle GPS location"
         >
@@ -1117,9 +1119,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           )}
           {gpsStatus === "active" && !gpsMatch && (
             <motion.div
-              className="absolute inset-0 rounded-[13px] border-2 border-orange-400/50"
-              animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.15, 0.5] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 rounded-[13px] bg-blue-500/90"
+              animate={{ opacity: [0.9, 0.4, 0.9] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
           )}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
