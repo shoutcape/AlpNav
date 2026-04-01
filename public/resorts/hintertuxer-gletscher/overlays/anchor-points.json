@@ -8,8 +8,8 @@
       "lng": 11.673892283333336
     },
     "panorama": {
-      "x": 1284.0,
-      "y": 2480.0
+      "x": 1284,
+      "y": 2480
     },
     "snapRadius": 200
   },
@@ -22,8 +22,8 @@
       "lng": 11.64955202857143
     },
     "panorama": {
-      "x": 3784.0,
-      "y": 2296.0
+      "x": 3784,
+      "y": 2296
     },
     "snapRadius": 200
   },
@@ -36,8 +36,8 @@
       "lng": 11.6632779
     },
     "panorama": {
-      "x": 2524.0,
-      "y": 2544.0
+      "x": 2524,
+      "y": 2544
     },
     "snapRadius": 200
   },
@@ -50,8 +50,8 @@
       "lng": 11.6703144
     },
     "panorama": {
-      "x": 1792.0,
-      "y": 1380.0
+      "x": 1792,
+      "y": 1380
     },
     "snapRadius": 200
   },
@@ -64,8 +64,8 @@
       "lng": 11.6712493
     },
     "panorama": {
-      "x": 1668.0,
-      "y": 1600.0
+      "x": 1668,
+      "y": 1600
     },
     "snapRadius": 200
   },
@@ -78,8 +78,8 @@
       "lng": 11.663240495
     },
     "panorama": {
-      "x": 2476.0,
-      "y": 2564.0
+      "x": 2476,
+      "y": 2564
     },
     "snapRadius": 200
   },
@@ -92,8 +92,540 @@
       "lng": 11.6703144
     },
     "panorama": {
-      "x": 1776.0,
-      "y": 1404.0
+      "x": 1776,
+      "y": 1404
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60514_bottom",
+    "name": "Gefrorene Wand 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0629667,
+      "lng": 11.6710049
+    },
+    "panorama": {
+      "x": 1421.2959999999998,
+      "y": 826.7040000000001
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60514_top",
+    "name": "Gefrorene Wand 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0629547,
+      "lng": 11.680226
+    },
+    "panorama": {
+      "x": 937.376,
+      "y": 755.076
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60557_bottom",
+    "name": "Gefrorene Wand 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0630716,
+      "lng": 11.671001
+    },
+    "panorama": {
+      "x": 1427.788,
+      "y": 793.6240000000001
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60557_top",
+    "name": "Gefrorene Wand 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0630456,
+      "lng": 11.6801288
+    },
+    "panorama": {
+      "x": 936.912,
+      "y": 723.988
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60518_bottom",
+    "name": "Olperer 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0606288,
+      "lng": 11.670104
+    },
+    "panorama": {
+      "x": 824.604,
+      "y": 2385.576
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60518_top",
+    "name": "Olperer 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0568399,
+      "lng": 11.6568656
+    },
+    "panorama": {
+      "x": 2355.884,
+      "y": 507.104
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60520_bottom",
+    "name": "Kaserer 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0739453,
+      "lng": 11.6566198
+    },
+    "panorama": {
+      "x": 1233.58,
+      "y": 2506.612
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60520_top",
+    "name": "Kaserer 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0612777,
+      "lng": 11.6572436
+    },
+    "panorama": {
+      "x": 2568.5319999999997,
+      "y": 1255.26
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60521_bottom",
+    "name": "Kaserer 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.07428,
+      "lng": 11.6557049
+    },
+    "panorama": {
+      "x": 2694.7,
+      "y": 1246.308
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60521_top",
+    "name": "Kaserer 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0646639,
+      "lng": 11.6506477
+    },
+    "panorama": {
+      "x": 2834.808,
+      "y": 708.092
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60526_bottom",
+    "name": "Ramsmoos (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0974201,
+      "lng": 11.6627891
+    },
+    "panorama": {
+      "x": 2556.58,
+      "y": 2566.54
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60526_top",
+    "name": "Ramsmoos (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0937381,
+      "lng": 11.6577518
+    },
+    "panorama": {
+      "x": 2936.164,
+      "y": 2144.7160000000003
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60558_bottom",
+    "name": "Olperer 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0605265,
+      "lng": 11.6701201
+    },
+    "panorama": {
+      "x": 796.272,
+      "y": 2396.004
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60558_top",
+    "name": "Olperer 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0567761,
+      "lng": 11.6568988
+    },
+    "panorama": {
+      "x": 1427.788,
+      "y": 763.868
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6053_bottom",
+    "name": "Gletscherbus 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1068255,
+      "lng": 11.6749802
+    },
+    "panorama": {
+      "x": 1585.884,
+      "y": 3673.628
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6053_top",
+    "name": "Gletscherbus 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0973756,
+      "lng": 11.663824
+    },
+    "panorama": {
+      "x": 2477.112,
+      "y": 2596.328
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6055_bottom",
+    "name": "Gletscherbus 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0969454,
+      "lng": 11.6634587
+    },
+    "panorama": {
+      "x": 2488.624,
+      "y": 2555.684
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6055_top",
+    "name": "Gletscherbus 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0774338,
+      "lng": 11.6705868
+    },
+    "panorama": {
+      "x": 1782.9239999999995,
+      "y": 1453.4800000000002
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6059_bottom",
+    "name": "Gletscherbus 3 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.077178,
+      "lng": 11.6725266
+    },
+    "panorama": {
+      "x": 1612.132,
+      "y": 1426.164
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6059_top",
+    "name": "Gletscherbus 3 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0626746,
+      "lng": 11.680531
+    },
+    "panorama": {
+      "x": 893.332,
+      "y": 728.544
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6052_bottom",
+    "name": "8er Sommerberg (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.106912,
+      "lng": 11.6748163
+    },
+    "panorama": {
+      "x": 1641.588,
+      "y": 3663.772
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6052_top",
+    "name": "8er Sommerberg (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0975034,
+      "lng": 11.6636371
+    },
+    "panorama": {
+      "x": 2479.832,
+      "y": 2618.188
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60513_bottom",
+    "name": "2er Gefrorene Wand 3b (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0679369,
+      "lng": 11.6712313
+    },
+    "panorama": {
+      "x": 1519.204,
+      "y": 958.7959999999999
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60513_top",
+    "name": "2er Gefrorene Wand 3b (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0636416,
+      "lng": 11.6795346
+    },
+    "panorama": {
+      "x": 1015.124,
+      "y": 810.536
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60517_bottom",
+    "name": "3er Schlegeis (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0499755,
+      "lng": 11.6787734
+    },
+    "panorama": {
+      "x": 1374.972,
+      "y": 2983.588
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60517_top",
+    "name": "3er Schlegeis (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0586339,
+      "lng": 11.6744278
+    },
+    "panorama": {
+      "x": 1312.124,
+      "y": 2509.348
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60528_bottom",
+    "name": "4erTuxerjoch (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0979745,
+      "lng": 11.6629405
+    },
+    "panorama": {
+      "x": 2568.004,
+      "y": 2613.736
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60528_top",
+    "name": "4erTuxerjoch (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0938172,
+      "lng": 11.6473953
+    },
+    "panorama": {
+      "x": 3836.432,
+      "y": 1917.8359999999998
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60525_bottom",
+    "name": "6er Sommerberg (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0941998,
+      "lng": 11.6668863
+    },
+    "panorama": {
+      "x": 2479.128,
+      "y": 2585.856
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60525_top",
+    "name": "6er Sommerberg (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0967724,
+      "lng": 11.6627305
+    },
+    "panorama": {
+      "x": 2123.084,
+      "y": 2585.856
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60522_bottom",
+    "name": "6er Lärmstange 1 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0865274,
+      "lng": 11.6608962
+    },
+    "panorama": {
+      "x": 2453.288,
+      "y": 2108.848
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60522_top",
+    "name": "6er Lärmstange 1 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0713379,
+      "lng": 11.6602536
+    },
+    "panorama": {
+      "x": 2417.768,
+      "y": 1089.6599999999999
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60519_bottom",
+    "name": "6er Lärmstange 2 (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0720428,
+      "lng": 11.6609189
+    },
+    "panorama": {
+      "x": 2398.812,
+      "y": 1221.044
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60519_top",
+    "name": "6er Lärmstange 2 (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.062855,
+      "lng": 11.6581363
+    },
+    "panorama": {
+      "x": 2400.3599999999997,
+      "y": 565.2040000000001
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6056_bottom",
+    "name": "4er Fernerhaus (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0969988,
+      "lng": 11.6636463
+    },
+    "panorama": {
+      "x": 2483.072,
+      "y": 2570.456
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_6056_top",
+    "name": "4er Fernerhaus (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0773964,
+      "lng": 11.6708913
+    },
+    "panorama": {
+      "x": 1754.212,
+      "y": 1456.228
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60510_bottom",
+    "name": "10 EUB Gefrorene Wand (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.0771745,
+      "lng": 11.6712856
+    },
+    "panorama": {
+      "x": 1656.336,
+      "y": 1416.432
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60510_top",
+    "name": "10 EUB Gefrorene Wand (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.0665448,
+      "lng": 11.673143
+    },
+    "panorama": {
+      "x": 1519.208,
+      "y": 958.8
     },
     "snapRadius": 200
   }

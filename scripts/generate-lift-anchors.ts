@@ -1,19 +1,16 @@
 // scripts/generate-lift-anchors.ts
 //
-// Usage: ANTHROPIC_API_KEY=sk-... npx tsx scripts/generate-lift-anchors.ts
+// Usage: npx tsx scripts/generate-lift-anchors.ts [--dry-run]
 //
 // For each resort:
 // 1. Reads intermaps lift data (name, altitude, SVG endpoints)
 // 2. Queries OSM Overpass for lift geo coordinates
-// 3. Uses Claude to match OSM <-> intermaps lifts
+// 3. Matches by normalized name similarity
 // 4. Outputs lift-bottom and lift-top anchor entries
 
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { JSDOM } from "jsdom";
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
 
 // --- Resort configs ---
 const RESORTS = [
@@ -65,8 +62,16 @@ async function queryOverpassLifts(bbox: typeof RESORTS[0]["bbox"]): Promise<OsmL
     out geom;
   `;
   const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Overpass failed: ${res.status}`);
+  let res: Response | null = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) {
+      console.log(`    Overpass retry ${attempt + 1}/3 after 30s...`);
+      await new Promise((r) => setTimeout(r, 30000));
+    }
+    res = await fetch(url);
+    if (res.ok) break;
+  }
+  if (!res || !res.ok) throw new Error(`Overpass failed after 3 attempts: ${res?.status}`);
   const data = await res.json();
 
   return (data.elements as any[])
@@ -225,40 +230,65 @@ function loadLiftSvgEndpoints(resortId: string): Map<string, { endpointA: { x: n
   return results;
 }
 
-// --- Use Claude to match OSM lifts to intermaps lifts ---
-async function matchLiftsWithClaude(
+// --- Normalize name for matching ---
+function normalize(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^a-zäöüß0-9]/g, "")
+    .replace(/(bahn|lift|express|jet)$/g, "");
+}
+
+// --- Match OSM lifts to intermaps lifts by name ---
+function matchLiftsByName(
   intermapsLifts: { id: string; name: string; altitudeValley?: number; altitudeMountain?: number }[],
   osmLifts: OsmLift[],
-  resortId: string,
-): Promise<LiftMatch[]> {
-  const prompt = `You are matching ski lift data between two sources for the resort "${resortId}".
+): LiftMatch[] {
+  const matches: LiftMatch[] = [];
+  const usedOsm = new Set<number>();
+  const usedIm = new Set<string>();
 
-INTERMAPS LIFTS (from panorama map system):
-${intermapsLifts.map((l) => `- ID: ${l.id}, Name: "${l.name}", Valley: ${l.altitudeValley ?? "?"}m, Mountain: ${l.altitudeMountain ?? "?"}m`).join("\n")}
-
-OSM LIFTS (from OpenStreetMap):
-${osmLifts.map((l) => `- OSM ID: ${l.osmId}, Name: "${l.name}", Type: ${l.aerialway}`).join("\n")}
-
-Match each intermaps lift to its corresponding OSM lift. They represent the same physical lifts but may have different names (e.g. marketing names vs geographic names, German vs English, abbreviations).
-
-Return a JSON array of matches. Only include matches you are confident about. Format:
-[{"intermapsId": "L_12345", "osmId": 67890, "confidence": "high"|"medium"|"low", "reason": "brief explanation"}]
-
-Return ONLY the JSON array, no other text.`;
-
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 4096,
-    messages: [{ role: "user", content: prompt }],
-  });
-
-  const text = response.content[0].type === "text" ? response.content[0].text : "";
-  const jsonMatch = text.match(/\[[\s\S]*\]/);
-  if (!jsonMatch) {
-    console.error("  Claude response did not contain JSON array:", text);
-    return [];
+  // Pass 1: exact normalized match
+  for (const im of intermapsLifts) {
+    const imNorm = normalize(im.name);
+    for (const osm of osmLifts) {
+      if (usedOsm.has(osm.osmId)) continue;
+      const osmNorm = normalize(osm.name);
+      if (imNorm === osmNorm) {
+        matches.push({ intermapsId: im.id, osmId: osm.osmId, confidence: "high", reason: "exact normalized match" });
+        usedOsm.add(osm.osmId);
+        usedIm.add(im.id);
+        break;
+      }
+    }
   }
-  return JSON.parse(jsonMatch[0]) as LiftMatch[];
+
+  // Pass 2: substring containment
+  for (const im of intermapsLifts) {
+    if (usedIm.has(im.id)) continue;
+    const imNorm = normalize(im.name);
+    if (imNorm.length < 4) continue; // skip very short names
+
+    let bestOsm: OsmLift | null = null;
+    let bestScore = 0;
+    for (const osm of osmLifts) {
+      if (usedOsm.has(osm.osmId)) continue;
+      const osmNorm = normalize(osm.name);
+      if (osmNorm.includes(imNorm) || imNorm.includes(osmNorm)) {
+        const score = Math.min(osmNorm.length, imNorm.length);
+        if (score > bestScore) {
+          bestScore = score;
+          bestOsm = osm;
+        }
+      }
+    }
+    if (bestOsm) {
+      matches.push({ intermapsId: im.id, osmId: bestOsm.osmId, confidence: "medium", reason: "substring match" });
+      usedOsm.add(bestOsm.osmId);
+      usedIm.add(im.id);
+    }
+  }
+
+  return matches;
 }
 
 // --- Determine which endpoint is bottom/top ---
@@ -292,6 +322,9 @@ function assignBottomTop(
 
 // --- Main ---
 async function main() {
+  const dryRun = process.argv.includes("--dry-run");
+  if (dryRun) console.log("DRY RUN — no files will be written\n");
+
   for (const resort of RESORTS) {
     console.log(`\n=== ${resort.id} ===`);
 
@@ -307,10 +340,10 @@ async function main() {
 
     // 3. Query OSM
     const osmLifts = await queryOverpassLifts(resort.bbox);
-    console.log(`  OSM lifts: ${osmLifts.length}`);
+    console.log(`  OSM lifts (named ways): ${osmLifts.length}`);
 
-    // 4. Match via Claude
-    const matches = await matchLiftsWithClaude(liftMeta, osmLifts, resort.id);
+    // 4. Match by name
+    const matches = matchLiftsByName(liftMeta, osmLifts);
     console.log(`  Matches: ${matches.length}`);
 
     // 5. Fetch elevations for all matched OSM lift endpoints
@@ -334,7 +367,7 @@ async function main() {
       const osm = osmLifts.find((l) => l.osmId === match.osmId);
       const endpoints = svgEndpoints.get(match.intermapsId);
       if (!im || !osm || !endpoints) {
-        console.log(`  skipping ${match.intermapsId}: missing data`);
+        console.log(`  ⚠ skipping ${match.intermapsId}: missing data`);
         continue;
       }
 
@@ -359,16 +392,28 @@ async function main() {
         snapRadius: 200,
       });
 
-      console.log(`  matched ${im.name}: bottom(${bottom.geo.lat.toFixed(4)}, ${bottom.geo.lng.toFixed(4)}) top(${top.geo.lat.toFixed(4)}, ${top.geo.lng.toFixed(4)}) [${match.confidence}] elev: ${elev.start.toFixed(0)}m->${elev.end.toFixed(0)}m`);
+      console.log(`  ✓ ${im.name} ↔ ${osm.name} [${match.confidence}] elev: ${elev.start.toFixed(0)}m→${elev.end.toFixed(0)}m`);
+    }
+
+    // Report unmatched
+    const matchedImIds = new Set(matches.map((m) => m.intermapsId));
+    const unmatched = liftMeta.filter((l) => !matchedImIds.has(l.id));
+    if (unmatched.length > 0) {
+      console.log(`  Unmatched (${unmatched.length}):`);
+      for (const l of unmatched) console.log(`    ✗ ${l.id}: ${l.name}`);
     }
 
     // 7. Write merged anchors
-    const merged = [...nonLiftAnchors, ...liftAnchors];
-    writeFileSync(anchorPath, JSON.stringify(merged, null, 2) + "\n");
-    console.log(`  Written: ${liftAnchors.length} lift anchors (${merged.length} total)`);
+    if (!dryRun) {
+      const merged = [...nonLiftAnchors, ...liftAnchors];
+      writeFileSync(anchorPath, JSON.stringify(merged, null, 2) + "\n");
+      console.log(`  Written: ${liftAnchors.length} lift anchors (${merged.length} total)`);
+    } else {
+      console.log(`  Would write: ${liftAnchors.length} lift anchors`);
+    }
 
-    // Rate limit between resorts
-    await new Promise((r) => setTimeout(r, 2000));
+    // Rate limit between resorts (Overpass needs time between requests)
+    await new Promise((r) => setTimeout(r, 10000));
   }
 }
 
