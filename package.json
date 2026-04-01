@@ -33,13 +33,16 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.81.0",
     "@next/bundle-analyzer": "^16.2.1",
     "@tailwindcss/postcss": "4.2.1",
+    "@types/jsdom": "^28.0.1",
     "@types/node": "20.19.37",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
     "eslint-config-next": "16.1.7",
+    "jsdom": "^29.0.1",
     "sharp": "^0.34.5",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
