@@ -1085,11 +1085,39 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         {/* GPS location */}
         <button
           onClick={() => {
-            if (gpsActive && gpsMatch && viewportRef.current) {
-              const { x, y } = gpsMatch.panorama;
-              viewportRef.current.moveCenter(x, y);
+            if (gpsActive) {
+              // Re-fetch fresh position and recenter
+              setGpsStatus("requesting");
+              setGpsMatch(null);
+              navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                  setGpsStatus("active");
+                  const { latitude: lat, longitude: lng } = pos.coords;
+                  const hav = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+                    const R = 6371000;
+                    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+                    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+                    const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+                    return 2 * R * Math.asin(Math.sqrt(a));
+                  };
+                  let best: typeof gpsMatch = null;
+                  let bestDist = Infinity;
+                  for (const anchor of gpsAnchorsRef.current) {
+                    const d = hav(lat, lng, anchor.geo.lat, anchor.geo.lng);
+                    if (d <= anchor.snapRadius && d < bestDist) { bestDist = d; best = anchor; }
+                  }
+                  const finalDist = best ? hav(lat, lng, best.geo.lat, best.geo.lng) : null;
+                  setGpsPos({ lat, lng, dist: finalDist });
+                  setGpsMatch(best);
+                  if (best && viewportRef.current) {
+                    viewportRef.current.moveCenter(best.panorama.x, best.panorama.y);
+                  }
+                },
+                () => { setGpsStatus("active"); },
+                { enableHighAccuracy: true, timeout: 5000 },
+              );
             } else {
-              setGpsActive((v) => !v);
+              setGpsActive(true);
             }
           }}
           className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md active:scale-95 ${
@@ -1103,21 +1131,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           }`}
           aria-label="Toggle GPS location"
         >
-          {gpsStatus === "requesting" && (
-            <motion.div
-              className="absolute inset-0 rounded-[13px] border-2 border-blue-400/60"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          )}
-          {gpsStatus === "active" && gpsMatch && (
+          {gpsActive && gpsMatch && (
             <motion.div
               className="absolute inset-0 rounded-[13px] border-2 border-blue-400/50"
               animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
           )}
-          {gpsStatus === "active" && !gpsMatch && (
+          {gpsActive && !gpsMatch && (
             <motion.div
               className="absolute inset-0 -z-10 rounded-[13px] bg-blue-500/90"
               animate={{ opacity: [0.9, 0.4, 0.9] }}
