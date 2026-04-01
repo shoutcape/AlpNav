@@ -37,16 +37,24 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              function isCanvas(el) {
+                while (el && el !== document.body) {
+                  if (el.tagName === 'CANVAS') return true;
+                  el = el.parentElement;
+                }
+                return false;
+              }
               document.addEventListener('touchmove', function(e) {
-                if (e.touches.length > 1) {
-                  var t = e.target;
-                  while (t && t !== document.body) {
-                    if (t.tagName === 'CANVAS') return;
-                    t = t.parentElement;
-                  }
+                if (e.touches.length > 1 && !isCanvas(e.target)) {
                   e.preventDefault();
                 }
               }, { passive: false });
+              document.addEventListener('gesturestart', function(e) {
+                if (!isCanvas(e.target)) e.preventDefault();
+              });
+              document.addEventListener('gesturechange', function(e) {
+                if (!isCanvas(e.target)) e.preventDefault();
+              });
             `,
           }}
         />
