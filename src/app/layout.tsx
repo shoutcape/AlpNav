@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -14,6 +14,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   title: "AlpNav",
   description: "Unified Zillertal ski navigation shell app.",
@@ -27,6 +34,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.variable} ${ibmPlexMono.variable} antialiased`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function isCanvas(el) {
+                while (el && el !== document.body) {
+                  if (el.tagName === 'CANVAS') return true;
+                  el = el.parentElement;
+                }
+                return false;
+              }
+              document.addEventListener('touchmove', function(e) {
+                if (e.touches.length > 1 && !isCanvas(e.target)) {
+                  e.preventDefault();
+                }
+              }, { passive: false });
+              document.addEventListener('gesturestart', function(e) {
+                if (!isCanvas(e.target)) e.preventDefault();
+              });
+              document.addEventListener('gesturechange', function(e) {
+                if (!isCanvas(e.target)) e.preventDefault();
+              });
+            `,
+          }}
+        />
         {children}
         <Analytics />
       </body>
