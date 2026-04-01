@@ -8,7 +8,7 @@
 // 3. Matches by normalized name similarity
 // 4. Outputs lift-bottom and lift-top anchor entries
 
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { JSDOM } from "jsdom";
 
@@ -54,8 +54,19 @@ type LiftMatch = {
   reason: string;
 };
 
+const CACHE_DIR = join(process.cwd(), "scripts/.osm-cache");
+
 // --- Overpass: get full geometry so we can extract valley/mountain station coords ---
-async function queryOverpassLifts(bbox: typeof RESORTS[0]["bbox"]): Promise<OsmLift[]> {
+async function queryOverpassLifts(bbox: typeof RESORTS[0]["bbox"], resortId?: string): Promise<OsmLift[]> {
+  // Check cache first to avoid hammering Overpass
+  if (resortId) {
+    if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true });
+    const cachePath = join(CACHE_DIR, `${resortId}.json`);
+    if (existsSync(cachePath)) {
+      console.log(`    Using cached OSM data`);
+      return JSON.parse(readFileSync(cachePath, "utf-8"));
+    }
+  }
   const query = `
     [out:json][timeout:30];
     way["aerialway"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});
@@ -74,7 +85,7 @@ async function queryOverpassLifts(bbox: typeof RESORTS[0]["bbox"]): Promise<OsmL
   if (!res || !res.ok) throw new Error(`Overpass failed after 3 attempts: ${res?.status}`);
   const data = await res.json();
 
-  return (data.elements as any[])
+  const result = (data.elements as any[])
     .filter((el: any) => el.tags?.name && el.geometry?.length >= 2)
     .map((el: any) => ({
       osmId: el.id,
@@ -83,6 +94,12 @@ async function queryOverpassLifts(bbox: typeof RESORTS[0]["bbox"]): Promise<OsmL
       startNode: { lat: el.geometry[0].lat, lon: el.geometry[0].lon },
       endNode: { lat: el.geometry[el.geometry.length - 1].lat, lon: el.geometry[el.geometry.length - 1].lon },
     }));
+
+  // Cache results
+  if (resortId) {
+    writeFileSync(join(CACHE_DIR, `${resortId}.json`), JSON.stringify(result, null, 2));
+  }
+  return result;
 }
 
 // --- Elevation lookup via Open-Meteo API ---
@@ -292,28 +309,38 @@ function matchLiftsByName(
 }
 
 // --- Determine which endpoint is bottom/top ---
+// Cross-validates intermaps altitude data with OSM elevation to find the
+// correct pairing between SVG endpoints and OSM geo endpoints.
+// Previous approach used panorama Y independently, which fails for lifts
+// that aren't vertically oriented on the panorama.
 function assignBottomTop(
   intermaps: IntermapsLift,
   osm: OsmLift,
   osmStartElevation: number,
   osmEndElevation: number,
 ): { bottom: { panorama: { x: number; y: number }; geo: { lat: number; lng: number } }; top: { panorama: { x: number; y: number }; geo: { lat: number; lng: number } } } {
-  // Panorama: on a ski panorama, valley (bottom) is typically at higher Y values
-  const panoBottomIsA = intermaps.endpointA.y > intermaps.endpointB.y;
+  const valleyAlt = intermaps.altitudeValley ?? 0;
+  const mountainAlt = intermaps.altitudeMountain ?? Infinity;
 
-  // OSM: use actual elevation to determine which node is valley (lower elevation)
-  const osmValleyIsStart = osmStartElevation <= osmEndElevation;
+  // Try both pairings of (panorama endpoint, geo endpoint) and pick the one
+  // where OSM elevations best match the known intermaps altitudes.
+  // Pairing 1: A↔start, B↔end
+  const err1 = Math.abs(osmStartElevation - valleyAlt) + Math.abs(osmEndElevation - mountainAlt);
+  // Pairing 2: A↔end, B↔start
+  const err2 = Math.abs(osmEndElevation - valleyAlt) + Math.abs(osmStartElevation - mountainAlt);
+
+  const aIsValley = err1 <= err2;
 
   return {
     bottom: {
-      panorama: panoBottomIsA ? intermaps.endpointA : intermaps.endpointB,
-      geo: osmValleyIsStart
+      panorama: aIsValley ? intermaps.endpointA : intermaps.endpointB,
+      geo: aIsValley
         ? { lat: osm.startNode.lat, lng: osm.startNode.lon }
         : { lat: osm.endNode.lat, lng: osm.endNode.lon },
     },
     top: {
-      panorama: panoBottomIsA ? intermaps.endpointB : intermaps.endpointA,
-      geo: osmValleyIsStart
+      panorama: aIsValley ? intermaps.endpointB : intermaps.endpointA,
+      geo: aIsValley
         ? { lat: osm.endNode.lat, lng: osm.endNode.lon }
         : { lat: osm.startNode.lat, lng: osm.startNode.lon },
     },
@@ -339,7 +366,7 @@ async function main() {
     console.log(`  Intermaps lifts: ${liftMeta.length}, SVG endpoints: ${svgEndpoints.size}`);
 
     // 3. Query OSM
-    const osmLifts = await queryOverpassLifts(resort.bbox);
+    const osmLifts = await queryOverpassLifts(resort.bbox, resort.id);
     console.log(`  OSM lifts (named ways): ${osmLifts.length}`);
 
     // 4. Match by name
