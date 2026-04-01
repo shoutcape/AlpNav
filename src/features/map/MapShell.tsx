@@ -1256,9 +1256,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                 onChange={(e) => setDebugSelectedAnchor(e.target.value)}
                 className="w-full rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
               >
-                <option value="" className="bg-[#111]">select restaurant...</option>
-                {debugAnchors.filter((a) => a.type === "restaurant").map((a) => (
-                  <option key={a.id} value={a.id} className="bg-[#111]">{a.name}</option>
+                <option value="" className="bg-[#111]">select anchor...</option>
+                {debugAnchors.map((a) => (
+                  <option key={a.id} value={a.id} className="bg-[#111]">[{a.type}] {a.name}</option>
                 ))}
               </select>
               {(() => {
