@@ -546,6 +546,90 @@
     "snapRadius": 200
   },
   {
+    "id": "L_60432_bottom",
+    "name": "6SB Penken Express (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1725878,
+      "lng": 11.8274234
+    },
+    "panorama": {
+      "x": 5056.088,
+      "y": 2864.248
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60432_top",
+    "name": "6SB Penken Express (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1741303,
+      "lng": 11.8138652
+    },
+    "panorama": {
+      "x": 5414.816,
+      "y": 2200.016
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60430_bottom",
+    "name": "Horbergbahn (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1905607,
+      "lng": 11.857775
+    },
+    "panorama": {
+      "x": 7410.848,
+      "y": 3964.544
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60430_top",
+    "name": "Horbergbahn (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1826316,
+      "lng": 11.8104845
+    },
+    "panorama": {
+      "x": 6417.672,
+      "y": 2696.5759999999996
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60429_bottom",
+    "name": "Penkenbahn (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1634171,
+      "lng": 11.8606363
+    },
+    "panorama": {
+      "x": 5693.536,
+      "y": 2813.632
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60429_top",
+    "name": "Penkenbahn (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1754503,
+      "lng": 11.8293403
+    },
+    "panorama": {
+      "x": 4944.168000000001,
+      "y": 4623.4400000000005
+    },
+    "snapRadius": 200
+  },
+  {
     "id": "L_6045_bottom",
     "name": "Filzenlift (valley)",
     "type": "lift-bottom",
@@ -686,118 +770,6 @@
     "snapRadius": 200
   },
   {
-    "id": "L_60430_bottom",
-    "name": "Horbergbahn (valley)",
-    "type": "lift-bottom",
-    "geo": {
-      "lat": 47.1905687,
-      "lng": 11.8574065
-    },
-    "panorama": {
-      "x": 7410.848,
-      "y": 3964.544
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60430_top",
-    "name": "Horbergbahn (mountain)",
-    "type": "lift-top",
-    "geo": {
-      "lat": 47.1905687,
-      "lng": 11.8574065
-    },
-    "panorama": {
-      "x": 6417.672,
-      "y": 2696.5759999999996
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60429_bottom",
-    "name": "Penkenbahn (valley)",
-    "type": "lift-bottom",
-    "geo": {
-      "lat": 47.1725878,
-      "lng": 11.8274234
-    },
-    "panorama": {
-      "x": 5693.536,
-      "y": 2813.632
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60429_top",
-    "name": "Penkenbahn (mountain)",
-    "type": "lift-top",
-    "geo": {
-      "lat": 47.1741303,
-      "lng": 11.8138652
-    },
-    "panorama": {
-      "x": 4944.168000000001,
-      "y": 4623.4400000000005
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60432_bottom",
-    "name": "6SB Penken Express (valley)",
-    "type": "lift-bottom",
-    "geo": {
-      "lat": 47.1634171,
-      "lng": 11.8606363
-    },
-    "panorama": {
-      "x": 5056.088,
-      "y": 2864.248
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60432_top",
-    "name": "6SB Penken Express (mountain)",
-    "type": "lift-top",
-    "geo": {
-      "lat": 47.1754503,
-      "lng": 11.8293403
-    },
-    "panorama": {
-      "x": 5414.816,
-      "y": 2200.016
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_604204_bottom",
-    "name": "8er Horbergjoch (valley)",
-    "type": "lift-bottom",
-    "geo": {
-      "lat": 47.1905607,
-      "lng": 11.857775
-    },
-    "panorama": {
-      "x": 6860.68,
-      "y": 1056.984
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_604204_top",
-    "name": "8er Horbergjoch (mountain)",
-    "type": "lift-top",
-    "geo": {
-      "lat": 47.1826316,
-      "lng": 11.8104845
-    },
-    "panorama": {
-      "x": 5416.344000000001,
-      "y": 1599.2959999999998
-    },
-    "snapRadius": 200
-  },
-  {
     "id": "L_60440_bottom",
     "name": "Penkenkuli (valley)",
     "type": "lift-bottom",
@@ -850,6 +822,34 @@
     "panorama": {
       "x": 2054.728,
       "y": 3289.864
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60446_bottom",
+    "name": "KinderLand Horberg (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1905687,
+      "lng": 11.8574065
+    },
+    "panorama": {
+      "x": 7326.144,
+      "y": 3965.424
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60446_top",
+    "name": "KinderLand Horberg (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1905687,
+      "lng": 11.8574065
+    },
+    "panorama": {
+      "x": 7396.944,
+      "y": 3991.256
     },
     "snapRadius": 200
   },

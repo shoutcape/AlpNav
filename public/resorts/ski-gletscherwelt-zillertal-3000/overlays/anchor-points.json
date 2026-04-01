@@ -308,6 +308,34 @@
     "snapRadius": 200
   },
   {
+    "id": "L_60432_bottom",
+    "name": "6SB Penken Express (valley)",
+    "type": "lift-bottom",
+    "geo": {
+      "lat": 47.1725878,
+      "lng": 11.8274234
+    },
+    "panorama": {
+      "x": 5056.088,
+      "y": 2864.248
+    },
+    "snapRadius": 200
+  },
+  {
+    "id": "L_60432_top",
+    "name": "6SB Penken Express (mountain)",
+    "type": "lift-top",
+    "geo": {
+      "lat": 47.1741303,
+      "lng": 11.8138652
+    },
+    "panorama": {
+      "x": 5414.816,
+      "y": 2200.016
+    },
+    "snapRadius": 200
+  },
+  {
     "id": "L_604105_bottom",
     "name": "6er Katzenmoos (valley)",
     "type": "lift-bottom",
@@ -556,34 +584,6 @@
     "panorama": {
       "x": 3701.808,
       "y": 2217.3599999999997
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60429_bottom",
-    "name": "Penkenbahn (valley)",
-    "type": "lift-bottom",
-    "geo": {
-      "lat": 47.1725878,
-      "lng": 11.8274234
-    },
-    "panorama": {
-      "x": 5693.536,
-      "y": 2813.632
-    },
-    "snapRadius": 200
-  },
-  {
-    "id": "L_60429_top",
-    "name": "Penkenbahn (mountain)",
-    "type": "lift-top",
-    "geo": {
-      "lat": 47.1741303,
-      "lng": 11.8138652
-    },
-    "panorama": {
-      "x": 4944.168000000001,
-      "y": 4623.4400000000005
     },
     "snapRadius": 200
   },

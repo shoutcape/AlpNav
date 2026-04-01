@@ -255,6 +255,23 @@ function normalize(s: string): string {
     .replace(/(bahn|lift|express|jet)$/g, "");
 }
 
+// --- Manual overrides for known mismatches ---
+// The name matcher confuses similar names (e.g. "Penkenbahn" vs "Penken-Express").
+// These overrides force correct pairings. Key = intermaps ID, value = OSM ID.
+const MANUAL_OVERRIDES: Record<string, number> = {
+  // Mayrhofen: Penkenbahn is the gondola, Penken-Express is the chairlift
+  "L_60429": 30978865,   // Penkenbahn → Penkenbahn (gondola)
+  "L_60432": 26158184,   // 6SB Penken Express → Penken-Express (chair_lift)
+  // Mayrhofen: Horbergbahn is a gondola, not the same as 8er Horbergjoch
+  "L_60430": 156215470,  // Horbergbahn → Horbergbahn (gondola)
+};
+
+// IDs to skip matching (no valid OSM match in this resort's bbox)
+const SKIP_IDS = new Set([
+  "L_604204", // 8er Horbergjoch — not in Mayrhofen OSM bbox
+  "L_60443",  // Horberg Shuttle — falsely matches Horbergbahn (different lift)
+]);
+
 // --- Match OSM lifts to intermaps lifts by name ---
 function matchLiftsByName(
   intermapsLifts: { id: string; name: string; altitudeValley?: number; altitudeMountain?: number }[],
@@ -264,8 +281,23 @@ function matchLiftsByName(
   const usedOsm = new Set<number>();
   const usedIm = new Set<string>();
 
+  // Pass 0: apply manual overrides
+  for (const im of intermapsLifts) {
+    const overrideOsmId = MANUAL_OVERRIDES[im.id];
+    if (overrideOsmId !== undefined) {
+      const osm = osmLifts.find((o) => o.osmId === overrideOsmId);
+      if (osm) {
+        matches.push({ intermapsId: im.id, osmId: osm.osmId, confidence: "high", reason: "manual override" });
+        usedOsm.add(osm.osmId);
+        usedIm.add(im.id);
+      }
+    }
+    if (SKIP_IDS.has(im.id)) usedIm.add(im.id);
+  }
+
   // Pass 1: exact normalized match
   for (const im of intermapsLifts) {
+    if (usedIm.has(im.id)) continue;
     const imNorm = normalize(im.name);
     for (const osm of osmLifts) {
       if (usedOsm.has(osm.osmId)) continue;
