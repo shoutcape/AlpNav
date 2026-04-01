@@ -1084,7 +1084,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
         {/* GPS location */}
         <button
-          onClick={() => setGpsActive((v) => !v)}
+          onClick={() => {
+            if (gpsActive && gpsMatch && viewportRef.current) {
+              const { x, y } = gpsMatch.panorama;
+              viewportRef.current.moveCenter(x, y);
+            } else {
+              setGpsActive((v) => !v);
+            }
+          }}
           className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${
             gpsStatus === "denied" || gpsStatus === "unavailable"
               ? "bg-red-500/80 text-white"
