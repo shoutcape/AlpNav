@@ -119,6 +119,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [gpsActive, setGpsActive] = useState(false);
   const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "active" | "denied" | "unavailable" | "error">("idle");
   const [gpsMatch, setGpsMatch] = useState<AnchorPoint | null>(null);
+  const [gpsPos, setGpsPos] = useState<{ lat: number; lng: number; dist: number | null } | null>(null);
   const gpsAnchorsRef = useRef<AnchorPoint[]>([]);
   const gpsDotRef = useRef<Graphics | null>(null);
   const gpsWatchRef = useRef<number | null>(null);
@@ -751,6 +752,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       }
       setGpsStatus("idle");
       setGpsMatch(null);
+      setGpsPos(null);
       const dot = gpsDotRef.current;
       if (dot) dot.clear();
       return;
@@ -799,6 +801,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           }
         }
 
+        const finalDist = best ? haversine(lat, lng, best.geo.lat, best.geo.lng) : null;
+        setGpsPos({ lat, lng, dist: finalDist });
         setGpsMatch(best);
 
         const dot = gpsDotRef.current;
@@ -1119,7 +1123,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
           )}
           {gpsStatus === "active" && !gpsMatch && (
             <motion.div
-              className="absolute inset-0 rounded-[13px] bg-blue-500/90"
+              className="absolute inset-0 -z-10 rounded-[13px] bg-blue-500/90"
               animate={{ opacity: [0.9, 0.4, 0.9] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
@@ -1261,6 +1265,20 @@ export function MapShell({ initialAreaId }: MapShellProps) {
               </div>
             </>
           )}
+
+          {/* GPS location */}
+          <div className="border-t border-white/10 pt-1.5 space-y-0.5">
+            <div className="text-[9px] uppercase tracking-widest text-white/40">GPS</div>
+            <div className="text-[10px] text-white/70">status: {gpsStatus}</div>
+            {gpsPos && (
+              <>
+                <div className="text-[10px] text-white/70">pos: {gpsPos.lat.toFixed(6)}, {gpsPos.lng.toFixed(6)}</div>
+                <div className="text-[10px] text-white/70">
+                  match: {gpsMatch ? `${gpsMatch.name} (${gpsPos.dist?.toFixed(0)}m)` : "none"}
+                </div>
+              </>
+            )}
+          </div>
 
           {/* Anchor point tester */}
           <div className="border-t border-white/10 pt-1.5 space-y-1">
