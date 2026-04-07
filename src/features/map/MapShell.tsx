@@ -672,6 +672,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       appRef.current = null;
 
       overlayDataRef.current = null;
+      pisteOverlayRef.current = null;
+      liftOverlayRef.current = null;
+      liftMarkerOverlayRef.current = null;
+      pisteMarkerRef.current = null;
       pisteHighlightRef.current = null;
       liftHighlightRef.current = null;
       badgeHighlightRef.current = null;
@@ -681,6 +685,9 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       sportFunOverlayRef.current = null;
       pisteLinesByDiffRef.current = null;
       pisteMarkersByDiffRef.current = null;
+      debugDotRef.current = null;
+      debugLayerRef.current = null;
+      gpsDotRef.current = null;
 
       host.replaceChildren();
     };
