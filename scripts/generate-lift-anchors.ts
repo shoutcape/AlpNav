@@ -16,7 +16,6 @@ import { JSDOM } from "jsdom";
 const RESORTS = [
   { id: "zillertal-arena", bbox: { south: 47.10, west: 11.87, north: 47.35, east: 12.25 } },
   { id: "mayrhofner-bergbahnen", bbox: { south: 47.12, west: 11.82, north: 47.20, east: 11.90 } },
-  { id: "ski-gletscherwelt-zillertal-3000", bbox: { south: 47.04, west: 11.62, north: 47.18, east: 11.82 } },
   { id: "hintertuxer-gletscher", bbox: { south: 47.02, west: 11.62, north: 47.10, east: 11.72 } },
   { id: "hochzillertal-hochfugen-spieljoch", bbox: { south: 47.15, west: 11.80, north: 47.30, east: 11.95 } },
 ];

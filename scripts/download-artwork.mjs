@@ -15,10 +15,6 @@ const CONFIGS = {
     intermapsId: "hochzillertal_spieljoch",
     remoteBaseZoom: 16,
   },
-  "ski-gletscherwelt-zillertal-3000": {
-    intermapsId: "zillertal_3000",
-    remoteBaseZoom: 16,
-  },
   "hintertuxer-gletscher": {
     intermapsId: "hintertuxer_gletscher",
     remoteBaseZoom: 17,

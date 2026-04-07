@@ -15,10 +15,6 @@ const CONFIGS = {
     intermapsId: "hochzillertal_spieljoch",
     imagePath: "hochzillertal_spieljoch_srm",
   },
-  "ski-gletscherwelt-zillertal-3000": {
-    intermapsId: "zillertal_3000",
-    imagePath: "zillertal_3000",
-  },
   "hintertuxer-gletscher": {
     intermapsId: "hintertuxer_gletscher",
     imagePath: "hintertuxer_gletscher",
