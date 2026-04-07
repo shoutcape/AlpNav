@@ -1,12 +1,10 @@
 import arenaManifest from "../../../public/resorts/zillertal-arena/panorama/manifest.json";
 import hochzillertalManifest from "../../../public/resorts/hochzillertal-hochfugen-spieljoch/panorama/manifest.json";
 import mayrhofenManifest from "../../../public/resorts/mayrhofner-bergbahnen/panorama/manifest.json";
-import zillertal3000Manifest from "../../../public/resorts/ski-gletscherwelt-zillertal-3000/panorama/manifest.json";
 import hintertuxerGletscherManifest from "../../../public/resorts/hintertuxer-gletscher/panorama/manifest.json";
 import { loadArenaOverlayData } from "@/lib/resorts/arena/adapter";
 import { loadHochzillertalOverlayData } from "@/lib/resorts/hochzillertal/adapter";
 import { loadMayrhofenOverlayData } from "@/lib/resorts/mayrhofen/adapter";
-import { loadZillertal3000OverlayData } from "@/lib/resorts/zillertal-3000/adapter";
 import { loadHintertuxerGletscherOverlayData } from "@/lib/resorts/hintertuxer-gletscher/adapter";
 import type { ResortDefinition } from "@/lib/resorts/types";
 
@@ -42,21 +40,6 @@ export const RESORTS: ResortDefinition[] = [
     labelTierScales: [0, 0.1, 0.0, 0.0],
     loadOverlayData: loadMayrhofenOverlayData,
     bbox: { south: 47.12, west: 11.82, north: 47.20, east: 11.90 },
-  },
-  {
-    id: "ski-gletscherwelt-zillertal-3000",
-    name: "Ski & Gletscherwelt Zillertal 3000",
-    shortName: "Zillertal 3000",
-    subtitle: "Available now",
-    availability: "available",
-    locationLabel: "Tux-Finkenberg, Austria",
-    elevationLabel: "630 - 3,250 m",
-    conditionsUrl: "https://www.bergfex.com/hintertuxer-gletscher/wetter/",
-    manifest: zillertal3000Manifest,
-    visualScale: 2.0,
-    labelTierScales: [0, 0.1, 0.0, 0.0],
-    loadOverlayData: loadZillertal3000OverlayData,
-    bbox: { south: 47.04, west: 11.62, north: 47.18, east: 11.82 },
   },
   {
     id: "hintertuxer-gletscher",

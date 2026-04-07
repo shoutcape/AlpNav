@@ -11,7 +11,6 @@
     "sync:arena": "node scripts/download-artwork.mjs zillertal-arena && node scripts/download-overlays.mjs zillertal-arena && node scripts/convert-tiles.mjs public/resorts/zillertal-arena/panorama",
     "sync:mayrhofen": "node scripts/download-artwork.mjs mayrhofner-bergbahnen && node scripts/download-overlays.mjs mayrhofner-bergbahnen && node scripts/convert-tiles.mjs public/resorts/mayrhofner-bergbahnen/panorama",
     "sync:hochzillertal": "node scripts/download-artwork.mjs hochzillertal-hochfugen-spieljoch && node scripts/download-overlays.mjs hochzillertal-hochfugen-spieljoch && node scripts/convert-tiles.mjs public/resorts/hochzillertal-hochfugen-spieljoch/panorama",
-    "sync:zillertal-3000": "node scripts/download-artwork.mjs ski-gletscherwelt-zillertal-3000 && node scripts/download-overlays.mjs ski-gletscherwelt-zillertal-3000 && node scripts/convert-tiles.mjs public/resorts/ski-gletscherwelt-zillertal-3000/panorama",
     "sync:hintertuxer-gletscher": "node scripts/download-artwork.mjs hintertuxer-gletscher && node scripts/download-overlays.mjs hintertuxer-gletscher && node scripts/convert-tiles.mjs public/resorts/hintertuxer-gletscher/panorama",
     "enrich:arena": "node scripts/enrich-lift-info.mjs zillertal-arena && node scripts/enrich-gastronomy-images.mjs zillertal-arena && node scripts/enrich-gastronomy-websites.mjs zillertal-arena",
     "enrich:mayrhofen": "node scripts/enrich-lift-info.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-images.mjs mayrhofner-bergbahnen && node scripts/enrich-gastronomy-websites.mjs mayrhofner-bergbahnen",
@@ -20,7 +19,6 @@
     "fetch-restaurants:arena": "node scripts/fetch-osm-restaurants.mjs zillertal-arena",
     "fetch-restaurants:mayrhofen": "node scripts/fetch-osm-restaurants.mjs mayrhofner-bergbahnen",
     "fetch-restaurants:hochzillertal": "node scripts/fetch-osm-restaurants.mjs hochzillertal-hochfugen-spieljoch",
-    "fetch-restaurants:zillertal-3000": "node scripts/fetch-osm-restaurants.mjs ski-gletscherwelt-zillertal-3000",
     "fetch-restaurants:hintertuxer-gletscher": "node scripts/fetch-osm-restaurants.mjs hintertuxer-gletscher"
   },
   "dependencies": {
