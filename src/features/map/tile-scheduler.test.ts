@@ -1,5 +1,23 @@
-import { describe, it, expect } from "vitest";
-import { computeVisibleTiles, getTargetLevels } from "./tile-scheduler";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import type { Viewport } from "pixi-viewport";
+
+vi.mock("pixi.js", () => {
+  class Container {
+    addChild = vi.fn();
+    label = "";
+    alpha = 0;
+  }
+  return {
+    Assets: { load: vi.fn(), get: vi.fn() },
+    Container,
+    Rectangle: class {},
+    Sprite: class {},
+    Texture: class {},
+  };
+});
+
+import { Assets, Container } from "pixi.js";
+import { computeVisibleTiles, getTargetLevels, TileScheduler } from "./tile-scheduler";
 import { buildTileUrl, createTileDescriptors } from "./tile-types";
 import type { TileDescriptor } from "./tile-types";
 import type { PanoramaLevel, PanoramaManifest } from "./types";
@@ -163,5 +181,69 @@ describe("getTargetLevels", () => {
   it("excludes the base zoom level", () => {
     const result = getTargetLevels(levels, 5000, baseZoom);
     expect(result.every((l) => l.remoteZoom !== baseZoom)).toBe(true);
+  });
+});
+
+// ── TileScheduler dispose ─────────────────────────────────────
+
+describe("TileScheduler dispose", () => {
+  const manifest: PanoramaManifest = {
+    resortId: "test",
+    pageUrl: "https://example.com",
+    tileSize: 256,
+    remoteBaseZoom: 2,
+    localTemplate: "/tiles/{z}/{x}/{y}.webp",
+    levels: [],
+  };
+  const baseLevel: PanoramaLevel = {
+    localIndex: 0, remoteZoom: 2, width: 256, height: 256, columns: 1, rows: 1,
+  };
+  const nonBaseLevel: PanoramaLevel = {
+    localIndex: 1, remoteZoom: 3, width: 512, height: 512, columns: 2, rows: 2,
+  };
+  const viewport = {
+    x: 0, y: 0, scale: { x: 1, y: 1 }, screenWidth: 800, screenHeight: 600,
+  } as unknown as Viewport;
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.mocked(Assets.load).mockReset();
+    vi.mocked(Assets.get).mockReset();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("tracks retry timers and clears them on dispose", async () => {
+    vi.mocked(Assets.load).mockRejectedValue(new Error("fail"));
+
+    const scheduler = new TileScheduler({
+      manifest,
+      maxLevel: nonBaseLevel,
+      levels: [baseLevel, nonBaseLevel],
+      levelTiles: new Map([[3, createTileDescriptors(manifest, nonBaseLevel, nonBaseLevel)]]),
+      tileLayer: new Container() as unknown as import("pixi.js").Container,
+      levelContainers: new Map(),
+      loadedLevels: new Set(),
+      baseZoom: 2,
+      onLevelReady: vi.fn(),
+    });
+
+    scheduler.scheduleUpdate(viewport);
+    // Flush the Assets.load rejection microtask so the catch block registers the retry timer.
+    await vi.advanceTimersByTimeAsync(0);
+
+    const retryTimers = scheduler["retryTimers"];
+    expect(retryTimers.size).toBeGreaterThan(0);
+    const loadCallsBeforeDispose = vi.mocked(Assets.load).mock.calls.length;
+
+    scheduler.dispose();
+
+    expect(retryTimers.size).toBe(0);
+
+    // Advance past RETRY_DELAY_MS — the cleared timer must not fire.
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(vi.mocked(Assets.load).mock.calls.length).toBe(loadCallsBeforeDispose);
   });
 });
