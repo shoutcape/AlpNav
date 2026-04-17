@@ -50,6 +50,7 @@ export class TileScheduler {
   // Track currently visible tile keys per level for completion detection
   private visibleKeysByZoom = new Map<number, Set<string>>();
   private retryCount = new Map<string, number>();
+  private retryTimers = new Set<ReturnType<typeof setTimeout>>();
 
   constructor(options: TileSchedulerOptions) {
     this.manifest = options.manifest;
@@ -198,11 +199,13 @@ export class TileScheduler {
         const attempts = (this.retryCount.get(tile.key) ?? 0) + 1;
         if (attempts < MAX_RETRIES) {
           this.retryCount.set(tile.key, attempts);
-          setTimeout(() => {
+          const timer = setTimeout(() => {
+            this.retryTimers.delete(timer);
             if (!this.disposed && !this.loadedTileKeys.has(tile.key)) {
               this.loadTile(tile, zoom);
             }
           }, RETRY_DELAY_MS * attempts);
+          this.retryTimers.add(timer);
         }
 
         this.drainQueue();
@@ -244,6 +247,10 @@ export class TileScheduler {
       clearTimeout(this.debounceTimer);
       this.debounceTimer = null;
     }
+    for (const timer of this.retryTimers) clearTimeout(timer);
+    this.retryTimers.clear();
+    this.retryCount.clear();
+    this.visibleKeysByZoom.clear();
   }
 }
 
