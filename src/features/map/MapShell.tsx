@@ -24,6 +24,7 @@ import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
 import { applyFreshStatus, fetchFreshStatus } from "@/lib/resorts/status-refresh";
 import { RefreshButton } from "./RefreshButton";
+import { useStateRef } from "./useStateRef";
 
 // Minimum viewport scale at which each tier becomes visible.
 // Scale 0.09 ≈ fully zoomed out on a 390px screen; ~2 ≈ fully zoomed in.
@@ -76,30 +77,22 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const activeArea = useMemo(() => resolveActiveResort(selectedAreaId), [selectedAreaId]);
   const manifest = activeArea.manifest;
 
-  const [liftVisible, setLiftVisible] = useState(true);
-  const liftVisibleRef = useRef(true);
-  const [pisteVisible, setPisteVisible] = useState(true);
-  const pisteVisibleRef = useRef(true);
-  const [pisteFilter, setPisteFilter] = useState<Record<PisteDifficulty, boolean>>(DEFAULT_PISTE_FILTER);
-  const pisteFilterRef = useRef<Record<PisteDifficulty, boolean>>(DEFAULT_PISTE_FILTER);
+  const [liftVisible, setLiftVisible, liftVisibleRef] = useStateRef(true);
+  const [pisteVisible, setPisteVisible, pisteVisibleRef] = useStateRef(true);
+  const [pisteFilter, setPisteFilter, pisteFilterRef] = useStateRef<Record<PisteDifficulty, boolean>>(DEFAULT_PISTE_FILTER);
   const pisteLinesByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const pisteMarkersByDiffRef = useRef<Record<PisteDifficulty, Container> | null>(null);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
-  const [controlsExpanded, setControlsExpanded] = useState(false);
-  const controlsExpandedRef = useRef(false);
+  const [controlsExpanded, setControlsExpanded, controlsExpandedRef] = useStateRef(false);
   const [controlsDismissing, setControlsDismissing] = useState(false);
   const gastronomyOverlayRef = useRef<Container | null>(null);
-  const [gastronomyVisible, setGastronomyVisible] = useState(true);
-  const gastronomyVisibleRef = useRef(true);
+  const [gastronomyVisible, setGastronomyVisible, gastronomyVisibleRef] = useStateRef(true);
   const webcamOverlayRef = useRef<Container | null>(null);
-  const [webcamVisible, setWebcamVisible] = useState(true);
-  const webcamVisibleRef = useRef(true);
+  const [webcamVisible, setWebcamVisible, webcamVisibleRef] = useStateRef(true);
   const infrastructureOverlayRef = useRef<Container | null>(null);
-  const [infrastructureVisible, setInfrastructureVisible] = useState(true);
-  const infrastructureVisibleRef = useRef(true);
+  const [infrastructureVisible, setInfrastructureVisible, infrastructureVisibleRef] = useStateRef(true);
   const sportFunOverlayRef = useRef<Container | null>(null);
-  const [sportFunVisible, setSportFunVisible] = useState(true);
-  const sportFunVisibleRef = useRef(true);
+  const [sportFunVisible, setSportFunVisible, sportFunVisibleRef] = useStateRef(true);
 
   const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null>(null);
   const [debugMode, setDebugMode] = useState<false | "normal">(() => {
@@ -171,22 +164,17 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     setFilterPanelOpen(false);
     setLoadedLevelCount(0);
     setLiftVisible(true);
-    liftVisibleRef.current = true;
     setPisteVisible(true);
-    pisteVisibleRef.current = true;
     setPisteFilter(DEFAULT_PISTE_FILTER);
-    pisteFilterRef.current = DEFAULT_PISTE_FILTER;
     setGastronomyVisible(true);
-    gastronomyVisibleRef.current = true;
     setWebcamVisible(true);
-    webcamVisibleRef.current = true;
     setInfrastructureVisible(true);
-    infrastructureVisibleRef.current = true;
     setSportFunVisible(true);
-    sportFunVisibleRef.current = true;
     hasInteractedRef.current = false;
     overlayDataRef.current = null;
     setLoadError(null);
+    // useStateRef setters are stable; eslint can't infer that from a custom hook.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeArea.id]);
 
   useEffect(() => {
@@ -582,7 +570,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       viewport.on("clicked", ({ world }: { world: { x: number; y: number } }) => {
         if (controlsExpandedRef.current) {
-          controlsExpandedRef.current = false;
           setControlsExpanded(false);
           setControlsDismissing(true);
           setTimeout(() => setControlsDismissing(false), 75);
@@ -875,7 +862,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const toggleLifts = () => {
     const next = !liftVisible;
     setLiftVisible(next);
-    liftVisibleRef.current = next;
     if (liftOverlayRef.current) liftOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
     if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
   };
@@ -883,7 +869,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const toggleDifficultyFilter = (diff: PisteDifficulty) => {
     const next = { ...pisteFilterRef.current, [diff]: !pisteFilterRef.current[diff] };
     setPisteFilter(next);
-    pisteFilterRef.current = next;
 
     const enabled = next[diff];
     if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = enabled ? 1 : HIDDEN_ALPHA;
@@ -893,7 +878,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     // and explicitly dim all other off-filters (they were at alpha 1 with parent hiding them)
     if (enabled && !pisteVisibleRef.current) {
       setPisteVisible(true);
-      pisteVisibleRef.current = true;
       if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = 1;
       if (pisteMarkerRef.current) pisteMarkerRef.current.visible = true;
       for (const d of DIFFICULTIES) {
@@ -908,13 +892,11 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     const allOn = pisteVisibleRef.current && DIFFICULTIES.every(d => pisteFilterRef.current[d]);
     const turnOn = !allOn;
     setPisteVisible(turnOn);
-    pisteVisibleRef.current = turnOn;
     if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = turnOn ? 1 : HIDDEN_ALPHA;
     if (pisteMarkerRef.current) pisteMarkerRef.current.visible = turnOn;
 
     const next = { easy: turnOn, medium: turnOn, difficult: turnOn, unknown: turnOn } as Record<PisteDifficulty, boolean>;
     setPisteFilter(next);
-    pisteFilterRef.current = next;
     for (const diff of DIFFICULTIES) {
       // When turning off, parent handles hiding — reset children to 1 to avoid compounding.
       // When turning on, children are all on (next[diff] === true).
@@ -926,7 +908,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const toggleGastronomy = () => {
     const next = !gastronomyVisible;
     setGastronomyVisible(next);
-    gastronomyVisibleRef.current = next;
     if (gastronomyOverlayRef.current)
       gastronomyOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
@@ -934,7 +915,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const toggleInfrastructure = () => {
     const next = !infrastructureVisible;
     setInfrastructureVisible(next);
-    infrastructureVisibleRef.current = next;
     if (infrastructureOverlayRef.current)
       infrastructureOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
@@ -942,14 +922,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const toggleSportFun = () => {
     const next = !sportFunVisible;
     setSportFunVisible(next);
-    sportFunVisibleRef.current = next;
     if (sportFunOverlayRef.current) sportFunOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
 
   const toggleWebcam = () => {
     const next = !webcamVisible;
     setWebcamVisible(next);
-    webcamVisibleRef.current = next;
     if (webcamOverlayRef.current)
       webcamOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
   };
@@ -1062,7 +1040,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                 setTimeout(() => setControlsDismissing(false), 75);
               }
               setControlsExpanded(false);
-              controlsExpandedRef.current = false;
             }}
             className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-[transform,background-color] active:scale-95 ${legendOpen ? "bg-yellow-400/90 text-black" : "bg-[#07111f]/65 text-white/70"}`}
             aria-label="Toggle legend"
@@ -1178,7 +1155,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
             <button
               onClick={() => {
                 setControlsExpanded(true);
-                controlsExpandedRef.current = true;
                 setLegendOpen(false);
                 setFilterPanelOpen(false);
               }}
@@ -1271,7 +1247,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
                 min="0"
                 max="1"
                 step="0.001"
-                // eslint-disable-next-line react-hooks/refs
                 value={(() => {
                   const logMin = Math.log(minScaleRef.current);
                   const logMax = Math.log(maxScale);
