@@ -27,6 +27,7 @@ import { DEFAULT_PISTE_FILTER, DIFFICULTIES, LABEL_TIER_SCALES } from "./map-con
 import { LegendPanel } from "./LegendPanel";
 import { LayerControls } from "./LayerControls";
 import { MapLoadErrorBanner, MapLoadingBar } from "./MapLoadingOverlays";
+import { MapDebugPanel } from "./MapDebugPanel";
 import { applyLevelBlend, clamp, computeMinScale, getDominantLevel } from "./map-viewport";
 import type { AnchorPoint, DebugAnchorPoint, DebugStats, GpsPosition, GpsStatus, SelectedMapItem } from "./map-shell-types";
 import { findNearestAnchor, resolveGpsAnchorMatch } from "./gps-utils";
@@ -1046,6 +1047,34 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     vp.emit("moved", { type: "wheel", viewport: vp });
   };
 
+  const handleDebugPanelPointerDown = (e: React.PointerEvent<HTMLElement>) => {
+    const panel = debugPanelRef.current;
+    if (!panel) return;
+    const rect = panel.getBoundingClientRect();
+    debugDragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      startPosX: rect.left,
+      startPosY: rect.top,
+    };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const handleDebugPanelPointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    const drag = debugDragRef.current;
+    if (!drag) return;
+    const dx = e.clientX - drag.startX;
+    const dy = e.clientY - drag.startY;
+    setDebugPanelPos({
+      x: drag.startPosX + dx,
+      y: drag.startPosY + dy,
+    });
+  };
+
+  const handleDebugPanelPointerUp = () => {
+    debugDragRef.current = null;
+  };
+
   const handleSelectArea = (areaId: string) => {
     if (areaId === activeArea.id) {
       return;
@@ -1196,135 +1225,27 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
 
       {debugMode && (
-        <div
-          ref={debugPanelRef}
-          className="absolute z-50 rounded bg-black/70 p-2 font-mono text-xs text-white space-y-1.5 w-64 pointer-events-auto"
-          style={debugPanelPos.y === -1
-            ? { left: debugPanelPos.x, bottom: 16 }
-            : { left: debugPanelPos.x, top: debugPanelPos.y }
-          }
-        >
-          <div
-            className="flex items-center justify-between gap-2 border-b border-white/20 pb-1.5 cursor-grab active:cursor-grabbing select-none"
-            onPointerDown={(e) => {
-              const panel = debugPanelRef.current;
-              if (!panel) return;
-              const rect = panel.getBoundingClientRect();
-              debugDragRef.current = {
-                startX: e.clientX,
-                startY: e.clientY,
-                startPosX: rect.left,
-                startPosY: rect.top,
-              };
-              e.currentTarget.setPointerCapture(e.pointerId);
-            }}
-            onPointerMove={(e) => {
-              const drag = debugDragRef.current;
-              if (!drag) return;
-              const dx = e.clientX - drag.startX;
-              const dy = e.clientY - drag.startY;
-              setDebugPanelPos({
-                x: drag.startPosX + dx,
-                y: drag.startPosY + dy,
-              });
-            }}
-            onPointerUp={() => { debugDragRef.current = null; }}
-          >
-            <span className="text-[9px] uppercase tracking-widest text-white/50">Debug</span>
-            <div className="flex gap-1">
-              <button
-                onClick={() => setDebugMode("normal")}
-                className={`rounded px-1.5 py-0.5 text-[9px] uppercase tracking-widest transition-colors ${debugMode === "normal" ? "bg-yellow-400/90 text-black" : "bg-white/10 text-white/70 hover:bg-white/20"}`}
-                aria-label="Show normal debug mode"
-              >
-                normal
-              </button>
-            </div>
-          </div>
-
-          {debugMode === "normal" && debugStats && (
-            <>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.001"
-                // eslint-disable-next-line react-hooks/refs
-                value={(() => {
-                  const logMin = Math.log(minScaleRef.current);
-                  const logMax = Math.log(maxScale);
-                  return ((Math.log(debugStats.scale) - logMin) / (logMax - logMin)).toFixed(4);
-                })()}
-                onChange={onZoomSliderChange}
-                className="w-full accent-yellow-400"
-                aria-label="Zoom"
-              />
-              <div className="space-y-0.5 pointer-events-none">
-                <div>scale: {debugStats.scale.toFixed(4)}</div>
-                <div>level: z{debugStats.activeLevel} ({debugStats.blendPct.toFixed(0)}%)</div>
-                <div>center: {debugStats.worldCenterX}, {debugStats.worldCenterY}</div>
-                <div>loaded: {debugStats.loadedCount}/{debugStats.totalCount}</div>
-              </div>
-            </>
-          )}
-
-          {/* GPS location */}
-          <div className="border-t border-white/10 pt-1.5 space-y-0.5">
-            <div className="text-[9px] uppercase tracking-widest text-white/40">GPS</div>
-            <div className="text-[10px] text-white/70">status: {gpsStatus}</div>
-            {gpsPos && (
-              <>
-                <div className="text-[10px] text-white/70">pos: {gpsPos.lat.toFixed(6)}, {gpsPos.lng.toFixed(6)}</div>
-                <div className="text-[10px] text-white/70">
-                  match: {gpsMatch ? `${gpsMatch.name} (${gpsPos.dist?.toFixed(0)}m)` : "none"}
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Anchor point tester */}
-          <div className="border-t border-white/10 pt-1.5 space-y-1">
-            <div className="text-[9px] uppercase tracking-widest text-white/40">Anchor Test ({debugAnchors.length})</div>
-            {debugAnchors.length === 0 ? (
-              <div className="text-[10px] text-white/30">no anchor-points.json for {activeArea.id}</div>
-            ) : (
-              <></>
-            )}
-            {debugAnchors.length > 0 && (
-              <>
-              <select
-                value={debugSelectedAnchor}
-                onChange={(e) => setDebugSelectedAnchor(e.target.value)}
-                className="w-full rounded bg-white/10 px-1.5 py-1 text-[10px] text-white outline-none focus:bg-white/15"
-              >
-                <option value="" className="bg-[#111]">select anchor...</option>
-                {debugAnchors.map((a) => (
-                  <option key={a.id} value={a.id} className="bg-[#111]">[{a.type}] {a.name}</option>
-                ))}
-              </select>
-              {(() => {
-                const a = debugAnchors.find((x) => x.id === debugSelectedAnchor);
-                if (!a) return null;
-                return (
-                  <div className="space-y-0.5">
-                    <div className="text-[10px] text-white/70">{a.geo.lat.toFixed(6)}, {a.geo.lng.toFixed(6)}</div>
-                    <a
-                      href={`https://www.openstreetmap.org/#map=19/${a.geo.lat}/${a.geo.lng}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[10px] text-blue-400 hover:text-blue-300 underline"
-                    >
-                      view on OSM
-                    </a>
-                    <div className="text-[10px] text-white/40">pano: {a.panorama.x.toFixed(0)}, {a.panorama.y.toFixed(0)}</div>
-                  </div>
-                );
-              })()}
-            </>
-            )}
-          </div>
-
-        </div>
+        <MapDebugPanel
+          debugMode={debugMode}
+          debugStats={debugStats}
+          debugPanelPos={debugPanelPos}
+          debugAnchors={debugAnchors}
+          debugSelectedAnchor={debugSelectedAnchor}
+          gpsStatus={gpsStatus}
+          gpsPos={gpsPos}
+          gpsMatch={gpsMatch}
+          activeAreaId={activeArea.id}
+          maxScale={maxScale}
+          // eslint-disable-next-line react-hooks/refs
+          minScale={minScaleRef.current}
+          panelRef={debugPanelRef}
+          onSetDebugMode={setDebugMode}
+          onZoomSliderChange={onZoomSliderChange}
+          onSelectDebugAnchor={setDebugSelectedAnchor}
+          onDebugPanelPointerDown={handleDebugPanelPointerDown}
+          onDebugPanelPointerMove={handleDebugPanelPointerMove}
+          onDebugPanelPointerUp={handleDebugPanelPointerUp}
+        />
       )}
 
       <MapLoadErrorBanner loadError={loadError} activeAreaId={activeArea.id} />
