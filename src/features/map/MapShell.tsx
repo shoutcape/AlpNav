@@ -29,6 +29,7 @@ import { LayerControls } from "./LayerControls";
 import { MapLoadErrorBanner, MapLoadingBar } from "./MapLoadingOverlays";
 import { applyLevelBlend, clamp, computeMinScale, getDominantLevel } from "./map-viewport";
 import type { AnchorPoint, DebugAnchorPoint, DebugStats, GpsPosition, GpsStatus, SelectedMapItem } from "./map-shell-types";
+import { findNearestAnchor, resolveGpsAnchorMatch } from "./gps-utils";
 
 type MapShellProps = {
   initialAreaId: string;
@@ -719,8 +720,17 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   useEffect(() => {
     fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
       .then((r) => r.ok ? r.json() : [])
-      .then((data) => { gpsAnchorsRef.current = Array.isArray(data) ? data : []; })
-      .catch(() => { gpsAnchorsRef.current = []; });
+      .then((data) => {
+        gpsAnchorsRef.current = Array.isArray(data) ? data : [];
+        console.debug("[AlpNav GPS] anchors loaded", {
+          activeAreaId: activeArea.id,
+          anchorCount: gpsAnchorsRef.current.length,
+        });
+      })
+      .catch(() => {
+        gpsAnchorsRef.current = [];
+        console.debug("[AlpNav GPS] anchors failed to load", { activeAreaId: activeArea.id });
+      });
   }, [activeArea.id]);
 
   // GPS watch position
@@ -745,52 +755,21 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
     setGpsStatus("requesting");
 
-    const haversine = (lat1: number, lng1: number, lat2: number, lng2: number) => {
-      const R = 6371000;
-      const dLat = ((lat2 - lat1) * Math.PI) / 180;
-      const dLng = ((lng2 - lng1) * Math.PI) / 180;
-      const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
-      return 2 * R * Math.asin(Math.sqrt(a));
-    };
-
     gpsWatchRef.current = navigator.geolocation.watchPosition(
       (pos) => {
         setGpsStatus("active");
         const { latitude: lat, longitude: lng } = pos.coords;
+        const match = resolveGpsAnchorMatch({ lat, lng }, gpsAnchorsRef.current, gpsMatch?.id ?? null);
 
-        // Find nearest anchor within snap radius
-        let best: AnchorPoint | null = null;
-        let bestDist = Infinity;
-        for (const anchor of gpsAnchorsRef.current) {
-          const d = haversine(lat, lng, anchor.geo.lat, anchor.geo.lng);
-          if (d <= anchor.snapRadius && d < bestDist) {
-            bestDist = d;
-            best = anchor;
-          }
-        }
-
-        // Hysteresis: stick to current anchor unless a different one is
-        // significantly closer (30m threshold prevents GPS-drift jank
-        // when multiple anchors cluster at base areas)
-        const HYSTERESIS_M = 30;
-        const prev = gpsAnchorsRef.current.find((a) => a.id === gpsMatch?.id);
-        if (prev && best && best.id !== prev.id) {
-          const prevDist = haversine(lat, lng, prev.geo.lat, prev.geo.lng);
-          if (prevDist <= prev.snapRadius && bestDist > prevDist - HYSTERESIS_M) {
-            best = prev;
-          }
-        }
-
-        const finalDist = best ? haversine(lat, lng, best.geo.lat, best.geo.lng) : null;
-        setGpsPos({ lat, lng, dist: finalDist });
-        setGpsMatch(best);
+        setGpsPos({ lat, lng, dist: match?.distance ?? null });
+        setGpsMatch(match?.anchor ?? null);
 
         const dot = gpsDotRef.current;
         if (!dot) return;
         dot.clear();
 
-        if (best) {
-          const { x, y } = best.panorama;
+        if (match) {
+          const { x, y } = match.anchor.panorama;
           const s = activeArea.visualScale ?? 1;
 
           // Accuracy ring
@@ -927,6 +906,99 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   const toggleDebug = () => setDebugMode((currentMode) => (currentMode === false ? "normal" : false));
 
+  const centerViewportOnGpsAnchor = (anchor: AnchorPoint, source: string) => {
+    const viewport = viewportRef.current;
+
+    if (!viewport) {
+      console.debug("[AlpNav GPS] recenter skipped: viewport unavailable", { source, anchorId: anchor.id });
+      return false;
+    }
+
+    console.debug("[AlpNav GPS] recentering viewport", {
+      source,
+      anchorId: anchor.id,
+      anchorName: anchor.name,
+      panorama: anchor.panorama,
+      viewportCenterBefore: {
+        x: viewport.center.x,
+        y: viewport.center.y,
+      },
+    });
+    viewport.moveCenter(anchor.panorama.x, anchor.panorama.y);
+    console.debug("[AlpNav GPS] viewport recentered", {
+      source,
+      viewportCenterAfter: {
+        x: viewport.center.x,
+        y: viewport.center.y,
+      },
+    });
+
+    return true;
+  };
+
+  const requestCurrentGpsPosition = () => {
+    if (!("geolocation" in navigator)) {
+      console.debug("[AlpNav GPS] recenter unavailable: geolocation API missing");
+      setGpsActive(true);
+      setGpsStatus("unavailable");
+      return;
+    }
+
+    console.debug("[AlpNav GPS] recenter requested", {
+      activeAreaId: activeArea.id,
+      anchorCount: gpsAnchorsRef.current.length,
+      currentMatchId: gpsMatch?.id ?? null,
+    });
+    setGpsActive(true);
+    setGpsStatus("requesting");
+
+    if (gpsMatch && centerViewportOnGpsAnchor(gpsMatch, "button-current-match")) {
+      console.debug("[AlpNav GPS] recentered using current match before fresh sensor response");
+    }
+
+    setGpsMatch(null);
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setGpsStatus("active");
+        const { latitude: lat, longitude: lng } = pos.coords;
+        const match = findNearestAnchor({ lat, lng }, gpsAnchorsRef.current);
+        console.debug("[AlpNav GPS] sensor position received", {
+          lat,
+          lng,
+          accuracy: pos.coords.accuracy,
+          activeAreaId: activeArea.id,
+          anchorCount: gpsAnchorsRef.current.length,
+          matchId: match?.anchor.id ?? null,
+          matchName: match?.anchor.name ?? null,
+          matchDistance: match?.distance ?? null,
+          viewportReady: !!viewportRef.current,
+        });
+
+        setGpsPos({ lat, lng, dist: match?.distance ?? null });
+        setGpsMatch(match?.anchor ?? null);
+
+        if (match && viewportRef.current) {
+          centerViewportOnGpsAnchor(match.anchor, "button-fresh-position");
+        } else if (!match) {
+          console.debug("[AlpNav GPS] recenter skipped: no anchor match");
+        } else {
+          console.debug("[AlpNav GPS] recenter skipped: viewport unavailable");
+        }
+      },
+      (err) => {
+        console.debug("[AlpNav GPS] recenter geolocation error", {
+          code: err.code,
+          message: err.message,
+        });
+        if (err.code === err.PERMISSION_DENIED) setGpsStatus("denied");
+        else if (err.code === err.POSITION_UNAVAILABLE) setGpsStatus("unavailable");
+        else setGpsStatus("error");
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 },
+    );
+  };
+
   const handleRefreshStatus = async () => {
     const data = overlayDataRef.current;
     if (!data) return;
@@ -1053,42 +1125,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
         {/* GPS location */}
         <button
-          onClick={() => {
-            if (gpsActive) {
-              // Re-fetch fresh position and recenter
-              setGpsStatus("requesting");
-              setGpsMatch(null);
-              navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                  setGpsStatus("active");
-                  const { latitude: lat, longitude: lng } = pos.coords;
-                  const hav = (lat1: number, lng1: number, lat2: number, lng2: number) => {
-                    const R = 6371000;
-                    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-                    const dLng = ((lng2 - lng1) * Math.PI) / 180;
-                    const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
-                    return 2 * R * Math.asin(Math.sqrt(a));
-                  };
-                  let best: typeof gpsMatch = null;
-                  let bestDist = Infinity;
-                  for (const anchor of gpsAnchorsRef.current) {
-                    const d = hav(lat, lng, anchor.geo.lat, anchor.geo.lng);
-                    if (d <= anchor.snapRadius && d < bestDist) { bestDist = d; best = anchor; }
-                  }
-                  const finalDist = best ? hav(lat, lng, best.geo.lat, best.geo.lng) : null;
-                  setGpsPos({ lat, lng, dist: finalDist });
-                  setGpsMatch(best);
-                  if (best && viewportRef.current) {
-                    viewportRef.current.moveCenter(best.panorama.x, best.panorama.y);
-                  }
-                },
-                () => { setGpsStatus("active"); },
-                { enableHighAccuracy: true, timeout: 5000 },
-              );
-            } else {
-              setGpsActive(true);
-            }
-          }}
+          onClick={requestCurrentGpsPosition}
           className={`pointer-events-auto relative flex h-10 w-10 items-center justify-center rounded-[13px] border border-white/[0.09] shadow-[0_2px_12px_rgba(0,0,0,0.45)] backdrop-blur-md active:scale-95 ${
             gpsStatus === "denied" || gpsStatus === "unavailable"
               ? "bg-red-500/80 text-white"
