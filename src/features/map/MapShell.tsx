@@ -6,11 +6,10 @@ import { Viewport } from "pixi-viewport";
 import { createTileDescriptors } from "./tile-types";
 import { TileScheduler } from "./tile-scheduler";
 import { RESORTS, canActivateResort, resolveActiveResort } from "@/lib/resorts/catalog";
-import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
-import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
+import type { ResortOverlayData, PisteDifficulty } from "@/lib/domain/types";
 import { applyFreshStatus, fetchFreshStatus } from "@/lib/resorts/status-refresh";
 import { RefreshButton } from "./RefreshButton";
 import { DEFAULT_PISTE_FILTER, DIFFICULTIES, LABEL_TIER_SCALES } from "./map-constants";
@@ -24,6 +23,7 @@ import type { AnchorPoint, DebugAnchorPoint, DebugStats, GpsPosition, GpsStatus,
 import { findNearestAnchor, resolveGpsAnchorMatch } from "./gps-utils";
 import { applyLiftVisibility, applyPisteDifficultyVisibility, applyPisteVisibility, applyPoiLayerVisibility, createMapLayers, redrawStatusLayers } from "./map-layers";
 import type { MapLayerRefs } from "./map-layers";
+import { drawSelectedItemHighlights } from "./map-selection";
 
 type MapShellProps = {
   initialAreaId: string;
@@ -98,6 +98,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const gpsAnchorsRef = useRef<AnchorPoint[]>([]);
   const gpsDotRef = useRef<Graphics | null>(null);
   const gpsWatchRef = useRef<number | null>(null);
+  const gpsMatchIdRef = useRef<string | null>(null);
 
   // Debug: anchor point testing
   const [debugAnchors, setDebugAnchors] = useState<DebugAnchorPoint[]>([]);
@@ -133,7 +134,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     pisteMarkersByDiff: pisteMarkersByDiffRef.current,
   });
 
-  const maxLevel = manifest.levels[manifest.levels.length - 1];
+  const maxLevel = useMemo(() => manifest.levels[manifest.levels.length - 1], [manifest.levels]);
   const maxScale = useMemo(() => {
     if (typeof window === "undefined") {
       return 1;
@@ -594,7 +595,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       host.replaceChildren();
     };
-  }, [activeArea, levelTiles, manifest.levels, manifest.tileSize, maxLevel.height, maxLevel.width, maxScale]);
+  }, [activeArea, levelTiles, manifest, maxLevel, maxScale]);
 
   useEffect(() => {
     debugModeRef.current = debugMode;
@@ -605,13 +606,32 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     redrawDebugRef.current?.();
   }, [debugMode]);
 
+  useEffect(() => {
+    gpsMatchIdRef.current = gpsMatch?.id ?? null;
+  }, [gpsMatch?.id]);
+
   // Load anchor points for debug testing
   useEffect(() => {
-    if (!debugMode) return;
+    if (!debugMode) {
+      setDebugAnchors([]);
+      setDebugSelectedAnchor("");
+      return;
+    }
+
+    let cancelled = false;
+
     fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
       .then((r) => r.ok ? r.json() : [])
-      .then((data) => setDebugAnchors(Array.isArray(data) ? data : []))
-      .catch(() => setDebugAnchors([]));
+      .then((data) => {
+        if (!cancelled) setDebugAnchors(Array.isArray(data) ? data : []);
+      })
+      .catch(() => {
+        if (!cancelled) setDebugAnchors([]);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [debugMode, activeArea.id]);
 
   // Draw debug dot + center viewport when an anchor is selected
@@ -647,9 +667,12 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
   // Load anchors for GPS snapping
   useEffect(() => {
+    let cancelled = false;
+
     fetch(`/resorts/${activeArea.id}/overlays/anchor-points.json`)
       .then((r) => r.ok ? r.json() : [])
       .then((data) => {
+        if (cancelled) return;
         gpsAnchorsRef.current = Array.isArray(data) ? data : [];
         console.debug("[AlpNav GPS] anchors loaded", {
           activeAreaId: activeArea.id,
@@ -657,9 +680,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         });
       })
       .catch(() => {
+        if (cancelled) return;
         gpsAnchorsRef.current = [];
         console.debug("[AlpNav GPS] anchors failed to load", { activeAreaId: activeArea.id });
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, [activeArea.id]);
 
   // GPS watch position
@@ -688,7 +716,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
       (pos) => {
         setGpsStatus("active");
         const { latitude: lat, longitude: lng } = pos.coords;
-        const match = resolveGpsAnchorMatch({ lat, lng }, gpsAnchorsRef.current, gpsMatch?.id ?? null);
+        const match = resolveGpsAnchorMatch({ lat, lng }, gpsAnchorsRef.current, gpsMatchIdRef.current);
 
         setGpsPos({ lat, lng, dist: match?.distance ?? null });
         setGpsMatch(match?.anchor ?? null);
@@ -735,19 +763,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     const lg = liftHighlightRef.current;
     const bh = badgeHighlightRef.current;
     if (!pg || !lg) return;
-    const isInfra    = selectedItem !== null && "category" in selectedItem;
-    const isGastro   = selectedItem !== null && "position" in selectedItem && !("streamUrl" in selectedItem) && !("category" in selectedItem) && !("sportCategory" in selectedItem);
-    const isWebcam   = selectedItem !== null && "streamUrl" in selectedItem;
-    const isSportFun = !!selectedItem && "sportCategory" in selectedItem;
-    if (!isInfra && !isGastro && !isWebcam && !isSportFun && selectedItem && "difficulty" in selectedItem) {
-      drawPisteHighlight(pg, selectedItem, activeArea.visualScale);
-      drawLiftHighlight(lg, null, activeArea.visualScale);
-    } else {
-      drawPisteHighlight(pg, null, activeArea.visualScale);
-      drawLiftHighlight(lg, (isInfra || isGastro || isWebcam || isSportFun) ? null : selectedItem as Lift | null, activeArea.visualScale);
-    }
-    if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null, activeArea.visualScale);
-  }, [selectedItem]);
+    drawSelectedItemHighlights({
+      pisteHighlight: pg,
+      liftHighlight: lg,
+      badgeHighlight: bh,
+      selectedItem,
+      visualScale: activeArea.visualScale,
+    });
+  }, [selectedItem, activeArea.visualScale]);
 
   const toggleLifts = () => {
     const next = !liftVisible;
