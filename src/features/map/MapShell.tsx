@@ -28,19 +28,10 @@ import { LegendPanel } from "./LegendPanel";
 import { LayerControls } from "./LayerControls";
 import { MapLoadErrorBanner, MapLoadingBar } from "./MapLoadingOverlays";
 import { applyLevelBlend, clamp, computeMinScale, getDominantLevel } from "./map-viewport";
+import type { AnchorPoint, DebugAnchorPoint, DebugStats, GpsPosition, GpsStatus, SelectedMapItem } from "./map-shell-types";
 
 type MapShellProps = {
   initialAreaId: string;
-};
-
-type DebugStats = {
-  scale: number;
-  activeLevel: number;
-  blendPct: number;
-  worldCenterX: number;
-  worldCenterY: number;
-  loadedCount: number;
-  totalCount: number;
 };
 
 export function MapShell({ initialAreaId }: MapShellProps) {
@@ -92,7 +83,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [sportFunVisible, setSportFunVisible] = useState(true);
   const sportFunVisibleRef = useRef(true);
 
-  const [selectedItem, setSelectedItem] = useState<Piste | Lift | GastronomySpot | Webcam | InfrastructurePoi | SportFunPoi | null>(null);
+  const [selectedItem, setSelectedItem] = useState<SelectedMapItem | null>(null);
   const [debugMode, setDebugMode] = useState<false | "normal">(() => {
     if (typeof window === "undefined") return false;
     const saved = localStorage.getItem("alpnav_debug_mode");
@@ -105,18 +96,16 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [debugStats, setDebugStats] = useState<DebugStats | null>(null);
   const minScaleRef = useRef(0.05);
 
-  // GPS location
-  type AnchorPoint = { id: string; name: string; type: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number }; snapRadius: number };
   const [gpsActive, setGpsActive] = useState(false);
-  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "active" | "denied" | "unavailable" | "error">("idle");
+  const [gpsStatus, setGpsStatus] = useState<GpsStatus>("idle");
   const [gpsMatch, setGpsMatch] = useState<AnchorPoint | null>(null);
-  const [gpsPos, setGpsPos] = useState<{ lat: number; lng: number; dist: number | null } | null>(null);
+  const [gpsPos, setGpsPos] = useState<GpsPosition | null>(null);
   const gpsAnchorsRef = useRef<AnchorPoint[]>([]);
   const gpsDotRef = useRef<Graphics | null>(null);
   const gpsWatchRef = useRef<number | null>(null);
 
   // Debug: anchor point testing
-  const [debugAnchors, setDebugAnchors] = useState<{ id: string; name: string; type: string; geo: { lat: number; lng: number }; panorama: { x: number; y: number } }[]>([]);
+  const [debugAnchors, setDebugAnchors] = useState<DebugAnchorPoint[]>([]);
   const [debugSelectedAnchor, setDebugSelectedAnchor] = useState<string>("");
   const debugDotRef = useRef<Graphics | null>(null);
 
