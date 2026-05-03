@@ -24,9 +24,9 @@ import { Drawer } from "./Drawer";
 import type { ResortOverlayData, Piste, Lift, GastronomySpot, Webcam, InfrastructurePoi, SportFunPoi, PisteDifficulty } from "@/lib/domain/types";
 import { applyFreshStatus, fetchFreshStatus } from "@/lib/resorts/status-refresh";
 import { RefreshButton } from "./RefreshButton";
-import { DEFAULT_PISTE_FILTER, DIFFICULTIES, DIFFICULTY_CSS_COLORS, DIFFICULTY_LABELS, LABEL_TIER_SCALES } from "./map-constants";
-import { GastronomyMapIcon, InfrastructureMapIcon, LayersIcon, LiftIcon, SlopeIcon, SportFunMapIcon, WebcamMapIcon } from "./MapIcons";
+import { DEFAULT_PISTE_FILTER, DIFFICULTIES, LABEL_TIER_SCALES } from "./map-constants";
 import { LegendPanel } from "./LegendPanel";
+import { LayerControls } from "./LayerControls";
 
 type MapShellProps = {
   initialAreaId: string;
@@ -1156,54 +1156,33 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         <RefreshButton onRefresh={handleRefreshStatus} />
       </div>
 
-      {/* Bottom: primary map controls */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center px-4 pb-8">
-        <motion.div
-          layout
-          className={`pointer-events-auto rounded-[22px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md${controlsExpanded && !controlsDismissing ? "" : " overflow-hidden"}`}
-          transition={{ layout: { duration: 0.3, ease: [0.32, 0.72, 0, 1] } }}
-          onLayoutAnimationComplete={() => { if (!controlsDismissing) return; setControlsDismissing(false); }}
-        >
-          {!controlsExpanded ? (
-            <button
-              onClick={() => {
-                setControlsExpanded(true);
-                controlsExpandedRef.current = true;
-                setLegendOpen(false);
-                setFilterPanelOpen(false);
-              }}
-              aria-expanded={controlsExpanded}
-              aria-label="Map layer controls"
-              onContextMenu={e => e.preventDefault()}
-              className={`touch-none select-none flex flex-col items-center gap-1 rounded-[14px] px-4 py-2 text-ivory/70 hover:bg-white/[0.07] hover:text-ivory transition-opacity duration-150${controlsDismissing ? " opacity-0" : " opacity-100"}`}
-            >
-              <LayersIcon />
-              <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
-              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Layers</span>
-            </button>
-          ) : (
-            <div className="grid grid-cols-3 gap-1">
-              <MapControlButton icon={<LiftIcon />} label="Lifts" active={liftVisible} onClick={toggleLifts} />
-              <div className="relative">
-                <DifficultyFilterPanel filter={pisteFilter} open={filterPanelOpen} onToggle={toggleDifficultyFilter} onToggleAll={toggleAllPistes} />
-                <button
-                  onClick={() => setFilterPanelOpen(o => !o)}
-                  onContextMenu={e => e.preventDefault()}
-                  className={`touch-none select-none flex w-full flex-col items-center gap-1 rounded-[16px] px-5 py-2.5 ${pisteVisible || filterPanelOpen ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
-                >
-                  <SlopeIcon />
-                  <DifficultyDots pisteVisible={pisteVisible} pisteFilter={pisteFilter} />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">Slopes</span>
-                </button>
-              </div>
-              <MapControlButton icon={<GastronomyMapIcon />} label="Food" active={gastronomyVisible} onClick={toggleGastronomy} />
-              <MapControlButton icon={<WebcamMapIcon />} label="Webcams" active={webcamVisible} onClick={toggleWebcam} />
-              <MapControlButton icon={<InfrastructureMapIcon />} label="Info" active={infrastructureVisible} onClick={toggleInfrastructure} />
-              <MapControlButton icon={<SportFunMapIcon />} label="Sport" active={sportFunVisible} onClick={toggleSportFun} />
-            </div>
-          )}
-        </motion.div>
-      </div>
+      <LayerControls
+        controlsExpanded={controlsExpanded}
+        controlsDismissing={controlsDismissing}
+        pisteVisible={pisteVisible}
+        pisteFilter={pisteFilter}
+        filterPanelOpen={filterPanelOpen}
+        liftVisible={liftVisible}
+        gastronomyVisible={gastronomyVisible}
+        webcamVisible={webcamVisible}
+        infrastructureVisible={infrastructureVisible}
+        sportFunVisible={sportFunVisible}
+        onExpand={() => {
+          setControlsExpanded(true);
+          controlsExpandedRef.current = true;
+          setLegendOpen(false);
+          setFilterPanelOpen(false);
+        }}
+        onDismissAnimationComplete={() => { if (!controlsDismissing) return; setControlsDismissing(false); }}
+        onToggleFilterPanel={() => setFilterPanelOpen(o => !o)}
+        onToggleLifts={toggleLifts}
+        onToggleDifficultyFilter={toggleDifficultyFilter}
+        onToggleAllPistes={toggleAllPistes}
+        onToggleGastronomy={toggleGastronomy}
+        onToggleWebcam={toggleWebcam}
+        onToggleInfrastructure={toggleInfrastructure}
+        onToggleSportFun={toggleSportFun}
+      />
 
       <InfoSheet selectedItem={selectedItem} onDismiss={() => setSelectedItem(null)} />
 
@@ -1362,84 +1341,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         onSelectArea={handleSelectArea}
       />
     </main>
-  );
-}
-
-function DifficultyDots({ pisteVisible, pisteFilter }: { pisteVisible: boolean; pisteFilter: Record<string, boolean> }) {
-  return (
-    <div className="flex gap-[3px] items-center h-[5px]">
-      {DIFFICULTIES.map(diff => (
-        <span
-          key={diff}
-          className="w-[5px] h-[5px] rounded-full"
-          style={{
-            backgroundColor: DIFFICULTY_CSS_COLORS[diff],
-            opacity: pisteVisible && pisteFilter[diff] ? 1 : 0.15,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function MapControlButton({ icon, label, active, onClick, onPointerDown, onPointerUp, onPointerLeave }: {
-  icon: React.ReactNode; label: string; active: boolean;
-  onClick?: () => void;
-  onPointerDown?: () => void;
-  onPointerUp?: () => void;
-  onPointerLeave?: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-      onPointerLeave={onPointerLeave}
-      onContextMenu={e => e.preventDefault()}
-      className={`touch-none select-none flex w-full flex-col items-center gap-1.5 rounded-[16px] px-5 py-2.5 ${active ? "bg-white/[0.11] text-ivory" : "text-ivory/40 hover:bg-white/[0.07] hover:text-ivory/70"}`}
-    >
-      {icon}
-      <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-current">{label}</span>
-    </button>
-  );
-}
-
-function DifficultyFilterPanel({ filter, open, onToggle, onToggleAll }: {
-  filter: Record<PisteDifficulty, boolean>;
-  open: boolean;
-  onToggle: (d: PisteDifficulty) => void;
-  onToggleAll: () => void;
-}) {
-  const activeCount = DIFFICULTIES.filter(d => filter[d]).length;
-  const allOpacity = activeCount === DIFFICULTIES.length ? "opacity-100" : "opacity-30";
-  const allBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (open) allBtnRef.current?.focus();
-  }, [open]);
-
-  return (
-    <div inert={!open || undefined} className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 rounded-[18px] border border-white/[0.09] bg-[#07111f]/68 p-1.5 shadow-[0_8px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md transition-opacity duration-200 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-      <button
-        ref={allBtnRef}
-        onClick={onToggleAll}
-        className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${allOpacity}`}
-      >
-        <span className="w-4 h-4 rounded-full bg-white ring-1 ring-black" />
-        <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">All</span>
-      </button>
-      <div className="w-px self-stretch bg-white/[0.08] mx-0.5" />
-      {DIFFICULTIES.map(diff => (
-        <button
-          key={diff}
-          onClick={() => onToggle(diff)}
-          className={`flex flex-col items-center gap-1 rounded-[12px] px-3 py-2 transition-[transform,opacity] active:scale-[0.96] ${filter[diff] ? "opacity-100" : "opacity-30"}`}
-        >
-          <span className="w-4 h-4 rounded-full ring-1 ring-black" style={{ backgroundColor: DIFFICULTY_CSS_COLORS[diff] }} />
-          <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-ivory">{DIFFICULTY_LABELS[diff]}</span>
-        </button>
-      ))}
-    </div>
   );
 }
 
