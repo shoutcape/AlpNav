@@ -27,6 +27,7 @@ import { RefreshButton } from "./RefreshButton";
 import { DEFAULT_PISTE_FILTER, DIFFICULTIES, LABEL_TIER_SCALES } from "./map-constants";
 import { LegendPanel } from "./LegendPanel";
 import { LayerControls } from "./LayerControls";
+import { MapLoadErrorBanner, MapLoadingBar } from "./MapLoadingOverlays";
 
 type MapShellProps = {
   initialAreaId: string;
@@ -858,8 +859,6 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null, activeArea.visualScale);
   }, [selectedItem]);
 
-  const isLoading = loadedLevelCount < manifest.levels.length;
-
   const HIDDEN_ALPHA = 0.15;
 
   const toggleLifts = () => {
@@ -1012,16 +1011,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         className="absolute inset-0 bg-[linear-gradient(180deg,_#d7edf8_0%,_#edf7fb_26%,_#dbe2df_52%,_#73848f_100%)]"
       />
 
-      {/* Loading bar — top edge */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-[2px] transition-opacity duration-700"
-        style={{ opacity: isLoading ? 1 : 0 }}
-      >
-        <div
-          className="h-full bg-[#a8cfe0] transition-[width] duration-500"
-          style={{ width: `${(loadedLevelCount / manifest.levels.length) * 100}%` }}
-        />
-      </div>
+      <MapLoadingBar loadedLevelCount={loadedLevelCount} totalLevelCount={manifest.levels.length} />
 
       {/* Top-left: menu trigger */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 p-3.5">
@@ -1318,19 +1308,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         </div>
       )}
 
-      {loadError && (
-        <div className="pointer-events-none absolute inset-x-4 top-16 z-30 rounded-[18px] border border-red-300/30 bg-red-950/85 px-4 py-3 text-sm text-red-50 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-md">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-red-200/80">Area load failed</p>
-          {process.env.NODE_ENV !== "production" ? (
-            <>
-              <p className="mt-1 break-words text-red-50/95">{loadError}</p>
-              <p className="mt-2 text-xs text-red-100/70">Active area: {activeArea.id}</p>
-            </>
-          ) : (
-            <p className="mt-1 text-red-50/95">Unable to load this area. Please refresh and try again.</p>
-          )}
-        </div>
-      )}
+      <MapLoadErrorBanner loadError={loadError} activeAreaId={activeArea.id} />
 
       <Drawer
         open={drawerOpen}
