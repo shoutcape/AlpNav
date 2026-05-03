@@ -6,16 +6,7 @@ import { Viewport } from "pixi-viewport";
 import { createTileDescriptors } from "./tile-types";
 import { TileScheduler } from "./tile-scheduler";
 import { RESORTS, canActivateResort, resolveActiveResort } from "@/lib/resorts/catalog";
-import { drawPisteOverlay } from "./overlays/drawPisteOverlay";
-import { drawLiftOverlay } from "./overlays/drawLiftOverlay";
-import { drawLabelOverlay } from "./overlays/drawLabelOverlay";
-import { drawLiftMarkerOverlay } from "./overlays/drawLiftMarkerOverlay";
-import { drawPisteMarkerOverlay } from "./overlays/drawPisteMarkerOverlay";
 import { drawPisteHighlight, drawLiftHighlight, drawBadgeHighlight } from "./overlays/drawHighlightOverlay";
-import { drawGastronomyMarkerOverlay } from "./overlays/drawGastronomyMarkerOverlay";
-import { drawWebcamMarkerOverlay } from "./overlays/drawWebcamMarkerOverlay";
-import { drawInfrastructureOverlay } from "./overlays/drawInfrastructureOverlay";
-import { drawSportFunOverlay } from "./overlays/drawSportFunOverlay";
 import { hitTestOverlays } from "./hitTest";
 import { InfoSheet } from "./InfoSheet";
 import { Drawer } from "./Drawer";
@@ -31,6 +22,8 @@ import { GpsLocationButton } from "./GpsLocationButton";
 import { applyLevelBlend, clamp, computeMinScale, getDominantLevel } from "./map-viewport";
 import type { AnchorPoint, DebugAnchorPoint, DebugStats, GpsPosition, GpsStatus, SelectedMapItem } from "./map-shell-types";
 import { findNearestAnchor, resolveGpsAnchorMatch } from "./gps-utils";
+import { applyLiftVisibility, applyPisteDifficultyVisibility, applyPisteVisibility, applyPoiLayerVisibility, createMapLayers, redrawStatusLayers } from "./map-layers";
+import type { MapLayerRefs } from "./map-layers";
 
 type MapShellProps = {
   initialAreaId: string;
@@ -120,6 +113,25 @@ export function MapShell({ initialAreaId }: MapShellProps) {
   const [legendOpen, setLegendOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+
+  const getMapLayerRefs = (): MapLayerRefs => ({
+    pisteOverlay: pisteOverlayRef.current,
+    liftOverlay: liftOverlayRef.current,
+    liftMarkerOverlay: liftMarkerOverlayRef.current,
+    pisteMarkerOverlay: pisteMarkerRef.current,
+    pisteHighlight: pisteHighlightRef.current,
+    liftHighlight: liftHighlightRef.current,
+    badgeHighlight: badgeHighlightRef.current,
+    gastronomyOverlay: gastronomyOverlayRef.current,
+    webcamOverlay: webcamOverlayRef.current,
+    infrastructureOverlay: infrastructureOverlayRef.current,
+    sportFunOverlay: sportFunOverlayRef.current,
+    gpsDot: gpsDotRef.current,
+    debugDot: debugDotRef.current,
+    debugLayer: debugLayerRef.current,
+    pisteLinesByDiff: pisteLinesByDiffRef.current,
+    pisteMarkersByDiff: pisteMarkersByDiffRef.current,
+  });
 
   const maxLevel = manifest.levels[manifest.levels.length - 1];
   const maxScale = useMemo(() => {
@@ -350,111 +362,27 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
       overlayDataRef.current = overlayData;
 
-      const pisteContainer = new Container();
-      pisteContainer.label = "overlay-pistes";
-      viewport.addChild(pisteContainer);
-      pisteOverlayRef.current = pisteContainer;
-
-      // Piste highlight — below lifts so lift lines render on top
-      const pisteHighlight = new Graphics();
-      pisteHighlight.label = "overlay-piste-highlight";
-      viewport.addChild(pisteHighlight);
-      pisteHighlightRef.current = pisteHighlight;
-
-      const liftContainer = new Container();
-      liftContainer.label = "overlay-lifts";
-      drawLiftOverlay(liftContainer, overlayData.lifts, activeArea.visualScale);
-      viewport.addChild(liftContainer);
-      liftOverlayRef.current = liftContainer;
-
-      // Lift highlight — above lifts so gold color overwrites the green inner
-      const liftHighlight = new Graphics();
-      liftHighlight.label = "overlay-lift-highlight";
-      viewport.addChild(liftHighlight);
-      liftHighlightRef.current = liftHighlight;
-
-      const liftMarkerContainer = new Container();
-      liftMarkerContainer.label = "overlay-lift-markers";
-      drawLiftMarkerOverlay(liftMarkerContainer, overlayData.lifts, activeArea.visualScale);
-      viewport.addChild(liftMarkerContainer);
-      liftMarkerOverlayRef.current = liftMarkerContainer;
-
-      const pisteMarkerContainer = new Container();
-      pisteMarkerContainer.label = "overlay-piste-markers";
-      viewport.addChild(pisteMarkerContainer);
-      pisteMarkerRef.current = pisteMarkerContainer;
-
-      // Draw per-difficulty sub-containers
-      const linesByDiff = {} as Record<PisteDifficulty, Container>;
-      const markersByDiff = {} as Record<PisteDifficulty, Container>;
-      for (const diff of DIFFICULTIES) {
-        const filtered = overlayData.pistes.filter(p => p.difficulty === diff);
-
-        const lineSub = new Container();
-        drawPisteOverlay(lineSub, filtered, activeArea.visualScale);
-        pisteContainer.addChild(lineSub);
-        linesByDiff[diff] = lineSub;
-
-        const markerSub = new Container();
-        drawPisteMarkerOverlay(markerSub, filtered, activeArea.visualScale);
-        pisteMarkerContainer.addChild(markerSub);
-        markersByDiff[diff] = markerSub;
-      }
-      pisteLinesByDiffRef.current = linesByDiff;
-      pisteMarkersByDiffRef.current = markersByDiff;
-
-      const gastronomyContainer = new Container();
-      gastronomyContainer.label = "overlay-gastronomy";
-      drawGastronomyMarkerOverlay(gastronomyContainer, overlayData.gastronomy, activeArea.visualScale);
-      viewport.addChild(gastronomyContainer);
-      gastronomyOverlayRef.current = gastronomyContainer;
-
-      const webcamContainer = new Container();
-      webcamContainer.label = "overlay-webcams";
-      drawWebcamMarkerOverlay(webcamContainer, overlayData.webcams, activeArea.visualScale);
-      viewport.addChild(webcamContainer);
-      webcamOverlayRef.current = webcamContainer;
-
-      const infrastructureContainer = new Container();
-      infrastructureContainer.label = "overlay-infrastructure";
-      drawInfrastructureOverlay(infrastructureContainer, overlayData.infrastructure, activeArea.visualScale);
-      viewport.addChild(infrastructureContainer);
-      infrastructureOverlayRef.current = infrastructureContainer;
-
-      const sportFunContainer = new Container();
-      sportFunContainer.label = "overlay-sport-fun";
-      drawSportFunOverlay(sportFunContainer, overlayData.sportFun, activeArea.visualScale);
-      viewport.addChild(sportFunContainer);
-      sportFunOverlayRef.current = sportFunContainer;
-
-      const labelContainer = new Container();
-      labelContainer.label = "overlay-labels";
-      const labelTiers = drawLabelOverlay(labelContainer, overlayData.labels);
-      viewport.addChild(labelContainer);
-
-      const badgeHighlight = new Graphics();
-      badgeHighlight.label = "overlay-badge-highlight";
-      viewport.addChild(badgeHighlight);
-      badgeHighlightRef.current = badgeHighlight;
-
-      // GPS location dot
-      const gpsDot = new Graphics();
-      gpsDot.label = "gps-location-dot";
-      viewport.addChild(gpsDot);
-      gpsDotRef.current = gpsDot;
-
-      // Debug: anchor test dot
-      const debugDot = new Graphics();
-      debugDot.label = "debug-anchor-dot";
-      viewport.addChild(debugDot);
-      debugDotRef.current = debugDot;
-
-      // Debug layer — above all overlays, invisible unless debug mode is active
-      const debugLayer = new Graphics();
-      debugLayer.label = "debug-layer";
-      debugLayer.visible = false;
-      viewport.addChild(debugLayer);
-      debugLayerRef.current = debugLayer;
+      const { refs: layerRefs, labelTiers } = createMapLayers({
+        viewport,
+        overlayData,
+        visualScale: activeArea.visualScale,
+      });
+      pisteOverlayRef.current = layerRefs.pisteOverlay;
+      liftOverlayRef.current = layerRefs.liftOverlay;
+      liftMarkerOverlayRef.current = layerRefs.liftMarkerOverlay;
+      pisteMarkerRef.current = layerRefs.pisteMarkerOverlay;
+      pisteHighlightRef.current = layerRefs.pisteHighlight;
+      liftHighlightRef.current = layerRefs.liftHighlight;
+      badgeHighlightRef.current = layerRefs.badgeHighlight;
+      gastronomyOverlayRef.current = layerRefs.gastronomyOverlay;
+      webcamOverlayRef.current = layerRefs.webcamOverlay;
+      infrastructureOverlayRef.current = layerRefs.infrastructureOverlay;
+      sportFunOverlayRef.current = layerRefs.sportFunOverlay;
+      gpsDotRef.current = layerRefs.gpsDot;
+      debugDotRef.current = layerRefs.debugDot;
+      debugLayerRef.current = layerRefs.debugLayer;
+      pisteLinesByDiffRef.current = layerRefs.pisteLinesByDiff;
+      pisteMarkersByDiffRef.current = layerRefs.pisteMarkersByDiff;
 
       const redrawDebug = () => {
         const g = debugLayerRef.current;
@@ -821,14 +749,11 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     if (bh) drawBadgeHighlight(bh, isSportFun ? selectedItem as SportFunPoi : isWebcam ? selectedItem as Webcam : isInfra ? selectedItem as InfrastructurePoi : isGastro ? selectedItem as GastronomySpot : selectedItem as Piste | Lift | null, activeArea.visualScale);
   }, [selectedItem]);
 
-  const HIDDEN_ALPHA = 0.15;
-
   const toggleLifts = () => {
     const next = !liftVisible;
     setLiftVisible(next);
     liftVisibleRef.current = next;
-    if (liftOverlayRef.current) liftOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
-    if (liftMarkerOverlayRef.current) liftMarkerOverlayRef.current.visible = next;
+    applyLiftVisibility(getMapLayerRefs(), next);
   };
 
   const toggleDifficultyFilter = (diff: PisteDifficulty) => {
@@ -837,21 +762,14 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     pisteFilterRef.current = next;
 
     const enabled = next[diff];
-    if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = enabled ? 1 : HIDDEN_ALPHA;
-    if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[diff].visible = enabled;
+    applyPisteDifficultyVisibility(getMapLayerRefs(), diff, enabled);
 
     // If turning a filter on while the master switch is off, restore the parent
     // and explicitly dim all other off-filters (they were at alpha 1 with parent hiding them)
     if (enabled && !pisteVisibleRef.current) {
       setPisteVisible(true);
       pisteVisibleRef.current = true;
-      if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = 1;
-      if (pisteMarkerRef.current) pisteMarkerRef.current.visible = true;
-      for (const d of DIFFICULTIES) {
-        if (d === diff) continue;
-        if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[d].alpha = next[d] ? 1 : HIDDEN_ALPHA;
-        if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[d].visible = next[d];
-      }
+      applyPisteVisibility(getMapLayerRefs(), true, next);
     }
   };
 
@@ -860,49 +778,39 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     const turnOn = !allOn;
     setPisteVisible(turnOn);
     pisteVisibleRef.current = turnOn;
-    if (pisteOverlayRef.current) pisteOverlayRef.current.alpha = turnOn ? 1 : HIDDEN_ALPHA;
-    if (pisteMarkerRef.current) pisteMarkerRef.current.visible = turnOn;
 
     const next = { easy: turnOn, medium: turnOn, difficult: turnOn, unknown: turnOn } as Record<PisteDifficulty, boolean>;
     setPisteFilter(next);
     pisteFilterRef.current = next;
-    for (const diff of DIFFICULTIES) {
-      // When turning off, parent handles hiding — reset children to 1 to avoid compounding.
-      // When turning on, children are all on (next[diff] === true).
-      if (pisteLinesByDiffRef.current) pisteLinesByDiffRef.current[diff].alpha = 1;
-      if (pisteMarkersByDiffRef.current) pisteMarkersByDiffRef.current[diff].visible = turnOn;
-    }
+    applyPisteVisibility(getMapLayerRefs(), turnOn, next);
   };
 
   const toggleGastronomy = () => {
     const next = !gastronomyVisible;
     setGastronomyVisible(next);
     gastronomyVisibleRef.current = next;
-    if (gastronomyOverlayRef.current)
-      gastronomyOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    applyPoiLayerVisibility(gastronomyOverlayRef.current, next);
   };
 
   const toggleInfrastructure = () => {
     const next = !infrastructureVisible;
     setInfrastructureVisible(next);
     infrastructureVisibleRef.current = next;
-    if (infrastructureOverlayRef.current)
-      infrastructureOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    applyPoiLayerVisibility(infrastructureOverlayRef.current, next);
   };
 
   const toggleSportFun = () => {
     const next = !sportFunVisible;
     setSportFunVisible(next);
     sportFunVisibleRef.current = next;
-    if (sportFunOverlayRef.current) sportFunOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    applyPoiLayerVisibility(sportFunOverlayRef.current, next);
   };
 
   const toggleWebcam = () => {
     const next = !webcamVisible;
     setWebcamVisible(next);
     webcamVisibleRef.current = next;
-    if (webcamOverlayRef.current)
-      webcamOverlayRef.current.alpha = next ? 1 : HIDDEN_ALPHA;
+    applyPoiLayerVisibility(webcamOverlayRef.current, next);
   };
 
   const toggleDebug = () => setDebugMode((currentMode) => (currentMode === false ? "normal" : false));
@@ -1007,29 +915,7 @@ export function MapShell({ initialAreaId }: MapShellProps) {
     const fresh = await fetchFreshStatus(activeArea.id);
     applyFreshStatus(data.lifts, data.pistes, fresh);
 
-    // Redraw lift overlays
-    if (liftOverlayRef.current) {
-      liftOverlayRef.current.removeChildren();
-      drawLiftOverlay(liftOverlayRef.current, data.lifts, activeArea.visualScale);
-    }
-    if (liftMarkerOverlayRef.current) {
-      liftMarkerOverlayRef.current.removeChildren();
-      drawLiftMarkerOverlay(liftMarkerOverlayRef.current, data.lifts, activeArea.visualScale);
-    }
-
-    // Redraw piste overlays per difficulty
-    if (pisteLinesByDiffRef.current && pisteMarkersByDiffRef.current) {
-      for (const diff of DIFFICULTIES) {
-        const filtered = data.pistes.filter(p => p.difficulty === diff);
-        const lineSub = pisteLinesByDiffRef.current[diff];
-        lineSub.removeChildren();
-        drawPisteOverlay(lineSub, filtered, activeArea.visualScale);
-
-        const markerSub = pisteMarkersByDiffRef.current[diff];
-        markerSub.removeChildren();
-        drawPisteMarkerOverlay(markerSub, filtered, activeArea.visualScale);
-      }
-    }
+    redrawStatusLayers({ refs: getMapLayerRefs(), overlayData: data, visualScale: activeArea.visualScale });
 
     // Update selected item if it has a status field
     if (selectedItem && "status" in selectedItem) {
