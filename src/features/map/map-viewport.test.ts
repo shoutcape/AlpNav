@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Container } from "pixi.js";
-import { applyLevelBlend, clamp, computeMinScale } from "./map-viewport";
+import { applyLevelBlend, clamp, computeMinScale, getDominantLevel } from "./map-viewport";
 import type { PanoramaLevel } from "./types";
 
 const levels: PanoramaLevel[] = [
@@ -11,6 +11,13 @@ const levels: PanoramaLevel[] = [
 
 function makeContainers() {
   return new Map(levels.map((level) => [level.remoteZoom, new Container()]));
+}
+
+function hideContainers(containers: Map<number, Container>) {
+  for (const container of containers.values()) {
+    container.visible = false;
+    container.alpha = 0;
+  }
 }
 
 describe("clamp", () => {
@@ -59,5 +66,36 @@ describe("applyLevelBlend", () => {
 
     expect(containers.get(3)?.visible).toBe(true);
     expect(containers.get(3)?.alpha).toBe(1);
+  });
+});
+
+describe("getDominantLevel", () => {
+  it("returns null when no visible level containers exist", () => {
+    const containers = makeContainers();
+    hideContainers(containers);
+
+    expect(getDominantLevel(levels, containers)).toBeNull();
+  });
+
+  it("chooses the highest alpha visible level", () => {
+    const containers = makeContainers();
+    hideContainers(containers);
+    containers.get(1)!.visible = true;
+    containers.get(1)!.alpha = 1;
+    containers.get(2)!.visible = true;
+    containers.get(2)!.alpha = 0.5;
+
+    expect(getDominantLevel(levels, containers)).toEqual({ level: levels[0], alpha: 1 });
+  });
+
+  it("chooses the higher zoom level when visible levels have equal alpha", () => {
+    const containers = makeContainers();
+    hideContainers(containers);
+    containers.get(1)!.visible = true;
+    containers.get(1)!.alpha = 1;
+    containers.get(2)!.visible = true;
+    containers.get(2)!.alpha = 1;
+
+    expect(getDominantLevel(levels, containers)).toEqual({ level: levels[1], alpha: 1 });
   });
 });

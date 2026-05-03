@@ -86,3 +86,21 @@ export function computeMinScale(screenWidth: number, screenHeight: number, world
 export function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(Math.max(value, minimum), maximum);
 }
+
+export function getDominantLevel(levels: PanoramaLevel[], containers: Map<number, Container>) {
+  let dominant: { level: PanoramaLevel; alpha: number } | null = null;
+
+  for (const level of levels) {
+    const container = containers.get(level.remoteZoom);
+
+    if (!container?.visible) {
+      continue;
+    }
+
+    if (!dominant || container.alpha >= dominant.alpha) {
+      dominant = { level, alpha: container.alpha };
+    }
+  }
+
+  return dominant;
+}

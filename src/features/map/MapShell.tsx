@@ -27,7 +27,7 @@ import { DEFAULT_PISTE_FILTER, DIFFICULTIES, LABEL_TIER_SCALES } from "./map-con
 import { LegendPanel } from "./LegendPanel";
 import { LayerControls } from "./LayerControls";
 import { MapLoadErrorBanner, MapLoadingBar } from "./MapLoadingOverlays";
-import { applyLevelBlend, clamp, computeMinScale } from "./map-viewport";
+import { applyLevelBlend, clamp, computeMinScale, getDominantLevel } from "./map-viewport";
 
 type MapShellProps = {
   initialAreaId: string;
@@ -472,17 +472,10 @@ export function MapShell({ initialAreaId }: MapShellProps) {
         g.clear();
         if (!debugModeRef.current) return;
 
-        let activeZoom = -1, highestAlpha = -1;
-        for (const [zoom, container] of levelContainers) {
-          if (container.alpha > highestAlpha) {
-            highestAlpha = container.alpha;
-            activeZoom = zoom;
-          }
-        }
-        if (activeZoom === -1) return;
+        const dominant = getDominantLevel(manifest.levels, levelContainers);
+        if (!dominant) return;
 
-        const level = manifest.levels.find(l => l.remoteZoom === activeZoom);
-        if (!level) return;
+        const { level, alpha } = dominant;
 
         const scale = maxLevel.width / level.width;
         const tw = manifest.tileSize * scale;
@@ -500,8 +493,8 @@ export function MapShell({ initialAreaId }: MapShellProps) {
 
         setDebugStats({
           scale: vp.scale.x,
-          activeLevel: activeZoom,
-          blendPct: highestAlpha * 100,
+          activeLevel: level.remoteZoom,
+          blendPct: alpha * 100,
           worldCenterX: Math.round(centerWorldX),
           worldCenterY: Math.round(centerWorldY),
           loadedCount: loadedLevels.size,
